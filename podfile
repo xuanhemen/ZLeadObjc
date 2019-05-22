@@ -1,0 +1,17 @@
+platform:ios,'8.0'
+inhibit_all_warnings!
+
+target 'ZLead' do
+pod 'MJExtension'
+pod 'Masonry'
+pod 'MBProgressHUD'
+pod 'MJRefresh'
+pod 'AFNetworking'
+pod 'Reachability'
+pod 'SVProgressHUD'
+pod 'YYText'
+pod 'Realm'
+pod 'Realm/Headers'
+pod 'ReactiveObjC'
+
+end
