@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZLConfig.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +17,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self.window makeKeyAndVisible];
+    
+    [ZLConfig chooseRootViewController]; //配置根视图控制器
+    [ZLConfig config]; //配置环境
+    
     // Override point for customization after application launch.
     return YES;
 }

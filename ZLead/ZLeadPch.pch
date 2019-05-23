@@ -1,0 +1,31 @@
+//
+//  ZLeadPch.pch
+//  ZLead
+//
+//  Created by 董建伟 on 2019/5/22.
+//  Copyright © 2019 Beijing tai chi HuaQing information systems co., LTD. All rights reserved.
+//
+
+#ifndef ZLeadPch_pch
+#define ZLeadPch_pch
+
+#import "SizeManager.h"
+#import "URLManager.h"
+#import "NSObject+HUD.h"
+
+/** 打印调试 */
+#ifdef DEBUG
+#define DLog(FORMAT, ...) fprintf(stderr,"----------------------------------------\n位置：\t%s\n方法：\t%s\n行数：\t%d\n内容：\t%s\n----------------------------------------\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__func__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#else
+#define DLog(FORMAT, ...) nil
+#endif
+
+/** 弱引用 */
+#define kWeakSelf(weakSelf) __weak __typeof(self)weakSelf = self;
+/** 加载图片 */
+#define image(string) [UIImage imageNamed:string]
+/** 空数组判断 */
+#define IsArrEmpty(_ref)    (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref) count] == 0))
+/** uuid */
+#define IMSI [[[UIDevice currentDevice] identifierForVendor] UUIDString]
+#endif /* ZLeadPch_pch */

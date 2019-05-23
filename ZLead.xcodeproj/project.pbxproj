@@ -14,6 +14,25 @@
 		7A0097B52294F98100AD79DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0097B42294F98100AD79DE /* main.m */; };
 		7A0097BF2294F98100AD79DE /* ZLeadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0097BE2294F98100AD79DE /* ZLeadTests.m */; };
 		7A0097CA2294F98100AD79DE /* ZLeadUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0097C92294F98100AD79DE /* ZLeadUITests.m */; };
+		7A0097DC22951E1700AD79DE /* ZLBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0097DB22951E1700AD79DE /* ZLBaseViewController.m */; };
+		7A0097FA229524AD00AD79DE /* ZLDataVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0097F9229524AD00AD79DE /* ZLDataVC.m */; };
+		7A0097FD2295268000AD79DE /* ZLPersonalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0097FC2295268000AD79DE /* ZLPersonalVC.m */; };
+		7A0098032295270B00AD79DE /* ZLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0098022295270B00AD79DE /* ZLNavigationController.m */; };
+		7A00980622952EAD00AD79DE /* ZLTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A00980522952EAD00AD79DE /* ZLTabBarViewController.m */; };
+		7A00980B22955ACB00AD79DE /* ZLConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A00980A22955ACB00AD79DE /* ZLConfig.m */; };
+		7A00980E22955C2400AD79DE /* ZLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A00980D22955C2400AD79DE /* ZLTabBarController.m */; };
+		7A9D682A2296680F0024DF3A /* URLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68292296680F0024DF3A /* URLManager.m */; };
+		7A9D682D229679AE0024DF3A /* NetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D682B229679AE0024DF3A /* NetManager.m */; };
+		7A9D683022967BB80024DF3A /* ZLShopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D682F22967BB80024DF3A /* ZLShopVC.m */; };
+		7A9D683322967BDC0024DF3A /* ZLGoodsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D683222967BDC0024DF3A /* ZLGoodsVC.m */; };
+		7A9D683B229683000024DF3A /* RemindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D683A229683000024DF3A /* RemindView.m */; };
+		7A9D683E229683DE0024DF3A /* NSObject+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D683D229683DE0024DF3A /* NSObject+HUD.m */; };
+		7A9D6841229688040024DF3A /* ZLLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D6840229688040024DF3A /* ZLLoginVC.m */; };
+		7A9D684C229689D80024DF3A /* GeneralTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D6847229689D70024DF3A /* GeneralTableViewDelegate.m */; };
+		7A9D684D229689D80024DF3A /* ZLEmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D6848229689D80024DF3A /* ZLEmptyDataView.m */; };
+		7A9D684E229689D80024DF3A /* GeneralTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D6849229689D80024DF3A /* GeneralTableView.m */; };
+		7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68502296983B0024DF3A /* ZLLoginView.m */; };
+		7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D6853229699BB0024DF3A /* ZLLoginViewModel.m */; };
 		9FB42ABF0BA8A97B989DAC14 /* libPods-ZLead.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BD921763FC6637F355F260 /* libPods-ZLead.a */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +69,46 @@
 		7A0097C52294F98100AD79DE /* ZLeadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZLeadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0097C92294F98100AD79DE /* ZLeadUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLeadUITests.m; sourceTree = "<group>"; };
 		7A0097CB2294F98100AD79DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A0097DA22951E1700AD79DE /* ZLBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLBaseViewController.h; sourceTree = "<group>"; };
+		7A0097DB22951E1700AD79DE /* ZLBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLBaseViewController.m; sourceTree = "<group>"; };
+		7A0097F8229524AD00AD79DE /* ZLDataVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLDataVC.h; sourceTree = "<group>"; };
+		7A0097F9229524AD00AD79DE /* ZLDataVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLDataVC.m; sourceTree = "<group>"; };
+		7A0097FB2295268000AD79DE /* ZLPersonalVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLPersonalVC.h; sourceTree = "<group>"; };
+		7A0097FC2295268000AD79DE /* ZLPersonalVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLPersonalVC.m; sourceTree = "<group>"; };
+		7A0098012295270B00AD79DE /* ZLNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLNavigationController.h; sourceTree = "<group>"; };
+		7A0098022295270B00AD79DE /* ZLNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLNavigationController.m; sourceTree = "<group>"; };
+		7A00980422952EAD00AD79DE /* ZLTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLTabBarViewController.h; sourceTree = "<group>"; };
+		7A00980522952EAD00AD79DE /* ZLTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLTabBarViewController.m; sourceTree = "<group>"; };
+		7A0098072295319F00AD79DE /* ZLeadPch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLeadPch.pch; sourceTree = "<group>"; };
+		7A009808229532DA00AD79DE /* SizeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SizeManager.h; sourceTree = "<group>"; };
+		7A00980922955ACB00AD79DE /* ZLConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLConfig.h; sourceTree = "<group>"; };
+		7A00980A22955ACB00AD79DE /* ZLConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLConfig.m; sourceTree = "<group>"; };
+		7A00980C22955C2400AD79DE /* ZLTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLTabBarController.h; sourceTree = "<group>"; };
+		7A00980D22955C2400AD79DE /* ZLTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLTabBarController.m; sourceTree = "<group>"; };
+		7A9D68282296680F0024DF3A /* URLManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLManager.h; sourceTree = "<group>"; };
+		7A9D68292296680F0024DF3A /* URLManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLManager.m; sourceTree = "<group>"; };
+		7A9D682B229679AE0024DF3A /* NetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetManager.m; sourceTree = "<group>"; };
+		7A9D682C229679AE0024DF3A /* NetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetManager.h; sourceTree = "<group>"; };
+		7A9D682E22967BB80024DF3A /* ZLShopVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopVC.h; sourceTree = "<group>"; };
+		7A9D682F22967BB80024DF3A /* ZLShopVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopVC.m; sourceTree = "<group>"; };
+		7A9D683122967BDC0024DF3A /* ZLGoodsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLGoodsVC.h; sourceTree = "<group>"; };
+		7A9D683222967BDC0024DF3A /* ZLGoodsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLGoodsVC.m; sourceTree = "<group>"; };
+		7A9D6839229683000024DF3A /* RemindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindView.h; sourceTree = "<group>"; };
+		7A9D683A229683000024DF3A /* RemindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindView.m; sourceTree = "<group>"; };
+		7A9D683C229683DE0024DF3A /* NSObject+HUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+HUD.h"; sourceTree = "<group>"; };
+		7A9D683D229683DE0024DF3A /* NSObject+HUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HUD.m"; sourceTree = "<group>"; };
+		7A9D683F229688040024DF3A /* ZLLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLLoginVC.h; sourceTree = "<group>"; };
+		7A9D6840229688040024DF3A /* ZLLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLLoginVC.m; sourceTree = "<group>"; };
+		7A9D6846229689D70024DF3A /* GeneralTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralTableViewDelegate.h; sourceTree = "<group>"; };
+		7A9D6847229689D70024DF3A /* GeneralTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralTableViewDelegate.m; sourceTree = "<group>"; };
+		7A9D6848229689D80024DF3A /* ZLEmptyDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLEmptyDataView.m; sourceTree = "<group>"; };
+		7A9D6849229689D80024DF3A /* GeneralTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralTableView.m; sourceTree = "<group>"; };
+		7A9D684A229689D80024DF3A /* ZLEmptyDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLEmptyDataView.h; sourceTree = "<group>"; };
+		7A9D684B229689D80024DF3A /* GeneralTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralTableView.h; sourceTree = "<group>"; };
+		7A9D684F2296983B0024DF3A /* ZLLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLLoginView.h; sourceTree = "<group>"; };
+		7A9D68502296983B0024DF3A /* ZLLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLLoginView.m; sourceTree = "<group>"; };
+		7A9D6852229699BB0024DF3A /* ZLLoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLLoginViewModel.h; sourceTree = "<group>"; };
+		7A9D6853229699BB0024DF3A /* ZLLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLLoginViewModel.m; sourceTree = "<group>"; };
 		916EADC284FDEA9BE6978269 /* Pods-ZLead.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZLead.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZLead/Pods-ZLead.debug.xcconfig"; sourceTree = "<group>"; };
 		F7BD921763FC6637F355F260 /* libPods-ZLead.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZLead.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -114,14 +173,18 @@
 		7A0097A42294F97F00AD79DE /* ZLead */ = {
 			isa = PBXGroup;
 			children = (
+				7A0097D72295165E00AD79DE /* AppDelegate */,
+				7A0097DD22951EA600AD79DE /* Login */,
 				7A0097D9229516AD00AD79DE /* Main */,
 				7A0097D82295169400AD79DE /* BaseClass */,
-				7A0097D72295165E00AD79DE /* AppDelegate */,
+				7A9D681F22964B200024DF3A /* Tool */,
+				7A9D682622964CDC0024DF3A /* ResourceManager */,
 				7A0097AB2294F97F00AD79DE /* Main.storyboard */,
-				7A0097AE2294F98100AD79DE /* Assets.xcassets */,
 				7A0097B02294F98100AD79DE /* LaunchScreen.storyboard */,
-				7A0097B32294F98100AD79DE /* Info.plist */,
 				7A0097B42294F98100AD79DE /* main.m */,
+				7A0098072295319F00AD79DE /* ZLeadPch.pch */,
+				7A0097B32294F98100AD79DE /* Info.plist */,
+				7A0097AE2294F98100AD79DE /* Assets.xcassets */,
 			);
 			path = ZLead;
 			sourceTree = "<group>";
@@ -149,6 +212,8 @@
 			children = (
 				7A0097A52294F97F00AD79DE /* AppDelegate.h */,
 				7A0097A62294F97F00AD79DE /* AppDelegate.m */,
+				7A00980922955ACB00AD79DE /* ZLConfig.h */,
+				7A00980A22955ACB00AD79DE /* ZLConfig.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -156,6 +221,14 @@
 		7A0097D82295169400AD79DE /* BaseClass */ = {
 			isa = PBXGroup;
 			children = (
+				7A0097DA22951E1700AD79DE /* ZLBaseViewController.h */,
+				7A0097DB22951E1700AD79DE /* ZLBaseViewController.m */,
+				7A0098012295270B00AD79DE /* ZLNavigationController.h */,
+				7A0098022295270B00AD79DE /* ZLNavigationController.m */,
+				7A00980422952EAD00AD79DE /* ZLTabBarViewController.h */,
+				7A00980522952EAD00AD79DE /* ZLTabBarViewController.m */,
+				7A00980C22955C2400AD79DE /* ZLTabBarController.h */,
+				7A00980D22955C2400AD79DE /* ZLTabBarController.m */,
 			);
 			path = BaseClass;
 			sourceTree = "<group>";
@@ -163,8 +236,314 @@
 		7A0097D9229516AD00AD79DE /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				7A0097DE22951EDA00AD79DE /* Shop */,
+				7A0097E322951FBD00AD79DE /* Goods */,
+				7A0097E4229521F700AD79DE /* Statistics */,
+				7A0097E52295223700AD79DE /* PersonalCenter */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		7A0097DD22951EA600AD79DE /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D68422296882C0024DF3A /* ViewController */,
+				7A9D68442296885A0024DF3A /* View */,
+				7A9D6845229688650024DF3A /* ViewModel */,
+				7A9D68432296883D0024DF3A /* Model */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		7A0097DE22951EDA00AD79DE /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				7A0097DF22951F7400AD79DE /* ViewController */,
+				7A0097E022951F8C00AD79DE /* View */,
+				7A0097E122951F9F00AD79DE /* ViewModel */,
+				7A0097E222951FAE00AD79DE /* Model */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		7A0097DF22951F7400AD79DE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D682E22967BB80024DF3A /* ZLShopVC.h */,
+				7A9D682F22967BB80024DF3A /* ZLShopVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		7A0097E022951F8C00AD79DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A0097E122951F9F00AD79DE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7A0097E222951FAE00AD79DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7A0097E322951FBD00AD79DE /* Goods */ = {
+			isa = PBXGroup;
+			children = (
+				7A0097E9229522F900AD79DE /* ViewController */,
+				7A0097E8229522F300AD79DE /* View */,
+				7A0097E7229522E200AD79DE /* ViewModel */,
+				7A0097E6229522D600AD79DE /* Model */,
+			);
+			path = Goods;
+			sourceTree = "<group>";
+		};
+		7A0097E4229521F700AD79DE /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				7A0097ED2295233500AD79DE /* ViewController */,
+				7A0097EC2295232E00AD79DE /* View */,
+				7A0097EB2295232300AD79DE /* ViewModel */,
+				7A0097EA2295231A00AD79DE /* Model */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		7A0097E52295223700AD79DE /* PersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				7A0097F12295236A00AD79DE /* ViewController */,
+				7A0097F02295236300AD79DE /* View */,
+				7A0097EF2295235800AD79DE /* ViewModel */,
+				7A0097EE2295234A00AD79DE /* Model */,
+			);
+			path = PersonalCenter;
+			sourceTree = "<group>";
+		};
+		7A0097E6229522D600AD79DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7A0097E7229522E200AD79DE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7A0097E8229522F300AD79DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A0097E9229522F900AD79DE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D683122967BDC0024DF3A /* ZLGoodsVC.h */,
+				7A9D683222967BDC0024DF3A /* ZLGoodsVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		7A0097EA2295231A00AD79DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7A0097EB2295232300AD79DE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7A0097EC2295232E00AD79DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A0097ED2295233500AD79DE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7A0097F8229524AD00AD79DE /* ZLDataVC.h */,
+				7A0097F9229524AD00AD79DE /* ZLDataVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		7A0097EE2295234A00AD79DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7A0097EF2295235800AD79DE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7A0097F02295236300AD79DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A0097F12295236A00AD79DE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7A0097FB2295268000AD79DE /* ZLPersonalVC.h */,
+				7A0097FC2295268000AD79DE /* ZLPersonalVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		7A9D681F22964B200024DF3A /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D6838229682960024DF3A /* PublicClass */,
+				7A9D682222964BAF0024DF3A /* Singleton */,
+				7A9D682122964B3D0024DF3A /* Category */,
+				7A9D682022964B2D0024DF3A /* Net */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		7A9D682022964B2D0024DF3A /* Net */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D682C229679AE0024DF3A /* NetManager.h */,
+				7A9D682B229679AE0024DF3A /* NetManager.m */,
+			);
+			path = Net;
+			sourceTree = "<group>";
+		};
+		7A9D682122964B3D0024DF3A /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D68342296818E0024DF3A /* Object */,
+				7A9D682522964C6D0024DF3A /* Array */,
+				7A9D682422964C600024DF3A /* Dictionary */,
+				7A9D682322964C560024DF3A /* String */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		7A9D682222964BAF0024DF3A /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Singleton;
+			sourceTree = "<group>";
+		};
+		7A9D682322964C560024DF3A /* String */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		7A9D682422964C600024DF3A /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		7A9D682522964C6D0024DF3A /* Array */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Array;
+			sourceTree = "<group>";
+		};
+		7A9D682622964CDC0024DF3A /* ResourceManager */ = {
+			isa = PBXGroup;
+			children = (
+				7A009808229532DA00AD79DE /* SizeManager.h */,
+				7A9D68282296680F0024DF3A /* URLManager.h */,
+				7A9D68292296680F0024DF3A /* URLManager.m */,
+			);
+			path = ResourceManager;
+			sourceTree = "<group>";
+		};
+		7A9D68342296818E0024DF3A /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D683C229683DE0024DF3A /* NSObject+HUD.h */,
+				7A9D683D229683DE0024DF3A /* NSObject+HUD.m */,
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
+		7A9D6838229682960024DF3A /* PublicClass */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D684B229689D80024DF3A /* GeneralTableView.h */,
+				7A9D6849229689D80024DF3A /* GeneralTableView.m */,
+				7A9D6846229689D70024DF3A /* GeneralTableViewDelegate.h */,
+				7A9D6847229689D70024DF3A /* GeneralTableViewDelegate.m */,
+				7A9D684A229689D80024DF3A /* ZLEmptyDataView.h */,
+				7A9D6848229689D80024DF3A /* ZLEmptyDataView.m */,
+				7A9D6839229683000024DF3A /* RemindView.h */,
+				7A9D683A229683000024DF3A /* RemindView.m */,
+			);
+			path = PublicClass;
+			sourceTree = "<group>";
+		};
+		7A9D68422296882C0024DF3A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D683F229688040024DF3A /* ZLLoginVC.h */,
+				7A9D6840229688040024DF3A /* ZLLoginVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		7A9D68432296883D0024DF3A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7A9D68442296885A0024DF3A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D684F2296983B0024DF3A /* ZLLoginView.h */,
+				7A9D68502296983B0024DF3A /* ZLLoginView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A9D6845229688650024DF3A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D6852229699BB0024DF3A /* ZLLoginViewModel.h */,
+				7A9D6853229699BB0024DF3A /* ZLLoginViewModel.m */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		B97A67E62B931C16048ABE36 /* Frameworks */ = {
@@ -239,6 +618,7 @@
 		7A00979A2294F97F00AD79DE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = ZL;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Beijing tai chi HuaQing information systems co., LTD";
 				TargetAttributes = {
@@ -348,7 +728,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A0097FA229524AD00AD79DE /* ZLDataVC.m in Sources */,
+				7A00980622952EAD00AD79DE /* ZLTabBarViewController.m in Sources */,
+				7A0097FD2295268000AD79DE /* ZLPersonalVC.m in Sources */,
+				7A9D684C229689D80024DF3A /* GeneralTableViewDelegate.m in Sources */,
+				7A9D684E229689D80024DF3A /* GeneralTableView.m in Sources */,
 				7A0097B52294F98100AD79DE /* main.m in Sources */,
+				7A0097DC22951E1700AD79DE /* ZLBaseViewController.m in Sources */,
+				7A9D683022967BB80024DF3A /* ZLShopVC.m in Sources */,
+				7A9D683322967BDC0024DF3A /* ZLGoodsVC.m in Sources */,
+				7A9D683B229683000024DF3A /* RemindView.m in Sources */,
+				7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */,
+				7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */,
+				7A9D682D229679AE0024DF3A /* NetManager.m in Sources */,
+				7A0098032295270B00AD79DE /* ZLNavigationController.m in Sources */,
+				7A00980E22955C2400AD79DE /* ZLTabBarController.m in Sources */,
+				7A9D684D229689D80024DF3A /* ZLEmptyDataView.m in Sources */,
+				7A00980B22955ACB00AD79DE /* ZLConfig.m in Sources */,
+				7A9D683E229683DE0024DF3A /* NSObject+HUD.m in Sources */,
+				7A9D682A2296680F0024DF3A /* URLManager.m in Sources */,
+				7A9D6841229688040024DF3A /* ZLLoginVC.m in Sources */,
 				7A0097A72294F97F00AD79DE /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,6 +922,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TVSTTC2NK6;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/ZLead/ZLeadPch.pch";
 				INFOPLIST_FILE = ZLead/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -532,6 +933,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tjhq.ZLead;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Debug;
 		};
@@ -542,6 +944,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TVSTTC2NK6;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/ZLead/ZLeadPch.pch";
 				INFOPLIST_FILE = ZLead/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -551,6 +955,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tjhq.ZLead;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Release;
 		};
