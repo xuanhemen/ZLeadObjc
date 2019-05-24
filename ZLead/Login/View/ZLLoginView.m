@@ -7,7 +7,12 @@
 //
 
 #import "ZLLoginView.h"
+@interface ZLLoginView ()
 
+
+@property (nonatomic, strong) UIImageView *logoView; // logo
+
+@end
 @implementation ZLLoginView
 
 /*
@@ -17,5 +22,22 @@
     // Drawing code
 }
 */
-
+-(instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+    }
+    return self;
+}
+-(UIImageView *)logoView{
+    if (!_logoView) {
+        _logoView = [[UIImageView alloc] init];
+        _logoView.image = image(@"分组");
+        [self addSubview:_logoView];
+        [_logoView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self).offset(s(150));
+        }];
+    }
+    return _logoView;
+}
 @end

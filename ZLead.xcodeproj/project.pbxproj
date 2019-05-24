@@ -33,6 +33,7 @@
 		7A9D684E229689D80024DF3A /* GeneralTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D6849229689D80024DF3A /* GeneralTableView.m */; };
 		7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68502296983B0024DF3A /* ZLLoginView.m */; };
 		7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D6853229699BB0024DF3A /* ZLLoginViewModel.m */; };
+		7A9D68582296A0680024DF3A /* UIColor+Func.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68572296A0680024DF3A /* UIColor+Func.m */; };
 		9FB42ABF0BA8A97B989DAC14 /* libPods-ZLead.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BD921763FC6637F355F260 /* libPods-ZLead.a */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,8 @@
 		7A9D68502296983B0024DF3A /* ZLLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLLoginView.m; sourceTree = "<group>"; };
 		7A9D6852229699BB0024DF3A /* ZLLoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLLoginViewModel.h; sourceTree = "<group>"; };
 		7A9D6853229699BB0024DF3A /* ZLLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLLoginViewModel.m; sourceTree = "<group>"; };
+		7A9D68562296A0680024DF3A /* UIColor+Func.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Func.h"; sourceTree = "<group>"; };
+		7A9D68572296A0680024DF3A /* UIColor+Func.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Func.m"; sourceTree = "<group>"; };
 		916EADC284FDEA9BE6978269 /* Pods-ZLead.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZLead.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZLead/Pods-ZLead.debug.xcconfig"; sourceTree = "<group>"; };
 		F7BD921763FC6637F355F260 /* libPods-ZLead.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZLead.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -442,6 +445,7 @@
 		7A9D682122964B3D0024DF3A /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				7A9D68552296A02A0024DF3A /* Color */,
 				7A9D68342296818E0024DF3A /* Object */,
 				7A9D682522964C6D0024DF3A /* Array */,
 				7A9D682422964C600024DF3A /* Dictionary */,
@@ -544,6 +548,15 @@
 				7A9D6853229699BB0024DF3A /* ZLLoginViewModel.m */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7A9D68552296A02A0024DF3A /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D68562296A0680024DF3A /* UIColor+Func.h */,
+				7A9D68572296A0680024DF3A /* UIColor+Func.m */,
+			);
+			path = Color;
 			sourceTree = "<group>";
 		};
 		B97A67E62B931C16048ABE36 /* Frameworks */ = {
@@ -741,6 +754,7 @@
 				7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */,
 				7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */,
 				7A9D682D229679AE0024DF3A /* NetManager.m in Sources */,
+				7A9D68582296A0680024DF3A /* UIColor+Func.m in Sources */,
 				7A0098032295270B00AD79DE /* ZLNavigationController.m in Sources */,
 				7A00980E22955C2400AD79DE /* ZLTabBarController.m in Sources */,
 				7A9D684D229689D80024DF3A /* ZLEmptyDataView.m in Sources */,

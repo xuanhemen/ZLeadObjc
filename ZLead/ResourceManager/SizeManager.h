@@ -23,7 +23,13 @@
 #define kSafeHeight (IS_IPHONE_X?(34):(0))
 /** 状态栏和导航栏总高度 */
 #define kNavBarHeight   (IS_IPHONE_X?(88):(64))
-/** 字体适配 */
-#define kFont(s) [UIFont systemFontOfSize:(s)*(kScreenWith)/375.0];
+/** 适配 */
+#define ks [UIScreen mainScreen].bounds.size.width/375.0
+/** 正常字体大小 */
+#define kFontNormal [UIFont systemFontOfSize:16*ks]
+/** 字体大小适配 */
+#define kFont(size) [UIFont systemFontOfSize:size*ks]
+/** 宽高、距离适配 */
+#define s(distance) distance*ks
 
 #endif /* SizeManager_h */
