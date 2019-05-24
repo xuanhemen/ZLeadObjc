@@ -35,7 +35,8 @@
         _logoView.image = image(@"分组");
         [self addSubview:_logoView];
         [_logoView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self).offset(s(150));
+            make.top.equalTo(self).offset(dis(150));
+            
         }];
     }
     return _logoView;
