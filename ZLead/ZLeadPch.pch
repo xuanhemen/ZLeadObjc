@@ -16,6 +16,8 @@
 #import "Masonry.h"   // 布局
 #import "ReactiveObjC.h"  // rac
 
+#import "UIColor+Func.h"
+
 /** 打印调试 */
 #ifdef DEBUG
 #define DLog(FORMAT, ...) fprintf(stderr,"----------------------------------------\n位置：\t%s\n方法：\t%s\n行数：\t%d\n内容：\t%s\n----------------------------------------\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__func__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
@@ -33,5 +35,8 @@
 #define IMSI [[[UIDevice currentDevice] identifierForVendor] UUIDString]
 /** rgb颜色 */
 #define COLOR(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
+
+#define ScreenWidth ([UIScreen mainScreen].bounds.size.width) //屏幕宽度
+#define ScreenHeight ([UIScreen mainScreen].bounds.size.height) //屏幕高度
 
 #endif /* ZLeadPch_pch */
