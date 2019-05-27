@@ -38,6 +38,13 @@
 		7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D6853229699BB0024DF3A /* ZLLoginViewModel.m */; };
 		7A9D68582296A0680024DF3A /* UIColor+Func.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68572296A0680024DF3A /* UIColor+Func.m */; };
 		9FB42ABF0BA8A97B989DAC14 /* libPods-ZLead.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BD921763FC6637F355F260 /* libPods-ZLead.a */; };
+		E2802B4D229906FB004AF4B8 /* ZLShopTurnoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B4C229906FB004AF4B8 /* ZLShopTurnoverView.m */; };
+		E2802B532299154D004AF4B8 /* ZLBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B522299154D004AF4B8 /* ZLBaseCell.m */; };
+		E2802B5622991597004AF4B8 /* ZLShopBusinessMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B5522991597004AF4B8 /* ZLShopBusinessMenuCell.m */; };
+		E2802B5922991CC7004AF4B8 /* ZLShopManagerNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B5822991CC7004AF4B8 /* ZLShopManagerNoteCell.m */; };
+		E2802B5C22992F53004AF4B8 /* ZLShopTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B5B22992F53004AF4B8 /* ZLShopTopView.m */; };
+		E2802B5F22993555004AF4B8 /* ZLShopListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B5E22993555004AF4B8 /* ZLShopListCell.m */; };
+		E2802B6222993CA7004AF4B8 /* ZLShopListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B6122993CA7004AF4B8 /* ZLShopListVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +129,20 @@
 		7A9D68562296A0680024DF3A /* UIColor+Func.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Func.h"; sourceTree = "<group>"; };
 		7A9D68572296A0680024DF3A /* UIColor+Func.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Func.m"; sourceTree = "<group>"; };
 		916EADC284FDEA9BE6978269 /* Pods-ZLead.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZLead.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZLead/Pods-ZLead.debug.xcconfig"; sourceTree = "<group>"; };
+		E2802B4B229906FB004AF4B8 /* ZLShopTurnoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopTurnoverView.h; sourceTree = "<group>"; };
+		E2802B4C229906FB004AF4B8 /* ZLShopTurnoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopTurnoverView.m; sourceTree = "<group>"; };
+		E2802B512299154D004AF4B8 /* ZLBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLBaseCell.h; sourceTree = "<group>"; };
+		E2802B522299154D004AF4B8 /* ZLBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLBaseCell.m; sourceTree = "<group>"; };
+		E2802B5422991597004AF4B8 /* ZLShopBusinessMenuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopBusinessMenuCell.h; sourceTree = "<group>"; };
+		E2802B5522991597004AF4B8 /* ZLShopBusinessMenuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopBusinessMenuCell.m; sourceTree = "<group>"; };
+		E2802B5722991CC7004AF4B8 /* ZLShopManagerNoteCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopManagerNoteCell.h; sourceTree = "<group>"; };
+		E2802B5822991CC7004AF4B8 /* ZLShopManagerNoteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopManagerNoteCell.m; sourceTree = "<group>"; };
+		E2802B5A22992F53004AF4B8 /* ZLShopTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopTopView.h; sourceTree = "<group>"; };
+		E2802B5B22992F53004AF4B8 /* ZLShopTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopTopView.m; sourceTree = "<group>"; };
+		E2802B5D22993555004AF4B8 /* ZLShopListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopListCell.h; sourceTree = "<group>"; };
+		E2802B5E22993555004AF4B8 /* ZLShopListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopListCell.m; sourceTree = "<group>"; };
+		E2802B6022993CA7004AF4B8 /* ZLShopListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopListVC.h; sourceTree = "<group>"; };
+		E2802B6122993CA7004AF4B8 /* ZLShopListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopListVC.m; sourceTree = "<group>"; };
 		F7BD921763FC6637F355F260 /* libPods-ZLead.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZLead.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -241,6 +262,8 @@
 				7A00980522952EAD00AD79DE /* ZLTabBarViewController.m */,
 				7A00980C22955C2400AD79DE /* ZLTabBarController.h */,
 				7A00980D22955C2400AD79DE /* ZLTabBarController.m */,
+				E2802B512299154D004AF4B8 /* ZLBaseCell.h */,
+				E2802B522299154D004AF4B8 /* ZLBaseCell.m */,
 			);
 			path = BaseClass;
 			sourceTree = "<group>";
@@ -271,7 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				7A0097DF22951F7400AD79DE /* ViewController */,
-				7A0097E022951F8C00AD79DE /* View */,
+				E2802B4A229906B8004AF4B8 /* View */,
 				7A0097E122951F9F00AD79DE /* ViewModel */,
 				7A0097E222951FAE00AD79DE /* Model */,
 			);
@@ -283,15 +306,10 @@
 			children = (
 				7A9D682E22967BB80024DF3A /* ZLShopVC.h */,
 				7A9D682F22967BB80024DF3A /* ZLShopVC.m */,
+				E2802B6022993CA7004AF4B8 /* ZLShopListVC.h */,
+				E2802B6122993CA7004AF4B8 /* ZLShopListVC.m */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		7A0097E022951F8C00AD79DE /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		7A0097E122951F9F00AD79DE /* ViewModel */ = {
@@ -590,6 +608,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E2802B4A229906B8004AF4B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E2802B4B229906FB004AF4B8 /* ZLShopTurnoverView.h */,
+				E2802B4C229906FB004AF4B8 /* ZLShopTurnoverView.m */,
+				E2802B5422991597004AF4B8 /* ZLShopBusinessMenuCell.h */,
+				E2802B5522991597004AF4B8 /* ZLShopBusinessMenuCell.m */,
+				E2802B5722991CC7004AF4B8 /* ZLShopManagerNoteCell.h */,
+				E2802B5822991CC7004AF4B8 /* ZLShopManagerNoteCell.m */,
+				E2802B5A22992F53004AF4B8 /* ZLShopTopView.h */,
+				E2802B5B22992F53004AF4B8 /* ZLShopTopView.m */,
+				E2802B5D22993555004AF4B8 /* ZLShopListCell.h */,
+				E2802B5E22993555004AF4B8 /* ZLShopListCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -725,7 +760,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
@@ -736,7 +771,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B62A8279FE9ACCB0DB609889 /* [CP] Check Pods Manifest.lock */ = {
@@ -767,14 +802,20 @@
 				7A0097FA229524AD00AD79DE /* ZLDataVC.m in Sources */,
 				7A00980622952EAD00AD79DE /* ZLTabBarViewController.m in Sources */,
 				7A0097FD2295268000AD79DE /* ZLPersonalVC.m in Sources */,
+				E2802B4D229906FB004AF4B8 /* ZLShopTurnoverView.m in Sources */,
 				7A9D684C229689D80024DF3A /* GeneralTableViewDelegate.m in Sources */,
+				E2802B5922991CC7004AF4B8 /* ZLShopManagerNoteCell.m in Sources */,
 				7A488A7122993B8500069483 /* ZLRegisterVC.m in Sources */,
 				7A9D684E229689D80024DF3A /* GeneralTableView.m in Sources */,
 				7A0097B52294F98100AD79DE /* main.m in Sources */,
 				7A0097DC22951E1700AD79DE /* ZLBaseViewController.m in Sources */,
+				E2802B532299154D004AF4B8 /* ZLBaseCell.m in Sources */,
 				7A9D683022967BB80024DF3A /* ZLShopVC.m in Sources */,
 				7A9D683322967BDC0024DF3A /* ZLGoodsVC.m in Sources */,
+				E2802B5622991597004AF4B8 /* ZLShopBusinessMenuCell.m in Sources */,
 				7A9D683B229683000024DF3A /* RemindView.m in Sources */,
+				E2802B5C22992F53004AF4B8 /* ZLShopTopView.m in Sources */,
+				E2802B6222993CA7004AF4B8 /* ZLShopListVC.m in Sources */,
 				7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */,
 				7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */,
 				7A488A652298E3B300069483 /* CustomTextField.m in Sources */,
@@ -788,6 +829,7 @@
 				7A9D682A2296680F0024DF3A /* URLManager.m in Sources */,
 				7A9D6841229688040024DF3A /* ZLLoginVC.m in Sources */,
 				7A0097A72294F97F00AD79DE /* AppDelegate.m in Sources */,
+				E2802B5F22993555004AF4B8 /* ZLShopListCell.m in Sources */,
 				7A488A6B2298F49800069483 /* ZLInputView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -961,7 +1003,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TVSTTC2NK6;
+				DEVELOPMENT_TEAM = K9F87B6ETE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZLead/ZLeadPch.pch";
 				INFOPLIST_FILE = ZLead/Info.plist;
@@ -983,7 +1025,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TVSTTC2NK6;
+				DEVELOPMENT_TEAM = K9F87B6ETE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZLead/ZLeadPch.pch";
 				INFOPLIST_FILE = ZLead/Info.plist;
