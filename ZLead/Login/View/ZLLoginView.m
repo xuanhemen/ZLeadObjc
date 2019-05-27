@@ -40,6 +40,7 @@
         self.style = style;
         [self initView]; //配置登录视图
         self.viewModel = viewModel;
+        
     }
     return self;
 }
@@ -63,7 +64,10 @@
 }
 - (ZLInputView *)tfView{
     if (!_tfView) {
-        _tfView = [[ZLInputView alloc] init];
+        _tfView = [[ZLInputView alloc] initWithFrame:CGRectZero viewModel:self.viewModel];
+        [[_tfView.rightBtnView rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+            [self.viewModel.getCode sendNext:x]; //获取验证码或忘记密码
+        }];
         [self addSubview:_tfView];
         [_tfView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.logoView.mas_bottom).offset(dis(80));
@@ -77,11 +81,27 @@
         _pwLogin = [UIButton buttonWithType:UIButtonTypeCustom];
         if (self.style == LogStyleLogin) {
             [_pwLogin setTitle:@"账号密码登录" forState:UIControlStateNormal];
+            [_pwLogin setTitle:@"验证码登录" forState:UIControlStateSelected];
         }else{
             [_pwLogin setTitle:@"已有账户，去登录" forState:UIControlStateNormal];
         }
         [_pwLogin setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         _pwLogin.titleLabel.font = kFont16;
+        [[_pwLogin rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+            if (self.style == LogStyleLogin) { //登录
+                UIButton *btn = x;
+                btn.selected = !btn.selected;
+                if (btn.selected == YES) {
+                    [self.tfView changeStyle:YES]; //账号密码登录，改变输入框样式
+                }else{
+                    [self.tfView changeStyle:NO]; //验证码登录，改变输入框样式
+                }
+            }else if (self.style == LogStyleRegister){ //注册
+                [self.viewModel.goLogin sendNext:x];
+            }
+           
+            
+        }];
         [self addSubview:_pwLogin];
         [_pwLogin mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.tfView).offset(dis(25));
@@ -113,11 +133,15 @@
         _login.backgroundColor = COLOR(248, 217, 168, 0.5);
         _login.layer.masksToBounds = YES;
         _login.layer.cornerRadius = dis(25);
-        [_login setTitle:@"登录" forState:UIControlStateNormal];
+        if (self.style == LogStyleLogin) {
+           [_login setTitle:@"登 录" forState:UIControlStateNormal];
+        }else{
+            [_login setTitle:@"注 册" forState:UIControlStateNormal];
+        }
         [_login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _login.titleLabel.font = kFont16;
         [[_login rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-            [self.viewModel.goLogin sendNext:x]; 
+            [self.viewModel.login sendNext:x]; 
         }];
         [self addSubview:_login];
         [_login mas_makeConstraints:^(MASConstraintMaker *make) {
