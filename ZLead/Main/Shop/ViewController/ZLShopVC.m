@@ -63,7 +63,7 @@
 }
 
 - (UIView *)setupTableViewHeaderView  {
-    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200)];
+    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 223)];
     return headView;
 }
 

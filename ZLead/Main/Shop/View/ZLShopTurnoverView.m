@@ -7,6 +7,7 @@
 //
 
 #import "ZLShopTurnoverView.h"
+#import "ZLMarqueeView.h"
 
 @interface ZLShopTurnoverView ()
 @property (nonatomic, strong) UIImageView *bgImageView;
@@ -18,7 +19,7 @@
 @property (nonatomic, strong) UILabel *payNumLabel;
 @property (nonatomic, strong) UILabel *vistorumTitleLabel;
 @property (nonatomic, strong) UILabel *vistorumLabel;
-@property (nonatomic, strong) UIImageView *notificationImageView;
+@property (nonatomic, strong) ZLMarqueeView *notificationView;
 @end
 
 @implementation ZLShopTurnoverView
@@ -145,8 +146,26 @@
         make.height.mas_equalTo(28);
         make.top.equalTo(weakSelf.orderNumLabel.mas_bottom).offset(2);
     }];
+    
+    [self addSubview:self.notificationView];
 }
 
+#pragma mark - Lazy Methods
+
+- (ZLMarqueeView *)notificationView {
+    if (!_notificationView) {
+        ZLMarqueeView *marqueeView =[[ZLMarqueeView alloc] initWithFrame:CGRectMake(10, 180, dis(400), 48) withTitle:@[@"1.本月大拍卖优惠：今日03:34开抢", @"2.第二条通知。。。。", @"3.第三条通知。。。。", @"end"]];
+        marqueeView.titleColor = [UIColor colorWithHexString:@"#664D38"];
+        marqueeView.titleFont = [UIFont systemFontOfSize:11];
+        __weak ZLMarqueeView *marquee = marqueeView;
+        marqueeView.handlerTitleClickCallBack = ^(NSInteger index){
+            DLog(@"%@----%zd",marquee.titleArr[index-1],index);
+        };
+        _notificationView = marqueeView;
+    }
+    return _notificationView;
+    
+}
 
 
 @end
