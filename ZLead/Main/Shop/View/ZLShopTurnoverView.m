@@ -104,7 +104,7 @@
         make.top.equalTo(weakSelf.todayturnoverTextLabel.mas_bottom);
     }];
     
-    CGFloat labelWidth = (ScreenWidth - 30)/3;
+    CGFloat labelWidth = (ScreenWidth - 70)/3;
     [self.orderNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.todayturnoverTextLabel).priorityHigh();
         make.width.mas_equalTo(labelWidth);
@@ -129,21 +129,21 @@
     [self.orderTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.todayturnoverTextLabel).priorityHigh();
         make.width.mas_equalTo(labelWidth);
-        make.height.mas_equalTo(28);
+        make.height.mas_equalTo(15);
         make.top.equalTo(weakSelf.orderNumLabel.mas_bottom).offset(2);
     }];
     
     [self.payTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.orderTitleLabel.mas_right);
         make.width.mas_equalTo(labelWidth);
-        make.height.mas_equalTo(28);
+        make.height.mas_equalTo(15);
         make.top.equalTo(weakSelf.orderNumLabel.mas_bottom).offset(2);
     }];
     
     [self.vistorumTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.payTitleLabel.mas_right);
         make.width.mas_equalTo(labelWidth);
-        make.height.mas_equalTo(28);
+        make.height.mas_equalTo(15);
         make.top.equalTo(weakSelf.orderNumLabel.mas_bottom).offset(2);
     }];
     
