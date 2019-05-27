@@ -52,7 +52,10 @@
     UIView *tempTitleLabel = nil;
     for (int i = 0; i < titles.count; i ++) {
         UIView *singleMenuView = [[UIView alloc] init];
+        singleMenuView.tag = 100 + i;
         [containerView addSubview:singleMenuView];
+        UITapGestureRecognizer *menuTapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleMenuViewTap:)];
+        [singleMenuView addGestureRecognizer:menuTapGes];
         if (i == 0) {
             [singleMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(0);
@@ -112,4 +115,13 @@
 + (CGFloat)heightForCell {
     return kZLShopBusinessMenuCellHeight;
 }
+
+#pragma mark - UITapGestureRecognizer Method
+
+- (void)singleMenuViewTap:(UITapGestureRecognizer *)menuGes {
+    if (self.shopBusinessBlock) {
+        self.shopBusinessBlock(menuGes.view.tag - 100);
+    }
+}
+
 @end

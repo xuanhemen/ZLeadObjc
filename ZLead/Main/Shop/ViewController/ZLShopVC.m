@@ -12,6 +12,10 @@
 #import "ZLShopTurnoverView.h"
 #import "ZLShopTopView.h"
 #import "ZLShopListVC.h"
+#import "ZLOrderManageVC.h"
+#import "ZLMakeOrderVC.h"
+#import "ZLOfflinePaymentVC.h"
+#import "ZLShopManagerNoteVC.h"
 
 @interface ZLShopVC () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -39,13 +43,6 @@
     };
     [self.view addSubview:self.shopNameView];
     
-//    [self.shopNameView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(weakSelf.view);
-//        make.width.equalTo(weakSelf.view);
-//        make.height.mas_equalTo(61);
-//        make.top.equalTo(weakSelf.view).offset(kNavigationBarHeight);
-//    }];
-    
     self.mainTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mainTableView.delegate = self;
@@ -66,7 +63,7 @@
 }
 
 - (UIView *)setupTableViewHeaderView  {
-    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 200)];
+    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 223)];
     return headView;
 }
 
@@ -91,10 +88,33 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLBaseCell *cell = nil;
+    __weak typeof (self) weakSelf = self;
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"ZLShopBusinessMenuCell"];
+        ((ZLShopBusinessMenuCell *)cell).shopBusinessBlock = ^(NSInteger businessType) {
+            if (businessType == 0) {
+                ZLOrderManageVC *orderManageVC = [[ZLOrderManageVC alloc] init];
+                [weakSelf.navigationController pushViewController:orderManageVC animated:YES];
+            } else if (businessType == 1) {
+                ZLMakeOrderVC *makeOrderVC = [[ZLMakeOrderVC alloc] init];
+                [weakSelf.navigationController pushViewController:makeOrderVC animated:YES];
+            }  else if (businessType == 2) {
+                ZLOfflinePaymentVC *offlinePaymentVC = [[ZLOfflinePaymentVC alloc] init];
+                [weakSelf.navigationController pushViewController:offlinePaymentVC animated:YES];
+            }
+        };
     } else  {
         cell = [tableView dequeueReusableCellWithIdentifier:@"ZLShopManagerNoteCell"];
+        ((ZLShopManagerNoteCell *)cell).shopManagerActionBlock = ^{
+            ZLShopManagerNoteVC *shopManagerNote = [[ZLShopManagerNoteVC alloc] init];
+            [weakSelf.navigationController pushViewController:shopManagerNote animated:YES];
+            
+        };
+        
+        ((ZLShopManagerNoteCell *)cell).aboutUsActionBlock = ^{
+            
+        };
+        
     }
     return cell;
 }
