@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface ZLShopManagerNoteCell : ZLBaseCell
-
+@property (nonatomic, copy) void (^shopManagerActionBlock) (void);
+@property (nonatomic, copy) void (^aboutUsActionBlock) (void);
 @end
 
 NS_ASSUME_NONNULL_END

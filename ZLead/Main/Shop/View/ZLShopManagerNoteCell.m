@@ -43,17 +43,19 @@
     NSArray *contents = @[@{@"title":@"店长须知",@"des":@"关于开店的教程", @"icon":@""}, @{@"title":@"关于我们",@"des":@"直链网相关介绍", @"icon":@""}];
     CGFloat actionButtonWidth = (ScreenWidth - 30)/2;
     for (int i = 0; i < contents.count; i ++) {
-        UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [containerView addSubview:actionButton];
+        UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        menuButton.tag = 1000 + i;
+        [menuButton addTarget:self action:@selector(menuButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [containerView addSubview:menuButton];
         if (i == 0) {
-            [actionButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            [menuButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(containerView.mas_left);
                 make.width.mas_equalTo(actionButtonWidth);
                 make.height.mas_equalTo(87);
                 make.top.equalTo(containerView.mas_top);
             }];
         } else {
-            [actionButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            [menuButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(containerView.mas_left).offset(actionButtonWidth);
                 make.width.mas_equalTo(actionButtonWidth);
                 make.height.mas_equalTo(87);
@@ -65,20 +67,20 @@
         UILabel *managerNoteLabel = [[UILabel alloc] init];
         managerNoteLabel.text = [[contents objectAtIndex:i] objectForKey:@"title"];
         managerNoteLabel.font = [UIFont boldSystemFontOfSize:15];
-        [actionButton addSubview:managerNoteLabel];
+        [menuButton addSubview:managerNoteLabel];
 
         [managerNoteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(actionButton.mas_left).offset(20);
+            make.left.equalTo(menuButton.mas_left).offset(20);
             make.width.mas_equalTo(150);
             make.height.mas_equalTo(21);
-            make.top.equalTo(actionButton.mas_top).offset(23);
+            make.top.equalTo(menuButton.mas_top).offset(23);
         }];
 
         UILabel *courseLabel = [[UILabel alloc] init];
         courseLabel.textColor = [UIColor colorWithHexString:@"#747682"];
         courseLabel.text =  [[contents objectAtIndex:i] objectForKey:@"des"];
         courseLabel.font = [UIFont systemFontOfSize:12];
-        [actionButton addSubview:courseLabel];
+        [menuButton addSubview:courseLabel];
         [courseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(managerNoteLabel.mas_left);
             make.width.mas_equalTo(150);
@@ -88,18 +90,35 @@
 
         UIImageView *noteIcon = [[UIImageView alloc] init];
         noteIcon.backgroundColor = [UIColor redColor];
-        [actionButton addSubview:noteIcon];
+        [menuButton addSubview:noteIcon];
         [noteIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(actionButton.mas_left).offset(120);
+            make.left.equalTo(menuButton.mas_left).offset(120);
             make.width.mas_equalTo(40);
             make.height.mas_equalTo(40);
-            make.top.equalTo(actionButton.mas_top).offset(23);
+            make.top.equalTo(menuButton.mas_top).offset(23);
         }];
     }
+    
+    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(actionButtonWidth, 19, 0.5, 50)];
+    separatorView.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2"];
+    [containerView addSubview:separatorView];
 }
 
 + (CGFloat)heightForCell {
     return kZLShopManagerNoteCellHeight;
 }
 
+#pragma mark - UIButton Actions
+
+- (void)menuButtonAction:(UIButton *)menuButton {
+    if (menuButton.tag - 1000 == 0) {
+        if (self.shopManagerActionBlock) {
+            self.shopManagerActionBlock();
+        }
+    } else {
+        if (self.aboutUsActionBlock) {
+            self.aboutUsActionBlock();
+        }
+    }
+}
 @end
