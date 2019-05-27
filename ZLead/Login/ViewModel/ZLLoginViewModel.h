@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) RACSubject *goRegister; // 去注册
 
+@property (nonatomic, strong) RACSubject *goLogin; // 登录
+
 /** 负责跳转 */
 -(void)jumpFromController:(UIViewController *)vc;
 @end

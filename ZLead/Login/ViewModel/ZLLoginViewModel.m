@@ -13,8 +13,8 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
-        self.goRegister = [RACSubject subject];
-
+        self.goRegister = [RACSubject subject]; //注册新号
+        self.goLogin = [RACSubject subject]; //登录
     }
     return self;
 }
@@ -24,6 +24,10 @@
         lvc.indentifier = @"register";
         [vc presentViewController:lvc animated:YES completion:nil];
     }];
+    [self.goLogin subscribeNext:^(id  _Nullable x) {
+        
+    }];
+    
     
 }
 @end
