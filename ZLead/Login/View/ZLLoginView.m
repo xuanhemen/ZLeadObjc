@@ -116,6 +116,9 @@
         [_login setTitle:@"登录" forState:UIControlStateNormal];
         [_login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _login.titleLabel.font = kFont16;
+        [[_login rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+            [self.viewModel.goLogin sendNext:x]; 
+        }];
         [self addSubview:_login];
         [_login mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.pwLogin.mas_bottom).offset(dis(60));

@@ -8,6 +8,7 @@
 
 #import "ZLLoginViewModel.h"
 #import "ZLLoginVC.h"
+#import "ZLTabBarController.h"
 @implementation ZLLoginViewModel
 
 -(instancetype)init{
@@ -25,7 +26,8 @@
         [vc presentViewController:lvc animated:YES completion:nil];
     }];
     [self.goLogin subscribeNext:^(id  _Nullable x) {
-        
+        ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
     }];
     
     
