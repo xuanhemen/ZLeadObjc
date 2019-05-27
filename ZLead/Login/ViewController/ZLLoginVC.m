@@ -8,7 +8,13 @@
 
 #import "ZLLoginVC.h"
 
+#import "ZLLoginViewModel.h"
 @interface ZLLoginVC ()
+
+
+
+
+@property (nonatomic, strong) ZLLoginViewModel *viewModel; //
 
 @end
 
@@ -17,10 +23,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    [self.view addSubview:self.loginView]; //添加登录视图
+    [self.viewModel jumpFromController:self]; //处理跳转事件
     // Do any additional setup after loading the view.
 }
-
+- (ZLLoginViewModel *)viewModel{
+    if (!_viewModel) {
+        _viewModel = [[ZLLoginViewModel alloc] init];
+    }
+    return _viewModel;
+}
+- (ZLLoginView *)loginView {
+    if (!_loginView) {
+        if ([self.indentifier isEqualToString:@"register"]) {
+             _loginView = [[ZLLoginView alloc] initWithFrame:self.view.frame viewModel:self.viewModel style:LogStyleRegister];
+        } else {
+           _loginView = [[ZLLoginView alloc] initWithFrame:self.view.frame viewModel:self.viewModel style:LogStyleLogin];
+        }
+    }
+    return _loginView;
+}
 /*
 #pragma mark - Navigation
 

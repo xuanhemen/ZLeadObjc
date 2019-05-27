@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLLoginViewModel : NSObject
 
+@property (nonatomic, strong) RACSubject *goRegister; // 去注册
+
+/** 负责跳转 */
+-(void)jumpFromController:(UIViewController *)vc;
 @end
 
 NS_ASSUME_NONNULL_END

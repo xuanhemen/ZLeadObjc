@@ -7,14 +7,23 @@
 //
 
 #import "ZLLoginViewModel.h"
-
+#import "ZLLoginVC.h"
 @implementation ZLLoginViewModel
 
 -(instancetype)init{
     self = [super init];
     if (self) {
-        
+        self.goRegister = [RACSubject subject];
+
     }
     return self;
+}
+-(void)jumpFromController:(UIViewController *)vc{
+    [self.goRegister subscribeNext:^(id  _Nullable x) {
+        ZLLoginVC *lvc = [[ZLLoginVC alloc] init];
+        lvc.indentifier = @"register";
+        [vc presentViewController:lvc animated:YES completion:nil];
+    }];
+    
 }
 @end

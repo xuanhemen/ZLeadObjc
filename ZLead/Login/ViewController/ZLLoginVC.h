@@ -7,11 +7,15 @@
 //
 
 #import "ZLBaseViewController.h"
-
+#import "ZLLoginView.h"
 NS_ASSUME_NONNULL_BEGIN
+
 
 @interface ZLLoginVC : ZLBaseViewController
 
+
+@property (nonatomic, copy) NSString *indentifier; // 登录还是注册
+@property (nonatomic, strong)ZLLoginView *loginView; // 登录视图
 @end
 
 NS_ASSUME_NONNULL_END

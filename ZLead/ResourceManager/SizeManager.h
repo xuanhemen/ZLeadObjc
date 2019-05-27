@@ -27,7 +27,14 @@
 #define kp [UIScreen mainScreen].bounds.size.width/375.0
 /** 距离、长度 */
 #define dis(s) s*kp
+/** 坐标 */
+#define kRect(x,y,w,h) CGRectMake(x*kp, y*kp, w*kp, h*kp)
+/** size */
+#define kSize(w,h) CGSizeMake(w*kp, h*kp)
 /** 正常字体大小 */
-#define kFontNormal [UIFont systemFontOfSize:16]
+#define kFont16 [UIFont systemFontOfSize:16]
+#define kFont15 [UIFont systemFontOfSize:15]
+#define kFont14 [UIFont systemFontOfSize:14]
+#define kFont13 [UIFont systemFontOfSize:13]
 
 #endif /* SizeManager_h */

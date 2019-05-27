@@ -12,6 +12,7 @@
 #import "SizeManager.h"  // 关于尺寸的宏定义
 #import "URLManager.h"  // URL接口管理类
 #import "NSObject+HUD.h"  // HUD
+#import "UIColor+Func.h"
 
 #import "Masonry.h"   // 布局
 #import "ReactiveObjC.h"  // rac
@@ -33,5 +34,8 @@
 #define IMSI [[[UIDevice currentDevice] identifierForVendor] UUIDString]
 /** rgb颜色 */
 #define COLOR(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
-
+/** hex */
+#define hex(str) [UIColor colorWithHexString:str]
+/** lightColor */
+#define lightColor [UIColor colorWithHexString:@"#CCCCCC"]
 #endif /* ZLeadPch_pch */

@@ -23,7 +23,6 @@
     [ZLConfig chooseRootViewController]; //配置根视图控制器
     [ZLConfig config]; //配置环境
     
-    dis
     // Override point for customization after application launch.
     return YES;
 }

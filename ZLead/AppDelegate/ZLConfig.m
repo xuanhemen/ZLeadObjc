@@ -8,14 +8,22 @@
 
 #import "ZLConfig.h"
 #import "ZLTabBarController.h"
-
+#import "ZLLoginVC.h"
 NSString * ZL_BASE_URL = @"";
 
 @implementation ZLConfig
 
 + (void)chooseRootViewController {
-    ZLTabBarController *vc = [[ZLTabBarController alloc] init];
-    [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    BOOL isLogined = [[infoDic objectForKey:@"loginState"] boolValue];
+    if (isLogined) {
+        ZLTabBarController *vc = [[ZLTabBarController alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+    }else{
+        ZLLoginVC *lvc = [[ZLLoginVC alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = lvc;
+    }
+   
 }
 + (void)config {
     NSDictionary * infoDic = [[NSBundle mainBundle] infoDictionary];
