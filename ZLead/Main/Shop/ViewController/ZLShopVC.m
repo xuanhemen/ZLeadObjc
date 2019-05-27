@@ -36,7 +36,7 @@
 - (void)setupViews {
     __weak typeof (self) weakSelf = self;
     
-    self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, ScreenWidth, 61)];
+    self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWith, 61)];
     self.shopNameView.changeShopBlock = ^{
         ZLShopListVC *shopListVC = [[ZLShopListVC alloc] init];
         [weakSelf.navigationController pushViewController:shopListVC animated:YES];
@@ -63,7 +63,7 @@
 }
 
 - (UIView *)setupTableViewHeaderView  {
-    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 223)];
+    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, 223)];
     return headView;
 }
 

@@ -104,7 +104,7 @@
         make.top.equalTo(weakSelf.todayturnoverTextLabel.mas_bottom);
     }];
     
-    CGFloat labelWidth = (ScreenWidth - 70)/3;
+    CGFloat labelWidth = (kScreenWith - 70)/3;
     [self.orderNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.todayturnoverTextLabel).priorityHigh();
         make.width.mas_equalTo(labelWidth);
