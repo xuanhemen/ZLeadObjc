@@ -13,6 +13,7 @@
 #import "ZLPerShareView.h"
 
 #import "ZLPerAccountVC.h"
+#import "ZLShopListVC.h"
 #import "ZLPerWithdrawVC.h"
 #import "ZLPerAccountOfWithdrawVC.h"
 
@@ -70,20 +71,19 @@
         make.left.equalTo(self.containerView).offset(15);
         make.right.equalTo(self.containerView).offset(-15);
         make.top.equalTo(self.headerV.mas_bottom).offset(-66);
-        make.height.mas_equalTo(125);
+        make.height.mas_equalTo(dis(125));
     }];
     
     self.listV.listArr = self.listArr;
     [self.listV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.btnV);
         make.top.equalTo(self.btnV.mas_bottom).offset(10);
-        make.height.mas_equalTo(230);
     }];
     
     [self.shareV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.btnV);
         make.top.equalTo(self.listV.mas_bottom).offset(10);
-        make.height.mas_equalTo(80);
+        make.height.mas_equalTo(dis(80));
         make.bottom.equalTo(self.containerView).offset(-20);
     }];
     
@@ -103,7 +103,8 @@
             return;
         }
         if (index == 1) {
-            
+            ZLShopListVC *shopListVc = [[ZLShopListVC alloc] init];
+            [self.navigationController pushViewController:shopListVc animated:YES];
             return;
         }
         if (index == 2) {

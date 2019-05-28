@@ -8,9 +8,19 @@
 
 #import "ZLBaseViewController.h"
 
+typedef NS_ENUM(NSInteger, AccountType) {
+    AccountTypeWechat,
+    AccountTypeAlipay,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLSetWechatVC : ZLBaseViewController
+
+/** <#注释#> */
+@property (nonatomic,assign) AccountType type;
+
+
 
 @end
 

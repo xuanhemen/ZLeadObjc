@@ -7,6 +7,8 @@
 //
 
 #import "ZLPerAccountOfWithdrawVC.h"
+#import "ZLAddBankCardVC.h"
+#import "ZLSetWechatVC.h"
 
 @interface ZLPerAccountOfWithdrawVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -61,6 +63,23 @@
     //3.调整(iOS8以上)view边距
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsMake(0, 15, 0, 0)];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dic = self.topicArr[indexPath.row];
+    NSString *topic = dic[@"topic"];
+    if ([topic isEqualToString:@"银行卡"]) {
+        ZLAddBankCardVC *bankCardVc = [[ZLAddBankCardVC alloc] init];
+        [self.navigationController pushViewController:bankCardVc animated:YES];
+    }else if ([topic isEqualToString:@"支付宝"]) {
+        ZLSetWechatVC *wechatVc = [[ZLSetWechatVC alloc] init];
+        wechatVc.type = AccountTypeAlipay;
+        [self.navigationController pushViewController:wechatVc animated:YES];
+    }else if ([topic isEqualToString:@"微信钱包"]) {
+        ZLSetWechatVC *wechatVc = [[ZLSetWechatVC alloc] init];
+        wechatVc.type = AccountTypeWechat;
+        [self.navigationController pushViewController:wechatVc animated:YES];
     }
 }
 

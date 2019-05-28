@@ -60,7 +60,7 @@
 		E832D6E7229CDD9A00D0ED7F /* ZLPerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E832D6DE229CDD9900D0ED7F /* ZLPerListView.m */; };
 		E832D6E8229CDD9A00D0ED7F /* ZLPerButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E832D6DF229CDD9900D0ED7F /* ZLPerButtonView.m */; };
 		E832D6E9229CDD9A00D0ED7F /* ZLPerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E832D6E0229CDD9900D0ED7F /* ZLPerHeaderView.m */; };
-		E832D6EA229CDD9A00D0ED7F /* ZLTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E832D6E4229CDD9900D0ED7F /* ZLTextFieldCell.m */; };
+		E832D6F0229D340100D0ED7F /* ZLAddStoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E832D6EF229D340100D0ED7F /* ZLAddStoreVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,8 +189,8 @@
 		E832D6E1229CDD9900D0ED7F /* ZLPerButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPerButtonView.h; sourceTree = "<group>"; };
 		E832D6E2229CDD9900D0ED7F /* ZLPerHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPerHeaderView.h; sourceTree = "<group>"; };
 		E832D6E3229CDD9900D0ED7F /* ZLPerShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPerShareView.h; sourceTree = "<group>"; };
-		E832D6E4229CDD9900D0ED7F /* ZLTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLTextFieldCell.m; sourceTree = "<group>"; };
-		E832D6E5229CDD9900D0ED7F /* ZLTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLTextFieldCell.h; sourceTree = "<group>"; };
+		E832D6EE229D340100D0ED7F /* ZLAddStoreVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLAddStoreVC.h; sourceTree = "<group>"; };
+		E832D6EF229D340100D0ED7F /* ZLAddStoreVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLAddStoreVC.m; sourceTree = "<group>"; };
 		F7BD921763FC6637F355F260 /* libPods-ZLead.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZLead.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -500,8 +500,6 @@
 				E832D6DE229CDD9900D0ED7F /* ZLPerListView.m */,
 				E832D6E3229CDD9900D0ED7F /* ZLPerShareView.h */,
 				E832D6DC229CDD9900D0ED7F /* ZLPerShareView.m */,
-				E832D6E5229CDD9900D0ED7F /* ZLTextFieldCell.h */,
-				E832D6E4229CDD9900D0ED7F /* ZLTextFieldCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -518,6 +516,8 @@
 				E832D6C7229CDD4800D0ED7F /* ZLPerWithdrawVC.h */,
 				E832D6CB229CDD4800D0ED7F /* ZLPerWithdrawVC.m */,
 				E832D6D2229CDD5600D0ED7F /* AccountOfWithdraw */,
+				E832D6EE229D340100D0ED7F /* ZLAddStoreVC.h */,
+				E832D6EF229D340100D0ED7F /* ZLAddStoreVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -713,10 +713,10 @@
 		E832D6D2229CDD5600D0ED7F /* AccountOfWithdraw */ = {
 			isa = PBXGroup;
 			children = (
-				E832D6D3229CDD5600D0ED7F /* ZLSetWechatVC.h */,
 				E832D6D4229CDD5600D0ED7F /* ZLAddBankCardVC.h */,
-				E832D6D5229CDD5600D0ED7F /* ZLSetWechatVC.m */,
 				E832D6D6229CDD5600D0ED7F /* ZLAddBankCardVC.m */,
+				E832D6D3229CDD5600D0ED7F /* ZLSetWechatVC.h */,
+				E832D6D5229CDD5600D0ED7F /* ZLSetWechatVC.m */,
 			);
 			path = AccountOfWithdraw;
 			sourceTree = "<group>";
@@ -906,10 +906,10 @@
 				7A488A7122993B8500069483 /* ZLRegisterVC.m in Sources */,
 				7A9D684E229689D80024DF3A /* GeneralTableView.m in Sources */,
 				7A0097B52294F98100AD79DE /* main.m in Sources */,
-				E832D6EA229CDD9A00D0ED7F /* ZLTextFieldCell.m in Sources */,
 				7A0097DC22951E1700AD79DE /* ZLBaseViewController.m in Sources */,
 				E2802B532299154D004AF4B8 /* ZLBaseCell.m in Sources */,
 				7A9D683022967BB80024DF3A /* ZLShopVC.m in Sources */,
+				E832D6F0229D340100D0ED7F /* ZLAddStoreVC.m in Sources */,
 				E832D6E7229CDD9A00D0ED7F /* ZLPerListView.m in Sources */,
 				7A9D683322967BDC0024DF3A /* ZLGoodsVC.m in Sources */,
 				E832D6D7229CDD5600D0ED7F /* ZLSetWechatVC.m in Sources */,
