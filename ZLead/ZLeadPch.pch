@@ -13,6 +13,7 @@
 #import "URLManager.h"  // URL接口管理类
 #import "NSObject+HUD.h"  // HUD
 #import "UIColor+Func.h"
+#import "UIView+Size.h"
 
 #import "Masonry.h"   // 布局
 #import "ReactiveObjC.h"  // rac
