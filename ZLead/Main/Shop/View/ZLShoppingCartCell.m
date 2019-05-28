@@ -7,11 +7,10 @@
 //
 
 #import "ZLShoppingCartCell.h"
-#import "ZLShoppingCartView.h"
 #import "ZLShopGoodsModel.h"
 
 @interface ZLShoppingCartCell ()
-@property (nonatomic, strong) ZLShoppingCartView *shoppingCartView;
+
 @end
 
 @implementation ZLShoppingCartCell
@@ -27,7 +26,7 @@
 
 - (void)setupViews {
     self.shoppingCartView = [[ZLShoppingCartView alloc] initWithFrame:kRect(15, 5, 345, 164)];
-    [self.shoppingCartView setSubviewsFrame:YES];
+//    [self.shoppingCartView setSubviewsFrame:YES];
     kWeakSelf(weakSelf);
     self.shoppingCartView.minusButtonBlock = ^{
         if (weakSelf.delegate) {

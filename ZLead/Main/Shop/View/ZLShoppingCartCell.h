@@ -7,6 +7,7 @@
 //
 
 #import "ZLBaseCell.h"
+#import "ZLShoppingCartView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 @interface ZLShoppingCartCell : ZLBaseCell
+@property (nonatomic, strong) ZLShoppingCartView *shoppingCartView;
 @property (nonatomic, weak) id <ZLShoppingCartCellDelegate> delegate;
+- (void)setupViews;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UITableView *goodsListTableView;
 @property (nonatomic, strong) UIButton *allSelectedButton;
 @property (nonatomic, copy)  void (^allSelectedBlock) (BOOL isSelected);
+@property (nonatomic, copy)  void (^calculateButtonBlock) (void);
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -70,6 +70,7 @@
     self.calculateButton.frame = kRect(269,5,96,41);
     self.calculateButton.backgroundColor = [UIColor colorWithHexString:@"#FFB223"];
     self.calculateButton.layer.cornerRadius = 24;
+    [self.calculateButton addTarget:self action:@selector(calculateButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView addSubview:self.calculateButton];
 }
 
@@ -79,6 +80,12 @@
     allSelectedBtn.selected = !allSelectedBtn.selected;
     if (self.allSelectedBlock) {
         self.allSelectedBlock(allSelectedBtn.isSelected);
+    }
+}
+
+- (void)calculateButtonAction {
+    if (self.calculateButtonBlock) {
+        self.calculateButtonBlock();
     }
 }
 

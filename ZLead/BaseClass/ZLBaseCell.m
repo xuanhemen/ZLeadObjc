@@ -8,18 +8,22 @@
 
 #import "ZLBaseCell.h"
 
+@interface ZLBaseCell ()
+
+@end
+
 @implementation ZLBaseCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.bottomSeparator = [[UIView alloc] initWithFrame:CGRectZero];
+        self.bottomSeparator.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
+        [self addSubview:self.bottomSeparator];
+    }
+    return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 - (void)setupData:(id)dataModel {
     

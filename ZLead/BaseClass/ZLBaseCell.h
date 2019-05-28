@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLBaseCell : UITableViewCell
+@property (nonatomic, strong) UIView *bottomSeparator;
 - (void)setupData:(id)dataModel;
 + (CGFloat)heightForCell;
 @end

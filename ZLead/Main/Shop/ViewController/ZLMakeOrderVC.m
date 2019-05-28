@@ -10,6 +10,7 @@
 #import "ZLMakeOrderView.h"
 #import "ZLShoppingCartCell.h"
 #import "ZLShopGoodsModel.h"
+#import "ZLGoodsBillVC.h"
 
 @interface ZLMakeOrderVC () <UITableViewDataSource, UITableViewDelegate, ZLShoppingCartCellDelegate>
 @property (nonatomic, strong) ZLMakeOrderView *makeOrderView;
@@ -70,6 +71,11 @@
         }
         [weakSelf.makeOrderView.goodsListTableView reloadData];
     };
+    self.makeOrderView.calculateButtonBlock = ^{
+        weakSelf.hidesBottomBarWhenPushed = YES;
+        ZLGoodsBillVC *billVC = [[ZLGoodsBillVC alloc] init];
+        [weakSelf.navigationController pushViewController:billVC animated:YES];
+    };
 }
 
 #pragma mark - private Method
@@ -114,6 +120,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZLShoppingCartCell"];
+    [((ZLShoppingCartCell *)cell).shoppingCartView setSubviewsFrame:YES];
     [(ZLShoppingCartCell *)cell setupData:[self.goodsList objectAtIndex:indexPath.row]];
     ((ZLShoppingCartCell *)cell).delegate = self;
     return cell;

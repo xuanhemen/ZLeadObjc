@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UIImageView *goodsImageView;
 @property (nonatomic, strong) UILabel *goodsTitleLabel;
 @property (nonatomic, strong) UILabel *goodsTypeLabel;
-@property (nonatomic, strong) UILabel *goodsNumLabel;
+@property (nonatomic, strong) UILabel *goodsPriceLabel;
 @property (nonatomic, strong) UIView *numChangeView;
 @property (nonatomic,strong) UIButton *addButton;
 @property (nonatomic,strong) UIButton *minusButton;
@@ -63,10 +63,10 @@
     self.goodsTypeLabel.textColor = [UIColor colorWithHexString:@"#999999"];
     [self addSubview:self.goodsTypeLabel];
     
-    self.goodsNumLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.goodsNumLabel.font = kFont15;
-    self.goodsNumLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-    [self addSubview:self.goodsNumLabel];
+    self.goodsPriceLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.goodsPriceLabel.font = kFont15;
+    self.goodsPriceLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+    [self addSubview:self.goodsPriceLabel];
     
     self.numChangeView = [[UIView alloc] initWithFrame:CGRectZero];
     self.numChangeView.layer.cornerRadius = 2;
@@ -121,7 +121,7 @@
             make.right.equalTo(weakSelf.mas_right).offset(dis(-10));
             make.height.lessThanOrEqualTo(@(dis(40.0)));
         }];
-        [self.goodsNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.goodsPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(weakSelf.goodsImageView.mas_right).offset(dis(10));
             make.bottom.equalTo(weakSelf.mas_bottom).offset(dis(-16));
             make.width.lessThanOrEqualTo(@(dis(100.0)));
@@ -129,7 +129,7 @@
         
         [self.goodsTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(weakSelf.goodsImageView.mas_right).offset(dis(10));
-            make.bottom.equalTo(weakSelf.goodsNumLabel.mas_top).offset(dis(-12));
+            make.bottom.equalTo(weakSelf.goodsPriceLabel.mas_top).offset(dis(-12));
             make.right.equalTo(weakSelf.mas_right).offset(dis(-10));
         }];
         
@@ -162,13 +162,63 @@
         }];
     } else {
         self.selectedButton.hidden = YES;
+        self.goodsIdLabel.frame = kRect(184, 15, 176, 17);
+        self.separator.hidden = YES;
+        self.selectedButton.hidden = YES;;
+        self.goodsImageView.frame = kRect(15, 45, 80, 80);
+        kWeakSelf(weakSelf);
+        [self.goodsTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(weakSelf).offset(dis(44));
+            make.left.equalTo(weakSelf.goodsImageView.mas_right).offset(dis(10));
+            make.right.equalTo(weakSelf.mas_right).offset(dis(-15));
+            make.height.lessThanOrEqualTo(@(dis(40.0)));
+        }];
+        [self.goodsPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(weakSelf.goodsImageView.mas_right).offset(dis(10));
+            make.bottom.equalTo(weakSelf.mas_bottom).offset(dis(-16));
+            make.width.lessThanOrEqualTo(@(dis(100.0)));
+        }];
+        
+        [self.goodsTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(weakSelf.goodsImageView.mas_right).offset(dis(10));
+            make.bottom.equalTo(weakSelf.goodsPriceLabel.mas_top).offset(dis(-12));
+            make.right.equalTo(weakSelf.mas_right).offset(dis(-10));
+        }];
+        
+        [self.numChangeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(weakSelf.mas_right).offset(dis(-15));
+            make.bottom.equalTo(weakSelf.mas_bottom).offset(dis(-15));
+            make.width.mas_equalTo(dis(83));
+            make.height.mas_equalTo(dis(24));
+        }];
+        
+        [self.addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(weakSelf.numChangeView.mas_right);
+            make.bottom.equalTo(weakSelf.numChangeView.mas_bottom);
+            make.width.mas_equalTo(dis(24));
+            make.height.mas_equalTo(dis(24));
+        }];
+        
+        [self.goodsNumTF mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(weakSelf.addButton.mas_left);
+            make.bottom.equalTo(weakSelf.numChangeView.mas_bottom);
+            make.width.mas_equalTo(dis(35));
+            make.height.mas_equalTo(dis(24));
+        }];
+        
+        [self.minusButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(weakSelf.goodsNumTF.mas_left);
+            make.bottom.equalTo(weakSelf.numChangeView.mas_bottom);
+            make.width.mas_equalTo(dis(24));
+            make.height.mas_equalTo(dis(24));
+        }];
     }
 }
 
 - (void)setupData:(ZLShopGoodsModel *)goodsModel {
     self.goodsTitleLabel.text = @"这里是产品名称只显示两行多出的文字不显示多出的文字不显示多出";
     self.goodsIdLabel.text = @"商品编号：14732012832835";
-    self.goodsNumLabel.text = @"￥233.00把";
+    self.goodsPriceLabel.text = @"￥233.00/把";
     self.goodsTypeLabel.text = @"分类：零件";
     self.goodsNumTF.text = [NSString stringWithFormat:@"%@", @(goodsModel.goodsNum)];
     if (goodsModel.isSelected) {
