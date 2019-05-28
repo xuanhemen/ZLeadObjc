@@ -8,7 +8,9 @@
 //
 
 #import "ZLInputView.h"
+@interface ZLInputView ()
 
+@end
 @implementation ZLInputView
 
 /*
@@ -18,10 +20,9 @@
     // Drawing code
 }
 */
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame viewModel:(ZLLoginViewModel *)viewModel{
     self = [super initWithFrame:frame];
     if (self) {
-        
         [self addSubview:self.userField]; //添加用户输入框
         [self addSubview:self.pwField]; //添加密码输入框
     }
@@ -48,25 +49,43 @@
         UIImageView * leftView = [[UIImageView alloc] init];
         leftView.image = image(@"passwordImg");
         _pwField.leftView = leftView;
-        _pwField.rightView = [self rightBtnView];
+        _pwField.rightView = self.rightBtnView; //右视图
         _pwField.rightViewMode=UITextFieldViewModeAlways;
         _pwField.keyboardType = UIKeyboardTypeTwitter;
         _pwField.clearsOnBeginEditing = NO;
         _pwField.secureTextEntry = YES;
-        _pwField.placeholder = @"请输入密码";
+        _pwField.placeholder = @"请输入验证码";
         [self addSubview:_pwField];
     }
     return _userField;
 }
 - (UIButton *)rightBtnView{
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [btn setTitleColor:lightColor forState:UIControlStateNormal];
-    btn.titleLabel.font = kFont16;
-    return btn;
+    if (!_rightBtnView) {
+        _rightBtnView = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_rightBtnView setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [_rightBtnView setTitleColor:lightColor forState:UIControlStateNormal];
+        _rightBtnView.titleLabel.font = kFont16;
+    }
+      return _rightBtnView;
 }
 - (void)layoutSubviews{
     _userField.frame = kRect(25, 0, kScreenWith-50, self.frame.size.height/2);
     _pwField.frame = kRect(25, self.frame.size.height/2, kScreenWith-50, self.frame.size.height/2);
+}
+- (void)changeStyle:(BOOL)isSelected{
+    if (isSelected) { //账号密码登录
+        UIImageView * leftView = [[UIImageView alloc] init];
+        leftView.image = image(@"secImg");
+        _pwField.leftView = leftView;
+        _pwField.placeholder = @"请输入密码";
+        [_rightBtnView setTitle:@"忘记密码" forState:UIControlStateNormal];
+    }else{ //验证码登录
+        UIImageView * leftView = [[UIImageView alloc] init];
+        leftView.image = image(@"passwordImg");
+        _pwField.leftView = leftView;
+        _pwField.placeholder = @"请输入验证码";
+        [_rightBtnView setTitle:@"获取验证码" forState:UIControlStateNormal];
+    }
+    
 }
 @end

@@ -10,11 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZLLoginViewModel : NSObject
+@interface ZLLoginViewModel : NSObject<UITextFieldDelegate>
 
 @property (nonatomic, strong) RACSubject *goRegister; // 去注册
 
-@property (nonatomic, strong) RACSubject *goLogin; // 登录
+@property (nonatomic, strong) RACSubject *goLogin; // 从注册界面切回到登录界面
+
+@property (nonatomic, strong) RACSubject *login; // 登录
+
+@property (nonatomic, strong) RACSubject *getCode; // 获取验证码
 
 /** 负责跳转 */
 -(void)jumpFromController:(UIViewController *)vc;
