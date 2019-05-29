@@ -14,11 +14,8 @@
 #import "NSObject+HUD.h"  // HUD
 #import "UIColor+Func.h"
 #import "UIView+Size.h"
-<<<<<<< HEAD
 #import "UIImage+ZL.h"
-=======
 #import "NetManager.h"
->>>>>>> 755fb3f8845bf0e0d8df477709fa3b7686618a66
 
 #import "Masonry.h"   // 布局
 #import "ReactiveObjC.h"  // rac
