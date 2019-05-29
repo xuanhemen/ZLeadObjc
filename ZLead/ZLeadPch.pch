@@ -14,6 +14,7 @@
 #import "NSObject+HUD.h"  // HUD
 #import "UIColor+Func.h"
 #import "UIView+Size.h"
+#import "NetManager.h"
 
 #import "Masonry.h"   // 布局
 #import "ReactiveObjC.h"  // rac
@@ -33,12 +34,12 @@
 #define image(string) [UIImage imageNamed:string]
 /** 空数组判断 */
 #define IsArrEmpty(_ref)    (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref) count] == 0))
+/** 字符串是否为空 */
+#define IsStrEmpty(_ref)    (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref)isEqualToString:@""]))
 /** uuid */
 #define IMSI [[[UIDevice currentDevice] identifierForVendor] UUIDString]
 /** rgb颜色 */
 #define COLOR(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
-
-
 /** hex */
 #define hex(str) [UIColor colorWithHexString:str]
 /** lightColor */
