@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLPerHeaderView : UIView
 
+/** <#注释#> */
+@property (nonatomic, copy)void (^msgBlock)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -20,6 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"账户设置";
+    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
@@ -42,6 +44,7 @@
         cell.textLabel.textColor = [UIColor colorWithHexString:@"#333333"];
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text = self.topicArr[indexPath.row];
     return cell;
