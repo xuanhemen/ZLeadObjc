@@ -31,7 +31,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     self.title = self.type == AccountTypeAlipay ? @"设置支付宝": @"设置微信";
     [self setup];
 }
@@ -123,7 +122,7 @@
 - (UIView *)line1View {
     if (!_line1View) {
         _line1View = [[UIView alloc] init];
-        _line1View.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
+        _line1View.backgroundColor = [UIColor zl_lineColor];
         [self.containerView addSubview:_line1View];
     }
     return _line1View;
@@ -132,7 +131,7 @@
 - (UIView *)line2View {
     if (!_line2View) {
         _line2View = [[UIView alloc] init];
-        _line2View.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
+        _line2View.backgroundColor = [UIColor zl_lineColor];
         [self.containerView addSubview:_line2View];
     }
     return _line2View;

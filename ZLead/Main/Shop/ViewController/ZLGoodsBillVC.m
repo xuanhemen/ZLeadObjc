@@ -26,7 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     //    [self setupViews];
     self.title = @"一键开单";
     [self config];

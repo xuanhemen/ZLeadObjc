@@ -32,7 +32,7 @@
         make.left.right.equalTo(self);
         make.bottom.equalTo(self).offset(dis(-10));
     }];
-    self.imageView.backgroundColor = [UIColor cyanColor];
+    self.imageView.backgroundColor = [UIColor zl_bgColor];
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.titleLbl.mas_top).offset(dis(-10));
         make.centerX.equalTo(self);

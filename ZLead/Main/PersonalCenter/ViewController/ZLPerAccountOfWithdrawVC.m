@@ -91,7 +91,7 @@
         _tableView.dataSource = self;
         _tableView.tableFooterView = [UIView new];
         [self.view addSubview:_tableView];
-        _tableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
+        _tableView.backgroundColor = [UIColor zl_bgColor];
         
         if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
             _tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);

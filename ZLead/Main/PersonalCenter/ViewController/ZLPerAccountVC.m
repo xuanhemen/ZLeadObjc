@@ -20,7 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
@@ -64,7 +63,7 @@
 - (UIView *)footer {
     if (!_footer) {
         _footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, 200)];
-        _footer.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
+        _footer.backgroundColor = [UIColor zl_bgColor];
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.backgroundColor = [UIColor colorWithHexString:@"#FFB223"];

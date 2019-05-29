@@ -33,7 +33,7 @@
 }
 
 - (void)setup {
-    self.headerImgV.backgroundColor = [UIColor blueColor];
+    self.headerImgV.backgroundColor = [UIColor zl_bgColor];
     [self.headerImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(dis(15));
         make.centerY.equalTo(self);

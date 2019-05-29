@@ -25,8 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
-    
+
     [self setup];
 }
 
@@ -44,7 +43,7 @@
     }];
     
     UIView *line1V = [[UIView alloc] init];
-    line1V.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
+    line1V.backgroundColor = [UIColor zl_lineColor];
     [self.containerView addSubview:line1V];
     [line1V mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameTextF);
@@ -59,7 +58,7 @@
     }];
     
     UIView *line2V = [[UIView alloc] init];
-    line2V.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
+    line2V.backgroundColor = [UIColor zl_lineColor];
     [self.containerView addSubview:line2V];
     [line2V mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.height.equalTo(line1V);
@@ -72,7 +71,7 @@
     }];
     
     UIView *line3V = [[UIView alloc] init];
-    line3V.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
+    line3V.backgroundColor = [UIColor zl_lineColor];
     [self.containerView addSubview:line3V];
     [line3V mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.height.equalTo(line1V);
