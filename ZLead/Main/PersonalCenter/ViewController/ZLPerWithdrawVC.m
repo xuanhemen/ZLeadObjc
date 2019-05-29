@@ -1,23 +1,21 @@
 //
-//  ZLBaseViewController.m
+//  ZLWithdrawVC.m
 //  ZLead
 //
-//  Created by 董建伟 on 2019/5/22.
-//  Copyright © 2019 Beijing tai chi HuaQing information systems co., LTD. All rights reserved.
+//  Created by qzwh on 2019/5/27.
+//  Copyright © 2019年 Beijing tai chi HuaQing information systems co., LTD. All rights reserved.
 //
 
-#import "ZLBaseViewController.h"
+#import "ZLPerWithdrawVC.h"
 
-@interface ZLBaseViewController ()
+@interface ZLPerWithdrawVC ()
 
 @end
 
-@implementation ZLBaseViewController
+@implementation ZLPerWithdrawVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor whiteColor];
-    self.view.backgroundColor = [UIColor zl_bgColor];
     // Do any additional setup after loading the view.
 }
 

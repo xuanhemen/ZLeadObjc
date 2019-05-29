@@ -40,4 +40,16 @@
                            alpha:1.0f];
 }
 
++ (UIColor *)zl_bgColor {
+    return [self colorWithHexString:@"#F7F7F7"];
+}
+
++ (UIColor *)zl_mainColor {
+    return [self colorWithHexString:@""];
+}
+
++ (UIColor *)zl_lineColor {
+    return [self colorWithHexString:@"#EEEEEE"];
+}
+
 @end

@@ -40,10 +40,10 @@
     containerView.layer.shadowRadius = 4;
     [self addSubview:containerView];
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf).offset(15);
-        make.right.equalTo(weakSelf).offset(-15);
-        make.height.mas_equalTo(80);
-        make.top.equalTo(weakSelf).offset(10);
+        make.left.equalTo(weakSelf).offset(dis(15));
+        make.right.equalTo(weakSelf).offset(dis(-15));
+        make.height.mas_equalTo(dis(80));
+        make.top.equalTo(weakSelf).offset(dis(10));
     }];
     
     self.shopLogo = [[UIImageView alloc] init];
@@ -62,7 +62,7 @@
     self.shopTypeLabel.layer.borderColor = [UIColor colorWithHexString:@"#FFB223"].CGColor;
     self.shopTypeLabel.layer.borderWidth = 1;
     self.shopTypeLabel.textAlignment = NSTextAlignmentCenter;
-    self.shopTypeLabel.layer.cornerRadius = 8;
+    self.shopTypeLabel.layer.cornerRadius = dis(8);
     self.shopTypeLabel.layer.masksToBounds = YES;
     [containerView addSubview:self.shopTypeLabel];
     
@@ -79,43 +79,43 @@
     [self.shopLogo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(containerView).offset(8);
         make.left.mas_equalTo(containerView).offset(10);
-        make.height.mas_equalTo(60);
-        make.width.mas_equalTo(60);
+        make.height.mas_equalTo(dis(60));
+        make.width.mas_equalTo(dis(60));
     }];
-    self.shopLogo.layer.cornerRadius = 30;
+    self.shopLogo.layer.cornerRadius = dis(30);
     self.shopLogo.layer.masksToBounds = YES;
     
     [self.shopNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.shopLogo).offset(7);
-        make.left.equalTo(self.shopLogo.mas_right).offset(10);
-        make.width.mas_equalTo(200);
-        make.height.mas_equalTo(20);
+        make.top.equalTo(self.shopLogo).offset(dis(7));
+        make.left.equalTo(self.shopLogo.mas_right).offset(dis(10));
+        make.width.mas_equalTo(dis(200));
+        make.height.mas_equalTo(dis(20));
     }];
     
     [self.shopTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.shopNameLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.shopLogo.mas_right).offset(10);
-        make.width.mas_equalTo(61);
-        make.height.mas_equalTo(16);
+        make.top.equalTo(self.shopNameLabel.mas_bottom).offset(dis(10));
+        make.left.equalTo(self.shopLogo.mas_right).offset(dis(10));
+        make.width.mas_equalTo(dis(61));
+        make.height.mas_equalTo(dis(16));
     }];
     
     [self.todayIncomeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.shopNameLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.shopTypeLabel.mas_right).offset(15);
-        make.width.mas_equalTo(130);
-        make.height.mas_equalTo(16);
+        make.top.equalTo(self.shopNameLabel.mas_bottom).offset(dis(10));
+        make.left.equalTo(self.shopTypeLabel.mas_right).offset(dis(15));
+        make.width.mas_equalTo(dis(130));
+        make.height.mas_equalTo(dis(16));
     }];
     
     [self.authenticationIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(containerView).offset(14);
+        make.top.equalTo(containerView).offset(dis(14));
         make.right.equalTo(containerView);
-        make.width.mas_equalTo(68);
-        make.height.mas_equalTo(20);
+        make.width.mas_equalTo(dis(68));
+        make.height.mas_equalTo(dis(20));
     }];
 }
 
 + (CGFloat)heightForCell {
-    return 90;
+    return dis(90);
 }
 
 @end

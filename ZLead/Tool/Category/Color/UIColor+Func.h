@@ -14,6 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 /** HEX */
 +(UIColor *)colorWithHexString:(NSString *)stringToConvert;
 
++ (UIColor *)zl_mainColor;
+
++ (UIColor *)zl_bgColor;
+
++ (UIColor *)zl_lineColor;
+
 @end
 
 NS_ASSUME_NONNULL_END
