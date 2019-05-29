@@ -40,8 +40,8 @@
         make.top.equalTo(weakSelf).offset(7);
     }];
     
-    NSArray *contents = @[@{@"title":@"店长须知",@"des":@"关于开店的教程", @"icon":@""}, @{@"title":@"关于我们",@"des":@"直链网相关介绍", @"icon":@""}];
-    CGFloat actionButtonWidth = (ScreenWidth - 30)/2;
+    NSArray *contents = @[@{@"title":@"店长须知",@"des":@"关于开店的教程", @"icon":@"shop-note"}, @{@"title":@"关于我们",@"des":@"直链网相关介绍", @"icon":@"shop-about"}];
+    CGFloat actionButtonWidth = (kScreenWith - 30)/2;
     for (int i = 0; i < contents.count; i ++) {
         UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
         menuButton.tag = 1000 + i;
@@ -89,13 +89,14 @@
         }];
 
         UIImageView *noteIcon = [[UIImageView alloc] init];
+        noteIcon.image = [UIImage imageNamed:[[contents objectAtIndex:i] objectForKey:@"icon"]];
         noteIcon.backgroundColor = [UIColor redColor];
         [menuButton addSubview:noteIcon];
         [noteIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(menuButton.mas_left).offset(120);
-            make.width.mas_equalTo(40);
-            make.height.mas_equalTo(40);
-            make.top.equalTo(menuButton.mas_top).offset(23);
+            make.left.equalTo(menuButton.mas_left).offset(dis(120));
+            make.width.mas_equalTo(36);
+            make.height.mas_equalTo(36);
+            make.top.equalTo(menuButton.mas_top).offset(25);
         }];
     }
     

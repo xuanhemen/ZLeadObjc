@@ -47,7 +47,7 @@
     
     NSArray *titles = @[@"订单管理", @"一键开单", @"线下收款", @"敬请期待"];
 //    NSArray *icons = @[@"订单管理", @"一键开单", @"线下收款", @"敬请期待"];
-    CGFloat singleMenuViewWidth = (ScreenWidth-30)/4;
+    CGFloat singleMenuViewWidth = (kScreenWith-30)/4;
     UIView *tempSingleMenuView = nil;
     UIView *tempTitleLabel = nil;
     for (int i = 0; i < titles.count; i ++) {

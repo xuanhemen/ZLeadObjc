@@ -13,6 +13,7 @@
 #import "URLManager.h"  // URL接口管理类
 #import "NSObject+HUD.h"  // HUD
 #import "UIColor+Func.h"
+#import "UIView+Size.h"
 
 #import "Masonry.h"   // 布局
 #import "ReactiveObjC.h"  // rac
@@ -36,10 +37,6 @@
 #define IMSI [[[UIDevice currentDevice] identifierForVendor] UUIDString]
 /** rgb颜色 */
 #define COLOR(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
-
-
-#define ScreenWidth ([UIScreen mainScreen].bounds.size.width) //屏幕宽度
-#define ScreenHeight ([UIScreen mainScreen].bounds.size.height) //屏幕高度
 
 
 /** hex */

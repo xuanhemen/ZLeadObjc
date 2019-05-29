@@ -35,6 +35,9 @@
 #define kFont16 [UIFont systemFontOfSize:16]
 #define kFont15 [UIFont systemFontOfSize:15]
 #define kFont14 [UIFont systemFontOfSize:14]
+#define kBoldFont14 [UIFont boldSystemFontOfSize:14]
 #define kFont13 [UIFont systemFontOfSize:13]
+#define kFont12 [UIFont systemFontOfSize:12]
+#define kFont11 [UIFont systemFontOfSize:11]
 
 #endif /* SizeManager_h */

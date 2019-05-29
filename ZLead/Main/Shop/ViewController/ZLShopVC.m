@@ -36,7 +36,7 @@
 - (void)setupViews {
     __weak typeof (self) weakSelf = self;
     
-    self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, ScreenWidth, 61)];
+    self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWith, 61)];
     self.shopNameView.changeShopBlock = ^{
         ZLShopListVC *shopListVC = [[ZLShopListVC alloc] init];
         [weakSelf.navigationController pushViewController:shopListVC animated:YES];
@@ -63,7 +63,7 @@
 }
 
 - (UIView *)setupTableViewHeaderView  {
-    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 223)];
+    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, 223)];
     return headView;
 }
 
@@ -93,14 +93,20 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"ZLShopBusinessMenuCell"];
         ((ZLShopBusinessMenuCell *)cell).shopBusinessBlock = ^(NSInteger businessType) {
             if (businessType == 0) {
+                self.hidesBottomBarWhenPushed = YES;
                 ZLOrderManageVC *orderManageVC = [[ZLOrderManageVC alloc] init];
                 [weakSelf.navigationController pushViewController:orderManageVC animated:YES];
+                self.hidesBottomBarWhenPushed = NO;
             } else if (businessType == 1) {
+                self.hidesBottomBarWhenPushed = YES;
                 ZLMakeOrderVC *makeOrderVC = [[ZLMakeOrderVC alloc] init];
                 [weakSelf.navigationController pushViewController:makeOrderVC animated:YES];
+                self.hidesBottomBarWhenPushed = NO;
             }  else if (businessType == 2) {
+                self.hidesBottomBarWhenPushed = YES;
                 ZLOfflinePaymentVC *offlinePaymentVC = [[ZLOfflinePaymentVC alloc] init];
                 [weakSelf.navigationController pushViewController:offlinePaymentVC animated:YES];
+                self.hidesBottomBarWhenPushed = NO;
             }
         };
     } else  {
