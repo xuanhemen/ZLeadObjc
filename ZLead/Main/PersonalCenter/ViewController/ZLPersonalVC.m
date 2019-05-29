@@ -9,7 +9,7 @@
 #import "ZLPersonalVC.h"
 
 @interface ZLPersonalVC ()
-
+@property (nonatomic, strong)UIScrollView *scrollView;
 @end
 
 @implementation ZLPersonalVC
