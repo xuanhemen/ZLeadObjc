@@ -27,6 +27,8 @@
 
 /** 弱引用 */
 #define kWeakSelf(weakSelf) __weak __typeof(self)weakSelf = self;
+/** 强引用 */
+#define kStrongSelf(strongSelf) __strong __typeof(weakSelf)strongSelf = weakSelf;
 /** 加载图片 */
 #define image(string) [UIImage imageNamed:string]
 /** 空数组判断 */

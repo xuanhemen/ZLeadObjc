@@ -41,7 +41,7 @@
     [self addSubview:self.goodsIdLabel];
     
     self.separator = [[UIView alloc] initWithFrame:CGRectZero];
-    self.separator.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
+    self.separator.backgroundColor = [UIColor zl_lineColor];
     [self addSubview:self.separator];
     
     self.selectedButton = [UIButton buttonWithType:UIButtonTypeCustom];

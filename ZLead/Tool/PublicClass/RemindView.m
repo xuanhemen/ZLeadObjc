@@ -36,7 +36,7 @@ static RemindView *_remindView = nil;
     [[UIApplication sharedApplication].keyWindow addSubview:_remindView];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [_remindView removeFromSuperview];
-       
+        _remindView = nil;
     });
 }
 +(void)showWithTitle:(NSString *)string duration:(NSTimeInterval)seconds{
@@ -44,10 +44,12 @@ static RemindView *_remindView = nil;
         _remindView = [[RemindView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     }
     [_remindView initDataWithString:string];
+    
     [[UIApplication sharedApplication].keyWindow addSubview:_remindView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:_remindView];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(seconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [_remindView removeFromSuperview];
+        
     });
 }
 

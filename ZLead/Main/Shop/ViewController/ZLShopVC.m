@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     [self setupViews];
 }
@@ -47,6 +47,7 @@
     self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
+    self.mainTableView.backgroundColor = [UIColor zl_bgColor];
     [self.mainTableView registerClass:[ZLShopBusinessMenuCell class] forCellReuseIdentifier:@"ZLShopBusinessMenuCell"];
     [self.mainTableView registerClass:[ZLShopManagerNoteCell class] forCellReuseIdentifier:@"ZLShopManagerNoteCell"];
     self.mainTableView.tableHeaderView = [self setupTableViewHeaderView];

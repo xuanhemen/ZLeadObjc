@@ -9,6 +9,10 @@
 #import "ZLLoginViewModel.h"
 #import "ZLLoginVC.h"
 #import "ZLTabBarController.h"
+#import "ZLNavigationController.h"
+#import "NSString+Function.h"
+#import "ZLSetPasswordVC.h"
+
 
 @implementation ZLLoginViewModel
 
@@ -31,15 +35,34 @@
     [self.goRegister subscribeNext:^(id  _Nullable x) {
         ZLLoginVC *lvc = [[ZLLoginVC alloc] init];
         lvc.indentifier = @"register";
-        [vc presentViewController:lvc animated:YES completion:nil];
+        ZLNavigationController *zvc = [[ZLNavigationController alloc] initWithRootViewController:lvc];
+        [vc presentViewController:zvc animated:YES completion:nil];
         
     }];
     [self.goLogin subscribeNext:^(id  _Nullable x) {
         [vc dismissViewControllerAnimated:YES completion:nil];
     }];
     [self.login subscribeNext:^(id  _Nullable x) {
-        ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
-        [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
+        UIButton *btn = x;
+        if ([btn.titleLabel.text isEqualToString:@"登录"]) {
+            BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
+            if (!isTrue) {
+                [self showMsg:@"手机号格式不正确"];
+                return;
+            }
+            ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
+            [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
+        }else if ([btn.titleLabel.text isEqualToString:@"注册"]){
+            BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
+            if (!isTrue) {
+                [self showMsg:@"手机号格式不正确"];
+                return;
+            }
+            ZLSetPasswordVC *svc = [[ZLSetPasswordVC alloc] init];
+            [vc.navigationController pushViewController:svc animated:YES];
+        }
+       
+        
     }];
 }
 - (void)getVerificationCode{
@@ -48,10 +71,17 @@
         UIButton *btn = x;
         NSString *title = btn.titleLabel.text; 
         if ([title isEqualToString:@"获取验证码"]) { //调用获取验证码接口
-            [self showMsg:@"获取验证码"];
+            BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
+            if (isTrue) {
+                [self showMsg:@"发送验证码"];
+            }else{
+                [self showMsg:@"手机号格式不正确"];
+            }
+          
         }else if ([title isEqualToString:@"忘记密码"]){ //忘记密码
             
         }
     }];
 }
+
 @end

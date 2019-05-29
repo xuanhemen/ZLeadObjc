@@ -1,18 +1,18 @@
 //
-//  ZLRegisterVC.m
+//  ZLWithdrawVC.m
 //  ZLead
 //
-//  Created by 董建伟 on 2019/5/25.
-//  Copyright © 2019 Beijing tai chi HuaQing information systems co., LTD. All rights reserved.
+//  Created by qzwh on 2019/5/27.
+//  Copyright © 2019年 Beijing tai chi HuaQing information systems co., LTD. All rights reserved.
 //
 
-#import "ZLRegisterVC.h"
+#import "ZLPerWithdrawVC.h"
 
-@interface ZLRegisterVC ()
+@interface ZLPerWithdrawVC ()
 
 @end
 
-@implementation ZLRegisterVC
+@implementation ZLPerWithdrawVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

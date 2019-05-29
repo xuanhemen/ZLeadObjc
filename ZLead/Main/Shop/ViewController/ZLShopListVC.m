@@ -8,10 +8,12 @@
 
 #import "ZLShopListVC.h"
 #import "ZLShopListCell.h"
-#import "ZLAddShopVC.h"
+#import "ZLAddStoreVC.h"
 
 @interface ZLShopListVC () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *shopListTableView;
+
+@property (nonatomic, strong)UIView *footer;
 
 @end
 
@@ -34,7 +36,7 @@
     self.shopListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.shopListTableView.delegate = self;
     self.shopListTableView.dataSource = self;
-    self.shopListTableView.tableFooterView = [self createTableViewFooterView];
+    self.shopListTableView.tableFooterView = self.footer;
     [self.shopListTableView registerClass:[ZLShopListCell class] forCellReuseIdentifier:@"ZLShopListCell"];
     self.shopListTableView.backgroundColor = [UIColor clearColor];
     self.shopListTableView.backgroundView = nil;
@@ -46,29 +48,6 @@
         make.top.equalTo(weakSelf.view);
         make.bottom.equalTo(weakSelf.view);
     }];
-}
-
-- (UIView *)createTableViewFooterView {
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, dis(115))];
-    UIButton *addShopButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    addShopButton.frame = kRect(24, 60, 327, 44);
-    addShopButton.backgroundColor = [UIColor colorWithHexString:@"#FFB223"];
-    addShopButton.layer.cornerRadius = dis(22);
-    [addShopButton setTitle:@"新增店铺" forState:UIControlStateNormal];
-    [addShopButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    addShopButton.titleLabel.font = kFont16;
-    [footerView addSubview:addShopButton];
-    [addShopButton addTarget:self action:@selector(addShopButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    return footerView;
-}
-
-#pragma mark - UIButton Actions
-
-- (void)addShopButtonAction {
-    self.hidesBottomBarWhenPushed = YES;
-    ZLAddShopVC *addShopVC = [[ZLAddShopVC alloc] init];
-    [self.navigationController pushViewController:addShopVC animated:YES];
-    self.hidesBottomBarWhenPushed = NO;
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -88,6 +67,35 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZLShopListCell"];
     return cell;
+}
+
+#pragma mark - action
+- (void)addStore:(UIButton *)sender {
+    ZLAddStoreVC *addStoreVc = [[ZLAddStoreVC alloc] init];
+    [self.navigationController pushViewController:addStoreVc animated:YES];
+}
+
+#pragma mark - lazy load
+- (UIView *)footer {
+    if (!_footer) {
+        _footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, 150)];
+        _footer.backgroundColor = [UIColor zl_bgColor];
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.backgroundColor = [UIColor colorWithHexString:@"#FFB223"];
+        btn.layer.cornerRadius = dis(45)/2;
+        [btn setTitle:@"新增店铺" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_footer addSubview:btn];
+        [btn addTarget:self action:@selector(addStore:) forControlEvents:UIControlEventTouchUpInside];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self->_footer).offset(25);
+            make.centerX.equalTo(self->_footer);
+            make.top.equalTo(self->_footer).offset(60);
+            make.height.mas_equalTo(dis(45));
+        }];
+    }
+    return _footer;
 }
 
 @end

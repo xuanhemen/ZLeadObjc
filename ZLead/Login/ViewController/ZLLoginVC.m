@@ -43,6 +43,9 @@
     }
     return _loginView;
 }
+- (void)viewWillAppear:(BOOL)animated{
+       self.navigationController.navigationBar.hidden = YES;
+}
 /*
 #pragma mark - Navigation
 
