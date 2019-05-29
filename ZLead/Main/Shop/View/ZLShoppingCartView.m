@@ -215,6 +215,14 @@
     }
 }
 
+- (void)setUnitPriceText:(CGFloat)price goodsUnit:(NSString *)goodsUnit{
+    NSString *priceStr = [NSString stringWithFormat:@"¥%.2f/%@", price, goodsUnit];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:priceStr attributes: @{NSFontAttributeName: kFont14 ,NSForegroundColorAttributeName: [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]}];
+    [string addAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Mediu" size: 15] ? [UIFont fontWithName:@"PingFangSC-Mediu" size: 15] :kFont15 , NSForegroundColorAttributeName: [UIColor colorWithHexString:@"#333333"]} range:NSMakeRange(0, priceStr.length - goodsUnit.length - 1)];
+    [string addAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"苹方-简 常规体" size: 14] ? [UIFont fontWithName:@"苹方-简 常规体" size: 14] : kFont14, NSForegroundColorAttributeName: [UIColor colorWithHexString:@"#999999"]} range:NSMakeRange(priceStr.length - goodsUnit.length - 1, goodsUnit.length + 1)];
+    self.goodsPriceLabel.attributedText = string;
+}
+
 - (void)setupData:(ZLShopGoodsModel *)goodsModel {
     self.goodsTitleLabel.text = @"这里是产品名称只显示两行多出的文字不显示多出的文字不显示多出";
     self.goodsIdLabel.text = @"商品编号：14732012832835";
@@ -226,6 +234,7 @@
     } else {
         self.selectedButton.backgroundColor = [UIColor yellowColor];
     }
+    [self setUnitPriceText:2330.00 goodsUnit:@"把"];
 }
 
 #pragma mark - UIButton Actions

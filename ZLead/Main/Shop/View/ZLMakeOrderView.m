@@ -32,7 +32,7 @@
     self.searchView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.searchView];
     
-    self.goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(84), kScreenWith, kScreenHeight - (dis(135) + kSafeHeight - kNavBarHeight)) style:UITableViewStylePlain];
+    self.goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(84), kScreenWith, kScreenHeight - (dis(135) + kSafeHeight)) style:UITableViewStylePlain];
     self.goodsListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.goodsListTableView.backgroundColor = [UIColor clearColor];
     [self.goodsListTableView registerClass:[ZLShoppingCartCell class] forCellReuseIdentifier:@"ZLShoppingCartCell"];
