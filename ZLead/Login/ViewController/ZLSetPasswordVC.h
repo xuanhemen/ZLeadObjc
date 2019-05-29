@@ -1,8 +1,8 @@
 //
-//  ZLRegisterVC.h
+//  ZLSetPasswordVC.h
 //  ZLead
 //
-//  Created by 董建伟 on 2019/5/25.
+//  Created by 董建伟 on 2019/5/28.
 //  Copyright © 2019 Beijing tai chi HuaQing information systems co., LTD. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZLRegisterVC : ZLBaseViewController
+@interface ZLSetPasswordVC : ZLBaseViewController
 
 @end
 

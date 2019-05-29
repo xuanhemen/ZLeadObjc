@@ -19,6 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIButton *rightBtnView; // 密码右视图
 
+@property (nonatomic, strong) ZLLoginViewModel *viewModel; //
+
+
+@property (nonatomic, copy) void (^changeLoginState)(BOOL); // 改变登录状态
+
 - (instancetype)initWithFrame:(CGRect)frame viewModel:(ZLLoginViewModel *)viewModel;
 /** 根据登录方式不同，改变自身样式 当isSelected是YES时为账号密码登录，反之为验证码登录*/
 -(void)changeStyle:(BOOL)isSelected;

@@ -20,8 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) RACSubject *getCode; // 获取验证码
 
+@property (nonatomic, copy) NSString *phoneNumber; // 手机号
+
+
 /** 负责跳转 */
 -(void)jumpFromController:(UIViewController *)vc;
+
 @end
 
 NS_ASSUME_NONNULL_END

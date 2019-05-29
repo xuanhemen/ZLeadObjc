@@ -9,6 +9,7 @@
 #import "ZLConfig.h"
 #import "ZLTabBarController.h"
 #import "ZLLoginVC.h"
+#import "ZLNavigationController.h"
 NSString * ZL_BASE_URL = @"";
 
 @implementation ZLConfig
@@ -21,7 +22,8 @@ NSString * ZL_BASE_URL = @"";
         [UIApplication sharedApplication].keyWindow.rootViewController = vc;
     }else{
         ZLLoginVC *lvc = [[ZLLoginVC alloc] init];
-        [UIApplication sharedApplication].keyWindow.rootViewController = lvc;
+        ZLNavigationController *zvc = [[ZLNavigationController alloc] initWithRootViewController:lvc];
+        [UIApplication sharedApplication].keyWindow.rootViewController = zvc;
     }
    
 }

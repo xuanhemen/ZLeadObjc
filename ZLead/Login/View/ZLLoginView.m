@@ -16,10 +16,6 @@
 
 @property (nonatomic, strong) ZLInputView *tfView; // 输入视图
 
-
-
-
-
 @property (nonatomic, strong) UIButton *login; // 登录
 
 @property (nonatomic, strong) ZLLoginViewModel *viewModel; // viewModel
@@ -37,9 +33,10 @@
 -(instancetype)initWithFrame:(CGRect)frame viewModel:(ZLLoginViewModel *)viewModel style:(LogStyle)style{
     self = [super initWithFrame:frame];
     if (self) {
+        self.viewModel = viewModel;
         self.style = style;
         [self initView]; //配置登录视图
-        self.viewModel = viewModel;
+        
         
     }
     return self;
@@ -65,9 +62,16 @@
 - (ZLInputView *)tfView{
     if (!_tfView) {
         _tfView = [[ZLInputView alloc] initWithFrame:CGRectZero viewModel:self.viewModel];
-        [[_tfView.rightBtnView rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-            [self.viewModel.getCode sendNext:x]; //获取验证码或忘记密码
-        }];
+        kWeakSelf(weakSelf)
+        _tfView.changeLoginState = ^(BOOL selecte) {
+            if (selecte) {
+                weakSelf.login.enabled = YES;
+                weakSelf.login.backgroundColor = hex(@"#F7981C");
+            }else{
+                 weakSelf.login.enabled = NO;
+                 weakSelf.login.backgroundColor = COLOR(249, 222, 172, 1);
+            }
+        };
         [self addSubview:_tfView];
         [_tfView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.logoView.mas_bottom).offset(dis(80));
@@ -130,13 +134,14 @@
 - (UIButton *)login{
     if (!_login) {
         _login = [UIButton buttonWithType:UIButtonTypeCustom];
-        _login.backgroundColor = COLOR(248, 217, 168, 0.5);
+        _login.backgroundColor = COLOR(249, 222, 172, 1);
         _login.layer.masksToBounds = YES;
         _login.layer.cornerRadius = dis(25);
+        _login.enabled = NO;
         if (self.style == LogStyleLogin) {
-           [_login setTitle:@"登 录" forState:UIControlStateNormal];
+           [_login setTitle:@"登录" forState:UIControlStateNormal];
         }else{
-            [_login setTitle:@"注 册" forState:UIControlStateNormal];
+            [_login setTitle:@"注册" forState:UIControlStateNormal];
         }
         [_login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _login.titleLabel.font = kFont16;
