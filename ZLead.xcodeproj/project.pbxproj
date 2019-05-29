@@ -965,7 +965,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
@@ -976,7 +976,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B62A8279FE9ACCB0DB609889 /* [CP] Check Pods Manifest.lock */ = {
@@ -1016,10 +1016,8 @@
 				7A9D684C229689D80024DF3A /* GeneralTableViewDelegate.m in Sources */,
 				E265E011229E4F4800842DD0 /* ZLOfflinePaymentView.m in Sources */,
 				E2802B5922991CC7004AF4B8 /* ZLShopManagerNoteCell.m in Sources */,
-
 				E265E00E229D4CF700842DD0 /* ZLPaymentMethodSectionHeaderView.m in Sources */,
 				E832D6FC229E51CD00D0ED7F /* ZLPerButtonView.m in Sources */,
-
 				E265DFFF229D123A00842DD0 /* ZLGoodsBillView.m in Sources */,
 				7A9D684E229689D80024DF3A /* GeneralTableView.m in Sources */,
 				E265DFFC229D121A00842DD0 /* ZLGoodsBillVC.m in Sources */,
@@ -1041,11 +1039,8 @@
 				E265DFDF229B8EBD00842DD0 /* ZLOfflinePaymentVC.m in Sources */,
 				7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */,
 				E265DFE9229B955200842DD0 /* UIView+Addition.m in Sources */,
-
 				7AFD07E9229E7F040093091C /* NSDictionary+Function.m in Sources */,
-
 				E832D6FB229E51CD00D0ED7F /* ZLPerHeaderView.m in Sources */,
-
 				7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */,
 				E265DFDC229B8E8A00842DD0 /* ZLMakeOrderVC.m in Sources */,
 				E265DFE6229B953300842DD0 /* ZLMarqueeView.m in Sources */,
