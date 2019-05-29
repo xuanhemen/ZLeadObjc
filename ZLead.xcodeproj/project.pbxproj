@@ -772,8 +772,8 @@
 			isa = PBXGroup;
 			children = (
 				E832D70C229E521100D0ED7F /* ZLSetWechatVC.h */,
-				E832D70D229E521100D0ED7F /* ZLAddBankCardVC.h */,
 				E832D70E229E521100D0ED7F /* ZLSetWechatVC.m */,
+				E832D70D229E521100D0ED7F /* ZLAddBankCardVC.h */,
 				E832D70F229E521100D0ED7F /* ZLAddBankCardVC.m */,
 			);
 			path = AccountOfWithdraw;
