@@ -10,6 +10,7 @@
 #import "ZLConfig.h"
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
+#import "NSDictionary+Function.h"
 @implementation NetManager
 
 static NetManager *_instance = nil;
@@ -66,7 +67,8 @@ static NetManager *_instance = nil;
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     NSString *urlStr = [ZL_BASE_URL stringByAppendingPathComponent:URLString];
-    [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSMutableDictionary *param = [NSMutableDictionary splicingParameters:parameters]; //拼接参数
+    [manager POST:urlStr parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 #ifdef DEBUG
         NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         DLog(@"%@",jsonStr);
@@ -77,6 +79,23 @@ static NetManager *_instance = nil;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&error];
         /**请求成功*/
         success(dic);
+//        NSString *str = [dic objectForKey:@"statusCode"];
+//        if ([str isEqualToString:@"200"]){//
+//            NSDictionary *dictionary = [dic objectForKey:@"data"];
+//            NSString *code = [dictionary objectForKey:@"code"];
+//            if ([code isEqualToString:@"200"]) {
+//                NSDictionary *dataDic = [dictionary objectForKey:@"zlw_user"];
+//                NSLog(@"%@",dataDic);
+//
+//            }else if ([code isEqualToString:@"301"]){//
+//                NSLog(@"该账号已经注册");
+//            }
+//
+//
+//        }else if ([str isEqualToString:@"500"]){
+//
+//            NSLog(@"");
+//        }
         /**请求失败*/
         failure(dic);
     

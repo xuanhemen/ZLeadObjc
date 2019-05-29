@@ -58,6 +58,12 @@
                 [self showMsg:@"手机号格式不正确"];
                 return;
             }
+            NSDictionary *params = @{@"phone":self.phoneNumber};
+            [NetManager postWithURLString:@"getPhoneValidateCode" parameters:params success:^(NSDictionary * _Nonnull response) {
+                
+            } failure:^(NSDictionary * _Nonnull errorMsg) {
+                
+            }];
             ZLSetPasswordVC *svc = [[ZLSetPasswordVC alloc] init];
             [vc.navigationController pushViewController:svc animated:YES];
         }
@@ -74,6 +80,7 @@
             BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
             if (isTrue) {
                 [self showMsg:@"发送验证码"];
+               
             }else{
                 [self showMsg:@"手机号格式不正确"];
             }

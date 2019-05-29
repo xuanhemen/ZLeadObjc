@@ -38,6 +38,8 @@
 		7A9D68582296A0680024DF3A /* UIColor+Func.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68572296A0680024DF3A /* UIColor+Func.m */; };
 		7AC903BB229D1F830036AD68 /* NSString+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC903BA229D1F830036AD68 /* NSString+Function.m */; };
 		7AC903BE229D425C0036AD68 /* ZLSetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC903BD229D425C0036AD68 /* ZLSetPasswordVC.m */; };
+		7AFD07E6229E7ACC0093091C /* ZLLoginNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD07E5229E7ACC0093091C /* ZLLoginNetManager.m */; };
+		7AFD07E9229E7F040093091C /* NSDictionary+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD07E8229E7F040093091C /* NSDictionary+Function.m */; };
 		9FB42ABF0BA8A97B989DAC14 /* libPods-ZLead.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BD921763FC6637F355F260 /* libPods-ZLead.a */; };
 		E265DFD9229B8DAC00842DD0 /* ZLOrderManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DFD8229B8DAC00842DD0 /* ZLOrderManageVC.m */; };
 		E265DFDC229B8E8A00842DD0 /* ZLMakeOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DFDB229B8E8A00842DD0 /* ZLMakeOrderVC.m */; };
@@ -146,6 +148,10 @@
 		7AC903BA229D1F830036AD68 /* NSString+Function.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Function.m"; sourceTree = "<group>"; };
 		7AC903BC229D425C0036AD68 /* ZLSetPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLSetPasswordVC.h; sourceTree = "<group>"; };
 		7AC903BD229D425C0036AD68 /* ZLSetPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLSetPasswordVC.m; sourceTree = "<group>"; };
+		7AFD07E4229E7ACC0093091C /* ZLLoginNetManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLLoginNetManager.h; sourceTree = "<group>"; };
+		7AFD07E5229E7ACC0093091C /* ZLLoginNetManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLLoginNetManager.m; sourceTree = "<group>"; };
+		7AFD07E7229E7F040093091C /* NSDictionary+Function.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Function.h"; sourceTree = "<group>"; };
+		7AFD07E8229E7F040093091C /* NSDictionary+Function.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Function.m"; sourceTree = "<group>"; };
 		916EADC284FDEA9BE6978269 /* Pods-ZLead.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZLead.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZLead/Pods-ZLead.debug.xcconfig"; sourceTree = "<group>"; };
 		E265DFD7229B8DAC00842DD0 /* ZLOrderManageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLOrderManageVC.h; sourceTree = "<group>"; };
 		E265DFD8229B8DAC00842DD0 /* ZLOrderManageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLOrderManageVC.m; sourceTree = "<group>"; };
@@ -254,6 +260,7 @@
 		7A0097A42294F97F00AD79DE /* ZLead */ = {
 			isa = PBXGroup;
 			children = (
+				7AFD07E2229E7A490093091C /* API */,
 				7A0097D72295165E00AD79DE /* AppDelegate */,
 				7A0097DD22951EA600AD79DE /* Login */,
 				7A0097D9229516AD00AD79DE /* Main */,
@@ -569,6 +576,8 @@
 		7A9D682422964C600024DF3A /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
+				7AFD07E7229E7F040093091C /* NSDictionary+Function.h */,
+				7AFD07E8229E7F040093091C /* NSDictionary+Function.m */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
@@ -662,6 +671,23 @@
 				7A9D68572296A0680024DF3A /* UIColor+Func.m */,
 			);
 			path = Color;
+			sourceTree = "<group>";
+		};
+		7AFD07E2229E7A490093091C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7AFD07E3229E7A520093091C /* Login */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		7AFD07E3229E7A520093091C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7AFD07E4229E7ACC0093091C /* ZLLoginNetManager.h */,
+				7AFD07E5229E7ACC0093091C /* ZLLoginNetManager.m */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		B97A67E62B931C16048ABE36 /* Frameworks */ = {
@@ -902,10 +928,7 @@
 				E2802B4D229906FB004AF4B8 /* ZLShopTurnoverView.m in Sources */,
 				7A9D684C229689D80024DF3A /* GeneralTableViewDelegate.m in Sources */,
 				E2802B5922991CC7004AF4B8 /* ZLShopManagerNoteCell.m in Sources */,
-
 				E265DFFF229D123A00842DD0 /* ZLGoodsBillView.m in Sources */,
-				7A488A7122993B8500069483 /* ZLRegisterVC.m in Sources */,
-
 				7A9D684E229689D80024DF3A /* GeneralTableView.m in Sources */,
 				E265DFFC229D121A00842DD0 /* ZLGoodsBillVC.m in Sources */,
 				7A0097B52294F98100AD79DE /* main.m in Sources */,
@@ -922,14 +945,12 @@
 				E265DFDF229B8EBD00842DD0 /* ZLOfflinePaymentVC.m in Sources */,
 				7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */,
 				E265DFE9229B955200842DD0 /* UIView+Addition.m in Sources */,
+				7AFD07E9229E7F040093091C /* NSDictionary+Function.m in Sources */,
 				7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */,
 				E265DFDC229B8E8A00842DD0 /* ZLMakeOrderVC.m in Sources */,
 				E265DFE6229B953300842DD0 /* ZLMarqueeView.m in Sources */,
-
 				7AC903BB229D1F830036AD68 /* NSString+Function.m in Sources */,
-
 				E265E002229D16C200842DD0 /* ZLShopGoodsModel.m in Sources */,
-
 				7A488A652298E3B300069483 /* CustomTextField.m in Sources */,
 				7A9D682D229679AE0024DF3A /* NetManager.m in Sources */,
 				7A9D68582296A0680024DF3A /* UIColor+Func.m in Sources */,
@@ -941,6 +962,7 @@
 				E265DFF0229CE00800842DD0 /* UIView+Size.m in Sources */,
 				7A9D683E229683DE0024DF3A /* NSObject+HUD.m in Sources */,
 				E265DFF3229CE1D500842DD0 /* ZLShoppingCartCell.m in Sources */,
+				7AFD07E6229E7ACC0093091C /* ZLLoginNetManager.m in Sources */,
 				E265DFF6229CE80D00842DD0 /* ZLGoodsTypeSelectedView.m in Sources */,
 				E265DFEC229BF70000842DD0 /* ZLShoppingCartView.m in Sources */,
 				7A9D682A2296680F0024DF3A /* URLManager.m in Sources */,
@@ -1121,7 +1143,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G8SE9X77HJ;
+				DEVELOPMENT_TEAM = 8XTX3D2Y7S;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZLead/ZLeadPch.pch";
 				INFOPLIST_FILE = ZLead/Info.plist;
@@ -1130,7 +1152,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tjhq.ZLead;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zlead.zhilian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
@@ -1143,7 +1165,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G8SE9X77HJ;
+				DEVELOPMENT_TEAM = 8XTX3D2Y7S;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZLead/ZLeadPch.pch";
 				INFOPLIST_FILE = ZLead/Info.plist;
@@ -1152,7 +1174,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tjhq.ZLead;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zlead.zhilian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";

@@ -31,9 +31,9 @@ NSString * ZL_BASE_URL = @"";
     NSDictionary * infoDic = [[NSBundle mainBundle] infoDictionary];
     BOOL isOnLine = [[infoDic objectForKey:@"EnvironmentOnLine"] boolValue];
     if (isOnLine) {
-        ZL_BASE_URL = @"debug"; //线上服务器地址
+        ZL_BASE_URL = @"release"; //线上服务器地址
     }else{
-        ZL_BASE_URL = @"release"; //测试地址
+        ZL_BASE_URL = @"http://192.168.0.227:8079"; //测试地址
     }
 }
 @end
