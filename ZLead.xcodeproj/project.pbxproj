@@ -38,6 +38,8 @@
 		7A9D68582296A0680024DF3A /* UIColor+Func.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68572296A0680024DF3A /* UIColor+Func.m */; };
 		7AC903BB229D1F830036AD68 /* NSString+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC903BA229D1F830036AD68 /* NSString+Function.m */; };
 		7AC903BE229D425C0036AD68 /* ZLSetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC903BD229D425C0036AD68 /* ZLSetPasswordVC.m */; };
+		7AFD07E6229E7ACC0093091C /* ZLLoginNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD07E5229E7ACC0093091C /* ZLLoginNetManager.m */; };
+		7AFD07E9229E7F040093091C /* NSDictionary+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD07E8229E7F040093091C /* NSDictionary+Function.m */; };
 		9FB42ABF0BA8A97B989DAC14 /* libPods-ZLead.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BD921763FC6637F355F260 /* libPods-ZLead.a */; };
 		E265DFD9229B8DAC00842DD0 /* ZLOrderManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DFD8229B8DAC00842DD0 /* ZLOrderManageVC.m */; };
 		E265DFDC229B8E8A00842DD0 /* ZLMakeOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DFDB229B8E8A00842DD0 /* ZLMakeOrderVC.m */; };
@@ -54,6 +56,11 @@
 		E265DFFF229D123A00842DD0 /* ZLGoodsBillView.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DFFE229D123A00842DD0 /* ZLGoodsBillView.m */; };
 		E265E002229D16C200842DD0 /* ZLShopGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E001229D16C200842DD0 /* ZLShopGoodsModel.m */; };
 		E265E005229D238F00842DD0 /* ZLGoodsBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E004229D238F00842DD0 /* ZLGoodsBillCell.m */; };
+		E265E008229D37AA00842DD0 /* ZLPaymentMethodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E007229D37AA00842DD0 /* ZLPaymentMethodCell.m */; };
+		E265E00E229D4CF700842DD0 /* ZLPaymentMethodSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E00D229D4CF700842DD0 /* ZLPaymentMethodSectionHeaderView.m */; };
+		E265E011229E4F4800842DD0 /* ZLOfflinePaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E010229E4F4800842DD0 /* ZLOfflinePaymentView.m */; };
+		E265E014229E514200842DD0 /* ZLPaymentAmountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E013229E514200842DD0 /* ZLPaymentAmountCell.m */; };
+		E265E017229E519400842DD0 /* ZLZLPaymentNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E016229E519400842DD0 /* ZLZLPaymentNoteCell.m */; };
 		E2802B4D229906FB004AF4B8 /* ZLShopTurnoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B4C229906FB004AF4B8 /* ZLShopTurnoverView.m */; };
 		E2802B532299154D004AF4B8 /* ZLBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B522299154D004AF4B8 /* ZLBaseCell.m */; };
 		E2802B5622991597004AF4B8 /* ZLShopBusinessMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B5522991597004AF4B8 /* ZLShopBusinessMenuCell.m */; };
@@ -158,6 +165,10 @@
 		7AC903BA229D1F830036AD68 /* NSString+Function.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Function.m"; sourceTree = "<group>"; };
 		7AC903BC229D425C0036AD68 /* ZLSetPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLSetPasswordVC.h; sourceTree = "<group>"; };
 		7AC903BD229D425C0036AD68 /* ZLSetPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLSetPasswordVC.m; sourceTree = "<group>"; };
+		7AFD07E4229E7ACC0093091C /* ZLLoginNetManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLLoginNetManager.h; sourceTree = "<group>"; };
+		7AFD07E5229E7ACC0093091C /* ZLLoginNetManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLLoginNetManager.m; sourceTree = "<group>"; };
+		7AFD07E7229E7F040093091C /* NSDictionary+Function.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Function.h"; sourceTree = "<group>"; };
+		7AFD07E8229E7F040093091C /* NSDictionary+Function.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Function.m"; sourceTree = "<group>"; };
 		916EADC284FDEA9BE6978269 /* Pods-ZLead.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZLead.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZLead/Pods-ZLead.debug.xcconfig"; sourceTree = "<group>"; };
 		E265DFD7229B8DAC00842DD0 /* ZLOrderManageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLOrderManageVC.h; sourceTree = "<group>"; };
 		E265DFD8229B8DAC00842DD0 /* ZLOrderManageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLOrderManageVC.m; sourceTree = "<group>"; };
@@ -189,6 +200,16 @@
 		E265E001229D16C200842DD0 /* ZLShopGoodsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ZLShopGoodsModel.m; path = ZLead/Main/Shop/View/ZLShopGoodsModel.m; sourceTree = SOURCE_ROOT; };
 		E265E003229D238F00842DD0 /* ZLGoodsBillCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLGoodsBillCell.h; sourceTree = "<group>"; };
 		E265E004229D238F00842DD0 /* ZLGoodsBillCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLGoodsBillCell.m; sourceTree = "<group>"; };
+		E265E006229D37AA00842DD0 /* ZLPaymentMethodCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLPaymentMethodCell.h; sourceTree = "<group>"; };
+		E265E007229D37AA00842DD0 /* ZLPaymentMethodCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLPaymentMethodCell.m; sourceTree = "<group>"; };
+		E265E00C229D4CF700842DD0 /* ZLPaymentMethodSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLPaymentMethodSectionHeaderView.h; sourceTree = "<group>"; };
+		E265E00D229D4CF700842DD0 /* ZLPaymentMethodSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLPaymentMethodSectionHeaderView.m; sourceTree = "<group>"; };
+		E265E00F229E4F4800842DD0 /* ZLOfflinePaymentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLOfflinePaymentView.h; sourceTree = "<group>"; };
+		E265E010229E4F4800842DD0 /* ZLOfflinePaymentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLOfflinePaymentView.m; sourceTree = "<group>"; };
+		E265E012229E514200842DD0 /* ZLPaymentAmountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLPaymentAmountCell.h; sourceTree = "<group>"; };
+		E265E013229E514200842DD0 /* ZLPaymentAmountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLPaymentAmountCell.m; sourceTree = "<group>"; };
+		E265E015229E519400842DD0 /* ZLZLPaymentNoteCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLZLPaymentNoteCell.h; sourceTree = "<group>"; };
+		E265E016229E519400842DD0 /* ZLZLPaymentNoteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLZLPaymentNoteCell.m; sourceTree = "<group>"; };
 		E2802B4B229906FB004AF4B8 /* ZLShopTurnoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopTurnoverView.h; sourceTree = "<group>"; };
 		E2802B4C229906FB004AF4B8 /* ZLShopTurnoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopTurnoverView.m; sourceTree = "<group>"; };
 		E2802B512299154D004AF4B8 /* ZLBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLBaseCell.h; sourceTree = "<group>"; };
@@ -290,6 +311,7 @@
 		7A0097A42294F97F00AD79DE /* ZLead */ = {
 			isa = PBXGroup;
 			children = (
+				7AFD07E2229E7A490093091C /* API */,
 				7A0097D72295165E00AD79DE /* AppDelegate */,
 				7A0097DD22951EA600AD79DE /* Login */,
 				7A0097D9229516AD00AD79DE /* Main */,
@@ -625,6 +647,8 @@
 		7A9D682422964C600024DF3A /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
+				7AFD07E7229E7F040093091C /* NSDictionary+Function.h */,
+				7AFD07E8229E7F040093091C /* NSDictionary+Function.m */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
@@ -720,6 +744,23 @@
 			path = Color;
 			sourceTree = "<group>";
 		};
+		7AFD07E2229E7A490093091C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7AFD07E3229E7A520093091C /* Login */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		7AFD07E3229E7A520093091C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7AFD07E4229E7ACC0093091C /* ZLLoginNetManager.h */,
+				7AFD07E5229E7ACC0093091C /* ZLLoginNetManager.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		B97A67E62B931C16048ABE36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -773,6 +814,16 @@
 				E265DFFE229D123A00842DD0 /* ZLGoodsBillView.m */,
 				E265E003229D238F00842DD0 /* ZLGoodsBillCell.h */,
 				E265E004229D238F00842DD0 /* ZLGoodsBillCell.m */,
+				E265E006229D37AA00842DD0 /* ZLPaymentMethodCell.h */,
+				E265E007229D37AA00842DD0 /* ZLPaymentMethodCell.m */,
+				E265E00C229D4CF700842DD0 /* ZLPaymentMethodSectionHeaderView.h */,
+				E265E00D229D4CF700842DD0 /* ZLPaymentMethodSectionHeaderView.m */,
+				E265E00F229E4F4800842DD0 /* ZLOfflinePaymentView.h */,
+				E265E010229E4F4800842DD0 /* ZLOfflinePaymentView.m */,
+				E265E012229E514200842DD0 /* ZLPaymentAmountCell.h */,
+				E265E013229E514200842DD0 /* ZLPaymentAmountCell.m */,
+				E265E015229E519400842DD0 /* ZLZLPaymentNoteCell.h */,
+				E265E016229E519400842DD0 /* ZLZLPaymentNoteCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -932,7 +983,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
@@ -943,7 +994,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B62A8279FE9ACCB0DB609889 /* [CP] Check Pods Manifest.lock */ = {
@@ -973,14 +1024,18 @@
 			files = (
 				E832D711229E521100D0ED7F /* ZLAddBankCardVC.m in Sources */,
 				E265E005229D238F00842DD0 /* ZLGoodsBillCell.m in Sources */,
+				E265E017229E519400842DD0 /* ZLZLPaymentNoteCell.m in Sources */,
 				7A0097FA229524AD00AD79DE /* ZLDataVC.m in Sources */,
 				7A00980622952EAD00AD79DE /* ZLTabBarViewController.m in Sources */,
 				7A0097FD2295268000AD79DE /* ZLPersonalVC.m in Sources */,
+				E265E014229E514200842DD0 /* ZLPaymentAmountCell.m in Sources */,
 				E832D6FA229E51CD00D0ED7F /* ZLPerShareView.m in Sources */,
 				E2802B4D229906FB004AF4B8 /* ZLShopTurnoverView.m in Sources */,
 				7A9D684C229689D80024DF3A /* GeneralTableViewDelegate.m in Sources */,
+				E265E011229E4F4800842DD0 /* ZLOfflinePaymentView.m in Sources */,
 				E2802B5922991CC7004AF4B8 /* ZLShopManagerNoteCell.m in Sources */,
 				E832D71B229E715100D0ED7F /* UIImage+ZL.m in Sources */,
+				E265E00E229D4CF700842DD0 /* ZLPaymentMethodSectionHeaderView.m in Sources */,
 				E832D6FC229E51CD00D0ED7F /* ZLPerButtonView.m in Sources */,
 				E265DFFF229D123A00842DD0 /* ZLGoodsBillView.m in Sources */,
 				7A9D684E229689D80024DF3A /* GeneralTableView.m in Sources */,
@@ -999,9 +1054,11 @@
 				E2802B5C22992F53004AF4B8 /* ZLShopTopView.m in Sources */,
 				E832D710229E521100D0ED7F /* ZLSetWechatVC.m in Sources */,
 				E2802B6222993CA7004AF4B8 /* ZLShopListVC.m in Sources */,
+				E265E008229D37AA00842DD0 /* ZLPaymentMethodCell.m in Sources */,
 				E265DFDF229B8EBD00842DD0 /* ZLOfflinePaymentVC.m in Sources */,
 				7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */,
 				E265DFE9229B955200842DD0 /* UIView+Addition.m in Sources */,
+				7AFD07E9229E7F040093091C /* NSDictionary+Function.m in Sources */,
 				E832D6FB229E51CD00D0ED7F /* ZLPerHeaderView.m in Sources */,
 				7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */,
 				E265DFDC229B8E8A00842DD0 /* ZLMakeOrderVC.m in Sources */,
@@ -1021,6 +1078,7 @@
 				E832D6F9229E51CD00D0ED7F /* ZLPerListView.m in Sources */,
 				7A9D683E229683DE0024DF3A /* NSObject+HUD.m in Sources */,
 				E265DFF3229CE1D500842DD0 /* ZLShoppingCartCell.m in Sources */,
+				7AFD07E6229E7ACC0093091C /* ZLLoginNetManager.m in Sources */,
 				E265DFF6229CE80D00842DD0 /* ZLGoodsTypeSelectedView.m in Sources */,
 				E265DFEC229BF70000842DD0 /* ZLShoppingCartView.m in Sources */,
 				7A9D682A2296680F0024DF3A /* URLManager.m in Sources */,
@@ -1203,7 +1261,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G8SE9X77HJ;
+				DEVELOPMENT_TEAM = 8XTX3D2Y7S;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZLead/ZLeadPch.pch";
 				INFOPLIST_FILE = ZLead/Info.plist;
@@ -1212,7 +1270,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tjhq.ZLead;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zlead.zhilian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
@@ -1225,7 +1283,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G8SE9X77HJ;
+				DEVELOPMENT_TEAM = 8XTX3D2Y7S;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZLead/ZLeadPch.pch";
 				INFOPLIST_FILE = ZLead/Info.plist;
@@ -1234,7 +1292,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tjhq.ZLead;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zlead.zhilian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";

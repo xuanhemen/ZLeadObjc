@@ -39,7 +39,7 @@
 //        tagLabel.layer.borderWidth = 1.0f;
 //        [self addSubview:tagLabel];
         
-        UIImageView *speakerIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, (self.frame.size.height - 20 )/2, 20, 20)];
+        UIImageView *speakerIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, (self.frame.size.height - dis(20))/2, dis(20), dis(20))];
         speakerIcon.backgroundColor = [UIColor yellowColor];
         [self addSubview:speakerIcon];
         
@@ -63,7 +63,7 @@
 
 - (void)nextAd {
     UIButton *firstBtn = [self viewWithTag:self.index];
-    self.moreBtn = [self btnframe: CGRectMake(35, self.bounds.size.height,[UIScreen mainScreen].bounds.size.width -2 *30, self.bounds.size.height)  titleColor:_titleColor action:@selector(clickBtn:)];
+    self.moreBtn = [self btnframe: CGRectMake(dis(35), self.bounds.size.height,[UIScreen mainScreen].bounds.size.width -2 *dis(30), self.bounds.size.height)  titleColor:_titleColor action:@selector(clickBtn:)];
     self.moreBtn.tag = self.index + 1;
     if ([self.titles[self.titleIndex+1] isEqualToString:@""]) {
         self.titleIndex = -1;

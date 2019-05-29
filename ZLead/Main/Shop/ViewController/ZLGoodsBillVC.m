@@ -9,7 +9,9 @@
 #import "ZLGoodsBillVC.h"
 #import "ZLGoodsBillView.h"
 #import "ZLGoodsBillCell.h"
+#import "ZLPaymentMethodCell.h"
 #import "ZLShopGoodsModel.h"
+#import "ZLPaymentMethodSectionHeaderView.h"
 
 @interface ZLGoodsBillVC () <UITableViewDataSource, UITableViewDelegate, ZLShoppingCartCellDelegate>
 @property (nonatomic, strong) ZLGoodsBillView *goodsBillView;
@@ -80,23 +82,55 @@
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.goodsList.count;
+    if (section == 0) {
+        return self.goodsList.count;
+    } else {
+        return 3;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [ZLGoodsBillCell heightForCell];
+    if (indexPath.section == 0) {
+        return [ZLGoodsBillCell heightForCell];
+    } else {
+        return [ZLPaymentMethodCell heightForCell];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ZLBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZLGoodsBillCell"];
-    [(ZLGoodsBillCell *)cell setupData:[self.goodsList objectAtIndex:indexPath.row]];
-//    [((ZLGoodsBillCell *)cell).shoppingCartView setSubviewsFrame:NO];
-    ((ZLGoodsBillCell *)cell).delegate = self;
+    ZLBaseCell *cell = nil;
+    if (indexPath.section == 0) {
+        cell =[tableView dequeueReusableCellWithIdentifier:@"ZLGoodsBillCell"];
+        [cell setupData:[self.goodsList objectAtIndex:indexPath.row]];
+        //    [((ZLGoodsBillCell *)cell).shoppingCartView setSubviewsFrame:NO];
+        ((ZLGoodsBillCell *)cell).delegate = self;
+    } else {
+       cell= [tableView dequeueReusableCellWithIdentifier:@"ZLPaymentMethodCell"];
+        [cell setupData:nil];
+    }
     return cell;
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 1) {
+        ZLPaymentMethodSectionHeaderView *headerView = [[ZLPaymentMethodSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, dis(53))];
+        return headerView;
+    } else {
+        return nil;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 1) {
+        return dis(53);
+    } else {
+        return CGFLOAT_MIN;
+    }
 }
 
 #pragma mark - ZLShoppingCartCellDelegate

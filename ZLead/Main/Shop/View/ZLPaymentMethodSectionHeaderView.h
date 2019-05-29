@@ -1,5 +1,5 @@
 //
-//  ZLGoodsBillView.h
+//  ZLPaymentMethodSectionHeaderView.h
 //  ZLead
 //
 //  Created by dmy on 2019/5/28.
@@ -10,9 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZLGoodsBillView : UIView
-@property (nonatomic, strong) UITableView *billTableView;
-@property (nonatomic, strong) UILabel *totalPriceLabel;
+@interface ZLPaymentMethodSectionHeaderView : UIView
+
 @end
 
 NS_ASSUME_NONNULL_END

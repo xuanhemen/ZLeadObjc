@@ -32,7 +32,7 @@
     self.searchView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.searchView];
     
-    self.goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(84), kScreenWith, kScreenHeight - (dis(135) + kSafeHeight - kNavBarHeight)) style:UITableViewStylePlain];
+    self.goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(84), kScreenWith, kScreenHeight - (dis(135) + kSafeHeight)) style:UITableViewStylePlain];
     self.goodsListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.goodsListTableView.backgroundColor = [UIColor clearColor];
     [self.goodsListTableView registerClass:[ZLShoppingCartCell class] forCellReuseIdentifier:@"ZLShoppingCartCell"];
@@ -69,7 +69,7 @@
     self.calculateButton.titleLabel.font = [UIFont systemFontOfSize:14];
     self.calculateButton.frame = kRect(269,5,96,41);
     self.calculateButton.backgroundColor = [UIColor colorWithHexString:@"#FFB223"];
-    self.calculateButton.layer.cornerRadius = 24;
+    self.calculateButton.layer.cornerRadius = dis(20);
     [self.calculateButton addTarget:self action:@selector(calculateButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView addSubview:self.calculateButton];
 }

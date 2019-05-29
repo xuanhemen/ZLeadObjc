@@ -36,7 +36,7 @@
 - (void)setupViews {
     self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.bgImageView.backgroundColor = [UIColor colorWithHexString:@"#FFA700"];
-    self.bgImageView.layer.cornerRadius = 4;
+    self.bgImageView.layer.cornerRadius = dis(4);
     [self addSubview:self.bgImageView];
     
     self.todayturnoverTextLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -84,67 +84,67 @@
     __weak __typeof(self) weakSelf = self;
     __weak __typeof(self.bgImageView) weakBgImageView = self.bgImageView;
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf).offset(15);
-        make.right.equalTo(weakSelf).offset(-15);
-        make.height.mas_equalTo(160);
-        make.top.equalTo(weakSelf).offset(15);
+        make.left.equalTo(weakSelf).offset(dis(15));
+        make.right.equalTo(weakSelf).offset(dis(-15));
+        make.height.mas_equalTo(dis(160));
+        make.top.equalTo(weakSelf).offset(dis(15));
     }];
     
     [self.todayturnoverTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakBgImageView).offset(20);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(20);
-        make.top.equalTo(weakBgImageView).offset(12);
+        make.left.equalTo(weakBgImageView).offset(dis(20));
+        make.width.mas_equalTo(dis(100));
+        make.height.mas_equalTo(dis(20));
+        make.top.equalTo(weakBgImageView).offset(dis(12));
     }];
     
     [self.turnoverValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.todayturnoverTextLabel).priorityHigh();
-        make.right.equalTo(weakBgImageView).offset(-20).priorityHigh();
-        make.height.mas_equalTo(45);
+        make.right.equalTo(weakBgImageView).offset(dis(-20)).priorityHigh();
+        make.height.mas_equalTo(dis(45));
         make.top.equalTo(weakSelf.todayturnoverTextLabel.mas_bottom);
     }];
     
-    CGFloat labelWidth = (kScreenWith - 70)/3;
+    CGFloat labelWidth = (kScreenWith - dis(70))/3;
     [self.orderNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.todayturnoverTextLabel).priorityHigh();
         make.width.mas_equalTo(labelWidth);
-        make.height.mas_equalTo(28);
-        make.top.equalTo(weakSelf.turnoverValueLabel.mas_bottom).offset(14);
+        make.height.mas_equalTo(dis(28));
+        make.top.equalTo(weakSelf.turnoverValueLabel.mas_bottom).offset(dis(14));
     }];
     
     [self.payNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.orderNumLabel.mas_right);
         make.width.mas_equalTo(labelWidth);
-        make.height.mas_equalTo(28);
+        make.height.mas_equalTo(dis(28));
         make.top.equalTo(weakSelf.orderNumLabel);
     }];
     
     [self.vistorumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.payNumLabel.mas_right);
         make.width.mas_equalTo(labelWidth);
-        make.height.mas_equalTo(28);
+        make.height.mas_equalTo(dis(28));
         make.top.equalTo(weakSelf.orderNumLabel);
     }];
 
     [self.orderTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.todayturnoverTextLabel).priorityHigh();
         make.width.mas_equalTo(labelWidth);
-        make.height.mas_equalTo(15);
-        make.top.equalTo(weakSelf.orderNumLabel.mas_bottom).offset(2);
+        make.height.mas_equalTo(dis(15));
+        make.top.equalTo(weakSelf.orderNumLabel.mas_bottom).offset(dis(2));
     }];
     
     [self.payTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.orderTitleLabel.mas_right);
         make.width.mas_equalTo(labelWidth);
-        make.height.mas_equalTo(15);
-        make.top.equalTo(weakSelf.orderNumLabel.mas_bottom).offset(2);
+        make.height.mas_equalTo(dis(15));
+        make.top.equalTo(weakSelf.orderNumLabel.mas_bottom).offset(dis(2));
     }];
     
     [self.vistorumTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.payTitleLabel.mas_right);
         make.width.mas_equalTo(labelWidth);
-        make.height.mas_equalTo(15);
-        make.top.equalTo(weakSelf.orderNumLabel.mas_bottom).offset(2);
+        make.height.mas_equalTo(dis(15));
+        make.top.equalTo(weakSelf.orderNumLabel.mas_bottom).offset(dis(2));
     }];
     
     [self addSubview:self.notificationView];
@@ -154,7 +154,7 @@
 
 - (ZLMarqueeView *)notificationView {
     if (!_notificationView) {
-        ZLMarqueeView *marqueeView =[[ZLMarqueeView alloc] initWithFrame:CGRectMake(10, 180, dis(400), 48) withTitle:@[@"1.本月大拍卖优惠：今日03:34开抢", @"2.第二条通知。。。。", @"3.第三条通知。。。。", @"end"]];
+        ZLMarqueeView *marqueeView =[[ZLMarqueeView alloc] initWithFrame:CGRectMake(dis(10), dis(180), dis(400), dis(48)) withTitle:@[@"1.本月大拍卖优惠：今日03:34开抢", @"2.第二条通知。。。。", @"3.第三条通知。。。。", @"end"]];
         marqueeView.titleColor = [UIColor colorWithHexString:@"#664D38"];
         marqueeView.titleFont = [UIFont systemFontOfSize:11];
         __weak ZLMarqueeView *marquee = marqueeView;

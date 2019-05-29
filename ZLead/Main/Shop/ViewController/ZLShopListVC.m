@@ -23,7 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupViews];
-    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     self.title = @"店铺切换";
 }
 
@@ -38,6 +38,8 @@
     self.shopListTableView.dataSource = self;
     self.shopListTableView.tableFooterView = self.footer;
     [self.shopListTableView registerClass:[ZLShopListCell class] forCellReuseIdentifier:@"ZLShopListCell"];
+    self.shopListTableView.backgroundColor = [UIColor clearColor];
+    self.shopListTableView.backgroundView = nil;
     [self.view addSubview:self.shopListTableView];
     
     [self.shopListTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,7 +48,6 @@
         make.top.equalTo(weakSelf.view);
         make.bottom.equalTo(weakSelf.view);
     }];
-
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
