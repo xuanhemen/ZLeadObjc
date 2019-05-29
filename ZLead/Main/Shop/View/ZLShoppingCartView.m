@@ -104,12 +104,12 @@
 - (void)setSubviewsFrame:(BOOL )enableSelected {
     if (enableSelected) {
         self.backgroundColor = [UIColor whiteColor];
-        self.layer.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor;
-        self.layer.cornerRadius = 10;
-        self.layer.shadowColor = [UIColor colorWithRed:255/255.0 green:241/255.0 blue:215/255.0 alpha:0.26].CGColor;
-        self.layer.shadowOffset = CGSizeMake(0,5);
+        self.layer.backgroundColor = [UIColor whiteColor].CGColor;
+        self.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.05].CGColor;
+        self.layer.shadowOffset = CGSizeMake(0, 0);
         self.layer.shadowOpacity = 1;
         self.layer.shadowRadius = 7;
+        self.layer.cornerRadius = 10;
         self.goodsIdLabel.frame = kRect(159, 10, 176, 17);
         self.separator.frame = kRect(10, 37, 325, 0.5);
         self.selectedButton.frame = kRect(10, 83, 18, 18);
@@ -164,7 +164,7 @@
         self.selectedButton.hidden = YES;
         self.goodsIdLabel.frame = kRect(184, 15, 176, 17);
         self.separator.hidden = YES;
-        self.selectedButton.hidden = YES;;
+        self.selectedButton.hidden = YES;
         self.goodsImageView.frame = kRect(15, 45, 80, 80);
         kWeakSelf(weakSelf);
         [self.goodsTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {

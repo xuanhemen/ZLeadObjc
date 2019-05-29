@@ -61,6 +61,7 @@
 		E265E011229E4F4800842DD0 /* ZLOfflinePaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E010229E4F4800842DD0 /* ZLOfflinePaymentView.m */; };
 		E265E014229E514200842DD0 /* ZLPaymentAmountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E013229E514200842DD0 /* ZLPaymentAmountCell.m */; };
 		E265E017229E519400842DD0 /* ZLZLPaymentNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E016229E519400842DD0 /* ZLZLPaymentNoteCell.m */; };
+		E265E01A229EA0F500842DD0 /* ZLShopGoodsSearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E265E019229EA0F500842DD0 /* ZLShopGoodsSearchBarView.m */; };
 		E2802B4D229906FB004AF4B8 /* ZLShopTurnoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B4C229906FB004AF4B8 /* ZLShopTurnoverView.m */; };
 		E2802B532299154D004AF4B8 /* ZLBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B522299154D004AF4B8 /* ZLBaseCell.m */; };
 		E2802B5622991597004AF4B8 /* ZLShopBusinessMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B5522991597004AF4B8 /* ZLShopBusinessMenuCell.m */; };
@@ -208,6 +209,8 @@
 		E265E013229E514200842DD0 /* ZLPaymentAmountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLPaymentAmountCell.m; sourceTree = "<group>"; };
 		E265E015229E519400842DD0 /* ZLZLPaymentNoteCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLZLPaymentNoteCell.h; sourceTree = "<group>"; };
 		E265E016229E519400842DD0 /* ZLZLPaymentNoteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLZLPaymentNoteCell.m; sourceTree = "<group>"; };
+		E265E018229EA0F500842DD0 /* ZLShopGoodsSearchBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopGoodsSearchBarView.h; sourceTree = "<group>"; };
+		E265E019229EA0F500842DD0 /* ZLShopGoodsSearchBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopGoodsSearchBarView.m; sourceTree = "<group>"; };
 		E2802B4B229906FB004AF4B8 /* ZLShopTurnoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopTurnoverView.h; sourceTree = "<group>"; };
 		E2802B4C229906FB004AF4B8 /* ZLShopTurnoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopTurnoverView.m; sourceTree = "<group>"; };
 		E2802B512299154D004AF4B8 /* ZLBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLBaseCell.h; sourceTree = "<group>"; };
@@ -815,6 +818,8 @@
 				E265E013229E514200842DD0 /* ZLPaymentAmountCell.m */,
 				E265E015229E519400842DD0 /* ZLZLPaymentNoteCell.h */,
 				E265E016229E519400842DD0 /* ZLZLPaymentNoteCell.m */,
+				E265E018229EA0F500842DD0 /* ZLShopGoodsSearchBarView.h */,
+				E265E019229EA0F500842DD0 /* ZLShopGoodsSearchBarView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -965,7 +970,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
@@ -976,7 +981,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B62A8279FE9ACCB0DB609889 /* [CP] Check Pods Manifest.lock */ = {
@@ -1063,6 +1068,7 @@
 				E265DFEC229BF70000842DD0 /* ZLShoppingCartView.m in Sources */,
 				7A9D682A2296680F0024DF3A /* URLManager.m in Sources */,
 				7A9D6841229688040024DF3A /* ZLLoginVC.m in Sources */,
+				E265E01A229EA0F500842DD0 /* ZLShopGoodsSearchBarView.m in Sources */,
 				7A0097A72294F97F00AD79DE /* AppDelegate.m in Sources */,
 				E2802B5F22993555004AF4B8 /* ZLShopListCell.m in Sources */,
 				7A488A6B2298F49800069483 /* ZLInputView.m in Sources */,

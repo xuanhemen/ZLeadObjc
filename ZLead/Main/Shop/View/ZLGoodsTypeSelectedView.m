@@ -38,7 +38,7 @@
     [showMenuButton addTarget:self action:@selector(showMenuButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:showMenuButton];
     
-    self.currentSelectedTypeLabel = [[UILabel alloc] initWithFrame:kRect(10, 0, 333, 41)];
+    self.currentSelectedTypeLabel = [[UILabel alloc] initWithFrame:kRect(10, 0, 333, 42)];
     self.currentSelectedTypeLabel.font = [UIFont systemFontOfSize:14];
     self.currentSelectedTypeLabel.textColor = [UIColor colorWithHexString:@"#333333"];
     self.currentSelectedTypeLabel.text = @"全部";
@@ -46,34 +46,36 @@
     [self addSubview:self.currentSelectedTypeLabel];
     
     self.maskView = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.maskView.frame = CGRectMake(0, dis(41), kScreenWith, kScreenHeight - dis(84) - kNavBarHeight);
+    self.maskView.frame = CGRectMake(0, dis(42), kScreenWith, kScreenHeight - dis(84) - kNavBarHeight);
     self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
     self.maskView.hidden = YES;
-    [self.maskView addTarget:self action:@selector(dismissMenuView) forControlEvents:UIControlEventTouchUpInside];
+    [self.maskView addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.maskView];
     
-    self.containerView = [[UIView alloc] initWithFrame:kRect(0, 41, 375, 356)];
+    self.containerView = [[UIView alloc] initWithFrame:kRect(0, 42, 375, 356)];
     self.containerView.backgroundColor = [UIColor whiteColor];
     self.containerView.hidden = YES;
     [self addSubview:self.containerView];
-    
     
     self.firstTypeTableView = [[UITableView alloc] initWithFrame:kRect(0, 0, 119, 285) style:UITableViewStylePlain];
     self.firstTypeTableView.delegate = self;
     self.firstTypeTableView.dataSource = self;
     [self.firstTypeTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"category"];
+    self.firstTypeTableView.showsVerticalScrollIndicator = NO;
     [self.containerView addSubview:self.firstTypeTableView];
 
     self.secondTypeTableView = [[UITableView alloc] initWithFrame:kRect(119, 0, 114, 285) style:UITableViewStylePlain];
     self.secondTypeTableView.delegate = self;
     self.secondTypeTableView.dataSource = self;
     [self.secondTypeTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"category"];
+    self.secondTypeTableView.showsVerticalScrollIndicator = NO;
     [self.containerView addSubview:self.secondTypeTableView];
 
     self.thirdTypeTableView = [[UITableView alloc] initWithFrame:kRect(233, 0, 142, 285) style:UITableViewStylePlain];
     self.thirdTypeTableView.delegate = self;
     self.thirdTypeTableView.dataSource = self;
     [self.thirdTypeTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"category"];
+    self.thirdTypeTableView.showsVerticalScrollIndicator = NO;
     [self.containerView addSubview:self.thirdTypeTableView];
     
     [self setupBottonView];
@@ -81,7 +83,7 @@
 
 - (void)setupBottonView {
     self.bottomView = [[UIView alloc] init];
-    self.bottomView.frame = kRect(0, 326,375,71);
+    self.bottomView.frame = kRect(0, 285,375,71);
     self.bottomView.layer.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor;
     self.bottomView.layer.shadowColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0].CGColor;
     self.bottomView.layer.shadowOffset = CGSizeMake(0,-0.5);
@@ -111,10 +113,11 @@
     [self.bottomView addSubview:sureButton];
 }
 
-- (void)dismissMenuView {
+- (void)dismiss {
     self.isHiddenMenu = YES;
-    self.containerView.hidden = self.isHiddenMenu;
-    self.maskView.hidden = self.isHiddenMenu;
+    self.containerView.hidden = YES;
+    self.maskView.hidden = YES;
+    self.height = dis(41);
 }
 
 #pragma mark - UIButton Actions
@@ -123,14 +126,27 @@
     self.isHiddenMenu = !self.isHiddenMenu;
     self.containerView.hidden = self.isHiddenMenu;
     self.maskView.hidden = self.isHiddenMenu;
+    if (!self.isHiddenMenu) {
+        self.height = dis(398);
+    } else {
+       self.height = dis(41);
+    }
 }
 
 - (void)resetButtonAction:(UIButton *)resetButton {
-    [self dismissMenuView];
+    [self dismiss];
+    if (self.resetButtonBlock) {
+        self.resetButtonBlock();
+    }
+    self.currentSelectedTypeLabel.text = @"全部";
 }
 
 - (void)sureButtonAction:(UIButton *)resetButton {
-    [self dismissMenuView];
+    [self dismiss];
+    if (self.sureButtonBlock) {
+        self.sureButtonBlock(@"一级分类", @"二级分类", @"三级分类");
+    }
+    self.currentSelectedTypeLabel.text = [NSString stringWithFormat:@"%@/%@/%@", @"一级分类", @"二级分类", @"三级分类"];
 }
 
 
@@ -155,7 +171,7 @@
 #pragma mark - <UITableViewDelegate>
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
