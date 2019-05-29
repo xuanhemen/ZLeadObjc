@@ -7,7 +7,7 @@
 //
 
 #import "ZLShopManagerNoteCell.h"
-#define kZLShopManagerNoteCellHeight 101
+#define kZLShopManagerNoteCellHeight dis(101)
 
 @implementation ZLShopManagerNoteCell
 
@@ -15,6 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self setupViews];
+        self.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
@@ -34,14 +35,14 @@
     containerView.layer.shadowRadius = 4;
     [self addSubview:containerView];
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf).offset(15);
-        make.right.equalTo(weakSelf).offset(-15);
-        make.height.mas_equalTo(87);
-        make.top.equalTo(weakSelf).offset(7);
+        make.left.equalTo(weakSelf).offset(dis(15));
+        make.right.equalTo(weakSelf).offset(dis(-15));
+        make.height.mas_equalTo(dis(87));
+        make.top.equalTo(weakSelf).offset(dis(7));
     }];
     
     NSArray *contents = @[@{@"title":@"店长须知",@"des":@"关于开店的教程", @"icon":@"shop-note"}, @{@"title":@"关于我们",@"des":@"直链网相关介绍", @"icon":@"shop-about"}];
-    CGFloat actionButtonWidth = (kScreenWith - 30)/2;
+    CGFloat actionButtonWidth = (kScreenWith - dis(30))/2;
     for (int i = 0; i < contents.count; i ++) {
         UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
         menuButton.tag = 1000 + i;
@@ -51,14 +52,14 @@
             [menuButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(containerView.mas_left);
                 make.width.mas_equalTo(actionButtonWidth);
-                make.height.mas_equalTo(87);
+                make.height.mas_equalTo(dis(87));
                 make.top.equalTo(containerView.mas_top);
             }];
         } else {
             [menuButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(containerView.mas_left).offset(actionButtonWidth);
                 make.width.mas_equalTo(actionButtonWidth);
-                make.height.mas_equalTo(87);
+                make.height.mas_equalTo(dis(87));
                 make.top.equalTo(containerView.mas_top);
             }];
         }
@@ -70,10 +71,10 @@
         [menuButton addSubview:managerNoteLabel];
 
         [managerNoteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(menuButton.mas_left).offset(20);
-            make.width.mas_equalTo(150);
-            make.height.mas_equalTo(21);
-            make.top.equalTo(menuButton.mas_top).offset(23);
+            make.left.equalTo(menuButton.mas_left).offset(dis(20));
+            make.width.mas_equalTo(dis(150));
+            make.height.mas_equalTo(dis(21));
+            make.top.equalTo(menuButton.mas_top).offset(dis(23));
         }];
 
         UILabel *courseLabel = [[UILabel alloc] init];
@@ -83,9 +84,9 @@
         [menuButton addSubview:courseLabel];
         [courseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(managerNoteLabel.mas_left);
-            make.width.mas_equalTo(150);
-            make.height.mas_equalTo(17);
-            make.top.equalTo(managerNoteLabel.mas_bottom).offset(7);
+            make.width.mas_equalTo(dis(150));
+            make.height.mas_equalTo(dis(17));
+            make.top.equalTo(managerNoteLabel.mas_bottom).offset(dis(7));
         }];
 
         UIImageView *noteIcon = [[UIImageView alloc] init];
@@ -94,13 +95,13 @@
         [menuButton addSubview:noteIcon];
         [noteIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(menuButton.mas_left).offset(dis(120));
-            make.width.mas_equalTo(36);
-            make.height.mas_equalTo(36);
-            make.top.equalTo(menuButton.mas_top).offset(25);
+            make.width.mas_equalTo(dis(36));
+            make.height.mas_equalTo(dis(36));
+            make.top.equalTo(menuButton.mas_top).offset(dis(25));
         }];
     }
     
-    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(actionButtonWidth, 19, 0.5, 50)];
+    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(actionButtonWidth, dis(19), 0.5, dis(50))];
     separatorView.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2"];
     [containerView addSubview:separatorView];
 }

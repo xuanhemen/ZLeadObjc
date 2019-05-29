@@ -31,18 +31,20 @@
     [self setupViews];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
+
 #pragma mark - Views
 
 - (void)setupViews {
     __weak typeof (self) weakSelf = self;
-    
-    self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWith, 61)];
-    self.shopNameView.changeShopBlock = ^{
-        ZLShopListVC *shopListVC = [[ZLShopListVC alloc] init];
-        [weakSelf.navigationController pushViewController:shopListVC animated:YES];
-    };
-    [self.view addSubview:self.shopNameView];
-    
     self.mainTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mainTableView.delegate = self;
@@ -56,7 +58,7 @@
     [self.mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(weakSelf.view);
         make.height.equalTo(weakSelf.view);
-        make.top.equalTo(weakSelf.view).offset(kNavBarHeight + 61);
+        make.top.equalTo(weakSelf.view).offset(kStatusBarHeight);
         make.bottom.equalTo(weakSelf.view);
     }];
     
@@ -64,8 +66,19 @@
 }
 
 - (UIView *)setupTableViewHeaderView  {
-    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, 223)];
-    return headView;
+    UIView *headerView = [[UIView alloc] initWithFrame:kRect(0, 0, kScreenWith, dis(284))];
+    headerView.backgroundColor = [UIColor whiteColor];
+    
+    __weak typeof (self) weakSelf = self;
+    self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, dis(61))];
+    self.shopNameView.changeShopBlock = ^{
+        ZLShopListVC *shopListVC = [[ZLShopListVC alloc] init];
+        [weakSelf.navigationController pushViewController:shopListVC animated:YES];
+    };
+    [headerView addSubview:self.shopNameView];
+    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, dis(61), kScreenWith, dis(223))];
+    [headerView addSubview:headView];
+    return headerView;
 }
 
 
