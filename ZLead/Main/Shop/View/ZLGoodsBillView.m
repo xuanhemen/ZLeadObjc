@@ -47,9 +47,9 @@
     [self.calculateButton setTitle:@"去结算" forState:UIControlStateNormal];
     [self.calculateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.calculateButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    self.calculateButton.frame = kRect(269,5,96,41);
+    self.calculateButton.frame = kRect(269,5,96,40);
     self.calculateButton.backgroundColor = [UIColor colorWithHexString:@"#FFB223"];
-    self.calculateButton.layer.cornerRadius = 24;
+    self.calculateButton.layer.cornerRadius = dis(20);
     [self.bottomView addSubview:self.calculateButton];
     
     self.totalPriceLabel = [[UILabel alloc] init];

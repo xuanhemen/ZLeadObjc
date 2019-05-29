@@ -69,7 +69,7 @@
     self.calculateButton.titleLabel.font = [UIFont systemFontOfSize:14];
     self.calculateButton.frame = kRect(269,5,96,41);
     self.calculateButton.backgroundColor = [UIColor colorWithHexString:@"#FFB223"];
-    self.calculateButton.layer.cornerRadius = 24;
+    self.calculateButton.layer.cornerRadius = dis(20);
     [self.calculateButton addTarget:self action:@selector(calculateButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView addSubview:self.calculateButton];
 }
