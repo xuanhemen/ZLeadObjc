@@ -154,7 +154,7 @@
 
 - (ZLMarqueeView *)notificationView {
     if (!_notificationView) {
-        ZLMarqueeView *marqueeView =[[ZLMarqueeView alloc] initWithFrame:CGRectMake(dis(10), dis(180), dis(400), dis(48)) withTitle:@[@"1.本月大拍卖优惠：今日03:34开抢", @"2.第二条通知。。。。", @"3.第三条通知。。。。", @"end"]];
+        ZLMarqueeView *marqueeView =[[ZLMarqueeView alloc] initWithFrame:CGRectMake(dis(15), dis(175), dis(345), dis(48)) withTitle:@[@"1.本月大拍卖优惠：今日03:34开抢", @"2.第二条通知。。。。", @"3.第三条通知。。。。", @"end"]];
         marqueeView.titleColor = [UIColor colorWithHexString:@"#664D38"];
         marqueeView.titleFont = [UIFont systemFontOfSize:11];
         __weak ZLMarqueeView *marquee = marqueeView;

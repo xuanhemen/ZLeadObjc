@@ -30,17 +30,8 @@
         self.titleFont =  [UIFont systemFontOfSize:14];
         self.clipsToBounds = YES;
         
-//        UILabel *tagLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, (self.frame.size.height - 20 )/2, 40, 20)];
-//        tagLabel.text = @"资讯";
-//        tagLabel.textAlignment = NSTextAlignmentCenter;
-//        tagLabel.textColor = [UIColor orangeColor];
-//        tagLabel.font = [UIFont systemFontOfSize:12];
-//        tagLabel.layer.borderColor =  [UIColor colorWithRed:0.94f green:0.46f blue:0.27f alpha:1.00f].CGColor;
-//        tagLabel.layer.borderWidth = 1.0f;
-//        [self addSubview:tagLabel];
-        
         UIImageView *speakerIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, (self.frame.size.height - dis(20))/2, dis(20), dis(20))];
-        speakerIcon.backgroundColor = [UIColor yellowColor];
+        speakerIcon.backgroundColor = [UIColor colorWithHexString:@"#FFF9EF"];
         [self addSubview:speakerIcon];
         
         NSMutableArray *MutableTitles = [NSMutableArray arrayWithArray:titles];
