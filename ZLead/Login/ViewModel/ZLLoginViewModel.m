@@ -59,11 +59,11 @@
             ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
             [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
         }else if ([btn.titleLabel.text isEqualToString:@"注册"]){ //跳转到设置密码
-            BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
-            if (!isTrue) {
-                [self showMsg:@"手机号格式不正确"];
-                return;
-            }
+//            BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
+//            if (!isTrue) {
+//                [self showMsg:@"手机号格式不正确"];
+//                return;
+//            }
             ZLSetPasswordVC *svc = [[ZLSetPasswordVC alloc] init];
             [vc.navigationController pushViewController:svc animated:YES];
         }

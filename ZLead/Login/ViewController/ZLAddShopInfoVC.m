@@ -7,9 +7,11 @@
 //
 
 #import "ZLAddShopInfoVC.h"
-
+#import "ZLAddInfoView.h"
 @interface ZLAddShopInfoVC ()
 
+
+@property (nonatomic, strong) ZLAddInfoView *infoView; //
 @end
 
 @implementation ZLAddShopInfoVC
@@ -18,16 +20,44 @@
     [super viewDidLoad];
     
     UILabel *title = [[UILabel alloc] init];
-    title.text = @"请设置登录密码";
+    title.text = @"补充店铺信息";
     title.font = [UIFont boldSystemFontOfSize:18];
     [self.view addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(dis(100));
+        make.top.equalTo(self.view).offset(dis(120));
         make.left.equalTo(self.view).offset(dis(30));
+    }];
+    [self.view addSubview:_infoView];
+    [self.infoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(title.mas_bottom).offset(dis(30));
+        make.size.mas_equalTo(CGSizeMake(kScreenWith, dis(150)));
+    }];
+    
+    UIButton *completeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    completeBtn.backgroundColor = COLOR(249, 222, 172, 1);
+    completeBtn.layer.masksToBounds = YES;
+    completeBtn.layer.cornerRadius = dis(25);
+    [completeBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [completeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    completeBtn.titleLabel.font = kFont16;
+    [[completeBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        
+    }];
+    [self.view addSubview:completeBtn];
+    [completeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.infoView.mas_bottom).offset(dis(60));
+        make.centerX.equalTo(self.view);
+        make.size.mas_equalTo(kSize(kScreenWith-50, 50));
     }];
     // Do any additional setup after loading the view.
 }
-
+- (ZLAddInfoView *)infoView {
+    if (!_infoView) {
+        _infoView = [[ZLAddInfoView alloc] init];
+        [self.view addSubview:_infoView];
+    }
+    return _infoView;
+}
 /*
 #pragma mark - Navigation
 

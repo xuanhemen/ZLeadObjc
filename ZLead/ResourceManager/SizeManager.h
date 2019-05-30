@@ -36,6 +36,7 @@
 /** size */
 #define kSize(w,h) CGSizeMake(w*kp, h*kp)
 /** 正常字体大小 */
+#define kFont17 [UIFont systemFontOfSize:17]
 #define kFont16 [UIFont systemFontOfSize:16]
 #define kFont15 [UIFont systemFontOfSize:15]
 #define kFont14 [UIFont systemFontOfSize:14]
