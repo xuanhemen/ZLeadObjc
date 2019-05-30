@@ -50,20 +50,20 @@
                 [self showMsg:@"手机号格式不正确"];
                 return;
             }
-            ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
-            [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
-        }else if ([btn.titleLabel.text isEqualToString:@"注册"]){
-            BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
-            if (!isTrue) {
-                [self showMsg:@"手机号格式不正确"];
-                return;
-            }
-            NSDictionary *params = @{@"phone":self.phoneNumber};
+            NSDictionary *params = @{@"phone":self.phoneNumber,@"serviceId":@"2"};
             [NetManager postWithURLString:@"getPhoneValidateCode" parameters:params success:^(NSDictionary * _Nonnull response) {
                 
             } failure:^(NSDictionary * _Nonnull errorMsg) {
                 
             }];
+            ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
+            [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
+        }else if ([btn.titleLabel.text isEqualToString:@"注册"]){ //跳转到设置密码
+            BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
+            if (!isTrue) {
+                [self showMsg:@"手机号格式不正确"];
+                return;
+            }
             ZLSetPasswordVC *svc = [[ZLSetPasswordVC alloc] init];
             [vc.navigationController pushViewController:svc animated:YES];
         }
@@ -80,7 +80,12 @@
             BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
             if (isTrue) {
                 [self showMsg:@"发送验证码"];
-               
+                NSDictionary *params = @{@"phone":self.phoneNumber,@"serviceId":@"2"};
+                [NetManager postWithURLString:@"getPhoneValidateCode" parameters:params success:^(NSDictionary * _Nonnull response) {
+                    
+                } failure:^(NSDictionary * _Nonnull errorMsg) {
+                    
+                }];
             }else{
                 [self showMsg:@"手机号格式不正确"];
             }

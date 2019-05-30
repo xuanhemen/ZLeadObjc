@@ -68,6 +68,7 @@ static NetManager *_instance = nil;
     
     NSString *urlStr = [ZL_BASE_URL stringByAppendingPathComponent:URLString];
     NSMutableDictionary *param = [NSMutableDictionary splicingParameters:parameters]; //拼接参数
+    NSLog(@"请求%@",param);
     [manager POST:urlStr parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 #ifdef DEBUG
         NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
