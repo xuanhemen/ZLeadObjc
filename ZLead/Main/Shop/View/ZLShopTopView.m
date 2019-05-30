@@ -27,7 +27,7 @@
 }
 
 - (void)setupViews {
-    self.shopLogo = [[UIImageView alloc] initWithFrame:kRect(15, 10, 46, 46)];
+    self.shopLogo = [[UIImageView alloc] initWithFrame:kRect(15, 35, 46, 46)];
     self.shopLogo.backgroundColor = [UIColor colorWithHexString:@"#E76B00"];
     self.shopLogo.layer.cornerRadius = dis(23);
     self.shopLogo.layer.masksToBounds = YES;
