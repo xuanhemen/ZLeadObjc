@@ -137,7 +137,7 @@
         _login.backgroundColor = COLOR(249, 222, 172, 1);
         _login.layer.masksToBounds = YES;
         _login.layer.cornerRadius = dis(25);
-        _login.enabled = NO;
+       // _login.enabled = NO;
         if (self.style == LogStyleLogin) {
            [_login setTitle:@"登录" forState:UIControlStateNormal];
         }else{

@@ -36,10 +36,12 @@
 		7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68502296983B0024DF3A /* ZLLoginView.m */; };
 		7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D6853229699BB0024DF3A /* ZLLoginViewModel.m */; };
 		7A9D68582296A0680024DF3A /* UIColor+Func.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68572296A0680024DF3A /* UIColor+Func.m */; };
+		7AB6D8B5229F768500AFDCF0 /* ZLAddInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB6D8B4229F768500AFDCF0 /* ZLAddInfoView.m */; };
 		7AC903BB229D1F830036AD68 /* NSString+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC903BA229D1F830036AD68 /* NSString+Function.m */; };
 		7AC903BE229D425C0036AD68 /* ZLSetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC903BD229D425C0036AD68 /* ZLSetPasswordVC.m */; };
 		7AFD07E6229E7ACC0093091C /* ZLLoginNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD07E5229E7ACC0093091C /* ZLLoginNetManager.m */; };
 		7AFD07E9229E7F040093091C /* NSDictionary+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD07E8229E7F040093091C /* NSDictionary+Function.m */; };
+		7AFD07EC229EA0F90093091C /* ZLAddShopInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD07EB229EA0F90093091C /* ZLAddShopInfoVC.m */; };
 		9FB42ABF0BA8A97B989DAC14 /* libPods-ZLead.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BD921763FC6637F355F260 /* libPods-ZLead.a */; };
 		E2223B36229EB59F00C8547C /* ZLOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2223B35229EB59F00C8547C /* ZLOrderListCell.m */; };
 		E2223B39229FAD8D00C8547C /* ZLOrderManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2223B38229FAD8D00C8547C /* ZLOrderManageView.m */; };
@@ -167,6 +169,8 @@
 		7A9D6853229699BB0024DF3A /* ZLLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLLoginViewModel.m; sourceTree = "<group>"; };
 		7A9D68562296A0680024DF3A /* UIColor+Func.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Func.h"; sourceTree = "<group>"; };
 		7A9D68572296A0680024DF3A /* UIColor+Func.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Func.m"; sourceTree = "<group>"; };
+		7AB6D8B3229F768500AFDCF0 /* ZLAddInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLAddInfoView.h; sourceTree = "<group>"; };
+		7AB6D8B4229F768500AFDCF0 /* ZLAddInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLAddInfoView.m; sourceTree = "<group>"; };
 		7AC903B9229D1F830036AD68 /* NSString+Function.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Function.h"; sourceTree = "<group>"; };
 		7AC903BA229D1F830036AD68 /* NSString+Function.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Function.m"; sourceTree = "<group>"; };
 		7AC903BC229D425C0036AD68 /* ZLSetPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLSetPasswordVC.h; sourceTree = "<group>"; };
@@ -175,6 +179,8 @@
 		7AFD07E5229E7ACC0093091C /* ZLLoginNetManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLLoginNetManager.m; sourceTree = "<group>"; };
 		7AFD07E7229E7F040093091C /* NSDictionary+Function.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Function.h"; sourceTree = "<group>"; };
 		7AFD07E8229E7F040093091C /* NSDictionary+Function.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Function.m"; sourceTree = "<group>"; };
+		7AFD07EA229EA0F90093091C /* ZLAddShopInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLAddShopInfoVC.h; sourceTree = "<group>"; };
+		7AFD07EB229EA0F90093091C /* ZLAddShopInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLAddShopInfoVC.m; sourceTree = "<group>"; };
 		916EADC284FDEA9BE6978269 /* Pods-ZLead.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZLead.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZLead/Pods-ZLead.debug.xcconfig"; sourceTree = "<group>"; };
 		E2223B34229EB59F00C8547C /* ZLOrderListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLOrderListCell.h; sourceTree = "<group>"; };
 		E2223B35229EB59F00C8547C /* ZLOrderListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLOrderListCell.m; sourceTree = "<group>"; };
@@ -725,6 +731,8 @@
 				7A9D6840229688040024DF3A /* ZLLoginVC.m */,
 				7AC903BC229D425C0036AD68 /* ZLSetPasswordVC.h */,
 				7AC903BD229D425C0036AD68 /* ZLSetPasswordVC.m */,
+				7AFD07EA229EA0F90093091C /* ZLAddShopInfoVC.h */,
+				7AFD07EB229EA0F90093091C /* ZLAddShopInfoVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -743,6 +751,8 @@
 				7A9D68502296983B0024DF3A /* ZLLoginView.m */,
 				7A488A692298F49800069483 /* ZLInputView.h */,
 				7A488A6A2298F49800069483 /* ZLInputView.m */,
+				7AB6D8B3229F768500AFDCF0 /* ZLAddInfoView.h */,
+				7AB6D8B4229F768500AFDCF0 /* ZLAddInfoView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1021,7 +1031,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
@@ -1032,7 +1042,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B62A8279FE9ACCB0DB609889 /* [CP] Check Pods Manifest.lock */ = {
@@ -1117,6 +1127,7 @@
 				7A00980E22955C2400AD79DE /* ZLTabBarController.m in Sources */,
 				7A9D684D229689D80024DF3A /* ZLEmptyDataView.m in Sources */,
 				7A00980B22955ACB00AD79DE /* ZLConfig.m in Sources */,
+				7AFD07EC229EA0F90093091C /* ZLAddShopInfoVC.m in Sources */,
 				E265DFF0229CE00800842DD0 /* UIView+Size.m in Sources */,
 				E832D6F9229E51CD00D0ED7F /* ZLPerListView.m in Sources */,
 				7A9D683E229683DE0024DF3A /* NSObject+HUD.m in Sources */,
@@ -1133,6 +1144,7 @@
 				E832D709229E51EC00D0ED7F /* ZLAddStoreVC.m in Sources */,
 				E265DFD9229B8DAC00842DD0 /* ZLOrderManageVC.m in Sources */,
 				E832D70A229E51EC00D0ED7F /* ZLPerAccountOfWithdrawVC.m in Sources */,
+				7AB6D8B5229F768500AFDCF0 /* ZLAddInfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

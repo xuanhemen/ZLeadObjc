@@ -7,7 +7,7 @@
 //
 
 #import "ZLSetPasswordVC.h"
-
+#import "ZLAddShopInfoVC.h"
 @interface ZLSetPasswordVC ()
 
 @end
@@ -60,9 +60,27 @@
     
     UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     nextBtn.backgroundColor = COLOR(249, 222, 172, 1);
-    nextBtn.enabled = NO;
+    //nextBtn.enabled = NO;
     [nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
     [nextBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [[nextBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        ZLAddShopInfoVC *avc = [[ZLAddShopInfoVC alloc] init];
+        [self.navigationController pushViewController:avc animated:YES];
+//        BOOL isTrue =  [self cheackPass:firstField.text];
+//        BOOL isYes =  [self cheackPass:firstField.text];
+//        BOOL isEqual = [firstField.text isEqualToString:secField.text];
+//        if (isTrue && isYes) {
+//            if (isEqual) { //跳转到补充店铺信息
+//                ZLAddShopInfoVC *avc = [[ZLAddShopInfoVC alloc] init];
+//                [self.navigationController pushViewController:avc animated:YES];
+//            }else{
+//               [self showMsg:@"密码不一致"];
+//            }
+//        }else{
+//            [self showMsg:@"密码格式不正确"];
+//        }
+        
+    }];
     [self.view addSubview:nextBtn];
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(secField.mas_bottom).offset(dis(60));
@@ -73,6 +91,10 @@
     nextBtn.layer.cornerRadius = dis(25);
     
     [[firstField.rac_textSignal filter:^BOOL(NSString * _Nullable value) {
+        if (value.length>=6 && secField.text.length>=6) {
+            nextBtn.enabled = YES;
+            nextBtn.backgroundColor = hex(@"#F7981C");
+        }
         if (value.length>20) {
             firstField.text = [firstField.text substringToIndex:20];
             [self showMsg:@"密码最多20位"];
@@ -83,17 +105,24 @@
     }];
     [[secField.rac_textSignal filter:^BOOL(NSString * _Nullable value) {
         if (value.length>=6 && firstField.text.length>=6) {
+           
             nextBtn.enabled = YES;
             nextBtn.backgroundColor = hex(@"#F7981C");
         }
         if (value.length>20) {
-            secField.text = [firstField.text substringToIndex:20];
+            secField.text = [secField.text substringToIndex:20];
             [self showMsg:@"密码最多20位"];
         }
         return YES;
     }] subscribeNext:^(NSString * _Nullable x) {
-        
+
     }];
+}
+- (BOOL)cheackPass:(NSString *)string {
+    NSString * regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z`~!@#$%^&*()+=|{}':;',//[//].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]{6,20}$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL isMatch = [pred evaluateWithObject:string];
+    return isMatch;
 }
 - (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.hidden = NO;
