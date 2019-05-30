@@ -19,16 +19,21 @@
 //    self.view.backgroundColor = [UIColor whiteColor];
     self.view.backgroundColor = [UIColor zl_bgColor];
     // Do any additional setup after loading the view.
+    [self configNavigationBar];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)configNavigationBar {
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftButton.frame = CGRectMake(0, 2, 60, 44);
+    [leftButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [leftButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    leftButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 40);
+    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = leftButtonItem;
 }
-*/
+
+- (void)backAction {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end
