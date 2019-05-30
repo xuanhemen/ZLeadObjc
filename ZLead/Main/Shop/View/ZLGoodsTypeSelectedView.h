@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLGoodsTypeSelectedView : UIView
-
+@property (nonatomic, copy) void (^resetButtonBlock) (void);
+@property (nonatomic, copy) void (^sureButtonBlock) (NSString *fType, NSString *sType, NSString *tType);
 @end
 
 NS_ASSUME_NONNULL_END

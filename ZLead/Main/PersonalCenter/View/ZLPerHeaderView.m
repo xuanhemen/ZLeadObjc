@@ -11,13 +11,9 @@
 @interface ZLPerHeaderView ()
 
 @property (nonatomic, strong)UIButton *msgItem;
-/** 头像 */
 @property (nonatomic, strong)UIImageView *headerImgV;
-/** name */
 @property (nonatomic, strong)UILabel *nameLbl;
-/** phone */
 @property (nonatomic, strong)UILabel *phoneLbl;
-/** eye */
 @property (nonatomic, strong)UIButton *eyeBtn;
 
 @end
@@ -40,6 +36,14 @@
         make.width.height.mas_equalTo(dis(60));
     }];
     
+    CGFloat stateH = IS_IPHONE_X ? 34 : 20;
+    self.msgItem.backgroundColor = [UIColor zl_bgColor];
+    [self.msgItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(stateH + 18);
+        make.right.equalTo(self).offset(-15);
+        make.width.height.mas_equalTo(24);
+    }];
+    
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.headerImgV.mas_right).offset(dis(10));
         make.bottom.equalTo(self.headerImgV.mas_centerY);
@@ -49,7 +53,7 @@
         make.left.equalTo(self.nameLbl);
         make.top.equalTo(self.nameLbl.mas_bottom).offset(dis(4));
     }];
-    self.eyeBtn.backgroundColor = [UIColor blueColor];
+    
     [self.eyeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.phoneLbl.mas_right).offset(dis(10));
         make.centerY.equalTo(self.phoneLbl);
@@ -57,7 +61,16 @@
     }];
 }
 
+#pragma mark - action
+- (void)msgBtnClicked:(UIButton *)sender {
+    if (_msgBlock) {
+        _msgBlock();
+    }
+}
 
+- (void)eyeBtnClicked:(UIButton *)sender {
+    sender.selected = !sender.selected;
+}
 
 #pragma mark - lazy method
 - (UIImageView *)headerImgV {
@@ -94,11 +107,23 @@
 - (UIButton *)eyeBtn {
     if (!_eyeBtn) {
         _eyeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_eyeBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [_eyeBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+        [_eyeBtn setBackgroundImage:[UIImage imageWithColor:[UIColor blueColor]] forState:UIControlStateNormal];
+        [_eyeBtn setBackgroundImage:[UIImage imageWithColor:[UIColor zl_bgColor]] forState:UIControlStateSelected];
+        _eyeBtn.selected = YES;
         [self addSubview:_eyeBtn];
+        [_eyeBtn addTarget:self action:@selector(eyeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _eyeBtn;
+}
+
+- (UIButton *)msgItem {
+    if (!_msgItem) {
+        _msgItem = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_msgItem setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [self addSubview:_msgItem];
+        [_msgItem addTarget:self action:@selector(msgBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _msgItem;
 }
 
 #pragma mark - private

@@ -27,9 +27,9 @@
 }
 
 - (void)setupViews {
-    self.shopLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 46, 46)];
+    self.shopLogo = [[UIImageView alloc] initWithFrame:kRect(15, 10, 46, 46)];
     self.shopLogo.backgroundColor = [UIColor colorWithHexString:@"#E76B00"];
-    self.shopLogo.layer.cornerRadius = 23;
+    self.shopLogo.layer.cornerRadius = dis(23);
     self.shopLogo.layer.masksToBounds = YES;
     [self addSubview:self.shopLogo];
     
@@ -65,24 +65,24 @@
     [self.shopNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.shopLogo);
         make.left.equalTo(self.shopLogo.mas_right).offset(2);
-        make.width.mas_lessThanOrEqualTo(120);
-        make.height.mas_equalTo(45);
+        make.width.mas_lessThanOrEqualTo(dis(120));
+        make.height.mas_equalTo(dis(45));
         make.centerY.equalTo(weakSelf.shopLogo);
     }];
     
     [self.shopChangeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.shopNameLabel.mas_right).offset(2);
         make.height.mas_equalTo(20);
-        make.width.mas_equalTo(40);
+        make.width.mas_equalTo(dis(40));
         make.centerY.equalTo(self.shopLogo);
     }];
     
     
     [self.notificationButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_right).offset(-25);
-        make.height.mas_equalTo(16);
-        make.width.mas_equalTo(20);
-        make.top.equalTo(self.shopLogo.mas_top).offset(4);
+        make.right.equalTo(self.mas_right).offset(dis(-25));
+        make.height.mas_equalTo(dis(16));
+        make.width.mas_equalTo(dis(20));
+        make.top.equalTo(self.shopLogo.mas_top).offset(dis(4));
     }];
     
 }

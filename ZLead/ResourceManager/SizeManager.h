@@ -23,6 +23,10 @@
 #define kSafeHeight (IS_IPHONE_X?(34):(0))
 /** 状态栏和导航栏总高度 */
 #define kNavBarHeight   (IS_IPHONE_X?(88):(64))
+
+/** 状态栏和导航栏总高度 */
+#define kStatusBarHeight   (IS_IPHONE_X?(44):(20))
+
 /** 适配比例 */
 #define kp [UIScreen mainScreen].bounds.size.width/375.0
 /** 距离、长度 */

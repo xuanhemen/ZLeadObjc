@@ -8,7 +8,7 @@
 
 #import "ZLShopBusinessMenuCell.h"
 
-#define kZLShopBusinessMenuCellHeight 123
+#define kZLShopBusinessMenuCellHeight dis(123)
 
 @interface ZLShopBusinessMenuCell ()
 
@@ -20,6 +20,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self setupViews];
+        self.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
@@ -39,15 +40,15 @@
     containerView.layer.shadowRadius = 4;
     [self addSubview:containerView];
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf).offset(15);
-        make.right.equalTo(weakSelf).offset(-15);
-        make.height.mas_equalTo(100);
-        make.top.equalTo(weakSelf).offset(15);
+        make.left.equalTo(weakSelf).offset(dis(15));
+        make.right.equalTo(weakSelf).offset(dis(-15));
+        make.height.mas_equalTo(dis(100));
+        make.top.equalTo(weakSelf).offset(dis(15));
     }];
     
     NSArray *titles = @[@"订单管理", @"一键开单", @"线下收款", @"敬请期待"];
 //    NSArray *icons = @[@"订单管理", @"一键开单", @"线下收款", @"敬请期待"];
-    CGFloat singleMenuViewWidth = (kScreenWith-30)/4;
+    CGFloat singleMenuViewWidth = (kScreenWith-dis(30))/4;
     UIView *tempSingleMenuView = nil;
     UIView *tempTitleLabel = nil;
     for (int i = 0; i < titles.count; i ++) {
@@ -59,14 +60,14 @@
         if (i == 0) {
             [singleMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(0);
-                make.height.mas_equalTo(100);
+                make.height.mas_equalTo(dis(100));
                 make.width.mas_equalTo(singleMenuViewWidth);
                 make.top.equalTo(containerView);
             }];
         } else  {
             [singleMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(tempSingleMenuView.mas_right);
-                make.height.mas_equalTo(100);
+                make.height.mas_equalTo(dis(100));
                 make.width.mas_equalTo(singleMenuViewWidth);
                 make.top.equalTo(containerView);
             }];
@@ -87,24 +88,24 @@
             [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(0);
                 make.right.equalTo(singleMenuView);
-                make.height.mas_equalTo(17);
+                make.height.mas_equalTo(dis(17));
                 make.width.mas_equalTo(singleMenuViewWidth);
-                make.bottom.equalTo(singleMenuView.mas_bottom).offset(-12);
+                make.bottom.equalTo(singleMenuView.mas_bottom).offset(dis(-12));
             }];
         } else {
             [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(tempTitleLabel.mas_right);
-                make.height.mas_equalTo(17);
+                make.height.mas_equalTo(dis(17));
                 make.width.mas_equalTo(singleMenuViewWidth);
-                make.bottom.equalTo(singleMenuView.mas_bottom).offset(-12);
+                make.bottom.equalTo(singleMenuView.mas_bottom).offset(dis(-12));
             }];
         }
         
         [icon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(titleLabel.mas_centerX);
-            make.height.mas_equalTo(43);
-            make.width.mas_equalTo(43);
-            make.top.equalTo(singleMenuView).offset(19);
+            make.height.mas_equalTo(dis(43));
+            make.width.mas_equalTo(dis(43));
+            make.top.equalTo(singleMenuView).offset(dis(19));
         }];
         
         

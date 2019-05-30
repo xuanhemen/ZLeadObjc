@@ -9,12 +9,13 @@
 #import "ZLMakeOrderView.h"
 #import "ZLShoppingCartCell.h"
 #import "ZLGoodsTypeSelectedView.h"
+#import "ZLShopGoodsSearchBarView.h"
 
 @interface ZLMakeOrderView ()
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIButton *calculateButton;
 @property (nonatomic, strong) ZLGoodsTypeSelectedView *typeSelectedView;
-@property (nonatomic, strong) UIView *searchView;
+@property (nonatomic, strong) ZLShopGoodsSearchBarView *searchView;
 @end
 
 @implementation ZLMakeOrderView
@@ -23,18 +24,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setupViews];
+        self.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     }
     return self;
 }
 
 - (void)setupViews {
-    self.searchView = [[UIView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWith, dis(42))];
+    self.searchView = [[ZLShopGoodsSearchBarView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWith, dis(42))];
     self.searchView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.searchView];
     
     self.goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(84), kScreenWith, kScreenHeight - (dis(135) + kSafeHeight)) style:UITableViewStylePlain];
     self.goodsListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.goodsListTableView.backgroundColor = [UIColor clearColor];
+    self.goodsListTableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
+    self.goodsListTableView.backgroundView = nil;
     [self.goodsListTableView registerClass:[ZLShoppingCartCell class] forCellReuseIdentifier:@"ZLShoppingCartCell"];
     [self addSubview:self.goodsListTableView];
     
@@ -42,6 +45,13 @@
     
     self.typeSelectedView = [[ZLGoodsTypeSelectedView alloc] initWithFrame:CGRectMake(0, self.searchView.bottom, kScreenWith, dis(42))];
     self.typeSelectedView.backgroundColor = [UIColor whiteColor];
+    self.typeSelectedView.resetButtonBlock = ^{
+        
+    };
+    
+    self.typeSelectedView.sureButtonBlock = ^(NSString * _Nonnull fType, NSString * _Nonnull sType, NSString * _Nonnull tType) {
+        
+    };
     [self addSubview:self.typeSelectedView];
 }
 

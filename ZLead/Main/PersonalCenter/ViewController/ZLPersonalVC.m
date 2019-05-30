@@ -16,6 +16,7 @@
 #import "ZLShopListVC.h"
 #import "ZLPerWithdrawVC.h"
 #import "ZLPerAccountOfWithdrawVC.h"
+#import "ZLMsgCenterVC.h"
 
 @interface ZLPersonalVC ()
 
@@ -96,6 +97,13 @@
 
 - (void)dealBlock {
     @weakify(self)
+    
+    [self.headerV setMsgBlock:^{
+        @strongify(self)
+        ZLMsgCenterVC *msgVc = [[ZLMsgCenterVC alloc] init];
+        [self.navigationController pushViewController:msgVc animated:YES];
+    }];
+    
     [self.btnV setPerButtonBlock:^(NSInteger index) {
         @strongify(self)
         if (index == 0) {
