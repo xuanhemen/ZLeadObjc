@@ -17,7 +17,7 @@ NSString * ZL_BASE_URL = @"";
 + (void)chooseRootViewController {
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
     BOOL isLogined = [[infoDic objectForKey:@"loginState"] boolValue];
-    if (isLogined) {
+    if (!isLogined) {
         ZLTabBarController *vc = [[ZLTabBarController alloc] init];
         [UIApplication sharedApplication].keyWindow.rootViewController = vc;
     }else{
