@@ -18,6 +18,7 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.17)
   - MJRefresh (3.2.0)
+  - MOFSPickerManager (2.1.4)
   - Reachability (3.2)
   - ReactiveObjC (3.1.1)
   - Realm (3.15.0):
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - MJExtension
   - MJRefresh
+  - MOFSPickerManager
   - Reachability
   - ReactiveObjC
   - Realm
@@ -46,6 +48,7 @@ SPEC REPOS:
     - MBProgressHUD
     - MJExtension
     - MJRefresh
+    - MOFSPickerManager
     - Reachability
     - ReactiveObjC
     - Realm
@@ -58,12 +61,13 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 74ec83124a68891619fb7ba9c5c811bbf1691076
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  MOFSPickerManager: 7172f566baa25899bf24e7513dd831c23ab6f93a
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   Realm: 9b834e1be6062f544805252c812348872dc5d4ed
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 00f83d2938e5fe2dc7c8b2abc830b25e6a1390a8
+PODFILE CHECKSUM: f4ebb531a472e68f680f5ac80e5d5ce20de2261c
 
 COCOAPODS: 1.5.3

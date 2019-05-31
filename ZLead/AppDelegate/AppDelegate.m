@@ -22,7 +22,11 @@
     
     [ZLConfig chooseRootViewController]; //配置根视图控制器
     [ZLConfig config]; //配置环境
-    
+    NSError *error = nil;
+    NSDictionary *dic = @{@"username":@"nihao",@"password":@"12345"};
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *paramStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"字符春%@",paramStr);
     // Override point for customization after application launch.
     return YES;
 }

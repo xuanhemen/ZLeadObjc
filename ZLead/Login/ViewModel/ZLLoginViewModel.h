@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) RACSubject *getCode; // 获取验证码
 
+@property (nonatomic, strong) RACSubject *forgetPassword; // 忘记密码
+
 @property (nonatomic, copy) NSString *phoneNumber; // 手机号
 
 

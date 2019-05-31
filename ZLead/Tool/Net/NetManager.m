@@ -56,16 +56,16 @@ static NetManager *_instance = nil;
 }
 /**post请求*/
 + (void)postWithURLString:(NSString *)URLString
-              parameters:(id)parameters
+              parameters:(NSDictionary *)parameters
                  success:(void (^)(NSDictionary *response))success
                  failure:(void (^)(NSDictionary *errorMsg))failure{
     
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.requestSerializer.timeoutInterval = 20.0f;
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
+    manager.requestSerializer.timeoutInterval = 20.0f;
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"application/json;charset=UTF-8", @"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
     NSString *urlStr = [ZL_BASE_URL stringByAppendingPathComponent:URLString];
     NSMutableDictionary *param = [NSMutableDictionary splicingParameters:parameters]; //拼接参数
     NSLog(@"请求%@",param);

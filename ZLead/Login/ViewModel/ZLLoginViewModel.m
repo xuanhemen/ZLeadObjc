@@ -12,7 +12,7 @@
 #import "ZLNavigationController.h"
 #import "NSString+Function.h"
 #import "ZLSetPasswordVC.h"
-
+#import "ZLForgetPassWordVC.h"
 
 @implementation ZLLoginViewModel
 
@@ -28,6 +28,7 @@
     self.goRegister = [RACSubject subject]; //注册新号
     self.goLogin = [RACSubject subject]; //切回登录界面
     self.login = [RACSubject subject]; //登录
+    self.forgetPassword = [RACSubject subject]; //忘记密码
     [self getVerificationCode]; //获取验证码或忘记密码
 }
 -(void)jumpFromController:(UIViewController *)vc{
@@ -50,25 +51,26 @@
                 [self showMsg:@"手机号格式不正确"];
                 return;
             }
-            NSDictionary *params = @{@"phone":self.phoneNumber,@"serviceId":@"2"};
-            [NetManager postWithURLString:@"getPhoneValidateCode" parameters:params success:^(NSDictionary * _Nonnull response) {
-                
-            } failure:^(NSDictionary * _Nonnull errorMsg) {
-                
-            }];
+//             {"platform":"ios/android/pc","appversion":"1.0.3","apiversion":"1.0.2","imei":"12345678","signature":"xxxxxx","token":"XXXX.XXXX.XXXX.XXXX","data":{"userName":"xxx","password":"xxxxx","code":"xxxx","authCodeKey":"zzzzzzz"}}
+            
             ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
             [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
         }else if ([btn.titleLabel.text isEqualToString:@"注册"]){ //跳转到设置密码
-//            BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
-//            if (!isTrue) {
-//                [self showMsg:@"手机号格式不正确"];
-//                return;
-//            }
+            BOOL isTrue = [NSString validatePhoneNumber:self.phoneNumber];
+            if (!isTrue) {
+                [self showMsg:@"手机号格式不正确"];
+                return;
+            }
             ZLSetPasswordVC *svc = [[ZLSetPasswordVC alloc] init];
+            svc.style = SetPWStyleNewSet;
             [vc.navigationController pushViewController:svc animated:YES];
         }
        
         
+    }];
+    [self.forgetPassword subscribeNext:^(id  _Nullable x) { //跳转到找回密码
+        ZLForgetPassWordVC *fvc = [[ZLForgetPassWordVC alloc] init];
+        [vc.navigationController pushViewController:fvc animated:YES];
     }];
 }
 - (void)getVerificationCode{
@@ -81,7 +83,7 @@
             if (isTrue) {
                 [self showMsg:@"发送验证码"];
                 NSDictionary *params = @{@"phone":self.phoneNumber,@"serviceId":@"2"};
-                [NetManager postWithURLString:@"getPhoneValidateCode" parameters:params success:^(NSDictionary * _Nonnull response) {
+                [NetManager postWithURLString:@"common/getPhoneValidateCode" parameters:params success:^(NSDictionary * _Nonnull response) {
                     
                 } failure:^(NSDictionary * _Nonnull errorMsg) {
                     
@@ -91,6 +93,7 @@
             }
           
         }else if ([title isEqualToString:@"忘记密码"]){ //忘记密码
+            [self.forgetPassword sendNext:@"忘记密码"];
             
         }
     }];

@@ -7,7 +7,7 @@
 //
 
 #import "ZLAddInfoView.h"
-
+#import "MOFSPickerManager.h"
 @implementation ZLAddInfoView
 
 /*
@@ -43,6 +43,7 @@
     [twoView.layer addSublayer:towLayer];
     
     
+    
     UIView *thirdView = [[UIView alloc] init];
     thirdView.frame = kRect(30, 100, kScreenWith-60, 50);
     [self addSubview:thirdView];
@@ -68,11 +69,12 @@
         make.left.equalTo(name.mas_right).offset(5);
         make.centerY.equalTo(name.superview);
     }];
-    UITextField *nameField = [[UITextField alloc] init];
-    nameField.placeholder = @"请输入您的店铺名称（必填）";
-    [oneView addSubview:nameField];
-    [nameField mas_makeConstraints:^(MASConstraintMaker *make) {
+    _nameField = [[UITextField alloc] init];
+    _nameField.placeholder = @"请输入您的店铺名称（必填）";
+    [oneView addSubview:_nameField];
+    [_nameField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(name.mas_right).offset(20);
+        make.right.equalTo(self.nameField.superview);
         make.centerY.equalTo(name);
     }];
     
@@ -84,12 +86,12 @@
         make.left.equalTo(area.superview);
         make.centerY.equalTo(area.superview);
     }];
-    UILabel *areaLable = [[UILabel alloc] init];
-    areaLable.text = @"请选择省市区";
-    areaLable.textColor = lightColor;
-    areaLable.font = kFont17;
-    [twoView addSubview:areaLable];
-    [areaLable mas_makeConstraints:^(MASConstraintMaker *make) {
+    _areaLable = [[UILabel alloc] init];
+    _areaLable.text = @"请选择省市区";
+    _areaLable.textColor = lightColor;
+    _areaLable.font = kFont17;
+    [twoView addSubview:_areaLable];
+    [_areaLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(area.mas_right).offset(20);
         make.centerY.equalTo(area);
     }];
@@ -110,12 +112,23 @@
         make.left.equalTo(address.superview);
         make.centerY.equalTo(address.superview);
     }];
-    UITextField *addressField = [[UITextField alloc] init];
-    addressField.placeholder = @"请输入详细地址";
-    [thirdView addSubview:addressField];
-    [addressField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(address.mas_right).offset(20);
+    _addressField = [[UITextField alloc] init];
+    _addressField.placeholder = @"请输入详细地址";
+    [thirdView addSubview:_addressField];
+    [_addressField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(thirdView).offset(dis(85));
         make.centerY.equalTo(address);
+        make.right.equalTo(self.addressField.superview);
+    }];
+    
+    [[twoView rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        [[MOFSPickerManager shareManger] showMOFSAddressPickerWithTitle:nil cancelTitle:@"取消" commitTitle:@"完成" commitBlock:^(NSString *address, NSString *zipcode) {
+            self.areaLable.text = address;
+            NSLog(@"%@",zipcode);
+            self.areaLable.textColor = [UIColor grayColor];
+        } cancelBlock:^{
+            
+        }];
     }];
 }
 @end
