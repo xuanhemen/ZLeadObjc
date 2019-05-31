@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ZLShopGoodsModel : NSObject
 @property (nonatomic, assign) NSInteger goodsNum;
 @property (nonatomic, assign) BOOL isSelected;
+@property (nonatomic, assign) CGFloat salePrice;
 @end
 
 NS_ASSUME_NONNULL_END
