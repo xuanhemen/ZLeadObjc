@@ -76,6 +76,7 @@ static NetManager *_instance = nil;
         NSError *error;
         //        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&error];
         /**请求成功*/
+        DLog(@"返回=%@\nmessage=%@", responseObject, responseObject[@"message"]);
         success(responseObject);
         //        NSString *str = [dic objectForKey:@"statusCode"];
         //        if ([str isEqualToString:@"200"]){//
@@ -127,7 +128,7 @@ static NetManager *_instance = nil;
     
 }
 
-- (void)postRequestWithPath:(NSString*)path andParameters:(NSMutableDictionary*)parameters forSueccessful:(void(^)(id responseObject))successful forFail:(void(^)(NSError *error)) fail {
+- (void)postRequestWithPath:(NSString*)path parameters:(NSMutableDictionary*)parameters sueccessful:(void(^)(id responseObject))successful fail:(void(^)(NSError *error)) fail {
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -139,7 +140,7 @@ static NetManager *_instance = nil;
     [mgr POST:urlStr parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // responseObject 返回状态码 200 表示成功
-        if ([responseObject[@"error"] intValue] != 200) {
+        if ([responseObject[@"status"] intValue] != 200) {
             // 将服务器返回错误message包装成NSError对象返回
             NSString *description = responseObject[@"message"];
             NSError *messageError = [NSError errorWithDomain:@"MessageError" code:[responseObject[@"error"] intValue] userInfo:@{NSLocalizedDescriptionKey:description}];
@@ -156,7 +157,7 @@ static NetManager *_instance = nil;
     
 }
 
-- (void)getRequestWithPath:(NSString*)path andParameters:(NSMutableDictionary*)parameters forSueccessful:(void(^)(id responseObject))successful forFail:(void(^)(NSError *error)) fail {
+- (void)getRequestWithPath:(NSString*)path parameters:(NSMutableDictionary*)parameters sueccessful:(void(^)(id responseObject))successful fail:(void(^)(NSError *error)) fail {
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -165,10 +166,11 @@ static NetManager *_instance = nil;
     NSString *urlStr = [ZL_BASE_URL stringByAppendingPathComponent:path];
     
     DLog(@"get请求地址:%@请求的参数:%@------------------------------------\n",path,parameters);
-    [mgr GET:urlStr parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    NSMutableDictionary *param = [NSMutableDictionary splicingParameters:parameters]; //拼接参数
+    [mgr GET:urlStr parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // responseObject 返回状态码 200 表示成功
-        if ([responseObject[@"error"] intValue] != 200) {
+        if ([responseObject[@"status"] intValue] != 200) {
             // 将服务器返回错误message包装成NSError对象返回
             NSString *description = responseObject[@"message"];
             NSError *messageError = [NSError errorWithDomain:@"MessageError" code:9999 userInfo:@{NSLocalizedDescriptionKey:description}];

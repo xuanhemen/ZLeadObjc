@@ -23,10 +23,10 @@
     if (smscode.length > 0) {
         dict[@"code"] = smscode;
     }
-    [[NetManager sharedInstance] postRequestWithPath:ZLURL_LOGIN andParameters:dict forSueccessful:^(id  _Nonnull responseObject) {
-        
-    } forFail:^(NSError * _Nonnull error) {
-        
+    [[NetManager sharedInstance] postRequestWithPath:ZLURL_LOGIN parameters:dict sueccessful:^(id  _Nonnull responseObject) {
+        sucess(responseObject);
+    } fail:^(NSError * _Nonnull error) {
+        fail(error);
     }];
 }
 
@@ -37,10 +37,22 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"phone"] = phoneNum;
     dict[@"serviceId"] = serviceId;
-    [[NetManager sharedInstance] postRequestWithPath:ZLURL_PhoneValidateCode andParameters:dict forSueccessful:^(id  _Nonnull responseObject) {
+    [[NetManager sharedInstance] postRequestWithPath:ZLURL_PhoneValidateCode parameters:dict sueccessful:^(id  _Nonnull responseObject) {
+        sucess(responseObject);
+    } fail:^(NSError * _Nonnull error) {
         
-    } forFail:^(NSError * _Nonnull error) {
-        
+    }];
+}
+
+- (void)checkIsRegByPhone:(NSString *)phoneNum
+                   sucess:(resultBlock)sucess
+                     fail:(failWithErrorBlock)fail {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"phone"] = phoneNum;
+    [[NetManager sharedInstance] postRequestWithPath:ZLURL_CheckIsRegByPhone parameters:dict sueccessful:^(id  _Nonnull responseObject) {
+        sucess(responseObject);
+    } fail:^(NSError * _Nonnull error) {
+        fail(error);
     }];
 }
 

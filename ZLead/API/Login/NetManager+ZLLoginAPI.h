@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  登录
  
- @param phoneNum 手机号码
+ @param phoneNum 手机号码//验证码和密码登录两种方式
  @param password 密码
  @param smscode 密码
  @param sucess 成功
@@ -38,6 +38,18 @@ NS_ASSUME_NONNULL_BEGIN
                  serviceId:(NSString *)serviceId
                    sucess:(resultBlock)sucess
                      fail:(failWithErrorBlock)fail;
+
+/**
+ 验证手机号是否注册
+ 
+ @param phoneNum 手机号码
+ @param sucess 成功
+ @param fail 失败
+ */
+- (void)checkIsRegByPhone:(NSString *)phoneNum
+                      sucess:(resultBlock)sucess
+                        fail:(failWithErrorBlock)fail;
+
 @end
 
 NS_ASSUME_NONNULL_END

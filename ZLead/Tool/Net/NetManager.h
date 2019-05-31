@@ -80,15 +80,15 @@ typedef void(^successBlock)(NSArray *dataList, int total);
  @param fail 失败回调
  */
 -(void)postRequestWithPath:(NSString*)path
-             andParameters:(NSMutableDictionary*)parameters
-            forSueccessful:(void(^)(id responseObject))successful
-                   forFail:(void(^)(NSError *error)) fail;
+             parameters:(NSMutableDictionary*)parameters
+            sueccessful:(void(^)(id responseObject))successful
+                   fail:(void(^)(NSError *error)) fail;
 
 
 - (void)getRequestWithPath:(NSString*)path
-             andParameters:(NSMutableDictionary*)parameters
-            forSueccessful:(void(^)(id responseObject))successful
-                   forFail:(void(^)(NSError *error)) fail;
+             parameters:(NSMutableDictionary*)parameters
+            sueccessful:(void(^)(id responseObject))successful
+                   fail:(void(^)(NSError *error)) fail;
 @end
 
 NS_ASSUME_NONNULL_END
