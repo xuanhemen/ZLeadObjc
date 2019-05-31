@@ -75,6 +75,7 @@
         tempSingleMenuView = singleMenuView;
         
         UIImageView *icon = [[UIImageView alloc] init];
+        icon.backgroundColor = [UIColor colorWithHexString:@"#F7F3EA"];
         [singleMenuView addSubview:icon];
         
         UILabel *titleLabel = [[UILabel alloc] init];
