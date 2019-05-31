@@ -12,3 +12,5 @@ static NSString * const ZLURL_LOGIN = @"ZlwUser/login";
 static NSString * const ZLURL_PhoneValidateCode = @"common/getPhoneValidateCode";
 static NSString * const ZLURL_CheckSmsCode = @"common/checkSmsCode";
 static NSString * const ZLURL_CheckShopIsExist = @"ZlwUser/checkShopIsExist";
+static NSString * const ZLURL_CheckIsRegByPhone = @"ZlwUser/isRegByPhone";
+
