@@ -13,5 +13,5 @@ pod 'YYText'
 pod 'Realm'
 pod 'Realm/Headers'
 pod 'ReactiveObjC'
-
+pod 'MOFSPickerManager' 
 end

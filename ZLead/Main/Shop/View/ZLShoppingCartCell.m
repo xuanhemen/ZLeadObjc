@@ -10,7 +10,7 @@
 #import "ZLShopGoodsModel.h"
 
 @interface ZLShoppingCartCell ()
-
+@property (nonatomic,strong) ZLShopGoodsModel *shopGoodsModel;
 @end
 
 @implementation ZLShoppingCartCell
@@ -37,6 +37,11 @@
     self.shoppingCartView.addButtonBlock = ^{
         if (weakSelf.delegate) {
             [weakSelf.delegate numButtonClick:weakSelf isAdd:YES];
+        }
+    };
+    self.shoppingCartView.selectedButtonBlock = ^(BOOL isSelected) {
+        if (weakSelf.delegate) {
+            [weakSelf.delegate selectedButtonClick:weakSelf isSelected:isSelected];
         }
     };
 //    self.shoppingCartView.goodsNumTF.delegate = weakSelf.delegate;

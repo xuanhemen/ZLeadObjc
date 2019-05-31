@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.loginView]; //添加登录视图
     [self.viewModel jumpFromController:self]; //处理跳转事件
     // Do any additional setup after loading the view.

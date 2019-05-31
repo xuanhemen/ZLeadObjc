@@ -145,6 +145,7 @@
         _pwField.placeholder = @"请输入密码";
         [_rightBtnView setTitle:@"忘记密码" forState:UIControlStateNormal];
         [_rightBtnView setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        _rightBtnView.enabled = YES;
         
     }else{ //验证码登录
         UIImageView * leftView = [[UIImageView alloc] init];

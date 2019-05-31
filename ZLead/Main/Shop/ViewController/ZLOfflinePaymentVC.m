@@ -9,6 +9,7 @@
 #import "ZLOfflinePaymentVC.h"
 #import "ZLPaymentMethodCell.h"
 #import "ZLPaymentMethodSectionHeaderView.h"
+#import "ZLPaymentMethodModel.h"
 
 @interface ZLOfflinePaymentVC ()<UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 @property (nonatomic, strong) UITableView *paymentTableView;
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) UITextView *paymentNoteTextView;
 @property (nonatomic, strong) UILabel *notePlaceholderLabel;
 @property (nonatomic, strong) UIButton *createPayQRCodeButton;
+@property (nonatomic, strong) NSMutableArray *payMethodList;
 @end
 
 @implementation ZLOfflinePaymentVC
@@ -31,6 +33,8 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+    [self setupData];
 }
 
 #pragma mark - Views
@@ -136,6 +140,27 @@
     return _createPayQRCodeButton;
 }
 
+#pragma mark - init Data
+
+- (NSMutableArray *)payMethodList {
+    if (!_payMethodList) {
+        NSMutableArray *payMethodList = [[NSMutableArray alloc] initWithCapacity:0];
+        self.payMethodList = payMethodList;
+    }
+    return _payMethodList;
+}
+
+#pragma mark - SetupData
+
+- (void)setupData {
+    NSArray *pays = @[@"现金支付", @"支付宝支付", @"微信支付"];
+    for (int i = 0; i < pays.count; i++) {
+        ZLPaymentMethodModel *payModel = [[ZLPaymentMethodModel alloc] init];
+        payModel.name = [pays objectAtIndex:i];
+        [self.payMethodList addObject:payModel];
+    }
+}
+
 #pragma mark - Private Method
 
 - (void)keyboardHide:(UITapGestureRecognizer *)ges {
@@ -173,11 +198,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ZLBaseCell *cell= [tableView dequeueReusableCellWithIdentifier:@"ZLPaymentMethodCell"];;
-    [cell setupData:nil];
+    ZLBaseCell *cell= [tableView dequeueReusableCellWithIdentifier:@"ZLPaymentMethodCell"];
+    __weak typeof (ZLBaseCell) *weakCell = cell;
+    kWeakSelf(weakSelf);
+    [cell setupData:[self.payMethodList objectAtIndex:indexPath.row]];
     return cell;
 }
-
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
@@ -192,6 +218,18 @@
         return dis(53);
     }
     return CGFLOAT_MIN;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    ZLPaymentMethodCell *paymentMethodCell = [tableView cellForRowAtIndexPath:indexPath];
+//    ZLPaymentMethodModel *payModel = self.payMethodList[indexPath.row];
+//    payModel.isSelected = !payModel.isSelected;
+//    [paymentMethodCell setupData:payModel];
+    for (int i = 0; i < self.payMethodList.count; i++) {
+        ZLPaymentMethodModel *payModel = [self.payMethodList objectAtIndex:i];
+        payModel.isSelected = (indexPath.row == i) ? YES : NO;
+    }
+    [tableView reloadSections:[[NSIndexSet alloc] initWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end

@@ -12,6 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLAddInfoView : UIView
 
+
+@property (nonatomic, strong) UITextField *nameField; // 店铺名称输入框
+
+@property (nonatomic, strong) UILabel *areaLable; // 省市区
+
+@property (nonatomic, strong) UITextField *addressField; // 地址输入框
 @end
 
 NS_ASSUME_NONNULL_END

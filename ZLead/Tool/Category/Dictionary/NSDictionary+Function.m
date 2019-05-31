@@ -11,20 +11,27 @@
 @implementation NSDictionary (Function)
 
 /** 拼接参数 */
-+ (NSMutableDictionary *)splicingParameters:(id)params {
-    NSDictionary *paramDic = params;
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:&error];
-    NSString *paramStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
++ (NSMutableDictionary *)splicingParameters:(NSDictionary *)params {
+//    NSDictionary *paramDic = params;
+//    NSError *error = nil;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:&error];
+//    NSString *paramStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"platform"] = @"ios";
+    param[@"appversion"] = @"1.0.0";
+    param[@"apiversion"] = @"1.0.0";
+    param[@"imei"] = @"1423415435";
+    param[@"signature"] = @"";
     NSString *tokenStr =  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     if (IsStrEmpty(tokenStr)) {
         param[@"token"] = @"";
     }else{
          param[@"token"] = tokenStr;
     }
-    param[@"data"] = paramStr;
+    NSAssert([params isKindOfClass:[NSDictionary class]], @"所传接口参数data不是一个NSDictionary");
+    if ([params isKindOfClass:[NSDictionary class]]) {
+        param[@"data"] = params;
+    }
     return param;
 }
 @end

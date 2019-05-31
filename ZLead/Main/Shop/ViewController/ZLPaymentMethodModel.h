@@ -1,8 +1,8 @@
 //
-//  ZLShopGoodsModel.h
+//  ZLPaymentMethodModel.h
 //  ZLead
 //
-//  Created by dmy on 2019/5/28.
+//  Created by dmy on 2019/5/30.
 //  Copyright © 2019 Beijing tai chi HuaQing information systems co., LTD. All rights reserved.
 //
 
@@ -10,10 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZLShopGoodsModel : NSObject
-@property (nonatomic, assign) NSInteger goodsNum;
+@interface ZLPaymentMethodModel : NSObject
 @property (nonatomic, assign) BOOL isSelected;
-@property (nonatomic, assign) CGFloat salePrice;
+@property (nonatomic, strong) NSString *name;
 @end
 
 NS_ASSUME_NONNULL_END

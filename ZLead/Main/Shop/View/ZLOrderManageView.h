@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class ZLSegmentTitleView;
+@class ZLScrollContentView;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLOrderManageView : UIView
-@property (nonatomic, strong) UITableView *orderListTableView;
+//@property (nonatomic, strong) UITableView *orderListTableView;
+@property (nonatomic, strong) ZLSegmentTitleView *titleView;
+@property (nonatomic, strong) ZLScrollContentView *contentView;
 @end
 
 NS_ASSUME_NONNULL_END

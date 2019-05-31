@@ -8,6 +8,8 @@
 
 #import "ZLSetPasswordVC.h"
 #import "ZLAddShopInfoVC.h"
+#import "ZLTabBarController.h"
+#import "ZLBaseViewController+Func.h"
 @interface ZLSetPasswordVC ()
 
 @end
@@ -20,8 +22,15 @@
     [self initView]; //添加视图
 }
 - (void)initView {
+    
+    [self addBackBtn];
+    
     UILabel *title = [[UILabel alloc] init];
-    title.text = @"请设置登录密码";
+    if (self.style == SetPWStyleNewSet) {
+        title.text = @"请设置登录密码";
+    }else{
+        title.text = @"请重新设置登录密码";
+    }
     title.font = [UIFont boldSystemFontOfSize:18];
     [self.view addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -60,25 +69,35 @@
     
     UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     nextBtn.backgroundColor = COLOR(249, 222, 172, 1);
-    //nextBtn.enabled = NO;
-    [nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
+    nextBtn.enabled = NO;
+    if (self.style == SetPWStyleNewSet) {
+        [nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
+    }else{
+         [nextBtn setTitle:@"完成" forState:UIControlStateNormal];
+    }
+    
     [nextBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [[nextBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-        ZLAddShopInfoVC *avc = [[ZLAddShopInfoVC alloc] init];
-        [self.navigationController pushViewController:avc animated:YES];
-//        BOOL isTrue =  [self cheackPass:firstField.text];
-//        BOOL isYes =  [self cheackPass:firstField.text];
-//        BOOL isEqual = [firstField.text isEqualToString:secField.text];
-//        if (isTrue && isYes) {
-//            if (isEqual) { //跳转到补充店铺信息
-//                ZLAddShopInfoVC *avc = [[ZLAddShopInfoVC alloc] init];
-//                [self.navigationController pushViewController:avc animated:YES];
-//            }else{
-//               [self showMsg:@"密码不一致"];
-//            }
-//        }else{
-//            [self showMsg:@"密码格式不正确"];
-//        }
+       
+        BOOL isTrue =  [self cheackPass:firstField.text];
+        BOOL isYes =  [self cheackPass:firstField.text];
+        BOOL isEqual = [firstField.text isEqualToString:secField.text];
+        if (isTrue && isYes) {
+            if (isEqual) { //跳转到补充店铺信息
+                if (self.style == SetPWStyleNewSet) {
+                    ZLAddShopInfoVC *avc = [[ZLAddShopInfoVC alloc] init];
+                    [self.navigationController pushViewController:avc animated:YES];
+                }else{ 
+                    ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
+                    [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
+                }
+               
+            }else{
+               [self showMsg:@"密码不一致"];
+            }
+        }else{
+            [self showMsg:@"密码格式不正确"];
+        }
         
     }];
     [self.view addSubview:nextBtn];
@@ -117,7 +136,9 @@
     }] subscribeNext:^(NSString * _Nullable x) {
 
     }];
+    
 }
+/** 验证密码格式 */
 - (BOOL)cheackPass:(NSString *)string {
     NSString * regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z`~!@#$%^&*()+=|{}':;',//[//].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]{6,20}$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
@@ -125,7 +146,7 @@
     return isMatch;
 }
 - (void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.hidden = YES;
 }
 /*
 #pragma mark - Navigation

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "URLManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,11 @@ typedef NS_ENUM(NSInteger,HttpRequestType) {
      */
     HttpRequestTypePost
 };
+
+typedef void(^failWithErrorBlock)(NSError *error);
+typedef void(^successfulBlock)();
+typedef void(^resultBlock)(id result);
+typedef void(^successBlock)(NSArray *dataList, int total);
 
 @interface NetManager : NSObject
 
@@ -47,7 +53,7 @@ typedef NS_ENUM(NSInteger,HttpRequestType) {
  *  @param failure    请求失败的回调
  */
 +(void)postWithURLString:(NSString *)URLString
-              parameters:(id)parameters
+              parameters:(NSDictionary *)parameters
                  success:(void (^)(NSDictionary *response))success
                  failure:(void (^)(NSDictionary *errorMsg))failure;
 /**
@@ -64,6 +70,25 @@ typedef NS_ENUM(NSInteger,HttpRequestType) {
                        type:(HttpRequestType)type
                     success:(void (^)(NSDictionary *response))success
                     failure:(void (^)(NSDictionary *errorMsg))failure;
+
+/**
+ 网络基类请求
+ 
+ @param path API后缀
+ @param parameters 参数
+ @param successful 成功回调
+ @param fail 失败回调
+ */
+-(void)postRequestWithPath:(NSString*)path
+             andParameters:(NSMutableDictionary*)parameters
+            forSueccessful:(void(^)(id responseObject))successful
+                   forFail:(void(^)(NSError *error)) fail;
+
+
+- (void)getRequestWithPath:(NSString*)path
+             andParameters:(NSMutableDictionary*)parameters
+            forSueccessful:(void(^)(id responseObject))successful
+                   forFail:(void(^)(NSError *error)) fail;
 @end
 
 NS_ASSUME_NONNULL_END
