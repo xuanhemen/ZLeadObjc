@@ -229,7 +229,7 @@
         ZLPaymentMethodModel *payModel = [self.payMethodList objectAtIndex:i];
         payModel.isSelected = (indexPath.row == i) ? YES : NO;
     }
-    [tableView reloadSections:[[NSIndexSet alloc] initWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [tableView reloadSections:[[NSIndexSet alloc] initWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end
