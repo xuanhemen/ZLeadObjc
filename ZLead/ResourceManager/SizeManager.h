@@ -10,7 +10,7 @@
 #define SizeManager_h
 
 /** 屏幕宽度 */
-#define kScreenWith  [UIScreen mainScreen].bounds.size.width
+#define kScreenWidth  [UIScreen mainScreen].bounds.size.width
 /** 屏幕高度 */
 #define kScreenHeight  [UIScreen mainScreen].bounds.size.height
 /** 屏幕尺寸 */

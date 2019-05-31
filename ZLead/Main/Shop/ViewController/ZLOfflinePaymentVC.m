@@ -82,10 +82,10 @@
 
 - (UIView *)tableViewHeaderView {
     if (!_tableViewHeaderView) {
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, dis(187))];
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, dis(187))];
         headerView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         
-        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, dis(10), kScreenWith, dis(177))];
+        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, dis(10), kScreenWidth, dis(177))];
         containerView.backgroundColor = [UIColor whiteColor];
         [headerView addSubview:containerView];
         
@@ -207,7 +207,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        ZLPaymentMethodSectionHeaderView *headerView = [[ZLPaymentMethodSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, dis(53))];
+        ZLPaymentMethodSectionHeaderView *headerView = [[ZLPaymentMethodSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, dis(53))];
         return headerView;
     }
     return nil;

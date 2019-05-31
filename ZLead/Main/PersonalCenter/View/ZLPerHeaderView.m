@@ -129,7 +129,7 @@
 #pragma mark - private
 - (void)addGradientLayer {
     CAGradientLayer *gl = [CAGradientLayer layer];
-    gl.frame = CGRectMake(0, 0, kScreenWith, 222);
+    gl.frame = CGRectMake(0, 0, kScreenWidth, 222);
     gl.startPoint = CGPointMake(0.68, 0.84);
     gl.endPoint = CGPointMake(0.68, 0.25);
     gl.colors = @[(__bridge id)[UIColor colorWithRed:255/255.0 green:197/255.0 blue:2/255.0 alpha:1.0].CGColor, (__bridge id)[UIColor colorWithRed:255/255.0 green:164/255.0 blue:1/255.0 alpha:1.0].CGColor, (__bridge id)[UIColor colorWithRed:255/255.0 green:164/255.0 blue:0/255.0 alpha:1.0].CGColor];

@@ -78,7 +78,7 @@
 #pragma mark - lazy load
 - (UIView *)footer {
     if (!_footer) {
-        _footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, 150)];
+        _footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150)];
         _footer.backgroundColor = [UIColor zl_bgColor];
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];

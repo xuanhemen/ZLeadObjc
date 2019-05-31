@@ -27,7 +27,7 @@
     titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Medium" size: 16];
     titleLabel.textColor = [UIColor colorWithHexString:@"#333333"];
     [contentView addSubview:titleLabel];
-    UIView *bLine = [[UIView alloc] initWithFrame:CGRectMake(0, dis(42) - 0.5, kScreenWith, 0.5)];
+    UIView *bLine = [[UIView alloc] initWithFrame:CGRectMake(0, dis(42) - 0.5, kScreenWidth, 0.5)];
     bLine.backgroundColor = [UIColor colorWithHexString:@"#EEEEEE"];
     [contentView addSubview:bLine];
     [self addSubview:contentView];

@@ -66,17 +66,17 @@
 }
 
 - (UIView *)setupTableViewHeaderView  {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, dis(315))];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, dis(315))];
     headerView.backgroundColor = [UIColor whiteColor];
     
     __weak typeof (self) weakSelf = self;
-    self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, dis(92))];
+    self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, dis(92))];
     self.shopNameView.changeShopBlock = ^{
         ZLShopListVC *shopListVC = [[ZLShopListVC alloc] init];
         [weakSelf.navigationController pushViewController:shopListVC animated:YES];
     };
     [headerView addSubview:self.shopNameView];
-    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, dis(92), kScreenWith, dis(223))];
+    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, dis(92), kScreenWidth, dis(223))];
     [headerView addSubview:headView];
     return headerView;
 }
