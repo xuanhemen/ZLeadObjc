@@ -48,6 +48,7 @@
 		E2223B3F229FC57C00C8547C /* ZLSegmentTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2223B3D229FC57C00C8547C /* ZLSegmentTitleView.m */; };
 		E2223B40229FC57C00C8547C /* ZLScrollContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2223B3E229FC57C00C8547C /* ZLScrollContentView.m */; };
 		E2223B43229FC66600C8547C /* ZLOrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E2223B42229FC66600C8547C /* ZLOrderListVC.m */; };
+		E2223B46229FE33D00C8547C /* ZLPaymentMethodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E2223B45229FE33D00C8547C /* ZLPaymentMethodModel.m */; };
 		E265DFD9229B8DAC00842DD0 /* ZLOrderManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DFD8229B8DAC00842DD0 /* ZLOrderManageVC.m */; };
 		E265DFDC229B8E8A00842DD0 /* ZLMakeOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DFDB229B8E8A00842DD0 /* ZLMakeOrderVC.m */; };
 		E265DFDF229B8EBD00842DD0 /* ZLOfflinePaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DFDE229B8EBD00842DD0 /* ZLOfflinePaymentVC.m */; };
@@ -192,6 +193,8 @@
 		E2223B3E229FC57C00C8547C /* ZLScrollContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLScrollContentView.m; sourceTree = "<group>"; };
 		E2223B41229FC66600C8547C /* ZLOrderListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLOrderListVC.h; sourceTree = "<group>"; };
 		E2223B42229FC66600C8547C /* ZLOrderListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLOrderListVC.m; sourceTree = "<group>"; };
+		E2223B44229FE33D00C8547C /* ZLPaymentMethodModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZLPaymentMethodModel.h; path = ZLead/Main/Shop/ViewController/ZLPaymentMethodModel.h; sourceTree = SOURCE_ROOT; };
+		E2223B45229FE33D00C8547C /* ZLPaymentMethodModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ZLPaymentMethodModel.m; path = ZLead/Main/Shop/ViewController/ZLPaymentMethodModel.m; sourceTree = SOURCE_ROOT; };
 		E265DFD7229B8DAC00842DD0 /* ZLOrderManageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLOrderManageVC.h; sourceTree = "<group>"; };
 		E265DFD8229B8DAC00842DD0 /* ZLOrderManageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLOrderManageVC.m; sourceTree = "<group>"; };
 		E265DFDA229B8E8A00842DD0 /* ZLMakeOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLMakeOrderVC.h; sourceTree = "<group>"; };
@@ -466,6 +469,8 @@
 			children = (
 				E265E000229D16C200842DD0 /* ZLShopGoodsModel.h */,
 				E265E001229D16C200842DD0 /* ZLShopGoodsModel.m */,
+				E2223B44229FE33D00C8547C /* ZLPaymentMethodModel.h */,
+				E2223B45229FE33D00C8547C /* ZLPaymentMethodModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1125,6 +1130,7 @@
 				E265DFF9229CEA0600842DD0 /* ZLMakeOrderView.m in Sources */,
 				7A0098032295270B00AD79DE /* ZLNavigationController.m in Sources */,
 				7A00980E22955C2400AD79DE /* ZLTabBarController.m in Sources */,
+				E2223B46229FE33D00C8547C /* ZLPaymentMethodModel.m in Sources */,
 				7A9D684D229689D80024DF3A /* ZLEmptyDataView.m in Sources */,
 				7A00980B22955ACB00AD79DE /* ZLConfig.m in Sources */,
 				7AFD07EC229EA0F90093091C /* ZLAddShopInfoVC.m in Sources */,
