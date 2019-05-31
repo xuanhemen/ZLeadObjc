@@ -99,7 +99,7 @@ static NetManager *_instance = nil;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         /**请求失败 code*/
-        DLog(@"接口=%@请求失败=%@，%@", URLString, error.userInfo);
+        DLog(@"接口=%@请求失败=%@", URLString, error.userInfo);
     }];
 }
 
@@ -145,7 +145,7 @@ static NetManager *_instance = nil;
             NSError *messageError = [NSError errorWithDomain:@"MessageError" code:[responseObject[@"error"] intValue] userInfo:@{NSLocalizedDescriptionKey:description}];
             fail(messageError);
         } else {
-            successful(responseObject[@"result"]);
+            successful(responseObject[@"data"]);
         }
         DLog(@"接口path=%@请求成功了! 返回的参数:%@,message=%@", path, responseObject,responseObject[@"message"]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -174,11 +174,10 @@ static NetManager *_instance = nil;
             NSError *messageError = [NSError errorWithDomain:@"MessageError" code:9999 userInfo:@{NSLocalizedDescriptionKey:description}];
             fail(messageError);
             
-        }else{
-            successful(responseObject[@"result"]);
+        } else {
+            successful(responseObject[@"data"]);
         }
         DLog(@"接口path=%@请求成功了! 返回的参数:%@,message=%@", path, responseObject,responseObject[@"message"]);
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         fail(error);
         DLog(@"接口请求失败了 原因:%@",error);
