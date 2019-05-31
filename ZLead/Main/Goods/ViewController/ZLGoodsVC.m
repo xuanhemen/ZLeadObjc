@@ -62,7 +62,7 @@
 }
 
 - (void)layoutChildViews {
-    self.headerView = [[ZLGoodsHeaderView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWith, 45)];
+    self.headerView = [[ZLGoodsHeaderView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, 45)];
     [self.view addSubview:self.headerView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,7 +75,7 @@
 #pragma mark - action
 - (void)tapG:(UITapGestureRecognizer *)tap {
     ZLGoodsSearchVC *searchVc = [[ZLGoodsSearchVC alloc] init];
-    [self.navigationController pushViewController:searchVc animated:YES];
+    [self.navigationController pushViewController:searchVc animated:NO];
 }
 
 - (void)managerBtnClicked:(UIBarButtonItem *)sender {
@@ -116,7 +116,7 @@
         NSLog(@"删除");
         
     }];
-    [[UIButton appearanceWhenContainedInInstancesOfClasses:@[[ZLGoodsListCell class]]] setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [[UIButton appearanceWhenContainedInInstancesOfClasses:@[[ZLGoodsListCell class]]] setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     action1.backgroundColor = [UIColor colorWithHexString:@"#F0F0F0"];
     
     

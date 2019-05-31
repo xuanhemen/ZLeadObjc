@@ -30,7 +30,7 @@
     [self.view addSubview:_infoView];
     [self.infoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(title.mas_bottom).offset(dis(30));
-        make.size.mas_equalTo(CGSizeMake(kScreenWith, dis(150)));
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, dis(150)));
     }];
     
     UIButton *completeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -47,7 +47,7 @@
     [completeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.infoView.mas_bottom).offset(dis(60));
         make.centerX.equalTo(self.view);
-        make.size.mas_equalTo(kSize(kScreenWith-50, 50));
+        make.size.mas_equalTo(kSize(kScreenWidth-50, 50));
     }];
     // Do any additional setup after loading the view.
 }

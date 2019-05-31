@@ -42,7 +42,7 @@
     }];
     
     NSArray *contents = @[@{@"title":@"店长须知",@"des":@"关于开店的教程", @"icon":@"shop-note"}, @{@"title":@"关于我们",@"des":@"直链网相关介绍", @"icon":@"shop-about"}];
-    CGFloat actionButtonWidth = (kScreenWith - dis(30))/2;
+    CGFloat actionButtonWidth = (kScreenWidth - dis(30))/2;
     for (int i = 0; i < contents.count; i ++) {
         UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
         menuButton.tag = 1000 + i;

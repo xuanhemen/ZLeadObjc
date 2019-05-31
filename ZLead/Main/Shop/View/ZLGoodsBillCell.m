@@ -28,7 +28,7 @@
     [super setupViews];
     self.shoppingCartView.frame = kRect(0, 0, 375, 156);
     [self.shoppingCartView setSubviewsFrame:NO];
-    self.bottomSeparator.frame = CGRectMake(0, dis(156) - 0.5, kScreenWith, 0.5);
+    self.bottomSeparator.frame = CGRectMake(0, dis(156) - 0.5, kScreenWidth, 0.5);
     [self bringSubviewToFront:self.bottomSeparator];
 }
 

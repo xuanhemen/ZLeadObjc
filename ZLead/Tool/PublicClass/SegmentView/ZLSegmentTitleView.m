@@ -46,7 +46,7 @@
     self.itemMinMargin = 25.f;
     self.firstItemMargin = self.itemMinMargin;
     
-    self.bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - dis(0.5), kScreenWith, dis(0.5))];
+    self.bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - dis(0.5), kScreenWidth, dis(0.5))];
     self.bottomLine.backgroundColor = [UIColor colorWithHexString:@"#f4f4f4"];
     [self addSubview:self.bottomLine];
 }

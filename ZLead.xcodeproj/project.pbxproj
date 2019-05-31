@@ -91,6 +91,7 @@
 		E832D753229FB30900D0ED7F /* ZLGoodsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E832D752229FB30900D0ED7F /* ZLGoodsHeaderView.m */; };
 		E832D756229FBA3E00D0ED7F /* ZLGoodsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E832D755229FBA3E00D0ED7F /* ZLGoodsListCell.m */; };
 		E832D759229FC99D00D0ED7F /* ZLGoodsSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E832D758229FC99D00D0ED7F /* ZLGoodsSearchVC.m */; };
+		E88492FF22A0D52900A226D8 /* ZLSearchHistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E88492FE22A0D52900A226D8 /* ZLSearchHistoryView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,6 +282,8 @@
 		E832D755229FBA3E00D0ED7F /* ZLGoodsListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLGoodsListCell.m; sourceTree = "<group>"; };
 		E832D757229FC99D00D0ED7F /* ZLGoodsSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLGoodsSearchVC.h; sourceTree = "<group>"; };
 		E832D758229FC99D00D0ED7F /* ZLGoodsSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLGoodsSearchVC.m; sourceTree = "<group>"; };
+		E88492FD22A0D52900A226D8 /* ZLSearchHistoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLSearchHistoryView.h; sourceTree = "<group>"; };
+		E88492FE22A0D52900A226D8 /* ZLSearchHistoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLSearchHistoryView.m; sourceTree = "<group>"; };
 		F7BD921763FC6637F355F260 /* libPods-ZLead.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZLead.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -533,6 +536,8 @@
 				E832D752229FB30900D0ED7F /* ZLGoodsHeaderView.m */,
 				E832D754229FBA3E00D0ED7F /* ZLGoodsListCell.h */,
 				E832D755229FBA3E00D0ED7F /* ZLGoodsListCell.m */,
+				E88492FD22A0D52900A226D8 /* ZLSearchHistoryView.h */,
+				E88492FE22A0D52900A226D8 /* ZLSearchHistoryView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1090,6 +1095,7 @@
 				E265E017229E519400842DD0 /* ZLZLPaymentNoteCell.m in Sources */,
 				7A0097FA229524AD00AD79DE /* ZLDataVC.m in Sources */,
 				7A00980622952EAD00AD79DE /* ZLTabBarViewController.m in Sources */,
+				E88492FF22A0D52900A226D8 /* ZLSearchHistoryView.m in Sources */,
 				7A0097FD2295268000AD79DE /* ZLPersonalVC.m in Sources */,
 				E265E014229E514200842DD0 /* ZLPaymentAmountCell.m in Sources */,
 				E832D6FA229E51CD00D0ED7F /* ZLPerShareView.m in Sources */,

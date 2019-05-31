@@ -132,8 +132,8 @@
       return _rightBtnView;
 }
 - (void)layoutSubviews{
-    _userField.frame = kRect(25, 0, kScreenWith-50, self.frame.size.height/2);
-    _pwField.frame = kRect(25, self.frame.size.height/2, kScreenWith-50, self.frame.size.height/2);
+    _userField.frame = kRect(25, 0, kScreenWidth-50, self.frame.size.height/2);
+    _pwField.frame = kRect(25, self.frame.size.height/2, kScreenWidth-50, self.frame.size.height/2);
 }
 - (void)changeStyle:(BOOL)isSelected{
     _pwField.text = @""; //切换账号密码登录之后，输入框置空

@@ -27,7 +27,7 @@
 - (void)initView {
     
     UIView *oneView = [[UIView alloc] init];
-    oneView.frame = kRect(30, 0, kScreenWith-60, 50);
+    oneView.frame = kRect(30, 0, kScreenWidth-60, 50);
     [self addSubview:oneView];
     CALayer *oneLayer = [CALayer layer];
     oneLayer.backgroundColor = [UIColor grayColor].CGColor;
@@ -35,7 +35,7 @@
     [oneView.layer addSublayer:oneLayer];
     
     UIButton *twoView = [UIButton buttonWithType:UIButtonTypeCustom];
-    twoView.frame = kRect(30, 50, kScreenWith-60, 50);
+    twoView.frame = kRect(30, 50, kScreenWidth-60, 50);
     [self addSubview:twoView];
     CALayer *towLayer = [CALayer layer];
     towLayer.backgroundColor = [UIColor grayColor].CGColor;
@@ -44,7 +44,7 @@
     
     
     UIView *thirdView = [[UIView alloc] init];
-    thirdView.frame = kRect(30, 100, kScreenWith-60, 50);
+    thirdView.frame = kRect(30, 100, kScreenWidth-60, 50);
     [self addSubview:thirdView];
     CALayer *thirdLayer = [CALayer layer];
     thirdLayer.backgroundColor = [UIColor grayColor].CGColor;

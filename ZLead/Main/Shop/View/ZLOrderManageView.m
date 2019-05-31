@@ -24,7 +24,7 @@
 }
 
 - (void)setupViews {
-    self.orderListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, kScreenHeight) style:UITableViewStylePlain];
+    self.orderListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
     self.orderListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.orderListTableView.backgroundColor = [UIColor clearColor];
     [self.orderListTableView registerClass:[ZLOrderListCell class] forCellReuseIdentifier:@"ZLOrderListCell"];

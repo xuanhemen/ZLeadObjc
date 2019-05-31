@@ -65,7 +65,7 @@
 
 - (UIView *)footer {
     if (!_footer) {
-        _footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWith, 200)];
+        _footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
         _footer.backgroundColor = [UIColor zl_bgColor];
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
