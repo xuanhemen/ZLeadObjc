@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)zl_bgColor;
 
 + (UIColor *)zl_lineColor;
+/** 主字体颜色 */
++ (UIColor *)zl_textColor;
 
 @end
 

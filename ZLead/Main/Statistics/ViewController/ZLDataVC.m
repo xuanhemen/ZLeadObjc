@@ -7,7 +7,7 @@
 //
 
 #import "ZLDataVC.h"
-
+#import "ZLLoginVC.h"
 @interface ZLDataVC ()
 
 @end
@@ -16,9 +16,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"退出登录" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn.frame = CGRectMake(100, 100, 100, 100);
+    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
     // Do any additional setup after loading the view.
 }
-
+- (void)btnClick {
+    ZLLoginVC *vc = [[ZLLoginVC alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
+}
 /*
 #pragma mark - Navigation
 

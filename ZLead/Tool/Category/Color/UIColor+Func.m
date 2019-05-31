@@ -45,11 +45,15 @@
 }
 
 + (UIColor *)zl_mainColor {
-    return [self colorWithHexString:@""];
+    return [self colorWithHexString:@"#F79A1E"];
 }
 
 + (UIColor *)zl_lineColor {
     return [self colorWithHexString:@"#EEEEEE"];
+}
+
++ (UIColor *)zl_textColor {
+    return [self colorWithHexString:@"#333333"];
 }
 
 @end

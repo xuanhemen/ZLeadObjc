@@ -53,7 +53,7 @@ typedef void(^successBlock)(NSArray *dataList, int total);
  *  @param failure    请求失败的回调
  */
 +(void)postWithURLString:(NSString *)URLString
-              parameters:(id)parameters
+              parameters:(NSDictionary *)parameters
                  success:(void (^)(NSDictionary *response))success
                  failure:(void (^)(NSDictionary *errorMsg))failure;
 /**

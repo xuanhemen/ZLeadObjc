@@ -17,7 +17,7 @@ NSString * ZL_BASE_URL = @"";
 + (void)chooseRootViewController {
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
     BOOL isLogined = [[infoDic objectForKey:@"loginState"] boolValue];
-    if (isLogined) {
+    if (!isLogined) {
         ZLTabBarController *vc = [[ZLTabBarController alloc] init];
         [UIApplication sharedApplication].keyWindow.rootViewController = vc;
     }else{
@@ -33,7 +33,8 @@ NSString * ZL_BASE_URL = @"";
     if (isOnLine) {
         ZL_BASE_URL = @"release"; //线上服务器地址
     }else{
-        ZL_BASE_URL = @"http://192.168.0.227:8079"; //测试地址
+        ZL_BASE_URL = @"http://192.168.0.227:9080"; //测试地址
     }
+    
 }
 @end

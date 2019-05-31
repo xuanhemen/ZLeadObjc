@@ -18,6 +18,10 @@
 //    NSString *paramStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"platform"] = @"ios";
+    param[@"appversion"] = @"1.0.0";
+    param[@"apiversion"] = @"1.0.0";
+    param[@"imei"] = @"1423415435";
+    param[@"signature"] = @"";
     NSString *tokenStr =  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     if (IsStrEmpty(tokenStr)) {
         param[@"token"] = @"";

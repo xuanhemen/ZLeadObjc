@@ -59,12 +59,10 @@ static NetManager *_instance = nil;
                parameters:(id)parameters
                   success:(void (^)(NSDictionary *response))success
                   failure:(void (^)(NSDictionary *errorMsg))failure{
-    
-    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        manager.requestSerializer.timeoutInterval = 20.0f;
+    manager.requestSerializer.timeoutInterval = 20.0f;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"application/json;charset=UTF-8", @"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
     NSString *urlStr = [ZL_BASE_URL stringByAppendingPathComponent:URLString];
     NSMutableDictionary *param = [NSMutableDictionary splicingParameters:parameters]; //拼接参数
