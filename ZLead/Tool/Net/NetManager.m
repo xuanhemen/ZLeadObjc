@@ -56,54 +56,55 @@ static NetManager *_instance = nil;
 }
 /**post请求*/
 + (void)postWithURLString:(NSString *)URLString
-              parameters:(id)parameters
-                 success:(void (^)(NSDictionary *response))success
-                 failure:(void (^)(NSDictionary *errorMsg))failure{
+               parameters:(id)parameters
+                  success:(void (^)(NSDictionary *response))success
+                  failure:(void (^)(NSDictionary *errorMsg))failure{
     
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.requestSerializer.timeoutInterval = 20.0f;
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        manager.requestSerializer.timeoutInterval = 20.0f;
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"application/json;charset=UTF-8", @"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
     NSString *urlStr = [ZL_BASE_URL stringByAppendingPathComponent:URLString];
     NSMutableDictionary *param = [NSMutableDictionary splicingParameters:parameters]; //拼接参数
     NSLog(@"请求%@",param);
-    [manager POST:urlStr parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 #ifdef DEBUG
-        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        DLog(@"%@",jsonStr);
+        //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        //        DLog(@"%@",jsonStr);
 #else
 #endif
-        
         NSError *error;
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&error];
+        //        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&error];
         /**请求成功*/
-        success(dic);
-//        NSString *str = [dic objectForKey:@"statusCode"];
-//        if ([str isEqualToString:@"200"]){//
-//            NSDictionary *dictionary = [dic objectForKey:@"data"];
-//            NSString *code = [dictionary objectForKey:@"code"];
-//            if ([code isEqualToString:@"200"]) {
-//                NSDictionary *dataDic = [dictionary objectForKey:@"zlw_user"];
-//                NSLog(@"%@",dataDic);
-//
-//            }else if ([code isEqualToString:@"301"]){//
-//                NSLog(@"该账号已经注册");
-//            }
-//
-//
-//        }else if ([str isEqualToString:@"500"]){
-//
-//            NSLog(@"");
-//        }
+        success(responseObject);
+        //        NSString *str = [dic objectForKey:@"statusCode"];
+        //        if ([str isEqualToString:@"200"]){//
+        //            NSDictionary *dictionary = [dic objectForKey:@"data"];
+        //            NSString *code = [dictionary objectForKey:@"code"];
+        //            if ([code isEqualToString:@"200"]) {
+        //                NSDictionary *dataDic = [dictionary objectForKey:@"zlw_user"];
+        //                NSLog(@"%@",dataDic);
+        //
+        //            }else if ([code isEqualToString:@"301"]){//
+        //                NSLog(@"该账号已经注册");
+        //            }
+        //
+        //
+        //        }else if ([str isEqualToString:@"500"]){
+        //
+        //            NSLog(@"");
+        //        }
         /**请求失败*/
-        failure(dic);
-    
+        //        failure(responseObject);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         /**请求失败 code*/
+        DLog(@"接口=%@请求失败=%@，%@", URLString, error.userInfo);
     }];
 }
+
 /**http请求*/
 + (void)requestWithURLString:(NSString *)URLString
                  parameters:(id)parameters

@@ -11,11 +11,11 @@
 @implementation NSDictionary (Function)
 
 /** 拼接参数 */
-+ (NSMutableDictionary *)splicingParameters:(id)params {
-    NSDictionary *paramDic = params;
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:&error];
-    NSString *paramStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
++ (NSMutableDictionary *)splicingParameters:(NSDictionary *)params {
+//    NSDictionary *paramDic = params;
+//    NSError *error = nil;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:&error];
+//    NSString *paramStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"platform"] = @"ios";
     NSString *tokenStr =  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
@@ -24,7 +24,10 @@
     }else{
          param[@"token"] = tokenStr;
     }
-    param[@"data"] = paramStr;
+    NSAssert([params isKindOfClass:[NSDictionary class]], @"所传接口参数data不是一个NSDictionary");
+    if ([params isKindOfClass:[NSDictionary class]]) {
+        param[@"data"] = params;
+    }
     return param;
 }
 @end
