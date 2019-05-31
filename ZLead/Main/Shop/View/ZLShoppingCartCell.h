@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)numButtonClick:(ZLShoppingCartCell *)cell isAdd:(BOOL)isAdd;
 
+- (void)selectedButtonClick:(ZLShoppingCartCell *)cell isSelected:(BOOL)isSelected;
+
 - (void)goodsNumTFTextChanged:(ZLShoppingCartCell *)cell;
 
 @end

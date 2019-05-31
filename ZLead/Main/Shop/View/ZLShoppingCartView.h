@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ZLShoppingCartView : UIView
 @property (nonatomic, strong) void (^addButtonBlock) (void);
 @property (nonatomic, strong) void (^minusButtonBlock) (void);
+@property (nonatomic, strong) void (^selectedButtonBlock) (BOOL isSelected);
 @property (nonatomic,strong) UITextField *goodsNumTF;
 - (void)setSubviewsFrame:(BOOL )enableSelected;
 - (void)setupData:(ZLShopGoodsModel *)goodsModel;

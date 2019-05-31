@@ -7,11 +7,13 @@
 //
 
 #import "ZLPaymentMethodCell.h"
+#import "ZLPaymentMethodModel.h"
 
 @interface ZLPaymentMethodCell ()
 @property (nonatomic, strong) UIImageView *pMethodIcon;
 @property (nonatomic, strong) UILabel *pMethodNameLabel;
-@property (nonatomic, strong) UIImageView *markImageView;
+@property (nonatomic, strong) UIButton *markButton;
+@property (nonatomic, strong) ZLPaymentMethodModel *payModel;
 @end
 
 @implementation ZLPaymentMethodCell
@@ -34,18 +36,39 @@
     self.pMethodNameLabel.textColor = [UIColor colorWithHexString:@"#333333"];
     [self addSubview:self.pMethodNameLabel];
     
-    self.markImageView = [[UIImageView alloc] initWithFrame:kRect(346, 21, 13, 9)];
-    [self addSubview:self.markImageView];
+    self.markButton = [[UIButton alloc] initWithFrame:kRect(346, 21, 13, 9)];
+//    [self.markButton addTarget:self action:@selector(markButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.markButton];
     
     self.bottomSeparator.frame = CGRectMake(dis(15), dis(51) - 0.5, dis(360), 0.5);
 }
 
-- (void)setupData:(id)dataModel {
-    self.pMethodNameLabel.text = @"支付宝收款";
+- (void)setupData:(ZLPaymentMethodModel *)methodModel {
+    self.payModel = methodModel;
+    self.pMethodNameLabel.text = methodModel.name;
+    if (methodModel.isSelected) {
+        self.markButton.backgroundColor = [UIColor redColor];
+    } else {
+        self.markButton.backgroundColor = [UIColor greenColor];
+    }
 }
 
 + (CGFloat)heightForCell {
     return dis(51);
+}
+
+#pragma mark - UIButton Actions
+
+- (void)markButtonAction {
+    self.payModel.isSelected = !self.payModel.isSelected;
+    if (self.payModel.isSelected) {
+        self.markButton.backgroundColor = [UIColor redColor];
+    } else {
+        self.markButton.backgroundColor = [UIColor greenColor];
+    }
+    if (self.markButtonBlock) {
+        self.markButtonBlock(self.payModel.isSelected);
+    }
 }
 
 @end

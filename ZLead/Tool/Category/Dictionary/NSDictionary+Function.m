@@ -12,7 +12,10 @@
 
 /** 拼接参数 */
 + (NSMutableDictionary *)splicingParameters:(NSDictionary *)params {
-    
+//    NSDictionary *paramDic = params;
+//    NSError *error = nil;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:&error];
+//    NSString *paramStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"platform"] = @"ios";
     param[@"appversion"] = @"1.0.0";
@@ -25,7 +28,10 @@
     }else{
          param[@"token"] = tokenStr;
     }
-    param[@"data"] = params;
+    NSAssert([params isKindOfClass:[NSDictionary class]], @"所传接口参数data不是一个NSDictionary");
+    if ([params isKindOfClass:[NSDictionary class]]) {
+        param[@"data"] = params;
+    }
     return param;
 }
 @end

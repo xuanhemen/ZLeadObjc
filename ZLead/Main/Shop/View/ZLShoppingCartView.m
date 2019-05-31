@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UIView *numChangeView;
 @property (nonatomic,strong) UIButton *addButton;
 @property (nonatomic,strong) UIButton *minusButton;
+@property (nonatomic,strong) ZLShopGoodsModel *shopGoodsModel;
 @end
 
 @implementation ZLShoppingCartView
@@ -46,6 +47,7 @@
     
     self.selectedButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.selectedButton.backgroundColor = [UIColor redColor];
+    [self.selectedButton addTarget:self action:@selector(selectedButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.selectedButton];
     
     self.goodsImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -224,9 +226,10 @@
 }
 
 - (void)setupData:(ZLShopGoodsModel *)goodsModel {
+    self.shopGoodsModel = goodsModel;
     self.goodsTitleLabel.text = @"这里是产品名称只显示两行多出的文字不显示多出的文字不显示多出";
     self.goodsIdLabel.text = @"商品编号：14732012832835";
-    self.goodsPriceLabel.text = @"￥233.00/把";
+    self.goodsPriceLabel.text = [NSString stringWithFormat:@"%.2f/把", goodsModel.salePrice];
     self.goodsTypeLabel.text = @"分类：零件";
     self.goodsNumTF.text = [NSString stringWithFormat:@"%@", @(goodsModel.goodsNum)];
     if (goodsModel.isSelected) {
@@ -234,7 +237,7 @@
     } else {
         self.selectedButton.backgroundColor = [UIColor yellowColor];
     }
-    [self setUnitPriceText:2330.00 goodsUnit:@"把"];
+    [self setUnitPriceText:goodsModel.salePrice goodsUnit:@"把"];
 }
 
 #pragma mark - UIButton Actions
@@ -248,6 +251,13 @@
 - (void)addButtonAction:(UIButton *)addBtn {
     if (self.addButtonBlock) {
         self.addButtonBlock();
+    }
+}
+
+- (void)selectedButtonAction:(UIButton *)selectedBtn {
+    self.shopGoodsModel.isSelected = !self.shopGoodsModel.isSelected;
+    if (self.selectedButtonBlock) {
+        self.selectedButtonBlock(self.shopGoodsModel.isSelected);
     }
 }
 
