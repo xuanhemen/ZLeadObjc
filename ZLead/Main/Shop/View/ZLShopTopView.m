@@ -27,8 +27,8 @@
 }
 
 - (void)setupViews {
-    self.shopLogo = [[UIImageView alloc] initWithFrame:kRect(15, 10, 46, 46)];
-    self.shopLogo.backgroundColor = [UIColor colorWithHexString:@"#E76B00"];
+    self.shopLogo = [[UIImageView alloc] initWithFrame:kRect(15, 35, 46, 46)];
+    self.shopLogo.backgroundColor = [UIColor colorWithHexString:@"#FFF9EF"];
     self.shopLogo.layer.cornerRadius = dis(23);
     self.shopLogo.layer.masksToBounds = YES;
     [self addSubview:self.shopLogo];
@@ -39,7 +39,7 @@
     [self addSubview:self.shopNameLabel];
     
     self.shopChangeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.shopChangeButton.backgroundColor = [UIColor redColor];
+    self.shopChangeButton.backgroundColor = [UIColor colorWithHexString:@"#FFF9EF"];
     [self.shopChangeButton addTarget:self action:@selector(changeShopButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.shopChangeButton];
     
