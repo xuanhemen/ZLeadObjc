@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLPaymentMethodCell : ZLBaseCell
+@property (nonatomic, copy) void (^markButtonBlock) (BOOL isSelected);
 @end
 
 NS_ASSUME_NONNULL_END
