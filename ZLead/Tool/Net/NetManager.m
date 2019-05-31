@@ -69,7 +69,7 @@ static NetManager *_instance = nil;
     NSString *urlStr = [ZL_BASE_URL stringByAppendingPathComponent:URLString];
     NSMutableDictionary *param = [NSMutableDictionary splicingParameters:parameters]; //拼接参数
     NSLog(@"请求%@",param);
-    [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:urlStr parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 #ifdef DEBUG
         //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         //        DLog(@"%@",jsonStr);
@@ -128,6 +128,66 @@ static NetManager *_instance = nil;
     }
     
 }
+
+- (void)postRequestWithPath:(NSString*)path andParameters:(NSMutableDictionary*)parameters forSueccessful:(void(^)(id responseObject))successful forFail:(void(^)(NSError *error)) fail {
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    mgr.requestSerializer.timeoutInterval = 20.0f;
+    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"application/json;charset=UTF-8", @"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
+    NSString *urlStr = [ZL_BASE_URL stringByAppendingPathComponent:path];
+    NSMutableDictionary *param = [NSMutableDictionary splicingParameters:parameters]; //拼接参数
+    DLog(@"POST请求地址:%@请求的参数:%@------------------------------------",path,parameters);
+    [mgr POST:urlStr parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // responseObject 返回状态码 200 表示成功
+        if ([responseObject[@"error"] intValue] != 200) {
+            // 将服务器返回错误message包装成NSError对象返回
+            NSString *description = responseObject[@"message"];
+            NSError *messageError = [NSError errorWithDomain:@"MessageError" code:[responseObject[@"error"] intValue] userInfo:@{NSLocalizedDescriptionKey:description}];
+            fail(messageError);
+        } else {
+            successful(responseObject[@"result"]);
+        }
+        DLog(@"接口path=%@请求成功了! 返回的参数:%@,message=%@", path, responseObject,responseObject[@"message"]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        fail(error);
+        DLog(@"接口请求失败了 原因:%@",error);
+        
+    }];
+    
+}
+
+- (void)getRequestWithPath:(NSString*)path andParameters:(NSMutableDictionary*)parameters forSueccessful:(void(^)(id responseObject))successful forFail:(void(^)(NSError *error)) fail {
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    mgr.requestSerializer.timeoutInterval = 20.0f;
+    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"application/json;charset=UTF-8", @"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
+    NSString *urlStr = [ZL_BASE_URL stringByAppendingPathComponent:path];
+    
+    DLog(@"get请求地址:%@请求的参数:%@------------------------------------\n",path,parameters);
+    [mgr GET:urlStr parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // responseObject 返回状态码 200 表示成功
+        if ([responseObject[@"error"] intValue] != 200) {
+            // 将服务器返回错误message包装成NSError对象返回
+            NSString *description = responseObject[@"message"];
+            NSError *messageError = [NSError errorWithDomain:@"MessageError" code:9999 userInfo:@{NSLocalizedDescriptionKey:description}];
+            fail(messageError);
+            
+        }else{
+            successful(responseObject[@"result"]);
+        }
+        DLog(@"接口path=%@请求成功了! 返回的参数:%@,message=%@", path, responseObject,responseObject[@"message"]);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        fail(error);
+        DLog(@"接口请求失败了 原因:%@",error);
+    }];
+    
+}
+
 ///**展示HUD*/
 //- (void)showHUD{
 ////    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
