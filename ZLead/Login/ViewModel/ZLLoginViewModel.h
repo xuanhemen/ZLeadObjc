@@ -24,6 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *phoneNumber; // 手机号
 
+@property (nonatomic, copy) NSString *authCode; // 验证码
+
+@property (nonatomic, copy) NSString *seconds; // 秒
+
+@property (nonatomic, strong) dispatch_source_t gcdTimer; //  
+
 
 /** 负责跳转 */
 -(void)jumpFromController:(UIViewController *)vc;

@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *areaLable; // 省市区
 
+@property (nonatomic, copy) NSString *areaCode; // 省市区编码
+
 @property (nonatomic, strong) UITextField *addressField; // 地址输入框
 @end
 

@@ -123,8 +123,9 @@
     
     [[twoView rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         [[MOFSPickerManager shareManger] showMOFSAddressPickerWithTitle:nil cancelTitle:@"取消" commitTitle:@"完成" commitBlock:^(NSString *address, NSString *zipcode) {
-            self.areaLable.text = address;
-            NSLog(@"%@",zipcode);
+            self.areaLable.text = address; //用于显示
+            zipcode = [zipcode stringByReplacingOccurrencesOfString:@"-" withString:@"."];
+            self.areaCode = zipcode; //省市编码
             self.areaLable.textColor = [UIColor grayColor];
         } cancelBlock:^{
             
