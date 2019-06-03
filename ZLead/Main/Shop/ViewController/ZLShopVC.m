@@ -16,10 +16,13 @@
 #import "ZLMakeOrderVC.h"
 #import "ZLOfflinePaymentVC.h"
 #import "ZLShopManagerNoteVC.h"
+#import "ZLUserInfo.h"
+#import "ZLShopModel.h"
 
 @interface ZLShopVC () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *mainTableView;
 @property (nonatomic, strong) ZLShopTopView *shopNameView;
+@property (nonatomic, strong) ZLShopModel *shopModel;
 @end
 
 @implementation ZLShopVC
@@ -62,20 +65,19 @@
         make.top.equalTo(weakSelf.view).offset(kStatusBarHeight);
         make.bottom.equalTo(weakSelf.view);
     }];
-    
-    [self setupTableViewHeaderView];
 }
 
 - (UIView *)setupTableViewHeaderView  {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, dis(315))];
     headerView.backgroundColor = [UIColor whiteColor];
-    
     __weak typeof (self) weakSelf = self;
-    self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, dis(92))];
-    self.shopNameView.changeShopBlock = ^{
-        ZLShopListVC *shopListVC = [[ZLShopListVC alloc] init];
-        [weakSelf.navigationController pushViewController:shopListVC animated:YES];
-    };
+    if (!self.shopNameView) {
+        self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, dis(92))];
+        self.shopNameView.changeShopBlock = ^{
+            ZLShopListVC *shopListVC = [[ZLShopListVC alloc] init];
+            [weakSelf.navigationController pushViewController:shopListVC animated:YES];
+        };
+    }
     [headerView addSubview:self.shopNameView];
     ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, dis(92), kScreenWidth, dis(223))];
     [headerView addSubview:headView];
@@ -85,10 +87,15 @@
 #pragma mark - setupData
 
 - (void)setupData {
-    [[NetManager sharedInstance] getShopListWithUserId:@"0010001910848702" sucess:^(NSArray * _Nonnull dataList, int total) {
-       
+    [[NetManager sharedInstance] getShopListWithUserId:@"0010001770316129" sucess:^(NSArray *dataList, NSInteger total) { //@"0010000137432355"
+        self.shopModel = [dataList firstObject];
+        [self.shopNameView setupData:self.shopModel];
+        self.mainTableView.tableHeaderView = [self setupTableViewHeaderView];
     } fail:^(NSError * _Nonnull error) {
-        
+        self.shopModel = [[ZLShopModel alloc] init];
+        self.shopModel.shopName = @"我的小店";
+        [self.shopNameView setupData:self.shopModel];
+        self.mainTableView.tableHeaderView = [self setupTableViewHeaderView];
     }];
 }
 

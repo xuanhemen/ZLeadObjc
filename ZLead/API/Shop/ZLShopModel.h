@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLShopModel : NSObject
 @property (nonatomic, strong) NSString *shopName;
+@property (nonatomic, strong) NSString *userId;
+@property (nonatomic, strong) NSString *shopRegion;
+@property (nonatomic, strong) NSString *shopId;
+@property (nonatomic, strong) NSString *companyId;
+@property (nonatomic, strong) NSString *shopRemark;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,6 +7,7 @@
 //
 
 #import "NetManager+ZLShopAPI.h"
+#import "ZLShopModel.h"
 
 @implementation NetManager (ZLShopAPI)
 - (void)getShopListWithUserId:(NSString *)userId
@@ -15,7 +16,15 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"userId"] = userId;
     [[NetManager sharedInstance] postRequestWithPath:ZLURL_GetShopsByUserId parameters:dict sueccessful:^(id  _Nonnull responseObject) {
-        sucess(nil, 0);
+        NSMutableArray *shopList = [[NSMutableArray alloc] init];
+        for (NSDictionary *companyDic in responseObject[@"zlwCompanyList"]) {
+            for (NSDictionary *shopDic in companyDic[@"zlwShopList"]) {
+                ZLShopModel *shopModel = [ZLShopModel  mj_objectWithKeyValues:shopDic];
+                [shopList addObject:shopModel];
+            }
+        }
+        
+        sucess(shopList, shopList.count);
     } fail:^(NSError * _Nonnull error) {
         fail(error);
     }];

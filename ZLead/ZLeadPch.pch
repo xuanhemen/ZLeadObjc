@@ -18,6 +18,9 @@
 #import "NetManager.h"
 #import "ZLUserInfo.h"  //单例，存储用户信息
 
+#import "MJExtension.h"
+
+
 //API
 #import "NetManager+ZLLoginAPI.h"
 #import "NetManager+ZLShopAPI.h"
