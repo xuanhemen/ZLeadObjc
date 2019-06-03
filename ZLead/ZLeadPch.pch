@@ -19,6 +19,7 @@
 
 //API
 #import "NetManager+ZLLoginAPI.h"
+#import "NetManager+ZLShopAPI.h"
 
 #import "Masonry.h"   // 布局
 #import "ReactiveObjC.h"  // rac

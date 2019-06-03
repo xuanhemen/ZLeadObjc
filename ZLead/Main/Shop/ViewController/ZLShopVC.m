@@ -29,6 +29,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     [self setupViews];
+    [self setupData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -81,6 +82,15 @@
     return headerView;
 }
 
+#pragma mark - setupData
+
+- (void)setupData {
+    [[NetManager sharedInstance] getShopListWithUserId:@"0010001910848702" sucess:^(NSArray * _Nonnull dataList, int total) {
+       
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
+}
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
