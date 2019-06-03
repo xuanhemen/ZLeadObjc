@@ -80,17 +80,34 @@
     [[nextBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
        
         BOOL isTrue =  [self cheackPass:firstField.text];
-        BOOL isYes =  [self cheackPass:firstField.text];
+        BOOL isYes =  [self cheackPass:secField.text];
         BOOL isEqual = [firstField.text isEqualToString:secField.text];
         if (isTrue && isYes) {
             if (isEqual) { //跳转到补充店铺信息
+                NSString *url;
                 if (self.style == SetPWStyleNewSet) {
-                    ZLAddShopInfoVC *avc = [[ZLAddShopInfoVC alloc] init];
-                    [self.navigationController pushViewController:avc animated:YES];
-                }else{ 
-                    ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
-                    [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
+                    url = @"ZlwUser/setPassword";
+                }else{
+                    url = @"ZlwUser/resetPassword";
                 }
+                NSDictionary *params = @{@"phone":self.phoneNumber,@"password":firstField.text};
+                [NetManager postWithURLString:url parameters:params success:^(NSDictionary * _Nonnull response) {
+                    if (self.style == SetPWStyleNewSet) {
+                        kUserInfo.userID = [response objectForKey:@"userId"];
+                    }
+                    
+                    if (self.style == SetPWStyleNewSet) {
+                        ZLAddShopInfoVC *avc = [[ZLAddShopInfoVC alloc] init];
+                        [self.navigationController pushViewController:avc animated:YES];
+                    }else{
+                        ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
+                        [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
+                    }
+            
+                } failure:^(NSDictionary * _Nonnull errorMsg) {
+                    
+                }];
+                
                
             }else{
                [self showMsg:@"密码不一致"];

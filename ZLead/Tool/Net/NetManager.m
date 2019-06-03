@@ -59,6 +59,7 @@ static NetManager *_instance = nil;
                parameters:(id)parameters
                   success:(void (^)(NSDictionary *response))success
                   failure:(void (^)(NSDictionary *errorMsg))failure{
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -66,39 +67,20 @@ static NetManager *_instance = nil;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"application/json;charset=UTF-8", @"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
     NSString *urlStr = [ZL_BASE_URL stringByAppendingPathComponent:URLString];
     NSMutableDictionary *param = [NSMutableDictionary splicingParameters:parameters]; //拼接参数
-    NSLog(@"请求%@",param);
+    DLog(@"请求参数%@",param);
     [manager POST:urlStr parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-#ifdef DEBUG
-        //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        //        DLog(@"%@",jsonStr);
-#else
-#endif
-        NSError *error;
-        //        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&error];
-        /**请求成功*/
-        DLog(@"返回=%@\nmessage=%@", responseObject, responseObject[@"message"]);
-        success(responseObject);
-        //        NSString *str = [dic objectForKey:@"statusCode"];
-        //        if ([str isEqualToString:@"200"]){//
-        //            NSDictionary *dictionary = [dic objectForKey:@"data"];
-        //            NSString *code = [dictionary objectForKey:@"code"];
-        //            if ([code isEqualToString:@"200"]) {
-        //                NSDictionary *dataDic = [dictionary objectForKey:@"zlw_user"];
-        //                NSLog(@"%@",dataDic);
-        //
-        //            }else if ([code isEqualToString:@"301"]){//
-        //                NSLog(@"该账号已经注册");
-        //            }
-        //
-        //
-        //        }else if ([str isEqualToString:@"500"]){
-        //
-        //            NSLog(@"");
-        //        }
-        /**请求失败*/
-        //        failure(responseObject);
+
+        NSDictionary *dictionary = responseObject;
+        DLog(@"请求结果%@",dictionary);
+        NSInteger stateCode = [[dictionary objectForKey:@"status"] integerValue];
+        NSDictionary *dataDic = [dictionary objectForKey:@"data"];
+        if (stateCode == 200) {  /**成功*/
+            success(dataDic);
+        }else{ //其他code码 业务失败
+            failure(dataDic);
+        }
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         /**请求失败 code*/
         DLog(@"接口=%@请求失败=%@", URLString, error.userInfo);
     }];

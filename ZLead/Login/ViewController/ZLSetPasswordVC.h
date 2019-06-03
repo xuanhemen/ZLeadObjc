@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger,SetPWStyle){
 @interface ZLSetPasswordVC : ZLBaseViewController
 
 
+@property (nonatomic, copy) NSString *phoneNumber; // 手机号
 @property (nonatomic,assign) SetPWStyle style; //找回密码类型
 @end
 

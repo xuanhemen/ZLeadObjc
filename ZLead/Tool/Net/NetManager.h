@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger,HttpRequestType) {
 };
 
 typedef void(^failWithErrorBlock)(NSError *error);
-typedef void(^successfulBlock)();
+typedef void(^successfulBlock)(void);
 typedef void(^resultBlock)(id result);
 typedef void(^successBlock)(NSArray *dataList, int total);
 

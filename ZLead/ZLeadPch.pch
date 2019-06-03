@@ -16,6 +16,7 @@
 #import "UIView+Size.h"
 #import "UIImage+ZL.h"
 #import "NetManager.h"
+#import "ZLUserInfo.h"  //单例，存储用户信息
 
 //API
 #import "NetManager+ZLLoginAPI.h"
@@ -49,5 +50,9 @@
 #define hex(str) [UIColor colorWithHexString:str]
 /** lightColor */
 #define lightColor [UIColor colorWithHexString:@"#CCCCCC"]
+/** 用户信息单例 */
+#define kUserInfo [ZLUserInfo sharedInstance]
+/** 用户id */
+#define kUserID [ZLUserInfo sharedInstance].userID
 
 #endif /* ZLeadPch_pch */

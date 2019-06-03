@@ -80,6 +80,7 @@
     [[_nextBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         ZLSetPasswordVC *svc = [[ZLSetPasswordVC alloc] init];
         svc.style = SetPWStyleForgetSet;
+        svc.phoneNumber = self.tfView.userField.text;
         [self.navigationController pushViewController:svc animated:YES];
     }];
     [self.view addSubview:_nextBtn];

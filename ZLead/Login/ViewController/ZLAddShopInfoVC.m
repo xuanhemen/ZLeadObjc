@@ -54,6 +54,16 @@
     [_completeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _completeBtn.titleLabel.font = kFont16;
     [[_completeBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+       
+        NSString *shopName = self.infoView.nameField.text; //商铺名称
+        NSString *areaCode = self.infoView.areaCode; //省市区地址编码
+        NSDictionary *params = @{@"userId":kUserID,@"companyId":@"",@"shopName":shopName,@"region":areaCode};
+        [NetManager postWithURLString:@"ZlwUser/createShop" parameters:params success:^(NSDictionary * _Nonnull response) {
+    
+            
+        } failure:^(NSDictionary * _Nonnull errorMsg) {
+            
+        }];
         ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
         [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
     }];
@@ -69,7 +79,6 @@
         _infoView = [[ZLAddInfoView alloc] init];
         [self.view addSubview:_infoView];
         [[_infoView.nameField.rac_textSignal filter:^BOOL(NSString * _Nullable value) {
-            NSLog(@"%@",value);
             if (!IsStrEmpty(value) && !IsStrEmpty(self.infoView.addressField.text) && !IsStrEmpty(self.infoView.areaLable.text)) {
                 self.completeBtn.enabled = YES;
                 self.completeBtn.backgroundColor = hex(@"#F7981C");
@@ -82,7 +91,7 @@
             
         }];
         [[_infoView.addressField.rac_textSignal filter:^BOOL(NSString * _Nullable value) {
-            NSLog(@"%@",value);
+
             if (!IsStrEmpty(value) && !IsStrEmpty(self.infoView.nameField.text) && !IsStrEmpty(self.infoView.areaLable.text)) {
                 self.completeBtn.enabled = YES;
                 self.completeBtn.backgroundColor = hex(@"#F7981C");

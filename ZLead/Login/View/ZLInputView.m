@@ -12,6 +12,7 @@
 @interface ZLInputView ()
 
 
+@property (nonatomic, copy) NSString *str; // <#annotation#>
 @end
 @implementation ZLInputView
 
@@ -28,7 +29,15 @@
         self.viewModel = viewModel;
         [self addSubview:self.userField]; //添加用户输入框
         [self addSubview:self.pwField]; //添加密码输入框
-       
+        RAC(self.rightBtnView.titleLabel,text) = [RACObserve(self.viewModel, seconds) map:^id _Nullable(id  _Nullable value) {
+            if (value == nil || value == [NSNull null]) {
+                [self.rightBtnView setTitle:@"获取验证码" forState:UIControlStateNormal];
+            }else{
+                [self.rightBtnView setTitle:value forState:UIControlStateNormal];
+            }
+            
+            return [value description];
+        }];
     }
     return self;
 }
@@ -111,7 +120,7 @@
             }
             return YES;
         }] subscribeNext:^(NSString * _Nullable x) {
-            
+            self.viewModel.authCode = x;
         }];
         [self addSubview:_pwField];
     }
