@@ -143,7 +143,7 @@ static NetManager *_instance = nil;
         if ([responseObject[@"status"] intValue] != 200) {
             // 将服务器返回错误message包装成NSError对象返回
             NSString *description = responseObject[@"message"];
-            NSError *messageError = [NSError errorWithDomain:@"MessageError" code:[responseObject[@"error"] intValue] userInfo:@{NSLocalizedDescriptionKey:description}];
+            NSError *messageError = [NSError errorWithDomain:@"MessageError" code:[responseObject[@"status"] intValue] userInfo:@{NSLocalizedDescriptionKey:description}];
             fail(messageError);
         } else {
             successful(responseObject[@"data"]);
@@ -152,7 +152,6 @@ static NetManager *_instance = nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         fail(error);
         DLog(@"接口请求失败了 原因:%@",error);
-        
     }];
     
 }
@@ -173,7 +172,7 @@ static NetManager *_instance = nil;
         if ([responseObject[@"status"] intValue] != 200) {
             // 将服务器返回错误message包装成NSError对象返回
             NSString *description = responseObject[@"message"];
-            NSError *messageError = [NSError errorWithDomain:@"MessageError" code:9999 userInfo:@{NSLocalizedDescriptionKey:description}];
+            NSError *messageError = [NSError errorWithDomain:@"MessageError" code:[responseObject[@"status"] intValue] userInfo:@{NSLocalizedDescriptionKey:description}];
             fail(messageError);
             
         } else {
