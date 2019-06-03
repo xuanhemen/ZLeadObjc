@@ -37,6 +37,7 @@
 - (void)setupData {
     for (int i = 0; i < 10; i++) {
         ZLShopGoodsModel *goodsModel = [[ZLShopGoodsModel alloc] init];
+        goodsModel.salePrice = i + 1;
         goodsModel.goodsNum = i+1;
         [self.goodsList addObject:goodsModel];
     }
@@ -78,10 +79,6 @@
 }
 
 #pragma mark - private Method
-
-- (void)totalPrice {
-    
-}
 
 /**
  是否全选
@@ -140,6 +137,14 @@
             goodsModel.goodsNum --;
         }
     }
+    [self.makeOrderView.goodsListTableView reloadData];
+    [self judgeIsAllSelected];
+}
+
+- (void)selectedButtonClick:(ZLShoppingCartCell *)cell isSelected:(BOOL)isSelected {
+    NSIndexPath *index = [self.makeOrderView.goodsListTableView indexPathForCell:cell];
+    ZLShopGoodsModel *goodsModel = self.goodsList[index.row];
+    goodsModel.isSelected = isSelected;
     [self.makeOrderView.goodsListTableView reloadData];
     [self judgeIsAllSelected];
 }

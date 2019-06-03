@@ -46,7 +46,7 @@
     [self addSubview:self.currentSelectedTypeLabel];
     
     self.maskView = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.maskView.frame = CGRectMake(0, dis(42), kScreenWith, kScreenHeight - dis(84) - kNavBarHeight);
+    self.maskView.frame = CGRectMake(0, dis(42), kScreenWidth, kScreenHeight - dis(84) - kNavBarHeight);
     self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
     self.maskView.hidden = YES;
     [self.maskView addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];

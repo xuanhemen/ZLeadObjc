@@ -63,7 +63,7 @@
         [self.view addSubview:_tfView];
         [_tfView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(dis(170));
-            make.size.mas_equalTo(CGSizeMake(kScreenWith, dis(120)));
+            make.size.mas_equalTo(CGSizeMake(kScreenWidth, dis(120)));
         }];
     }
     return _tfView;
@@ -87,7 +87,7 @@
     [_nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tfView.mas_bottom).offset(dis(60));
         make.centerX.equalTo(self.view);
-        make.size.mas_equalTo(kSize(kScreenWith-50, 50));
+        make.size.mas_equalTo(kSize(kScreenWidth-50, 50));
     }];
     return _nextBtn;
 }

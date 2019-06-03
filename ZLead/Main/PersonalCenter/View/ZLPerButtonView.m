@@ -83,7 +83,7 @@
 - (void)setup {
     NSInteger count = self.contentArr.count < 4 ? self.contentArr.count : 4;
     ZLPerButton *lastBtn = nil;
-    CGFloat width = (kScreenWith - 50 - count * 10) / count;
+    CGFloat width = (kScreenWidth - 50 - count * 10) / count;
     for (NSInteger i = 0; i < count; i++) {
         NSDictionary *dic = self.contentArr[i];
         ZLPerButton *perBtn = [[ZLPerButton alloc] init];

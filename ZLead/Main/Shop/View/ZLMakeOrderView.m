@@ -30,11 +30,11 @@
 }
 
 - (void)setupViews {
-    self.searchView = [[ZLShopGoodsSearchBarView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWith, dis(42))];
+    self.searchView = [[ZLShopGoodsSearchBarView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, dis(42))];
     self.searchView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.searchView];
     
-    self.goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(84), kScreenWith, kScreenHeight - (dis(135) + kSafeHeight)) style:UITableViewStylePlain];
+    self.goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(84), kScreenWidth, kScreenHeight - (dis(135) + kSafeHeight)) style:UITableViewStylePlain];
     self.goodsListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.goodsListTableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     self.goodsListTableView.backgroundView = nil;
@@ -43,7 +43,7 @@
     
     [self createBottomView];
     
-    self.typeSelectedView = [[ZLGoodsTypeSelectedView alloc] initWithFrame:CGRectMake(0, self.searchView.bottom, kScreenWith, dis(42))];
+    self.typeSelectedView = [[ZLGoodsTypeSelectedView alloc] initWithFrame:CGRectMake(0, self.searchView.bottom, kScreenWidth, dis(42))];
     self.typeSelectedView.backgroundColor = [UIColor whiteColor];
     self.typeSelectedView.resetButtonBlock = ^{
         
@@ -58,7 +58,7 @@
 - (void)createBottomView {
     self.bottomView = [[UIView alloc] init];
     self.bottomView.backgroundColor = [UIColor whiteColor];
-    self.bottomView.frame = CGRectMake(0, kScreenHeight - dis(51) - kSafeHeight,kScreenWith, dis(51) + kSafeHeight);
+    self.bottomView.frame = CGRectMake(0, kScreenHeight - dis(51) - kSafeHeight,kScreenWidth, dis(51) + kSafeHeight);
     self.bottomView.layer.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor;
     [self addSubview:self.bottomView];
     

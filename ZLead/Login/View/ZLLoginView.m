@@ -54,7 +54,7 @@
     if (!_logoView) {
         _logoView = [[UIImageView alloc] init];
         _logoView.image = image(@"分组");
-        _logoView.frame = kRect((kScreenWith-90)/2, 110, 90, 90);
+        _logoView.frame = kRect((kScreenWidth-90)/2, 110, 90, 90);
         [self addSubview:_logoView];
     }
     return _logoView;
@@ -75,7 +75,7 @@
         [self addSubview:_tfView];
         [_tfView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.logoView.mas_bottom).offset(dis(80));
-            make.size.mas_equalTo(CGSizeMake(kScreenWith, dis(120)));
+            make.size.mas_equalTo(CGSizeMake(kScreenWidth, dis(120)));
         }];
     }
     return _tfView;
@@ -152,7 +152,7 @@
         [_login mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.pwLogin.mas_bottom).offset(dis(60));
             make.centerX.equalTo(self);
-            make.size.mas_equalTo(kSize(kScreenWith-50, 50));
+            make.size.mas_equalTo(kSize(kScreenWidth-50, 50));
         }];
     }
     return _login;

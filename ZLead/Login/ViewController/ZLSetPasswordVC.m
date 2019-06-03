@@ -47,11 +47,11 @@
     [firstField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(title.mas_bottom).offset(dis(30));
         make.centerX.equalTo(self.view);
-        make.size.mas_equalTo(kSize(kScreenWith-60, 60));
+        make.size.mas_equalTo(kSize(kScreenWidth-60, 60));
     }];
     CALayer *bottomLayer = [CALayer layer];
     bottomLayer.backgroundColor = lightColor.CGColor;
-    bottomLayer.frame = kRect(0, 59.7, kScreenWith-60, 0.3);
+    bottomLayer.frame = kRect(0, 59.7, kScreenWidth-60, 0.3);
     [firstField.layer addSublayer:bottomLayer];
     UITextField *secField = [[UITextField alloc] init];
     secField.placeholder = @"请再次确认登录密码";
@@ -59,11 +59,11 @@
     [secField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(firstField.mas_bottom).offset(1);
         make.centerX.equalTo(self.view);
-        make.size.mas_equalTo(kSize(kScreenWith-60, 60));
+        make.size.mas_equalTo(kSize(kScreenWidth-60, 60));
     }];
     CALayer *secLayer = [CALayer layer];
     secLayer.backgroundColor = lightColor.CGColor;
-    secLayer.frame = kRect(0, 59.7, kScreenWith-60, 0.3);
+    secLayer.frame = kRect(0, 59.7, kScreenWidth-60, 0.3);
     [firstField.layer addSublayer:secLayer];
     [secField.layer addSublayer:secLayer];
     
@@ -120,7 +120,7 @@
     [self.view addSubview:nextBtn];
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(secField.mas_bottom).offset(dis(60));
-        make.size.mas_equalTo(kSize(kScreenWith-60, 50));
+        make.size.mas_equalTo(kSize(kScreenWidth-60, 50));
         make.centerX.equalTo(self.view);
     }];
     nextBtn.layer.masksToBounds = YES;
