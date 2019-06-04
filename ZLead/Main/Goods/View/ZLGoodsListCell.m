@@ -190,7 +190,7 @@
 - (UIButton *)editBtn {
     if (!_editBtn) {
         _editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_editBtn setBackgroundColor:[UIColor cyanColor]];
+        [_editBtn setImage:[UIImage imageNamed:@"goods-edit"] forState:UIControlStateNormal];
         [self.contentView addSubview:_editBtn];
     }
     return _editBtn;

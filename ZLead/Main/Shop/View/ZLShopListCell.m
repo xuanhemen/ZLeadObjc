@@ -7,6 +7,8 @@
 //
 
 #import "ZLShopListCell.h"
+#import "ZLShopModel.h"
+
 @interface ZLShopListCell ()
 @property (nonatomic, strong) UIImageView *shopLogo;
 @property (nonatomic, strong) UILabel *shopNameLabel;
@@ -113,6 +115,10 @@
         make.width.mas_equalTo(dis(68));
         make.height.mas_equalTo(dis(20));
     }];
+}
+
+- (void)setupData:(ZLShopModel *)shopModel {
+    self.shopNameLabel.text= shopModel.shopName;
 }
 
 + (CGFloat)heightForCell {

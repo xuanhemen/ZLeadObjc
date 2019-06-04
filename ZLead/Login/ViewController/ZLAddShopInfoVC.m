@@ -57,7 +57,7 @@
        
         NSString *shopName = self.infoView.nameField.text; //商铺名称
         NSString *areaCode = self.infoView.areaCode; //省市区地址编码
-        NSDictionary *params = @{@"userId":kUserID,@"companyId":@"",@"shopName":shopName,@"region":areaCode};
+        NSDictionary *params = @{@"userId":@"0010001770316129",@"companyId":@"",@"shopName":shopName,@"region":areaCode};
         [NetManager postWithURLString:@"ZlwUser/createShop" parameters:params success:^(NSDictionary * _Nonnull response) {
     
             

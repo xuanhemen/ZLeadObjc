@@ -9,12 +9,14 @@
 #import "ZLShopListVC.h"
 #import "ZLShopListCell.h"
 #import "ZLAddStoreVC.h"
+#import "ZLShopModel.h"
 
 @interface ZLShopListVC () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *shopListTableView;
 
 @property (nonatomic, strong)UIView *footer;
 
+@property (nonatomic, strong) NSArray *shopList;
 @end
 
 @implementation ZLShopListVC
@@ -25,6 +27,7 @@
     [self setupViews];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     self.title = @"店铺切换";
+    [self setupData];
 }
 
 
@@ -50,6 +53,17 @@
     }];
 }
 
+#pragma mark - setupData
+
+- (void)setupData {
+    [[NetManager sharedInstance] getShopListWithUserId:@"0010001770316129" sucess:^(NSArray *dataList, NSInteger total) { //@"0010000137432355"
+        self.shopList = dataList;
+        [self.shopListTableView reloadData];
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -57,7 +71,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.shopList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -66,6 +80,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZLShopListCell"];
+    [cell setupData:[self.shopList objectAtIndex:indexPath.row]];
     return cell;
 }
 

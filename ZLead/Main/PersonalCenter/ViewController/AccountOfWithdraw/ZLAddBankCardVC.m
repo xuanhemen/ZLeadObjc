@@ -8,7 +8,7 @@
 
 #import "ZLAddBankCardVC.h"
 
-@interface ZLAddBankCardVC ()
+@interface ZLAddBankCardVC ()<UITextFieldDelegate>
 
 @property (nonatomic, strong)UIView *containerView;
 @property (nonatomic, strong)UITextField *nameTextF;
@@ -106,6 +106,17 @@
     }];
 }
 
+- (void)tapGesture:(UITapGestureRecognizer *)tapG {
+    NSLog(@"12345");
+}
+
+#pragma mark - textFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (textField == self.bankTextF) {
+        return NO;
+    }
+    return YES;
+}
 
 #pragma mark - lazy load
 - (UIView *)containerView {
@@ -142,6 +153,15 @@
         UILabel *bankLbl = [self createCustomLblWithText:@"开户行"];
         _bankTextF.leftView = bankLbl;
         _bankTextF.leftViewMode = UITextFieldViewModeAlways;
+        
+        UIImageView *goImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_jump"]];
+        
+        _bankTextF.rightView = goImgV;
+        _bankTextF.rightViewMode = UITextFieldViewModeAlways;
+        
+        _bankTextF.delegate = self;
+        UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+        [_bankTextF addGestureRecognizer:tapG];
     }
     return _bankTextF;
 }

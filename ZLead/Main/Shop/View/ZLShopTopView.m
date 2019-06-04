@@ -7,6 +7,7 @@
 //
 
 #import "ZLShopTopView.h"
+#import "ZLShopModel.h"
 
 @interface ZLShopTopView ()
 @property (nonatomic, strong) UIImageView *shopLogo;
@@ -33,8 +34,8 @@
     self.shopLogo.layer.masksToBounds = YES;
     [self addSubview:self.shopLogo];
     
-    self.shopNameLabel = [[UILabel alloc] init];
-    self.shopNameLabel.text = @"店铺名称";
+    self.shopNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.shopNameLabel.text = @"sdfsfdsfsfd";
     self.shopNameLabel.font = [UIFont boldSystemFontOfSize:15];
     [self addSubview:self.shopNameLabel];
     
@@ -85,6 +86,12 @@
         make.top.equalTo(self.shopLogo.mas_top).offset(dis(4));
     }];
     
+}
+
+- (void)setupData:(ZLShopModel *)shopModel {
+    self.shopNameLabel.text = shopModel.shopName;
+    DLog(@"店铺名称=%@", self.shopNameLabel.text);
+    [self updateConstraintsIfNeeded];
 }
 
 #pragma mark - UIButton Actions
