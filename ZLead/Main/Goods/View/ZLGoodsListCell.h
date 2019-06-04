@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZLBaseCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZLGoodsListCell : UITableViewCell
+@interface ZLGoodsListCell : ZLBaseCell
 
 /** 是否允许编辑 默认不允许 */
 @property (nonatomic, assign)BOOL allowEdit;
+@property (nonatomic, copy) void (^selectedButtonBlock) (BOOL isSelected);
+@property (nonatomic, copy) void (^eidtButtonBlock) (void);
 + (ZLGoodsListCell *)listCellWithTableView:(UITableView *)tableView;
 
 @end

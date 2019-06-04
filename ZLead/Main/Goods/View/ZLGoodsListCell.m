@@ -7,6 +7,7 @@
 //
 
 #import "ZLGoodsListCell.h"
+#import "ZLGoodsModel.h"
 
 @interface ZLGoodsListCell ()
 
@@ -25,6 +26,7 @@
 /** 编辑按钮 */
 @property (nonatomic, strong)UIButton *editBtn;
 
+@property (nonatomic, strong)ZLGoodsModel *goodsModel;
 @end
 
 @implementation ZLGoodsListCell
@@ -50,7 +52,7 @@
     [self.selectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(10);
         make.centerY.equalTo(self.contentView);
-        make.width.height.mas_equalTo(15);
+        make.width.height.mas_equalTo(19);
     }];
     self.selectBtn.hidden = YES;
     [self.topicImgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -113,11 +115,17 @@
     [self layoutIfNeeded];
 }
 
+- (void)setupData:(ZLGoodsModel *)goodsModel {
+    _goodsModel = goodsModel;
+}
+
 #pragma mark - lazy load
 - (UIButton *)selectBtn {
     if (!_selectBtn) {
         _selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _selectBtn.backgroundColor = [UIColor brownColor];
+        [_selectBtn setImage:[UIImage imageNamed:@"goods-selected-normal"] forState:UIControlStateNormal];
+        [_selectBtn setImage:[UIImage imageNamed:@"goods-selected-highlight"] forState:UIControlStateSelected];
+        [_selectBtn addTarget:self action:@selector(selectBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_selectBtn];
     }
     return _selectBtn;
@@ -202,6 +210,15 @@
     [mStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10] range:NSMakeRange(0, 1)];
     
     return mStr;
+}
+
+#pragma mark - UIButton Actions
+
+- (void)selectBtnAction:(UIButton *)btn {
+    btn.selected = !btn.selected;
+    if (self.selectedButtonBlock) {
+        self.selectedButtonBlock(self.goodsModel.isSelected);
+    }
 }
 
 @end

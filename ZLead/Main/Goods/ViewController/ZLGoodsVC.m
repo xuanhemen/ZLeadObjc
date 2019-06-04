@@ -8,14 +8,17 @@
 
 #import "ZLGoodsVC.h"
 #import "ZLGoodsHeaderView.h"
+#import "ZLGoodsManagerView.h"
 #import "ZLGoodsListCell.h"
 
 #import "ZLGoodsSearchVC.h"
 
 @interface ZLGoodsVC ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong)ZLGoodsHeaderView *headerView;
-@property (nonatomic, strong)UITableView *tableView;
+@property (nonatomic, strong) ZLGoodsHeaderView *headerView;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) ZLGoodsManagerView *bottomManagerView;
+
 
 /** <#注释#> */
 @property (nonatomic,assign) BOOL allowEdit;
@@ -56,7 +59,7 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(addGoodsButtonAction)];
     self.navigationItem.leftBarButtonItem = leftItem;
     
-    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithTitle:@"管理" style:UIBarButtonItemStyleDone target:self action:@selector(managerBtnClicked:)];
+    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithTitle:@"管理" style:UIBarButtonItemStyleDone target:self action:@selector(managerButtonAction:)];
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addButton setImage:[UIImage imageNamed:@"goods-add-icon"] forState:UIControlStateNormal];
     addButton.frame = CGRectMake(0, 0, 19, 19);
@@ -69,11 +72,11 @@
     self.headerView = [[ZLGoodsHeaderView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, 45)];
     [self.view addSubview:self.headerView];
     
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.headerView.mas_bottom);
-        make.bottom.equalTo(self.view);
-    }];
+    self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
+
+    self.bottomManagerView = [[ZLGoodsManagerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kTabBarHeight - dis(50), kScreenWidth, dis(50))];
+    self.bottomManagerView.hidden = YES;
+    [self.view addSubview:self.bottomManagerView];
 }
 
 #pragma mark - action
@@ -82,9 +85,10 @@
     [self.navigationController pushViewController:searchVc animated:NO];
 }
 
-- (void)managerBtnClicked:(UIBarButtonItem *)sender {
+- (void)managerButtonAction:(UIBarButtonItem *)sender {
     sender.title = self.allowEdit ? @"管理": @"完成";
     self.allowEdit = !self.allowEdit;
+    self.bottomManagerView.hidden = !self.allowEdit;
 }
 
 - (void)addGoodsButtonAction {
@@ -150,6 +154,11 @@
 #pragma mark - setter
 - (void)setAllowEdit:(BOOL)allowEdit {
     _allowEdit = allowEdit;
+    if (_allowEdit) {
+        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - dis(50) - kNavBarHeight - 45);
+    } else {
+        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
+    }
     [self.tableView reloadData];
 }
 

@@ -24,6 +24,9 @@
 /** 状态栏和导航栏总高度 */
 #define kNavBarHeight   (IS_IPHONE_X?(88):(64))
 
+/** tabbar高度 */
+#define kTabBarHeight   (IS_IPHONE_X?(83):(49))
+
 /** 状态栏和导航栏总高度 */
 #define kStatusBarHeight   (IS_IPHONE_X?(44):(20))
 
