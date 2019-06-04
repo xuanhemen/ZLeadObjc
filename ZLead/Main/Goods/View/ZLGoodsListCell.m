@@ -12,7 +12,7 @@
 @interface ZLGoodsListCell ()
 
 @property (nonatomic, strong)UIButton *selectBtn;
-
+@property (nonatomic, strong)UIImageView *topImageView;
 @property (nonatomic, strong)UIImageView *topicImgView;
 @property (nonatomic, strong)UILabel *topicLbl;
 /** 价格 */
@@ -59,6 +59,12 @@
         make.left.equalTo(self.contentView).offset(dis(15));
         make.centerY.equalTo(self.contentView);
         make.width.height.mas_equalTo(dis(120));
+    }];
+    
+    [self.topImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.topicImgView.mas_left);
+        make.top.equalTo(self.topicImgView.mas_top);
+        make.width.height.mas_equalTo(dis(20));
     }];
     self.topicLbl.text = @"绿林钢卷尺 3米5米7.5米10米加厚盒尺木工高精度测量工具米…";
     [self.topicLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -117,6 +123,8 @@
 
 - (void)setupData:(ZLGoodsModel *)goodsModel {
     _goodsModel = goodsModel;
+    self.selectBtn.selected = _goodsModel.isSelected;
+    self.topImageView.hidden = !_goodsModel.top;
 }
 
 #pragma mark - lazy load
@@ -138,6 +146,16 @@
         [self.contentView addSubview:_topicImgView];
     }
     return _topicImgView;
+}
+
+- (UIImageView *)topImageView {
+    if (!_topImageView) {
+        _topImageView = [[UIImageView alloc] init];
+        _topImageView.backgroundColor = [UIColor zl_mainColor];
+        _topImageView.hidden = YES;
+        [self.contentView addSubview:_topImageView];
+    }
+    return _topImageView;
 }
 
 - (UILabel *)topicLbl {
@@ -216,6 +234,7 @@
 
 - (void)selectBtnAction:(UIButton *)btn {
     btn.selected = !btn.selected;
+    self.goodsModel.isSelected = btn.selected;
     if (self.selectedButtonBlock) {
         self.selectedButtonBlock(self.goodsModel.isSelected);
     }

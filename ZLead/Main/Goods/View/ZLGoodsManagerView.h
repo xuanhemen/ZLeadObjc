@@ -11,7 +11,17 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLGoodsManagerView : UIView
-
+@property (nonatomic, strong) UIButton *allSelectedButton;
+@property (nonatomic, copy) void (^allSelectedBlock) (BOOL isSelected);
+@property (nonatomic, copy) void (^unShelveBlock) (void);
+@property (nonatomic, copy) void (^delBlock) (void);
+@property (nonatomic, copy) void (^topBlock) (void);
+@property (nonatomic, copy) void (^cancelTopBlock) (void);
+- (void)refreshUnShelveButton:(BOOL )isEnableUnShelve;
+- (void)refreshDelButton:(BOOL )isEnableDel;
+- (void)refreshTopButton:(BOOL )isEnableTop;
+- (void)refreshCanelTopButton:(BOOL )isCancelTop;
+- (void)reset;
 @end
 
 NS_ASSUME_NONNULL_END

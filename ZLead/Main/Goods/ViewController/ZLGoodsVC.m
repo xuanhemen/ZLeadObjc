@@ -13,18 +13,17 @@
 
 #import "ZLGoodsSearchVC.h"
 
+#import "ZLGoodsModel.h"
+
 @interface ZLGoodsVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) ZLGoodsHeaderView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ZLGoodsManagerView *bottomManagerView;
-
-
 /** <#注释#> */
-@property (nonatomic,assign) BOOL allowEdit;
-
-
-
+@property (nonatomic, assign) BOOL allowEdit;
+@property (nonatomic, strong) NSMutableArray *goodsList;
+@property (nonatomic, assign) BOOL isAllSelected;
 @end
 
 @implementation ZLGoodsVC
@@ -46,6 +45,8 @@
     
     [self styleForNav];
     [self layoutChildViews];
+    
+    [self setupData];
 }
 
 /** 导航栏 */
@@ -89,10 +90,96 @@
 
     self.bottomManagerView = [[ZLGoodsManagerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kTabBarHeight - dis(50), kScreenWidth, dis(50))];
     self.bottomManagerView.hidden = YES;
+    kWeakSelf(weakSelf);
+    self.bottomManagerView.allSelectedBlock = ^(BOOL isSelected) {
+        [weakSelf allSelected:isSelected];
+    };
+    self.bottomManagerView.topBlock = ^{
+        for (int i = 0; i < 10; i++) {
+            ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:i];
+            goodsModel.goodsNum = i+1;
+            if (goodsModel.isSelected) {
+                goodsModel.top = YES;
+            }
+            [weakSelf.goodsList addObject:goodsModel];
+        }
+        [weakSelf.tableView reloadData];
+    };
+    self.bottomManagerView.cancelTopBlock = ^{
+        for (int i = 0; i < 10; i++) {
+            ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:i];
+            goodsModel.goodsNum = i+1;
+            if (goodsModel.isSelected) {
+                goodsModel.top = NO;
+            }
+            [weakSelf.goodsList addObject:goodsModel];
+        }
+        [weakSelf.tableView reloadData];
+    };
     [self.view addSubview:self.bottomManagerView];
 }
 
+#pragma mark - Init
+
+- (NSMutableArray *)goodsList {
+    if (!_goodsList) {
+        _goodsList = [[NSMutableArray alloc] init];
+    }
+    return _goodsList;
+}
+
+#pragma mark - setupData
+
+- (void)setupData {
+    for (int i = 0; i < 10; i++) {
+        ZLGoodsModel *goodsModel = [[ZLGoodsModel alloc] init];
+        goodsModel.goodsNum = i+1;
+        goodsModel.top = NO;
+        [self.goodsList addObject:goodsModel];
+    }
+    [self.tableView reloadData];
+}
+
+#pragma mark - private Method
+
+/**
+ 是否全选
+ */
+- (void)judgeIsAllSelected {
+    NSInteger count = 0;
+    BOOL enabelCancelTop = NO;
+    for (ZLGoodsModel *goodsModel in self.goodsList) {
+        if (goodsModel.isSelected) {
+            count ++;
+            if (goodsModel.top) {
+                enabelCancelTop = YES;
+            }
+        }
+    }
+    if (count == self.goodsList.count) {
+        self.bottomManagerView.allSelectedButton.selected = YES;
+        self.isAllSelected = YES;
+    } else {
+        self.bottomManagerView.allSelectedButton.selected = NO;
+        self.isAllSelected = NO;
+    }
+    if (enabelCancelTop) {
+        [self.bottomManagerView refreshCanelTopButton:enabelCancelTop];
+    }
+}
+
+- (void)allSelected:(BOOL )isSelected {
+    for (int i = 0; i < 10; i++) {
+        ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:i];
+        goodsModel.goodsNum = i+1;
+        goodsModel.isSelected = isSelected;
+        [self.goodsList addObject:goodsModel];
+    }
+    [self.tableView reloadData];
+}
+
 #pragma mark - action
+
 - (void)tapG:(UITapGestureRecognizer *)tap {
     ZLGoodsSearchVC *searchVc = [[ZLGoodsSearchVC alloc] init];
     [self.navigationController pushViewController:searchVc animated:NO];
@@ -106,6 +193,9 @@
     sender.title = self.allowEdit ? @"管理": @"完成";
     self.allowEdit = !self.allowEdit;
     self.bottomManagerView.hidden = !self.allowEdit;
+    self.isAllSelected = NO;
+    [self.bottomManagerView reset];
+//    [self judgeIsAllSelected];
 }
 
 - (void)addGoodsButtonAction {
@@ -115,7 +205,7 @@
 #pragma mark - delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return self.goodsList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,6 +215,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLGoodsListCell *cell = [ZLGoodsListCell listCellWithTableView:tableView];
     cell.allowEdit = self.allowEdit;
+    [cell setupData:[self.goodsList objectAtIndex:indexPath.row]];
+    kWeakSelf(weakSelf);
+    cell.selectedButtonBlock = ^(BOOL isSelected) {
+        ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:indexPath.row];
+        goodsModel.isSelected = isSelected;
+        [weakSelf judgeIsAllSelected];
+    };
     return cell;
 }
 

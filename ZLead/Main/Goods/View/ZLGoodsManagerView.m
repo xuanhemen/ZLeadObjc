@@ -9,7 +9,6 @@
 #import "ZLGoodsManagerView.h"
 
 @interface ZLGoodsManagerView ()
-@property (nonatomic, strong) UIButton *allSelectedButton;
 @property (nonatomic, strong) UIView *topLineView;
 @property (nonatomic, strong) UIButton *unShelveButton;
 @property (nonatomic, strong) UIButton *delButton;
@@ -94,7 +93,8 @@
 - (UIButton *)unShelveButton {
     if (!_unShelveButton) {
         _unShelveButton = [self customButtonWithTitle:@"下架"];
-         [self addSubview:_unShelveButton];
+        [_unShelveButton addTarget:self action:@selector(unShelveButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_unShelveButton];
     }
     return _unShelveButton;
 }
@@ -102,6 +102,7 @@
 - (UIButton *)delButton {
     if (!_delButton) {
         _delButton = [self customButtonWithTitle:@"删除"];
+        [_delButton addTarget:self action:@selector(delButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_delButton];
     }
     return _delButton;
@@ -110,6 +111,7 @@
 - (UIButton *)topButton {
     if (!_topButton) {
         _topButton = [self customButtonWithTitle:@"置顶"];
+        [_topButton addTarget:self action:@selector(topButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_topButton];
     }
     return _topButton;
@@ -118,6 +120,7 @@
 - (UIButton *)cancelTopButton {
     if (!_cancelTopButton) {
         _cancelTopButton = [self customButtonWithTitle:@"取消置顶"];
+        [_cancelTopButton addTarget:self action:@selector(cancelTopButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_cancelTopButton];
     }
     return _cancelTopButton;
@@ -135,10 +138,65 @@
     return btn;
 }
 
+#pragma mark - Public Method
+
+- (void)refreshUnShelveButton:(BOOL )isEnableUnShelve {
+    [self.unShelveButton setTitleColor:isEnableUnShelve ? [UIColor colorWithHexString:@"#333333"] : [UIColor colorWithHexString:@"#999999"]   forState:UIControlStateSelected];
+}
+
+- (void)refreshDelButton:(BOOL )isEnableDel {
+    [self.delButton setTitleColor:isEnableDel ? [UIColor colorWithHexString:@"#333333"] : [UIColor colorWithHexString:@"#999999"]   forState:UIControlStateSelected];
+}
+
+- (void)refreshTopButton:(BOOL )isEnableTop {
+    [self.topButton setTitleColor:isEnableTop ? [UIColor colorWithHexString:@"#333333"] : [UIColor colorWithHexString:@"#999999"]   forState:UIControlStateSelected];
+}
+
+- (void)refreshCanelTopButton:(BOOL )isCancelTop {
+    [self.cancelTopButton setTitleColor:isCancelTop ? [UIColor colorWithHexString:@"##FFB32A"] : [UIColor colorWithHexString:@"#999999"]   forState:UIControlStateSelected];
+    self.cancelTopButton.layer.borderColor = isCancelTop ? [UIColor colorWithHexString:@"##FFB32A"].CGColor : [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
+}
+
+- (void)reset {
+    self.allSelectedButton.selected = NO;
+    [self.unShelveButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+    [self.delButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+    [self.topButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+    [self.cancelTopButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+    self.cancelTopButton.layer.borderColor = [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
+}
+
 #pragma mark - UIButton Actions
 
-- (void)allSelectedButtonAction:(UIButton *)selectedButton {
-    
+- (void)allSelectedButtonAction:(UIButton *)selectedBtn {
+    selectedBtn.selected = !selectedBtn.selected;
+    if (self.allSelectedBlock) {
+        self.allSelectedBlock(selectedBtn.selected);
+    }
+}
+
+- (void)unShelveButtonAction:(UIButton *)unShelveBtn {
+    if (self.unShelveBlock) {
+        self.unShelveBlock();
+    }
+}
+
+- (void)delButtonAction:(UIButton *)delBtn {
+    if (self.delBlock) {
+        self.delBlock();
+    }
+}
+
+- (void)topButtonAction:(UIButton *)topBtn {
+    if (self.topBlock) {
+        self.topBlock();
+    }
+}
+
+- (void)cancelTopButtonAction:(UIButton *)cancelTopBtn {
+    if (self.cancelTopBlock) {
+        self.cancelTopBlock();
+    }
 }
 
 @end
