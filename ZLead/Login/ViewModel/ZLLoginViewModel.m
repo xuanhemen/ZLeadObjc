@@ -63,6 +63,7 @@
             }
            
             [NetManager postWithURLString:@"ZlwUser/login" parameters:params success:^(NSDictionary * _Nonnull response) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"loginState"];
                 ZLTabBarController *tvc = [[ZLTabBarController alloc] init];
                 [UIApplication sharedApplication].keyWindow.rootViewController = tvc;
 
@@ -79,7 +80,7 @@
             }
             NSDictionary *params = @{@"phone":self.phoneNumber,@"code":self.authCode};
             [NetManager postWithURLString:@"common/checkSmsCode" parameters:params success:^(NSDictionary * _Nonnull response) {
-                
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"loginState"];
                 ZLSetPasswordVC *svc = [[ZLSetPasswordVC alloc] init];
                 svc.style = SetPWStyleNewSet;
                 svc.phoneNumber = self.phoneNumber;

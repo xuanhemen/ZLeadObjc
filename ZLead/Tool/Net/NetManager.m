@@ -74,9 +74,11 @@ static NetManager *_instance = nil;
         DLog(@"请求结果%@",dictionary);
         NSInteger stateCode = [[dictionary objectForKey:@"status"] integerValue];
         NSDictionary *dataDic = [dictionary objectForKey:@"data"];
+        NSString *msg = [dictionary objectForKey:@"message"];
         if (stateCode == 200) {  /**成功*/
             success(dataDic);
         }else{ //其他code码 业务失败
+            [self showMsg:msg];
             failure(dataDic);
         }
         

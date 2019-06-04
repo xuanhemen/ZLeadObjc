@@ -85,12 +85,14 @@
         if (isTrue && isYes) {
             if (isEqual) { //跳转到补充店铺信息
                 NSString *url;
+                NSDictionary *params;
                 if (self.style == SetPWStyleNewSet) {
                     url = @"ZlwUser/setPassword";
+                    params = @{@"phone":self.phoneNumber,@"password":firstField.text};
                 }else{
                     url = @"ZlwUser/resetPassword";
+                    params = @{@"phone":self.phoneNumber,@"password":firstField.text,@"code":self.code};
                 }
-                NSDictionary *params = @{@"phone":self.phoneNumber,@"password":firstField.text};
                 [NetManager postWithURLString:url parameters:params success:^(NSDictionary * _Nonnull response) {
                     if (self.style == SetPWStyleNewSet) {
                         kUserInfo.userID = [response objectForKey:@"userId"];
