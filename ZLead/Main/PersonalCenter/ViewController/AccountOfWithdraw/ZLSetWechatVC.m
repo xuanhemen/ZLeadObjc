@@ -8,16 +8,13 @@
 
 #import "ZLSetWechatVC.h"
 
-@interface ZLSetWechatVC ()
+@interface ZLSetWechatVC ()<UITextFieldDelegate>
 
 @property (nonatomic, strong)UIView *containerView;
-@property (nonatomic, strong)UILabel *accountLbl;
 @property (nonatomic, strong)UITextField *accountTextF;
 @property (nonatomic, strong)UIView *line1View;
-@property (nonatomic, strong)UILabel *phoneLbl;
 @property (nonatomic, strong)UITextField *phoneTextF;
 @property (nonatomic, strong)UIView *line2View;
-@property (nonatomic, strong)UILabel *verifyLbl;
 @property (nonatomic, strong)UITextField *verifyTextF;
 
 @property (nonatomic, strong)UIButton *authBtn;
@@ -82,6 +79,23 @@
     }];
 }
 
+#pragma mark - action
+- (void)authBtnClicked:(UIButton *)sender {
+    NSLog(@"点击了授权");
+}
+
+- (void)verifyBtnClicked:(UIButton *)sender {
+    NSLog(@"发送验证码");
+}
+
+#pragma mark - delegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (textField == self.accountTextF) {
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - lazy load
 - (UIView *)containerView {
     if (!_containerView) {
@@ -90,33 +104,6 @@
         [self.view addSubview:_containerView];
     }
     return _containerView;
-}
-
-- (UILabel *)accountLbl {
-    if (!_accountLbl) {
-        _accountLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-        _accountLbl.text = self.type == AccountTypeAlipay ? @"支付宝": @"微信号";
-        _accountLbl.font = kFont14;
-    }
-    return _accountLbl;
-}
-
-- (UILabel *)phoneLbl {
-    if (!_phoneLbl) {
-        _phoneLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-        _phoneLbl.text = @"预留手机号";
-        _phoneLbl.font = kFont14;
-    }
-    return _phoneLbl;
-}
-
-- (UILabel *)verifyLbl {
-    if (!_verifyLbl) {
-        _verifyLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-        _verifyLbl.text = @"验证码";
-        _verifyLbl.font = kFont14;
-    }
-    return _verifyLbl;
 }
 
 - (UIView *)line1View {
@@ -142,11 +129,13 @@
         _accountTextF = [[UITextField alloc] init];
         _accountTextF.font = kFont14;
         [self.containerView addSubview:_accountTextF];
-        _accountTextF.leftView = self.accountLbl;
+        NSString *text = self.type == AccountTypeAlipay ? @"支付宝": @"微信号";
+        _accountTextF.leftView = [self createCustomLblWithText:text];
         _accountTextF.leftViewMode = UITextFieldViewModeAlways;
         _accountTextF.placeholder = @"account";
         _accountTextF.rightView = self.authBtn;
         _accountTextF.rightViewMode = UITextFieldViewModeAlways;
+        _accountTextF.delegate = self;
     }
     return _accountTextF;
 }
@@ -156,7 +145,7 @@
         _phoneTextF = [[UITextField alloc] init];
         _phoneTextF.font = kFont14;
         [self.containerView addSubview:_phoneTextF];
-        _phoneTextF.leftView = self.phoneLbl;
+        _phoneTextF.leftView = [self createCustomLblWithText:@"预留手机号"];
         _phoneTextF.leftViewMode = UITextFieldViewModeAlways;
         _phoneTextF.placeholder = @"phone";
     }
@@ -168,7 +157,7 @@
         _verifyTextF = [[UITextField alloc] init];
         _verifyTextF.font = kFont14;
         [self.containerView addSubview:_verifyTextF];
-        _verifyTextF.leftView = self.verifyLbl;
+        _verifyTextF.leftView = [self createCustomLblWithText:@"验证码"];
         _verifyTextF.leftViewMode = UITextFieldViewModeAlways;
         _verifyTextF.placeholder = @"verify";
         _verifyTextF.rightView = self.verifyBtn;
@@ -184,6 +173,7 @@
         _authBtn.titleLabel.font = kFont14;
         [_authBtn setTitle:@"授权" forState:UIControlStateNormal];
         [_authBtn setTitleColor:[UIColor colorWithHexString:@"#008EFF"] forState:UIControlStateNormal];
+        [_authBtn addTarget:self action:@selector(authBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _authBtn;
 }
@@ -195,6 +185,7 @@
         _verifyBtn.titleLabel.font = kFont14;
         [_verifyBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
         [_verifyBtn setTitleColor:[UIColor colorWithHexString:@"#008EFF"] forState:UIControlStateNormal];
+        [_verifyBtn addTarget:self action:@selector(verifyBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _verifyBtn;
 }
@@ -209,6 +200,15 @@
         [self.view addSubview:_submitBtn];
     }
     return _submitBtn;
+}
+
+#pragma mark - private
+- (UILabel *)createCustomLblWithText:(NSString *)text {
+    UILabel *lbl = [[UILabel alloc] init];
+    lbl.frame = CGRectMake(0, 0, 100, 30);
+    lbl.text = text;
+    lbl.font = kFont14;
+    return lbl;
 }
 
 
