@@ -135,6 +135,11 @@
         _rightBtnView.enabled = NO;
         [[_rightBtnView rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
             [self.viewModel.getCode sendNext:x]; //获取验证码或忘记密码
+            if ([self.rightBtnView.titleLabel.text isEqualToString:@"获取验证码"]) {
+                [self.rightBtnView setTitleColor:hex(@"#FFB223") forState:UIControlStateNormal];
+            }else{
+                [self.rightBtnView setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            }
             
         }];
     }

@@ -81,6 +81,7 @@
         ZLSetPasswordVC *svc = [[ZLSetPasswordVC alloc] init];
         svc.style = SetPWStyleForgetSet;
         svc.phoneNumber = self.tfView.userField.text;
+        svc.code = self.tfView.pwField.text;
         [self.navigationController pushViewController:svc animated:YES];
     }];
     [self.view addSubview:_nextBtn];

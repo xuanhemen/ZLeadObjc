@@ -21,6 +21,7 @@
 		7A00980622952EAD00AD79DE /* ZLTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A00980522952EAD00AD79DE /* ZLTabBarViewController.m */; };
 		7A00980B22955ACB00AD79DE /* ZLConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A00980A22955ACB00AD79DE /* ZLConfig.m */; };
 		7A00980E22955C2400AD79DE /* ZLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A00980D22955C2400AD79DE /* ZLTabBarController.m */; };
+		7A047C0F22A61BAF00867B3E /* ZLAddWayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A047C0E22A61BAF00867B3E /* ZLAddWayVC.m */; };
 		7A488A652298E3B300069483 /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A488A642298E3B300069483 /* CustomTextField.m */; };
 		7A488A6B2298F49800069483 /* ZLInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A488A6A2298F49800069483 /* ZLInputView.m */; };
 		7A9D682A2296680F0024DF3A /* URLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68292296680F0024DF3A /* URLManager.m */; };
@@ -148,6 +149,8 @@
 		7A00980A22955ACB00AD79DE /* ZLConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLConfig.m; sourceTree = "<group>"; };
 		7A00980C22955C2400AD79DE /* ZLTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLTabBarController.h; sourceTree = "<group>"; };
 		7A00980D22955C2400AD79DE /* ZLTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLTabBarController.m; sourceTree = "<group>"; };
+		7A047C0D22A61BAF00867B3E /* ZLAddWayVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLAddWayVC.h; sourceTree = "<group>"; };
+		7A047C0E22A61BAF00867B3E /* ZLAddWayVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLAddWayVC.m; sourceTree = "<group>"; };
 		7A488A632298E3B200069483 /* CustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
 		7A488A642298E3B300069483 /* CustomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextField.m; sourceTree = "<group>"; };
 		7A488A692298F49800069483 /* ZLInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLInputView.h; sourceTree = "<group>"; };
@@ -568,6 +571,8 @@
 				7A9D683222967BDC0024DF3A /* ZLGoodsVC.m */,
 				E832D757229FC99D00D0ED7F /* ZLGoodsSearchVC.h */,
 				E832D758229FC99D00D0ED7F /* ZLGoodsSearchVC.m */,
+				7A047C0D22A61BAF00867B3E /* ZLAddWayVC.h */,
+				7A047C0E22A61BAF00867B3E /* ZLAddWayVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1084,7 +1089,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/MOFSPickerManager/MOFSPickerManagerDemo/MOFSPickerManager/province_data.xml",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
@@ -1097,7 +1102,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZLead/Pods-ZLead-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B62A8279FE9ACCB0DB609889 /* [CP] Check Pods Manifest.lock */ = {
@@ -1139,6 +1144,7 @@
 				7AB6D8BF229FCF1C00AFDCF0 /* ZLBaseViewController+Func.m in Sources */,
 				E832D756229FBA3E00D0ED7F /* ZLGoodsListCell.m in Sources */,
 				7A9D684C229689D80024DF3A /* GeneralTableViewDelegate.m in Sources */,
+				7A047C0F22A61BAF00867B3E /* ZLAddWayVC.m in Sources */,
 				E265E011229E4F4800842DD0 /* ZLOfflinePaymentView.m in Sources */,
 				E2802B5922991CC7004AF4B8 /* ZLShopManagerNoteCell.m in Sources */,
 				E832D71B229E715100D0ED7F /* UIImage+ZL.m in Sources */,

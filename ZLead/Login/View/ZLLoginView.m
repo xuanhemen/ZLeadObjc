@@ -66,10 +66,10 @@
         _tfView.changeLoginState = ^(BOOL selecte) {
             if (selecte) {
                 weakSelf.login.enabled = YES;
-                weakSelf.login.backgroundColor = hex(@"#F7981C");
+                weakSelf.login.alpha = 1;
             }else{
                  weakSelf.login.enabled = NO;
-                 weakSelf.login.backgroundColor = COLOR(249, 222, 172, 1);
+                 weakSelf.login.alpha = 0.3;
             }
         };
         [self addSubview:_tfView];
@@ -134,7 +134,14 @@
 - (UIButton *)login{
     if (!_login) {
         _login = [UIButton buttonWithType:UIButtonTypeCustom];
-        _login.backgroundColor = COLOR(249, 222, 172, 1);
+        _login.alpha = 0.3;
+        CAGradientLayer *gradientLayer =  [CAGradientLayer layer];
+        gradientLayer.frame = kRect(0, 0, kScreenWidth-50, 50);
+        gradientLayer.startPoint = CGPointMake(0, 0);
+        gradientLayer.endPoint = CGPointMake(1, 0);
+        gradientLayer.locations = @[@(0.5),@(1.0)];//渐变点
+        [gradientLayer setColors:@[(id)[hex(@"#FFD94F") CGColor],(id)[hex(@"#F7981C") CGColor]]];//渐变数组
+        [_login.layer addSublayer:gradientLayer];
         _login.layer.masksToBounds = YES;
         _login.layer.cornerRadius = dis(25);
         _login.enabled = NO;

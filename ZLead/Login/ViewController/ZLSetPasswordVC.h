@@ -18,6 +18,8 @@ typedef NS_ENUM(NSInteger,SetPWStyle){
 
 
 @property (nonatomic, copy) NSString *phoneNumber; // 手机号
+
+@property (nonatomic, copy) NSString *code; // 验证码
 @property (nonatomic,assign) SetPWStyle style; //找回密码类型
 @end
 
