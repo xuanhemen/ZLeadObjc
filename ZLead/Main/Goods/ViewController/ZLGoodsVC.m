@@ -47,16 +47,29 @@
     [self styleForNav];
     [self layoutChildViews];
 }
+
 /** 导航栏 */
 - (void)styleForNav {
     UIView *searchV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dis(255), 30)];
-    searchV.backgroundColor = [UIColor whiteColor];
+    searchV.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3];
     searchV.layer.cornerRadius = 15;
+    UIImageView *searchIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, 8, 13, 13)];
+    searchIcon.image = [UIImage imageNamed:@"goods-search-icon"];
+    [searchV addSubview:searchIcon];
+    UILabel *searchPL = [[UILabel alloc] initWithFrame:CGRectMake(32, 0, 200, 30)];
+    searchPL.font = kFont13;
+    searchPL.text = @"输入搜索商品的关键词";
+    searchPL.textColor = [UIColor whiteColor];
+    [searchV addSubview:searchPL];
     self.navigationItem.titleView = searchV;
     UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapG:)];
     [searchV addGestureRecognizer:tapG];
     
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(addGoodsButtonAction)];
+    UIButton *classificationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [classificationButton setImage:[UIImage imageNamed:@"goods-classification-icon"] forState:UIControlStateNormal];
+    classificationButton.frame = CGRectMake(0, 0, 19, 19);
+    [classificationButton addTarget:self action:@selector(classificationButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:classificationButton];
     self.navigationItem.leftBarButtonItem = leftItem;
     
     UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithTitle:@"管理" style:UIBarButtonItemStyleDone target:self action:@selector(managerButtonAction:)];
@@ -85,6 +98,10 @@
     [self.navigationController pushViewController:searchVc animated:NO];
 }
 
+- (void)classificationButtonAction:(UIButton *)btn {
+    
+}
+
 - (void)managerButtonAction:(UIBarButtonItem *)sender {
     sender.title = self.allowEdit ? @"管理": @"完成";
     self.allowEdit = !self.allowEdit;
@@ -96,6 +113,7 @@
 }
 
 #pragma mark - delegate
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
 }
@@ -152,6 +170,7 @@
 }
 
 #pragma mark - setter
+
 - (void)setAllowEdit:(BOOL)allowEdit {
     _allowEdit = allowEdit;
     if (_allowEdit) {
@@ -163,6 +182,7 @@
 }
 
 #pragma mark - lazy load
+
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
