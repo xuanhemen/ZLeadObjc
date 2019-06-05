@@ -10,10 +10,13 @@
 #import "ZLGoodsHeaderView.h"
 #import "ZLGoodsManagerView.h"
 #import "ZLGoodsListCell.h"
+#import "ZLFilterView.h"
 
 #import "ZLGoodsSearchVC.h"
 
 #import "ZLGoodsModel.h"
+#import "ZLFilterDataModel.h"
+#import "ZLClassifyItemModel.h"
 
 @interface ZLGoodsVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -24,6 +27,9 @@
 @property (nonatomic, assign) BOOL allowEdit;
 @property (nonatomic, strong) NSMutableArray *goodsList;
 @property (nonatomic, assign) BOOL isAllSelected;
+@property (nonatomic, strong) ZLFilterView *filterView;
+@property (nonatomic, assign) BOOL showFilter;
+@property (nonatomic, strong) ZLFilterDataModel *filterDataModel;
 @end
 
 @implementation ZLGoodsVC
@@ -186,6 +192,34 @@
 }
 
 - (void)classificationButtonAction:(UIButton *)btn {
+    if (!self.showFilter) {
+        [self.filterView dismiss];
+        self.filterDataModel  = [[ZLFilterDataModel alloc] init];
+        NSArray *sectionTitles = @[@"分类", @"一级分类", @"二级分类"];
+        NSMutableArray *allItems = [[NSMutableArray alloc] init];
+        for (NSInteger section = 0; section < 3; section ++) {
+            ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
+            filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
+            filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+            NSMutableArray *items = [[NSMutableArray alloc] init];
+            for (NSInteger i = 0; i < 10; i++) {
+                ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
+                itemModel.classifyId = i + 1;
+                itemModel.title = [NSString stringWithFormat:@"分类%@", @(i)];
+                [items addObject:itemModel];
+            }
+            filterDataModel.dataList = items;
+            [allItems addObject:filterDataModel];
+        }
+        self.filterDataModel.dataList = allItems;
+        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(NSArray * _Nonnull tagArray) {
+            
+        }];
+        self.filterView.durationTime = 0.5;
+        [self.filterView show];
+    } else {
+        [self.filterView dismiss];
+    }
     
 }
 

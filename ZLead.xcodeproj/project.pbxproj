@@ -78,6 +78,14 @@
 		E26DF08B22A4C5E70050615C /* ZLShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF08A22A4C5E70050615C /* ZLShopModel.m */; };
 		E26DF08E22A614410050615C /* ZLGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF08D22A614410050615C /* ZLGoodsModel.m */; };
 		E26DF09122A615A80050615C /* ZLGoodsManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF09022A615A80050615C /* ZLGoodsManagerView.m */; };
+		E26DF09622A765A00050615C /* ZLFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF09522A765A00050615C /* ZLFilterView.m */; };
+		E26DF09922A76B0B0050615C /* ZLFilterItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF09822A76B0B0050615C /* ZLFilterItemCell.m */; };
+		E26DF09C22A79D1D0050615C /* ZLFilterSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF09B22A79D1D0050615C /* ZLFilterSectionHeaderView.m */; };
+		E26DF09F22A79D850050615C /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF09E22A79D850050615C /* NSString+Size.m */; };
+		E26DF0A222A7A0FA0050615C /* ZLFilterSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF0A122A7A0FA0050615C /* ZLFilterSectionFooterView.m */; };
+		E26DF0A822A7AA700050615C /* ZLFilterItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF0A722A7AA700050615C /* ZLFilterItemView.m */; };
+		E26DF0AC22A7B7C90050615C /* ZLFilterDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF0AB22A7B7C90050615C /* ZLFilterDataModel.m */; };
+		E26DF0AE22A7D9670050615C /* ZLClassifyItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E26DF0AD22A7D9670050615C /* ZLClassifyItemModel.m */; };
 		E2802B4D229906FB004AF4B8 /* ZLShopTurnoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B4C229906FB004AF4B8 /* ZLShopTurnoverView.m */; };
 		E2802B532299154D004AF4B8 /* ZLBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B522299154D004AF4B8 /* ZLBaseCell.m */; };
 		E2802B5622991597004AF4B8 /* ZLShopBusinessMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2802B5522991597004AF4B8 /* ZLShopBusinessMenuCell.m */; };
@@ -266,6 +274,22 @@
 		E26DF08D22A614410050615C /* ZLGoodsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLGoodsModel.m; sourceTree = "<group>"; };
 		E26DF08F22A615A80050615C /* ZLGoodsManagerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLGoodsManagerView.h; sourceTree = "<group>"; };
 		E26DF09022A615A80050615C /* ZLGoodsManagerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLGoodsManagerView.m; sourceTree = "<group>"; };
+		E26DF09422A765A00050615C /* ZLFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLFilterView.h; sourceTree = "<group>"; };
+		E26DF09522A765A00050615C /* ZLFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLFilterView.m; sourceTree = "<group>"; wrapsLines = 0; };
+		E26DF09722A76B0B0050615C /* ZLFilterItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLFilterItemCell.h; sourceTree = "<group>"; };
+		E26DF09822A76B0B0050615C /* ZLFilterItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLFilterItemCell.m; sourceTree = "<group>"; };
+		E26DF09A22A79D1D0050615C /* ZLFilterSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLFilterSectionHeaderView.h; sourceTree = "<group>"; };
+		E26DF09B22A79D1D0050615C /* ZLFilterSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLFilterSectionHeaderView.m; sourceTree = "<group>"; };
+		E26DF09D22A79D850050615C /* NSString+Size.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
+		E26DF09E22A79D850050615C /* NSString+Size.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Size.m"; sourceTree = "<group>"; };
+		E26DF0A022A7A0FA0050615C /* ZLFilterSectionFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLFilterSectionFooterView.h; sourceTree = "<group>"; };
+		E26DF0A122A7A0FA0050615C /* ZLFilterSectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLFilterSectionFooterView.m; sourceTree = "<group>"; };
+		E26DF0A322A7A7560050615C /* ZLClassifyItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLClassifyItemModel.h; sourceTree = "<group>"; };
+		E26DF0A622A7AA700050615C /* ZLFilterItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLFilterItemView.h; sourceTree = "<group>"; };
+		E26DF0A722A7AA700050615C /* ZLFilterItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLFilterItemView.m; sourceTree = "<group>"; };
+		E26DF0AA22A7B7C90050615C /* ZLFilterDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLFilterDataModel.h; sourceTree = "<group>"; };
+		E26DF0AB22A7B7C90050615C /* ZLFilterDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLFilterDataModel.m; sourceTree = "<group>"; };
+		E26DF0AD22A7D9670050615C /* ZLClassifyItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLClassifyItemModel.m; sourceTree = "<group>"; };
 		E2802B4B229906FB004AF4B8 /* ZLShopTurnoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLShopTurnoverView.h; sourceTree = "<group>"; };
 		E2802B4C229906FB004AF4B8 /* ZLShopTurnoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLShopTurnoverView.m; sourceTree = "<group>"; };
 		E2802B512299154D004AF4B8 /* ZLBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLBaseCell.h; sourceTree = "<group>"; };
@@ -556,6 +580,8 @@
 			children = (
 				E26DF08C22A614410050615C /* ZLGoodsModel.h */,
 				E26DF08D22A614410050615C /* ZLGoodsModel.m */,
+				E26DF0A322A7A7560050615C /* ZLClassifyItemModel.h */,
+				E26DF0AD22A7D9670050615C /* ZLClassifyItemModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -729,6 +755,8 @@
 			children = (
 				7AC903B9229D1F830036AD68 /* NSString+Function.h */,
 				7AC903BA229D1F830036AD68 /* NSString+Function.m */,
+				E26DF09D22A79D850050615C /* NSString+Size.h */,
+				E26DF09E22A79D850050615C /* NSString+Size.m */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -771,6 +799,7 @@
 		7A9D6838229682960024DF3A /* PublicClass */ = {
 			isa = PBXGroup;
 			children = (
+				E26DF09322A761610050615C /* ZLFilterView */,
 				E2223B3A229FC57C00C8547C /* SegmentView */,
 				E265DFE3229B951700842DD0 /* Marquee */,
 				7A9D684B229689D80024DF3A /* GeneralTableView.h */,
@@ -915,6 +944,33 @@
 				E26DF08722A4C10D0050615C /* NetManager+ZLShopAPI.m */,
 			);
 			path = Shop;
+			sourceTree = "<group>";
+		};
+		E26DF09322A761610050615C /* ZLFilterView */ = {
+			isa = PBXGroup;
+			children = (
+				E26DF0A922A7B3C00050615C /* Model */,
+				E26DF09422A765A00050615C /* ZLFilterView.h */,
+				E26DF09522A765A00050615C /* ZLFilterView.m */,
+				E26DF09722A76B0B0050615C /* ZLFilterItemCell.h */,
+				E26DF09822A76B0B0050615C /* ZLFilterItemCell.m */,
+				E26DF09A22A79D1D0050615C /* ZLFilterSectionHeaderView.h */,
+				E26DF09B22A79D1D0050615C /* ZLFilterSectionHeaderView.m */,
+				E26DF0A022A7A0FA0050615C /* ZLFilterSectionFooterView.h */,
+				E26DF0A122A7A0FA0050615C /* ZLFilterSectionFooterView.m */,
+				E26DF0A622A7AA700050615C /* ZLFilterItemView.h */,
+				E26DF0A722A7AA700050615C /* ZLFilterItemView.m */,
+			);
+			path = ZLFilterView;
+			sourceTree = "<group>";
+		};
+		E26DF0A922A7B3C00050615C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E26DF0AA22A7B7C90050615C /* ZLFilterDataModel.h */,
+				E26DF0AB22A7B7C90050615C /* ZLFilterDataModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		E2802B4A229906B8004AF4B8 /* View */ = {
@@ -1161,16 +1217,20 @@
 				E832D711229E521100D0ED7F /* ZLAddBankCardVC.m in Sources */,
 				E265E005229D238F00842DD0 /* ZLGoodsBillCell.m in Sources */,
 				E265E017229E519400842DD0 /* ZLZLPaymentNoteCell.m in Sources */,
+				E26DF0A822A7AA700050615C /* ZLFilterItemView.m in Sources */,
 				E2F18EAE22A0D66300C1F4F8 /* NetManager+ZLLoginAPI.m in Sources */,
 				7A0097FA229524AD00AD79DE /* ZLDataVC.m in Sources */,
 				7A00980622952EAD00AD79DE /* ZLTabBarViewController.m in Sources */,
+				E26DF09922A76B0B0050615C /* ZLFilterItemCell.m in Sources */,
 				E88492FF22A0D52900A226D8 /* ZLSearchHistoryView.m in Sources */,
 				7A0097FD2295268000AD79DE /* ZLPersonalVC.m in Sources */,
 				E26DF08822A4C10D0050615C /* NetManager+ZLShopAPI.m in Sources */,
 				E265E014229E514200842DD0 /* ZLPaymentAmountCell.m in Sources */,
+				E26DF09622A765A00050615C /* ZLFilterView.m in Sources */,
 				E832D6FA229E51CD00D0ED7F /* ZLPerShareView.m in Sources */,
 				E2802B4D229906FB004AF4B8 /* ZLShopTurnoverView.m in Sources */,
 				7AB6D8BF229FCF1C00AFDCF0 /* ZLBaseViewController+Func.m in Sources */,
+				E26DF0AE22A7D9670050615C /* ZLClassifyItemModel.m in Sources */,
 				E832D756229FBA3E00D0ED7F /* ZLGoodsListCell.m in Sources */,
 				7A9D684C229689D80024DF3A /* GeneralTableViewDelegate.m in Sources */,
 				7A047C0F22A61BAF00867B3E /* ZLAddWayVC.m in Sources */,
@@ -1196,17 +1256,21 @@
 				E832D708229E51EC00D0ED7F /* ZLPerAccountVC.m in Sources */,
 				E265DFE2229B901900842DD0 /* ZLShopManagerNoteVC.m in Sources */,
 				7A9D683B229683000024DF3A /* RemindView.m in Sources */,
+				E26DF09F22A79D850050615C /* NSString+Size.m in Sources */,
 				E2802B5C22992F53004AF4B8 /* ZLShopTopView.m in Sources */,
 				E26DF08B22A4C5E70050615C /* ZLShopModel.m in Sources */,
+				E26DF0AC22A7B7C90050615C /* ZLFilterDataModel.m in Sources */,
 				E832D710229E521100D0ED7F /* ZLSetWechatVC.m in Sources */,
 				E2802B6222993CA7004AF4B8 /* ZLShopListVC.m in Sources */,
 				E265E008229D37AA00842DD0 /* ZLPaymentMethodCell.m in Sources */,
 				7ACE1B8A22A22A4600A5701D /* ZLUserInfo.m in Sources */,
+				E26DF0A222A7A0FA0050615C /* ZLFilterSectionFooterView.m in Sources */,
 				E265DFDF229B8EBD00842DD0 /* ZLOfflinePaymentVC.m in Sources */,
 				7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */,
 				E265DFE9229B955200842DD0 /* UIView+Addition.m in Sources */,
 				E832D759229FC99D00D0ED7F /* ZLGoodsSearchVC.m in Sources */,
 				E2223B3F229FC57C00C8547C /* ZLSegmentTitleView.m in Sources */,
+				E26DF09C22A79D1D0050615C /* ZLFilterSectionHeaderView.m in Sources */,
 				7AFD07E9229E7F040093091C /* NSDictionary+Function.m in Sources */,
 				E832D6FB229E51CD00D0ED7F /* ZLPerHeaderView.m in Sources */,
 				7A9D6854229699BB0024DF3A /* ZLLoginViewModel.m in Sources */,
