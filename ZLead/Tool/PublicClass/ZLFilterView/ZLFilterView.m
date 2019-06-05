@@ -38,16 +38,13 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 // KeyWindow
 #define kKeyWindow [UIApplication sharedApplication].keyWindow
 
-// Rete
-#define kScreenWidthRete   kScreenWidth / 375.0 //比率
-#define kScreenHeightRete  kScreenWidth / 667.0 //比率
 // AutoSize
 #define kAutoWithSize(r) r*kScreenWidth / 375.0
 #define kFont(size) kAutoWithSize(size)
 
 #define kAutoHeightSize(r) r*kScreenHeight / 667.0
 
-#define kFilterButtonHeight 44
+#define kFilterButtonHeight dis(50)
 #define kFilterButtonWidth 44
 
 
@@ -102,6 +99,10 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     if (_bottomView == nil) {
         _bottomView = [[UIView alloc] init];
         _bottomView.backgroundColor = [UIColor whiteColor];
+        _bottomView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.05].CGColor;
+        _bottomView.layer.shadowOffset = CGSizeMake(0,-4);
+        _bottomView.layer.shadowOpacity = 1;
+        _bottomView.layer.shadowRadius = 4;
         _bottomView.frame = CGRectMake(self.filter.frame.origin.x, self.filter.frame.size.height + self.filter.frame.origin.y + kFilterButtonHeight,self.filter.frame.size.width , kZLSafeAreaBottomHeight);
     }
     return _bottomView;
