@@ -234,7 +234,7 @@
 
 - (void)selectBtnAction:(UIButton *)btn {
     btn.selected = !btn.selected;
-    self.goodsModel.isSelected = btn.selected;
+    self.goodsModel.isSelected = btn.selected; 
     if (self.selectedButtonBlock) {
         self.selectedButtonBlock(self.goodsModel.isSelected);
     }

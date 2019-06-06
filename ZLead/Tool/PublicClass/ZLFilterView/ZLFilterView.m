@@ -278,7 +278,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section  {
     if (section == 1 || section == 2) {
-        return CGSizeMake(kZLScreenWidth * 0.8, dis(38));;
+        return CGSizeMake(kZLScreenWidth * 0.8, dis(38));
     }
     return CGSizeZero;
 }

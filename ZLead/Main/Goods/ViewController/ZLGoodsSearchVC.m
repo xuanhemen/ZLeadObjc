@@ -8,11 +8,20 @@
 
 #import "ZLGoodsSearchVC.h"
 #import "ZLSearchHistoryView.h"
+#import "ZLGoodsSearchResultVC.h"
+#import "ZLGoodsSearchResultView.h"
+#import "ZLSearchBarView.h"
+#import "ZLGoodsListCell.h"
 
-@interface ZLGoodsSearchVC ()<SearchTagDelegate>
+#import "ZLGoodsModel.h"
 
-@property (nonatomic, strong)ZLSearchHistoryView *historyView;
-
+@interface ZLGoodsSearchVC ()<SearchTagDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, ZLSearchBarViewDelegate>
+@property (nonatomic, strong) ZLSearchHistoryView *historyView;
+@property (nonatomic, strong) ZLGoodsSearchResultView *searchResultView;
+@property (nonatomic, strong) ZLSearchBarView *searchBarView;
+@property (nonatomic, assign) BOOL allowEdit;
+@property (nonatomic, strong) NSMutableArray *goodsList;
+@property (nonatomic, assign) BOOL isAllSelected;
 @end
 
 @implementation ZLGoodsSearchVC
@@ -23,48 +32,64 @@
     [self styleForNav];
     
     [self.view addSubview:self.historyView];
+    [self.view addSubview:self.searchResultView];
+    self.searchResultView.hidden = YES;
+    [self config];
+    [self setupData];
+    
     self.historyView.tags = @[@"锤子",@"见过",@"膜拜单车",@"微信支付",@"Q",@"王者",@"蓝淋网",@"阿珂",@"半生",@"猎场",@"QQ空间",@"王者荣耀助手",@"斯卡哈复健科",@"安抚",@"沙发上",@"日打的费",@"问问",@"无人区",@"阿斯废弃物人情味",@"沙发上"];
 }
 
 
 - (void)styleForNav {
     self.navigationItem.hidesBackButton = YES;
-    self.navigationItem.titleView = [self searchView];
+    self.navigationItem.titleView = [self searchBarView];
 }
 
-- (UIView *)searchView {
-    UIView *conView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - dis(30), 30)];
+#pragma mark - Init
 
-    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelBtn.frame = CGRectMake(kScreenWidth - 80, 0, 50, 30);
-    cancelBtn.titleLabel.font = kFont15;
-    [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
-    [cancelBtn setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
-    [conView addSubview:cancelBtn];
-    [cancelBtn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 90, 30)];
-    bgView.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1"];
-    bgView.layer.cornerRadius = 15;
-    [conView addSubview:bgView];
-    
-    UIImageView *searchImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search"]];
-    searchImgV.frame = CGRectMake(15, 8.5, 13, 13);
-    [bgView addSubview:searchImgV];
-    
-    UITextField *textF = [[UITextField alloc] initWithFrame:CGRectMake(33, 0, kScreenWidth - 130, 30)];
-    textF.placeholder = @"输入搜索商品的关键词";
-    textF.font = kFont13;
-    [bgView addSubview:textF];
-    
-    return conView;
+- (NSMutableArray *)goodsList {
+    if (!_goodsList) {
+        _goodsList = [[NSMutableArray alloc] init];
+    }
+    return _goodsList;
 }
 
-- (void)pop {
-    [self.navigationController popViewControllerAnimated:NO];
+#pragma mark - config
+
+- (void)config {
+    self.searchResultView.resultTableView.delegate = self;
+    self.searchResultView.resultTableView.dataSource = self;
+    kWeakSelf(weakSelf);
+    self.searchResultView.bottomManagerView.allSelectedBlock = ^(BOOL isSelected) {
+        [weakSelf allSelected:isSelected];
+    };
+    self.searchResultView.bottomManagerView.topBlock = ^{
+        for (int i = 0; i < 10; i++) {
+            ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:i];
+            goodsModel.goodsNum = i+1;
+            if (goodsModel.isSelected) {
+                goodsModel.top = YES;
+            }
+            [weakSelf.goodsList addObject:goodsModel];
+        }
+        [weakSelf.searchResultView.resultTableView reloadData];
+    };
+    self.searchResultView.bottomManagerView.cancelTopBlock = ^{
+        for (int i = 0; i < 10; i++) {
+            ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:i];
+            goodsModel.goodsNum = i+1;
+            if (goodsModel.isSelected) {
+                goodsModel.top = NO;
+            }
+            [weakSelf.goodsList addObject:goodsModel];
+        }
+        [weakSelf.searchResultView.resultTableView reloadData];
+    };
 }
 
 #pragma mark - delegate
+
 - (void)handleSelectTag:(NSString *)keyword {
     NSLog(@"%@", keyword);
 }
@@ -74,6 +99,7 @@
 }
 
 #pragma mark - lazy load
+
 - (ZLSearchHistoryView *)historyView {
     if (!_historyView) {
         _historyView = [[ZLSearchHistoryView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, 0)];
@@ -82,5 +108,150 @@
     return _historyView;
 }
 
+- (ZLGoodsSearchResultView *)searchResultView {
+    if (!_searchResultView) {
+        _searchResultView = [[ZLGoodsSearchResultView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, kScreenHeight - kNavBarHeight)];
+    }
+    return _searchResultView;
+}
+
+- (ZLSearchBarView *)searchBarView {
+    if (!_searchBarView) {
+        _searchBarView = [[ZLSearchBarView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
+        _searchBarView.searchTextField.delegate = self;
+        _searchBarView.delegate = self;
+        [_searchBarView changeSearchBarViewStyle:NO];
+    }
+    
+    return _searchBarView;
+}
+
+#pragma mark - setupData
+
+- (void)setupData {
+    for (int i = 0; i < 10; i++) {
+        ZLGoodsModel *goodsModel = [[ZLGoodsModel alloc] init];
+        goodsModel.goodsNum = i+1;
+        goodsModel.top = NO;
+        [self.goodsList addObject:goodsModel];
+    }
+    [self.searchResultView.resultTableView reloadData];
+}
+
+#pragma mark - private Method
+
+/**
+ 是否全选
+ */
+- (void)judgeIsAllSelected {
+    NSInteger count = 0;
+    BOOL enabelCancelTop = NO;
+    for (ZLGoodsModel *goodsModel in self.goodsList) {
+        if (goodsModel.isSelected) {
+            count ++;
+            if (goodsModel.top) {
+                enabelCancelTop = YES;
+            }
+        }
+    }
+    if (count == self.goodsList.count) {
+        self.searchResultView.bottomManagerView.allSelectedButton.selected = YES;
+        self.isAllSelected = YES;
+    } else {
+        self.searchResultView.bottomManagerView.allSelectedButton.selected = NO;
+        self.isAllSelected = NO;
+    }
+    if (enabelCancelTop) {
+        [self.searchResultView.bottomManagerView refreshCanelTopButton:enabelCancelTop];
+    }
+}
+
+- (void)allSelected:(BOOL )isSelected {
+    for (int i = 0; i < 10; i++) {
+        ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:i];
+        goodsModel.goodsNum = i+1;
+        goodsModel.isSelected = isSelected;
+        [self.goodsList addObject:goodsModel];
+    }
+    [self.searchResultView.resultTableView reloadData];
+}
+
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+//    ZLGoodsSearchResultVC *searchResultVC = [[ZLGoodsSearchResultVC alloc] init];
+//    [self.navigationController pushViewController:searchResultVC animated:NO];
+    [self searchGoods];
+    return YES;
+}
+
+#pragma mark - UIButton Actions
+
+
+- (void)pop {
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+- (void)managerButtonAction:(UIBarButtonItem *)sender {
+    sender.title = self.allowEdit ? @"管理": @"完成";
+    self.allowEdit = !self.allowEdit;
+    self.searchResultView.bottomManagerView.hidden = !self.allowEdit;
+    self.isAllSelected = NO;
+    [self.searchResultView.bottomManagerView reset];
+    //    [self judgeIsAllSelected];
+}
+
+- (void)addGoodsButtonAction {
+    
+}
+
+#pragma mark - delegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.goodsList.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return dis(130);
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ZLGoodsListCell *cell = [ZLGoodsListCell listCellWithTableView:tableView];
+    cell.allowEdit = self.allowEdit;
+    [cell setupData:[self.goodsList objectAtIndex:indexPath.row]];
+    kWeakSelf(weakSelf);
+    cell.selectedButtonBlock = ^(BOOL isSelected) {
+        ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:indexPath.row];
+        goodsModel.isSelected = isSelected;
+        [weakSelf judgeIsAllSelected];
+    };
+    return cell;
+}
+
+#pragma mark - ZLSearchBarViewDelegate
+
+- (void)backPreviousPage {
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+- (void)searchGoods {
+    self.historyView.hidden = YES;
+    self.searchResultView.hidden = NO;
+    [self.searchBarView changeSearchBarViewStyle:YES];
+    [self.searchBarView.searchTextField resignFirstResponder];
+}
+
+- (void)manageGoods:(UIButton *)manageBtn {
+    [manageBtn setTitle:self.allowEdit ? @"管理": @"完成" forState:UIControlStateNormal];
+    self.allowEdit = !self.allowEdit;
+    self.searchResultView.bottomManagerView.hidden = !self.allowEdit;
+    self.isAllSelected = NO;
+    [self.searchResultView.bottomManagerView reset];
+}
+
+- (void)addGoods {
+    
+}
 
 @end

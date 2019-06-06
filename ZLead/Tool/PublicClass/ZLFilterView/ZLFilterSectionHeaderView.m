@@ -26,7 +26,7 @@
 - (void)setClassifyItemModel:(ZLClassifyItemModel *)classifyItemModel {
     _classifyItemModel = classifyItemModel;
     if (classifyItemModel && _filterDataModel.indexPath.section != 0) {
-        self.filterItemView.frame = CGRectMake(0, self.height - dis(32), dis(97), dis(32));
+        self.filterItemView.frame = CGRectMake(0, self.height - dis(42), dis(97), dis(32));
         self.filterItemView.hidden = NO;
     } else {
         self.filterItemView.hidden = YES;
