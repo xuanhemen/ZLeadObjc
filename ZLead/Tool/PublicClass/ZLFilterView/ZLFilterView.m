@@ -337,9 +337,6 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 
 - (void)selectedFilterItem:(ZLFilterItemCell *)item classifyItemModel:(ZLClassifyItemModel *)classifyItemModel {
     NSIndexPath *indexPath = [self.filter indexPathForCell:item];
-    if (indexPath.section == 0) {
-        return;
-    }
     ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
     for (ZLClassifyItemModel *itemModel in filterDataModel.dataList) {
         if (itemModel.classifyId == filterDataModel.selectedClassifyItemModel.classifyId) {

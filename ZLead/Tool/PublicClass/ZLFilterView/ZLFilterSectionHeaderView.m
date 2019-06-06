@@ -25,7 +25,8 @@
 
 - (void)setClassifyItemModel:(ZLClassifyItemModel *)classifyItemModel {
     _classifyItemModel = classifyItemModel;
-    if (classifyItemModel) {
+    if (classifyItemModel && _filterDataModel.indexPath.section != 0) {
+        self.filterItemView.frame = CGRectMake(0, self.height - dis(32), dis(97), dis(32));
         self.filterItemView.hidden = NO;
     } else {
         self.filterItemView.hidden = YES;
@@ -34,7 +35,7 @@
     self.imageView.hidden = self.details.hidden ;
     CGSize titleSize = [self.title.text sizeWithFont:[UIFont boldSystemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
     self.title.frame = CGRectMake(10, 0, titleSize.width, self.frame.size.height);
-    self.filterItemView.frame = CGRectMake(0, self.height - dis(32), dis(97), dis(32));
+    
     [self.filterItemView setClassifyItemModel:classifyItemModel];
 }
 
@@ -88,7 +89,7 @@
     
     self.details.frame = CGRectMake(self.frame.size.width - 60, 0, 60, dis(44));
     
-    self.filterItemView.frame = CGRectMake(0, self.height - dis(42), dis(97), dis(32));
+//    self.filterItemView.frame = CGRectMake(0, self.height - dis(42), dis(97), dis(32));
 }
 
 - (ZLFilterItemView *)filterItemView {

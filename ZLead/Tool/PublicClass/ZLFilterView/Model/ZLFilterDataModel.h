@@ -12,9 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class ZLClassifyItemModel;
 
 @interface ZLFilterDataModel : NSObject
-@property (nonatomic, strong) ZLClassifyItemModel *selectedFirstClassifyItemModel;
-@property (nonatomic, strong) ZLClassifyItemModel *selectedSecondClassifyItemModel;
-@property (nonatomic, strong) ZLClassifyItemModel *selectedThirdClassifyItemModel;
 @property (nonatomic, strong) ZLClassifyItemModel *selectedClassifyItemModel;
 @property (nonatomic, strong) NSArray *dataList;
 @property (nonatomic, assign) BOOL isUnflod;
