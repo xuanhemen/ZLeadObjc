@@ -1,21 +1,22 @@
 //
-//  ZLAddWayVC.m
+//  ZLAddPlatformVC.m
 //  ZLead
 //
-//  Created by 董建伟 on 2019/6/4.
+//  Created by 董建伟 on 2019/6/5.
 //  Copyright © 2019 Beijing tai chi HuaQing information systems co., LTD. All rights reserved.
 //
 
-#import "ZLAddWayVC.h"
+#import "ZLAddPlatformVC.h"
 
-@interface ZLAddWayVC ()
+@interface ZLAddPlatformVC ()
 
 @end
 
-@implementation ZLAddWayVC
+@implementation ZLAddPlatformVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"从平台添加商品";
     // Do any additional setup after loading the view.
 }
 

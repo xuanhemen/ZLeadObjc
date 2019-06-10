@@ -9,7 +9,7 @@
 #import "ZLGoodsVC.h"
 #import "ZLGoodsHeaderView.h"
 #import "ZLGoodsListCell.h"
-
+#import "ZLAddWayVC.h"
 #import "ZLGoodsSearchVC.h"
 
 @interface ZLGoodsVC ()<UITableViewDelegate, UITableViewDataSource>
@@ -28,19 +28,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor zl_mainColor]];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+   
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self styleForNav];
     [self layoutChildViews];
 }
@@ -88,7 +85,8 @@
 }
 
 - (void)addGoodsButtonAction {
-    
+    ZLAddWayVC *vc = [[ZLAddWayVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - delegate

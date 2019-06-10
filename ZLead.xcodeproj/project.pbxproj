@@ -24,6 +24,11 @@
 		7A047C0F22A61BAF00867B3E /* ZLAddWayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A047C0E22A61BAF00867B3E /* ZLAddWayVC.m */; };
 		7A488A652298E3B300069483 /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A488A642298E3B300069483 /* CustomTextField.m */; };
 		7A488A6B2298F49800069483 /* ZLInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A488A6A2298F49800069483 /* ZLInputView.m */; };
+		7A55F4F022ACF644003EF83D /* UIViewController+ZLFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A55F4EF22ACF644003EF83D /* UIViewController+ZLFunc.m */; };
+		7A5B033122A7D38C00AB320E /* ZLAddCustomGoodsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5B033022A7D38C00AB320E /* ZLAddCustomGoodsVC.m */; };
+		7A5B033422A7D48400AB320E /* ZLAddPlatformVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5B033322A7D48400AB320E /* ZLAddPlatformVC.m */; };
+		7A8B621A22A8AD1900438832 /* ZLAddGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8B621922A8AD1900438832 /* ZLAddGoodsView.m */; };
+		7A8B621D22A8C5B000438832 /* ZLAddGoodsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8B621C22A8C5B000438832 /* ZLAddGoodsViewModel.m */; };
 		7A9D682A2296680F0024DF3A /* URLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D68292296680F0024DF3A /* URLManager.m */; };
 		7A9D682D229679AE0024DF3A /* NetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D682B229679AE0024DF3A /* NetManager.m */; };
 		7A9D683022967BB80024DF3A /* ZLShopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D682F22967BB80024DF3A /* ZLShopVC.m */; };
@@ -157,6 +162,16 @@
 		7A488A642298E3B300069483 /* CustomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextField.m; sourceTree = "<group>"; };
 		7A488A692298F49800069483 /* ZLInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLInputView.h; sourceTree = "<group>"; };
 		7A488A6A2298F49800069483 /* ZLInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLInputView.m; sourceTree = "<group>"; };
+		7A55F4EE22ACF644003EF83D /* UIViewController+ZLFunc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ZLFunc.h"; sourceTree = "<group>"; };
+		7A55F4EF22ACF644003EF83D /* UIViewController+ZLFunc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ZLFunc.m"; sourceTree = "<group>"; };
+		7A5B032F22A7D38C00AB320E /* ZLAddCustomGoodsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLAddCustomGoodsVC.h; sourceTree = "<group>"; };
+		7A5B033022A7D38C00AB320E /* ZLAddCustomGoodsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLAddCustomGoodsVC.m; sourceTree = "<group>"; };
+		7A5B033222A7D48400AB320E /* ZLAddPlatformVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLAddPlatformVC.h; sourceTree = "<group>"; };
+		7A5B033322A7D48400AB320E /* ZLAddPlatformVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLAddPlatformVC.m; sourceTree = "<group>"; };
+		7A8B621822A8AD1900438832 /* ZLAddGoodsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLAddGoodsView.h; sourceTree = "<group>"; };
+		7A8B621922A8AD1900438832 /* ZLAddGoodsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLAddGoodsView.m; sourceTree = "<group>"; };
+		7A8B621B22A8C5B000438832 /* ZLAddGoodsViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLAddGoodsViewModel.h; sourceTree = "<group>"; };
+		7A8B621C22A8C5B000438832 /* ZLAddGoodsViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLAddGoodsViewModel.m; sourceTree = "<group>"; };
 		7A9D68282296680F0024DF3A /* URLManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLManager.h; sourceTree = "<group>"; };
 		7A9D68292296680F0024DF3A /* URLManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLManager.m; sourceTree = "<group>"; };
 		7A9D682B229679AE0024DF3A /* NetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetManager.m; sourceTree = "<group>"; };
@@ -555,6 +570,8 @@
 		7A0097E7229522E200AD79DE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7A8B621B22A8C5B000438832 /* ZLAddGoodsViewModel.h */,
+				7A8B621C22A8C5B000438832 /* ZLAddGoodsViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -562,6 +579,7 @@
 		7A0097E8229522F300AD79DE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7A8B621422A8AB6F00438832 /* addGoods */,
 				E832D751229FB30900D0ED7F /* ZLGoodsHeaderView.h */,
 				E832D752229FB30900D0ED7F /* ZLGoodsHeaderView.m */,
 				E832D754229FBA3E00D0ED7F /* ZLGoodsListCell.h */,
@@ -575,12 +593,11 @@
 		7A0097E9229522F900AD79DE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7A55F4ED22ACF1E3003EF83D /* addGoods */,
 				7A9D683122967BDC0024DF3A /* ZLGoodsVC.h */,
 				7A9D683222967BDC0024DF3A /* ZLGoodsVC.m */,
 				E832D757229FC99D00D0ED7F /* ZLGoodsSearchVC.h */,
 				E832D758229FC99D00D0ED7F /* ZLGoodsSearchVC.m */,
-				7A047C0D22A61BAF00867B3E /* ZLAddWayVC.h */,
-				7A047C0E22A61BAF00867B3E /* ZLAddWayVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -669,6 +686,28 @@
 			children = (
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		7A55F4ED22ACF1E3003EF83D /* addGoods */ = {
+			isa = PBXGroup;
+			children = (
+				7A047C0D22A61BAF00867B3E /* ZLAddWayVC.h */,
+				7A047C0E22A61BAF00867B3E /* ZLAddWayVC.m */,
+				7A5B032F22A7D38C00AB320E /* ZLAddCustomGoodsVC.h */,
+				7A5B033022A7D38C00AB320E /* ZLAddCustomGoodsVC.m */,
+				7A5B033222A7D48400AB320E /* ZLAddPlatformVC.h */,
+				7A5B033322A7D48400AB320E /* ZLAddPlatformVC.m */,
+			);
+			path = addGoods;
+			sourceTree = "<group>";
+		};
+		7A8B621422A8AB6F00438832 /* addGoods */ = {
+			isa = PBXGroup;
+			children = (
+				7A8B621822A8AD1900438832 /* ZLAddGoodsView.h */,
+				7A8B621922A8AD1900438832 /* ZLAddGoodsView.m */,
+			);
+			path = addGoods;
 			sourceTree = "<group>";
 		};
 		7A9D681F22964B200024DF3A /* Tool */ = {
@@ -835,6 +874,8 @@
 			children = (
 				7AB6D8BD229FCF1C00AFDCF0 /* ZLBaseViewController+Func.h */,
 				7AB6D8BE229FCF1C00AFDCF0 /* ZLBaseViewController+Func.m */,
+				7A55F4EE22ACF644003EF83D /* UIViewController+ZLFunc.h */,
+				7A55F4EF22ACF644003EF83D /* UIViewController+ZLFunc.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1161,6 +1202,7 @@
 				E832D6FA229E51CD00D0ED7F /* ZLPerShareView.m in Sources */,
 				E2802B4D229906FB004AF4B8 /* ZLShopTurnoverView.m in Sources */,
 				7AB6D8BF229FCF1C00AFDCF0 /* ZLBaseViewController+Func.m in Sources */,
+				7A5B033422A7D48400AB320E /* ZLAddPlatformVC.m in Sources */,
 				E832D756229FBA3E00D0ED7F /* ZLGoodsListCell.m in Sources */,
 				7A9D684C229689D80024DF3A /* GeneralTableViewDelegate.m in Sources */,
 				7A047C0F22A61BAF00867B3E /* ZLAddWayVC.m in Sources */,
@@ -1181,6 +1223,7 @@
 				7A9D683022967BB80024DF3A /* ZLShopVC.m in Sources */,
 				7A9D683322967BDC0024DF3A /* ZLGoodsVC.m in Sources */,
 				7AC903BE229D425C0036AD68 /* ZLSetPasswordVC.m in Sources */,
+				7A55F4F022ACF644003EF83D /* UIViewController+ZLFunc.m in Sources */,
 				E2802B5622991597004AF4B8 /* ZLShopBusinessMenuCell.m in Sources */,
 				E832D708229E51EC00D0ED7F /* ZLPerAccountVC.m in Sources */,
 				E265DFE2229B901900842DD0 /* ZLShopManagerNoteVC.m in Sources */,
@@ -1190,6 +1233,7 @@
 				E832D710229E521100D0ED7F /* ZLSetWechatVC.m in Sources */,
 				E2802B6222993CA7004AF4B8 /* ZLShopListVC.m in Sources */,
 				E265E008229D37AA00842DD0 /* ZLPaymentMethodCell.m in Sources */,
+				7A8B621A22A8AD1900438832 /* ZLAddGoodsView.m in Sources */,
 				7ACE1B8A22A22A4600A5701D /* ZLUserInfo.m in Sources */,
 				E265DFDF229B8EBD00842DD0 /* ZLOfflinePaymentVC.m in Sources */,
 				7A9D68512296983B0024DF3A /* ZLLoginView.m in Sources */,
@@ -1218,6 +1262,7 @@
 				E832D753229FB30900D0ED7F /* ZLGoodsHeaderView.m in Sources */,
 				7A00980B22955ACB00AD79DE /* ZLConfig.m in Sources */,
 				7AFD07EC229EA0F90093091C /* ZLAddShopInfoVC.m in Sources */,
+				7A5B033122A7D38C00AB320E /* ZLAddCustomGoodsVC.m in Sources */,
 				E265DFF0229CE00800842DD0 /* UIView+Size.m in Sources */,
 				E832D6F9229E51CD00D0ED7F /* ZLPerListView.m in Sources */,
 				7A9D683E229683DE0024DF3A /* NSObject+HUD.m in Sources */,
@@ -1227,6 +1272,7 @@
 				E265DFEC229BF70000842DD0 /* ZLShoppingCartView.m in Sources */,
 				7A9D682A2296680F0024DF3A /* URLManager.m in Sources */,
 				7A9D6841229688040024DF3A /* ZLLoginVC.m in Sources */,
+				7A8B621D22A8C5B000438832 /* ZLAddGoodsViewModel.m in Sources */,
 				E265E01A229EA0F500842DD0 /* ZLShopGoodsSearchBarView.m in Sources */,
 				7A0097A72294F97F00AD79DE /* AppDelegate.m in Sources */,
 				E2802B5F22993555004AF4B8 /* ZLShopListCell.m in Sources */,
