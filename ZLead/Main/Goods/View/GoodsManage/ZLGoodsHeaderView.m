@@ -62,7 +62,9 @@
             UIButton *btn = (UIButton *)view;
             if (btn == sender) {
                 btn.selected = YES;
-            }else {
+                btn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+            } else {
+                btn.titleLabel.font = kFont14;
                 btn.selected = NO;
             }
         }
@@ -83,6 +85,7 @@
     if (!_sellingBtn) {
         _sellingBtn = [self customButtonWithTitle:@"已上架"];
         _sellingBtn.selected = YES;
+        _sellingBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         [self addSubview:_sellingBtn];
     }
     return _sellingBtn;

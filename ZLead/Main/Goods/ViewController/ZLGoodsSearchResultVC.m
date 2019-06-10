@@ -1,28 +1,22 @@
 //
-//  ZLGoodsVC.m
+//  ZLGoodsSearchResultVC.m
 //  ZLead
 //
-//  Created by 董建伟 on 2019/5/23.
+//  Created by dmy on 2019/6/6.
 //  Copyright © 2019 Beijing tai chi HuaQing information systems co., LTD. All rights reserved.
 //
 
-#import "ZLGoodsVC.h"
+#import "ZLGoodsSearchResultVC.h"
 #import "ZLGoodsHeaderView.h"
 #import "ZLGoodsManagerView.h"
 #import "ZLGoodsListCell.h"
 
-#import "ZLAddWayVC.h"
-
-#import "ZLFilterView.h"
-
-
 #import "ZLGoodsSearchVC.h"
 
 #import "ZLGoodsModel.h"
-#import "ZLFilterDataModel.h"
 #import "ZLClassifyItemModel.h"
 
-@interface ZLGoodsVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface ZLGoodsSearchResultVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) ZLGoodsHeaderView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -31,16 +25,12 @@
 @property (nonatomic, assign) BOOL allowEdit;
 @property (nonatomic, strong) NSMutableArray *goodsList;
 @property (nonatomic, assign) BOOL isAllSelected;
-@property (nonatomic, strong) ZLFilterView *filterView;
-@property (nonatomic, assign) BOOL showFilter;
-@property (nonatomic, strong) ZLFilterDataModel *filterDataModel;
 @end
 
-@implementation ZLGoodsVC
+@implementation ZLGoodsSearchResultVC
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-   
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -49,7 +39,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     [self styleForNav];
     [self layoutChildViews];
     
@@ -59,30 +49,36 @@
 /** 导航栏 */
 - (void)styleForNav {
     UIView *searchV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dis(255), 30)];
-    searchV.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.3];
+    searchV.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1"];
     searchV.layer.cornerRadius = 15;
     UIImageView *searchIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, 8, 13, 13)];
-    searchIcon.image = [UIImage imageNamed:@"goods-search-icon"];
+    searchIcon.image = [UIImage imageNamed:@"search-icon-gray"];
     [searchV addSubview:searchIcon];
     UILabel *searchPL = [[UILabel alloc] initWithFrame:CGRectMake(32, 0, 200, 30)];
     searchPL.font = kFont13;
     searchPL.text = @"输入搜索商品的关键词";
-    searchPL.textColor = [UIColor whiteColor];
+    searchPL.textColor = [UIColor colorWithHexString:@"#333333"];
     [searchV addSubview:searchPL];
     self.navigationItem.titleView = searchV;
     UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapG:)];
     [searchV addGestureRecognizer:tapG];
     
-    UIButton *classificationButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [classificationButton setImage:[UIImage imageNamed:@"goods-classification-icon"] forState:UIControlStateNormal];
-    classificationButton.frame = CGRectMake(0, 0, 19, 19);
-    [classificationButton addTarget:self action:@selector(classificationButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:classificationButton];
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    backButton.frame = CGRectMake(0, 0, 19, 19);
+    [backButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = leftItem;
     
-    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithTitle:@"管理" style:UIBarButtonItemStyleDone target:self action:@selector(managerButtonAction:)];
+    UIButton *manageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    manageButton.frame = CGRectMake(0, 0, 19, 19);
+    [manageButton setTitle:@"管理" forState:UIControlStateNormal];
+    [manageButton setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+    manageButton.titleLabel.font = kFont15;
+    [manageButton addTarget:self action:@selector(managerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithCustomView:manageButton];
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addButton setImage:[UIImage imageNamed:@"goods-add-icon"] forState:UIControlStateNormal];
+    [addButton setImage:[UIImage imageNamed:@"goods-add-icon-gray"] forState:UIControlStateNormal];
     addButton.frame = CGRectMake(0, 0, 19, 19);
     [addButton addTarget:self action:@selector(addGoodsButtonAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithCustomView:addButton];
@@ -93,9 +89,9 @@
     self.headerView = [[ZLGoodsHeaderView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, 45)];
     [self.view addSubview:self.headerView];
     
-    self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
-
-    self.bottomManagerView = [[ZLGoodsManagerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kTabBarHeight - dis(50), kScreenWidth, dis(50))];
+    self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kNavBarHeight - 45);
+    
+    self.bottomManagerView = [[ZLGoodsManagerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - dis(50), kScreenWidth, dis(50))];
     self.bottomManagerView.hidden = YES;
     kWeakSelf(weakSelf);
     self.bottomManagerView.allSelectedBlock = ^(BOOL isSelected) {
@@ -192,36 +188,8 @@
     [self.navigationController pushViewController:searchVc animated:NO];
 }
 
-- (void)classificationButtonAction:(UIButton *)btn {
-    if (!self.showFilter) {
-        [self.filterView dismiss];
-        self.filterDataModel  = [[ZLFilterDataModel alloc] init];
-        NSArray *sectionTitles = @[@"分类", @"一级分类", @"二级分类"];
-        NSMutableArray *allItems = [[NSMutableArray alloc] init];
-        for (NSInteger section = 0; section < 3; section ++) {
-            ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
-            filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
-            filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-            NSMutableArray *items = [[NSMutableArray alloc] init];
-            for (NSInteger i = 0; i < 10; i++) {
-                ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
-                itemModel.classifyId = i + 1;
-                itemModel.title = [NSString stringWithFormat:@"分类%@", @(i)];
-                [items addObject:itemModel];
-            }
-            filterDataModel.dataList = items;
-            [allItems addObject:filterDataModel];
-        }
-        self.filterDataModel.dataList = allItems;
-        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromLeft  filterViewBlock:^(NSArray * _Nonnull tagArray) {
-            
-        }];
-        self.filterView.durationTime = 0.5;
-        [self.filterView show];
-    } else {
-        [self.filterView dismiss];
-    }
-    
+- (void)back:(UIButton *)btn {
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)managerButtonAction:(UIBarButtonItem *)sender {
@@ -230,12 +198,11 @@
     self.bottomManagerView.hidden = !self.allowEdit;
     self.isAllSelected = NO;
     [self.bottomManagerView reset];
-//    [self judgeIsAllSelected];
+    //    [self judgeIsAllSelected];
 }
 
 - (void)addGoodsButtonAction {
-    ZLAddWayVC *vc = [[ZLAddWayVC alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 #pragma mark - delegate
@@ -261,55 +228,14 @@
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-
-}
-
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        
-        NSLog(@"删除");
-        
-    }];
-//    [[UIButton appearanceWhenContainedInInstancesOfClasses:@[[ZLGoodsListCell class]]] setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    action1.backgroundColor = [UIColor colorWithHexString:@"#F0F0F0"];
-    
-    
-    UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"下架" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        
-        NSLog(@"更多");
-        
-    }];
-    
-    action2.backgroundColor = [UIColor colorWithHexString:@"#FFB32A"];
-    
-    UITableViewRowAction *action3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
-    }];
-    action3.backgroundColor = [UIColor colorWithHexString:@"#FF7527"];
-    
-    UITableViewRowAction *action4 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"取消\n置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
-    }];
-    action4.backgroundColor = [UIColor colorWithHexString:@"#FF3731"];
-    
-    NSArray *arr = @[action4,action3, action2, action1];
-    
-    return arr;
-}
-
 #pragma mark - setter
 
 - (void)setAllowEdit:(BOOL)allowEdit {
     _allowEdit = allowEdit;
     if (_allowEdit) {
-        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - dis(50) - kNavBarHeight - 45);
+        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - dis(50) - kNavBarHeight - 45);
     } else {
-        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
+        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kNavBarHeight - 45);
     }
     [self.tableView reloadData];
 }
@@ -329,3 +255,4 @@
 }
 
 @end
+
