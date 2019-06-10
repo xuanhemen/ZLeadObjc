@@ -16,8 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor whiteColor];
-    self.view.backgroundColor = [UIColor zl_bgColor];
+    self.view.backgroundColor = [UIColor zl_bgColor]; //背景颜色
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+
+    
+   
     // Do any additional setup after loading the view.
 
 }
@@ -35,5 +38,4 @@
 - (void)backAction {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 @end

@@ -16,7 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.navigationBar setBarTintColor:[UIColor zl_mainColor]]; //设置导航栏颜色
+    self.navigationBar.tintColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
 }
 
@@ -27,7 +28,17 @@
     [super pushViewController:viewController animated:animated];
     self.hidesBottomBarWhenPushed = NO;
 }
-
+/** 用颜色生成图片 */
+- (UIImage *)createImageWithColor:(UIColor*) color {
+    CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
+}
 /*
 #pragma mark - Navigation
 

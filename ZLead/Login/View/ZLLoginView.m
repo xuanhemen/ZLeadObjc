@@ -36,6 +36,7 @@
         self.viewModel = viewModel;
         self.style = style;
         [self initView]; //配置登录视图
+        [self addGesture]; //添加手势，取消键盘
         
         
     }
@@ -163,5 +164,12 @@
         }];
     }
     return _login;
+}
+- (void)addGesture {
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
+    [[tapGesture rac_gestureSignal] subscribeNext:^(id x) {
+        [self endEditing:YES];
+    }];
+    [self addGestureRecognizer:tapGesture];
 }
 @end
