@@ -26,8 +26,9 @@
     self.unflodButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.unflodButton.frame = CGRectMake(0, dis(10), self.width, self.height - dis(10));
     self.unflodButton.backgroundColor = [UIColor colorWithHexString:@"#FAFAFA"];
-    [self.unflodButton setTitle:@"展开" forState:UIControlStateNormal];
+    [self.unflodButton setTitle:@" 展开" forState:UIControlStateNormal];
     self.unflodButton.titleLabel.font = kFont12;
+    [self.unflodButton setImage:[UIImage imageNamed:@"goods-classifiy-open"] forState:UIControlStateNormal];
     [self.unflodButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
     [self.unflodButton addTarget:self action:@selector(unflodButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.unflodButton];
@@ -35,7 +36,8 @@
 
 - (void)setFilterDataModel:(ZLFilterDataModel *)filterDataModel {
     _filterDataModel = filterDataModel;
-    [self.unflodButton setTitle:_filterDataModel.isUnflod ? @"收起" : @"展开" forState:UIControlStateNormal];
+    [self.unflodButton setImage:_filterDataModel.isUnflod ? [UIImage imageNamed:@"goods-classifiy-close"] : [UIImage imageNamed:@"goods-classifiy-open"] forState:UIControlStateNormal];
+    [self.unflodButton setTitle:_filterDataModel.isUnflod ? @" 收起" : @" 展开" forState:UIControlStateNormal];
 }
 
 #pragma mark - UIButton Actions
@@ -43,7 +45,8 @@
 - (void)unflodButtonAction:(UIButton *)unflodButton {
     unflodButton.selected = !unflodButton.selected;
     _filterDataModel.isUnflod = !_filterDataModel.isUnflod;
-    [self.unflodButton setTitle:_filterDataModel.isUnflod ? @"收起" : @"展开" forState:UIControlStateNormal];
+    [self.unflodButton setImage:_filterDataModel.isUnflod ? [UIImage imageNamed:@"goods-classifiy-close"] : [UIImage imageNamed:@"goods-classifiy-open"] forState:UIControlStateNormal];
+    [self.unflodButton setTitle:_filterDataModel.isUnflod ? @" 收起" : @" 展开" forState:UIControlStateNormal];
     if (self.delegate && [self.delegate respondsToSelector:@selector(filterSectionFooterView:isUnfold:filterDataModel:)]) {
         [self.delegate filterSectionFooterView:self isUnfold:_filterDataModel.isUnflod filterDataModel:_filterDataModel];
     }
