@@ -8,7 +8,9 @@
 
 #import "ZLAddClassifyNameVC.h"
 
-@interface ZLAddClassifyNameVC ()
+#define kMaxLength 30
+
+@interface ZLAddClassifyNameVC ()<UITextFieldDelegate>
 @property (nonatomic, strong) UITextField *classifyNameTF;
 @property (nonatomic, strong) UIView *line;
 @property (nonatomic, strong) UILabel *numLabel;
@@ -62,7 +64,9 @@
     self.classifyNameTF = [[UITextField alloc] initWithFrame:CGRectMake(dis(32), kNavBarHeight +  dis(34), dis(315), dis(30))];
     self.classifyNameTF.placeholder = @"请输入您的分类名称";
     self.classifyNameTF.font = kFont15;
+    self.classifyNameTF.delegate = self;
     [self.view addSubview:self.classifyNameTF];
+    [self.classifyNameTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     self.line = [[UIView alloc] initWithFrame:CGRectMake(dis(32), self.classifyNameTF.bottom + dis(10), dis(315), 1)];
     self.line.backgroundColor = [UIColor colorWithHexString:@"#E2E2E2"];
@@ -74,6 +78,33 @@
     self.numLabel.textAlignment = NSTextAlignmentRight;
     self.numLabel.text = @"0/30";
     [self.view addSubview:self.numLabel];
+}
+
+#pragma mark - UITextField Method
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    if(kMaxLength <= 0){
+        return;
+    }
+    NSString *text = textField.text;
+    UITextRange *selectedRange = [textField markedTextRange];
+    UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+    if (!position){
+        if (text.length > kMaxLength) {
+            NSRange rangeIndex = [text rangeOfComposedCharacterSequenceAtIndex:kMaxLength];
+            if (rangeIndex.length == 1) {
+                textField.text = [text substringToIndex:kMaxLength];
+            } else {
+                if(kMaxLength == 1) {
+                    textField.text = @"";
+                } else {
+                    NSRange rangeRange = [text rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, kMaxLength - 1 )];
+                    textField.text = [text substringWithRange:rangeRange];
+                }
+            }
+        }
+    }
+    self.numLabel.text = [NSString stringWithFormat:@"%@/30", @(textField.text.length)];
 }
 
 #pragma mark - UIButton Actions
@@ -96,6 +127,43 @@
 }
 
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if(kMaxLength <= 0){
+        return YES;
+    }
+    UITextRange *selectedRange = [textField markedTextRange];//高亮选择的字
+    UITextPosition *startPos = [textField positionFromPosition:selectedRange.start offset:0];
+    UITextPosition *endPos = [textField positionFromPosition:selectedRange.end offset:0];
+    NSInteger markLength = [textField offsetFromPosition:startPos toPosition:endPos];
+    
+    NSInteger confirmlength =  textField.text.length - markLength - range.length;//已经确认输入的字符长度
+    if(confirmlength >= kMaxLength) {
+        return NO;
+    }
+    
+    NSInteger allowMaxMarkLength = [self allowMaxMarkLength:kMaxLength - confirmlength];
+    if(markLength > allowMaxMarkLength ){// && string.length > 0){
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - Private Method
+/**
+ 主要是用于中文输入的场景，可根据需要自定义
+ 剩余的允许输入的字数较少时，限制拼音字符的输入，提升体验
+ */
+- (NSInteger)allowMaxMarkLength:(NSInteger)remainLength {
+    NSInteger length = 0;
+    if(remainLength > 2){
+        length = NSIntegerMax;
+    } else if (remainLength > 0){
+        length = remainLength * 6;  //一个中文对应的拼音一般不超过6个
+    }
+    return length;
+}
 
 
 @end

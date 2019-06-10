@@ -15,8 +15,10 @@
 @property (nonatomic, strong)UIImageView *topImageView;
 @property (nonatomic, strong)UIImageView *topicImgView;
 @property (nonatomic, strong)UILabel *topicLbl;
-/** 价格 */
-@property (nonatomic, strong)UILabel *priceLbl;
+/** 门店价格 */
+@property (nonatomic, strong)UILabel *offlinePriceLbl;
+/** 网店价格 */
+@property (nonatomic, strong)UILabel *onlinePriceLbl;
 /** 成本 */
 @property (nonatomic, strong)UILabel *costLbl;
 /** 库存 */
@@ -70,12 +72,12 @@
     [self.topicLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.topicImgView.mas_right).offset(dis(10));
         make.right.equalTo(self.contentView).offset(-dis(15));
-        make.top.equalTo(self.topicImgView).offset(dis(10));
+        make.top.equalTo(self.topicImgView).offset(dis(8));
     }];
     
     [self.stockLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.topicLbl);
-        make.bottom.equalTo(self.topicImgView).offset(-dis(16));
+        make.bottom.equalTo(self.topicImgView).offset(-dis(6));
     }];
     
     [self.salesLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,19 +85,24 @@
         make.left.equalTo(self.stockLbl.mas_right).offset(dis(10));
     }];
     
-    [self.priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.offlinePriceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.topicLbl);
         make.bottom.equalTo(self.stockLbl.mas_top).offset(-dis(10));
     }];
     
+    [self.onlinePriceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.topicLbl);
+        make.bottom.equalTo(self.offlinePriceLbl.mas_top).offset(-dis(10));
+    }];
+    
     [self.costLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.priceLbl.mas_right).offset(dis(10));
-        make.centerY.equalTo(self.priceLbl);
+        make.left.equalTo(self.offlinePriceLbl.mas_right).offset(dis(10));
+        make.centerY.equalTo(self.offlinePriceLbl);
     }];
     
     [self.editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.contentView).offset(-dis(15));
-        make.bottom.equalTo(self.stockLbl);
+        make.bottom.equalTo(self.stockLbl.mas_top);
         make.width.height.mas_equalTo(14);
     }];
     
@@ -169,15 +176,26 @@
     return _topicLbl;
 }
 
-- (UILabel *)priceLbl {
-    if (!_priceLbl) {
-        _priceLbl = [[UILabel alloc] init];
-        _priceLbl.textColor = [UIColor zl_mainColor];
-        _priceLbl.font = [UIFont boldSystemFontOfSize:18];
-        [self.contentView addSubview:_priceLbl];
-        [_priceLbl setAttributedText:[self attributedStringWithStr:@"￥28.6"]];
+- (UILabel *)onlinePriceLbl {
+    if (!_onlinePriceLbl) {
+        _onlinePriceLbl = [[UILabel alloc] init];
+        _onlinePriceLbl.textColor = [UIColor zl_mainColor];
+        _onlinePriceLbl.font = [UIFont boldSystemFontOfSize:18];
+        [self.contentView addSubview:_onlinePriceLbl];
+        [_onlinePriceLbl setAttributedText:[self attributedStringWithStr:@"网店价 ¥28.6"]];
     }
-    return _priceLbl;
+    return _onlinePriceLbl;
+}
+
+- (UILabel *)offlinePriceLbl {
+    if (!_offlinePriceLbl) {
+        _offlinePriceLbl = [[UILabel alloc] init];
+        _offlinePriceLbl.textColor = [UIColor colorWithHexString:@"#999999"];
+        _offlinePriceLbl.font = kFont12;
+        _offlinePriceLbl.text = @"门店价: ¥27.10";
+        [self.contentView addSubview:_offlinePriceLbl];
+    }
+    return _offlinePriceLbl;
 }
 
 - (UILabel *)costLbl {
@@ -225,7 +243,7 @@
 #pragma mark - private
 - (NSAttributedString *)attributedStringWithStr:(NSString *)str {
     NSMutableAttributedString *mStr = [[NSMutableAttributedString alloc] initWithString:str];
-    [mStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10] range:NSMakeRange(0, 1)];
+    [mStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(0, 5)];
     
     return mStr;
 }

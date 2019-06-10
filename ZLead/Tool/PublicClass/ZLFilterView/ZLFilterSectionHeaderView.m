@@ -13,11 +13,9 @@
 #import "NSString+Size.h"
 
 @interface ZLFilterSectionHeaderView()
-
-@property (nonatomic , strong) UILabel *title;
-@property (nonatomic , strong) UILabel *details;
-@property (nonatomic , strong) UIImageView *imageView;
-@property (nonatomic , strong) ZLFilterItemView *filterItemView;
+@property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UIButton *manageButton;
+@property (nonatomic, strong) ZLFilterItemView *filterItemView;
 @property (nonatomic, strong) ZLClassifyItemModel *classifyItemModel;
 @end
 
@@ -30,11 +28,15 @@
         self.filterItemView.hidden = NO;
     } else {
         self.filterItemView.hidden = YES;
+        if (_filterDataModel.indexPath.section != 0) {
+            self.manageButton.hidden = NO;
+        } else {
+            self.manageButton.hidden = YES;
+        }
     }
-    self.details.hidden = NO;
-    self.imageView.hidden = self.details.hidden ;
     CGSize titleSize = [self.title.text sizeWithFont:[UIFont boldSystemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
-    self.title.frame = CGRectMake(10, 0, titleSize.width, self.frame.size.height);
+    self.title.frame = CGRectMake(0, 0, titleSize.width, self.frame.size.height);
+    self.manageButton.frame = CGRectMake(self.frame.size.width - 60, 0, 60, dis(44));
     
     [self.filterItemView setClassifyItemModel:classifyItemModel];
 }
@@ -68,8 +70,7 @@
 
 - (void)setupViews {
     [self addSubview:self.title];
-    [self addSubview:self.details];
-    [self addSubview:self.imageView];
+    [self addSubview:self.manageButton];
     [self addSubview:self.filterItemView];
     kWeakSelf(weakSelf)
     self.filterItemView.cancelSelectedBlock = ^{
@@ -84,10 +85,9 @@
 //    CGSize titleSize = [self.title.text sizeWithFont:[UIFont boldSystemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
 //    CGSize detailsSize = [self.details.text sizeWithFont:[UIFont boldSystemFontOfSize:11] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
     
-    self.title.frame = CGRectMake(10, 0, self.frame.size.width - 100, dis(44));
-    self.imageView.frame = CGRectMake(self.frame.size.width - 10 - 10, (dis(44) - 5 ) * 0.5, 10, 5);
+    self.title.frame = CGRectMake(0, 0, self.frame.size.width - 100, dis(44));
     
-    self.details.frame = CGRectMake(self.frame.size.width - 60, 0, 60, dis(44));
+    self.manageButton.frame = CGRectMake(self.frame.size.width - 60, 0, 60, dis(44));
     
 //    self.filterItemView.frame = CGRectMake(0, self.height - dis(42), dis(97), dis(32));
 }
@@ -100,25 +100,16 @@
     return _filterItemView;
 }
 
-- (UIImageView *)imageView {
-    if (_imageView == nil) {
-        _imageView = [[UIImageView alloc]init];
-        _imageView.image = [UIImage imageNamed:@"expand_down"];
-        _imageView.highlightedImage = [UIImage imageNamed:@"expand_up"];
+- (UIButton *)manageButton {
+    if (_manageButton == nil) {
+        _manageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_manageButton setTitle:@"管理" forState:UIControlStateNormal];
+        _manageButton.titleLabel.font = kFont11;
+        _manageButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [_manageButton setTitleColor:[UIColor colorWithHexString:@"#FFBC1A"] forState:UIControlStateNormal];
+        [_manageButton addTarget:self action:@selector(manageButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _imageView;
-}
-
-- (UILabel *)details {
-    if (_details == nil) {
-        _details = [[UILabel alloc] init];
-        _details.textAlignment = NSTextAlignmentRight;
-        _details.userInteractionEnabled = YES;
-        _details.font = [UIFont boldSystemFontOfSize:11];
-        _details.textColor = [UIColor orangeColor];
-        _details.text = @"管理";
-    }
-    return _details;
+    return _manageButton;
 }
 
 - (UILabel *)title {
@@ -137,6 +128,12 @@
         return dis(86);
     } else {
         return dis(44);
+    }
+}
+
+- (void)manageButtonAction:(UIButton *)manageBtn {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(manageClassify:filterDataModel:)]) {
+        [self.delegate manageClassify:self filterDataModel:self.filterDataModel];
     }
 }
 
