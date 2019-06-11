@@ -168,6 +168,7 @@
 - (UIButton *)addButton {
     if (!_addButton) {
         _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_addButton setImage:[UIImage imageNamed:@"plus-sign-icon"] forState:UIControlStateNormal];
         [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.expandView addSubview:self.addButton];
     }
@@ -177,6 +178,7 @@
 - (UIButton *)minusButton {
     if (!_minusButton) {
         _minusButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_minusButton setImage:[UIImage imageNamed:@"plus-sign-icon"] forState:UIControlStateNormal];
         [_minusButton addTarget:self action:@selector(minusButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.expandView addSubview:self.minusButton];
     }
