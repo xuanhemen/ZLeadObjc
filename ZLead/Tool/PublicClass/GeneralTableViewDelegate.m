@@ -14,7 +14,7 @@
     self.dataArr = array;
     self.createCell = cell;
     self.selecBlock = selectedBlock;
-   
+
 }
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *cell = self.createCell(tableView,indexPath);

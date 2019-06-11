@@ -11,11 +11,13 @@
 #import "ZLFilterView.h"
 #import "ZLFilterDataModel.h"
 #import "ZLClassifyItemModel.h"
+#import "ZLBrandVC.h"
 @interface ZLAddGoodsViewModel ()
 
 @property (nonatomic, strong) ZLFilterView *filterView;
 @property (nonatomic, assign) BOOL showFilter;
 @property (nonatomic, strong) ZLFilterDataModel *filterDataModel;
+@property (nonatomic, strong) UIViewController *seleVC; // 中间变量
 
 @end
 @implementation ZLAddGoodsViewModel
@@ -23,7 +25,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
+        self.brandEvent = [RACSubject subject];
     }
     return self;
 }
@@ -53,14 +55,26 @@
     }
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZLAddGoodsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == 0) {
         if (indexPath.row==0) {
             [self classificationButtonAction:cell.contentLb];
+        }else if (indexPath.row==1){
+            [self.brandEvent sendNext:@""];
+            
         }
     }
+}
+#pragma mark - 跳转
+-(void)jumpFromController:(UIViewController *)vc {
+    _seleVC = vc;
+    [self.brandEvent subscribeNext:^(id  _Nullable x) { //选择品牌
+         ZLBrandVC *vc = [[ZLBrandVC alloc] init];
+        [self.seleVC.navigationController pushViewController:vc animated:YES];
+    }];
 }
 - (void)classificationButtonAction:(UILabel *)label {
     if (!self.showFilter) {
@@ -83,9 +97,9 @@
             [allItems addObject:filterDataModel];
         }
         self.filterDataModel.dataList = allItems;
-//        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight filterViewBlock:^(NSArray * _Nonnull tagArray) {
-//            
-//        }];
+        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight filterViewBlock:^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
+            label.text = thirdClassify;
+        }];
         
         self.filterView.durationTime = 0.5;
         [self.filterView show];

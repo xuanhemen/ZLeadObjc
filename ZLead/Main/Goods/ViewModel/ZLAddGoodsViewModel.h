@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *dataArr; // 数据源
 
+@property (nonatomic, strong) RACSubject *brandEvent; // 选择品牌
+
+/** 负责跳转 */
+-(void)jumpFromController:(UIViewController *)vc;
 
 @end
 

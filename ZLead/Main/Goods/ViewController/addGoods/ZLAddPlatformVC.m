@@ -19,7 +19,22 @@
     self.title = @"从平台添加商品";
     // Do any additional setup after loading the view.
 }
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor grayColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+}
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    if (!parent) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        self.navigationController.navigationBar.barTintColor = [UIColor zl_mainColor];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    }
+}
 /*
 #pragma mark - Navigation
 

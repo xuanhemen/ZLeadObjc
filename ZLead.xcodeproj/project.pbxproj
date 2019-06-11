@@ -30,6 +30,7 @@
 		7A6B75C122AF72EC009CDB2D /* ZLGoodsSearchResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6B75C022AF72EC009CDB2D /* ZLGoodsSearchResultVC.m */; };
 		7A6B75C422AF736B009CDB2D /* ZLGoodsEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6B75C322AF736B009CDB2D /* ZLGoodsEmptyView.m */; };
 		7A6B75C722AF775F009CDB2D /* ZLClassifyManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6B75C522AF775E009CDB2D /* ZLClassifyManageVC.m */; };
+		7A6B75CA22AF79E0009CDB2D /* ZLBrandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6B75C922AF79E0009CDB2D /* ZLBrandVC.m */; };
 		7A89CFEB22ADEB4100847C4D /* ZLAddWayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A89CFEA22ADEB4100847C4D /* ZLAddWayVC.m */; };
 		7A89CFEE22ADF3CC00847C4D /* ZLAddGoodsImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A89CFED22ADF3CC00847C4D /* ZLAddGoodsImgView.m */; };
 		7A89CFF222ADF74C00847C4D /* ZLAddGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A89CFF122ADF74C00847C4D /* ZLAddGoodsView.m */; };
@@ -197,6 +198,8 @@
 		7A6B75C322AF736B009CDB2D /* ZLGoodsEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLGoodsEmptyView.m; sourceTree = "<group>"; };
 		7A6B75C522AF775E009CDB2D /* ZLClassifyManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLClassifyManageVC.m; sourceTree = "<group>"; };
 		7A6B75C622AF775F009CDB2D /* ZLClassifyManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLClassifyManageVC.h; sourceTree = "<group>"; };
+		7A6B75C822AF79E0009CDB2D /* ZLBrandVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLBrandVC.h; sourceTree = "<group>"; };
+		7A6B75C922AF79E0009CDB2D /* ZLBrandVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLBrandVC.m; sourceTree = "<group>"; };
 		7A89CFE922ADEB4100847C4D /* ZLAddWayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLAddWayVC.h; sourceTree = "<group>"; };
 		7A89CFEA22ADEB4100847C4D /* ZLAddWayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLAddWayVC.m; sourceTree = "<group>"; };
 		7A89CFEC22ADF3CC00847C4D /* ZLAddGoodsImgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLAddGoodsImgView.h; sourceTree = "<group>"; };
@@ -764,6 +767,8 @@
 				7A5B033022A7D38C00AB320E /* ZLAddCustomGoodsVC.m */,
 				7A5B033222A7D48400AB320E /* ZLAddPlatformVC.h */,
 				7A5B033322A7D48400AB320E /* ZLAddPlatformVC.m */,
+				7A6B75C822AF79E0009CDB2D /* ZLBrandVC.h */,
+				7A6B75C922AF79E0009CDB2D /* ZLBrandVC.m */,
 			);
 			path = addGoods;
 			sourceTree = "<group>";
@@ -1386,6 +1391,7 @@
 				E2802B532299154D004AF4B8 /* ZLBaseCell.m in Sources */,
 				7A9D683022967BB80024DF3A /* ZLShopVC.m in Sources */,
 				7AC903BE229D425C0036AD68 /* ZLSetPasswordVC.m in Sources */,
+				7A6B75CA22AF79E0009CDB2D /* ZLBrandVC.m in Sources */,
 				E2802B5622991597004AF4B8 /* ZLShopBusinessMenuCell.m in Sources */,
 				E832D708229E51EC00D0ED7F /* ZLPerAccountVC.m in Sources */,
 				E265DFE2229B901900842DD0 /* ZLShopManagerNoteVC.m in Sources */,
