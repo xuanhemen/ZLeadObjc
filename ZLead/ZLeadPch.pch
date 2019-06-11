@@ -53,6 +53,8 @@
 #define hex(str) [UIColor colorWithHexString:str]
 /** lightColor */
 #define lightColor [UIColor colorWithHexString:@"#CCCCCC"]
+/** 正常字体颜色 */
+#define normalColor hex(@"#333333")
 /** 用户信息单例 */
 #define kUserInfo [ZLUserInfo sharedInstance]
 /** 用户id */

@@ -10,9 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZLAddGoodsViewModel : NSObject<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UICollectionViewDataSourcePrefetching>
+@interface ZLAddGoodsViewModel : NSObject<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) NSMutableArray *imgArr; // 图片数组
+
+@property (nonatomic, strong) NSMutableArray *dataArr; // 数据源
+
+
 @end
 
 NS_ASSUME_NONNULL_END
