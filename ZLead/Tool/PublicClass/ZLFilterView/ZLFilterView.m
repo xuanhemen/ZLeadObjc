@@ -175,9 +175,9 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     if (_filter == nil) {
         CGRect filterFrame = CGRectZero;
         if (self.pushDirection == ZLFilterViewPushDirectionFromLeft) {
-            filterFrame = CGRectMake(0, 0, kZLScreenWidth * 0.9, kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
+            filterFrame = CGRectMake(0, 0, kZLScreenWidth - dis(40), kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
         } else {
-            filterFrame = CGRectMake(kZLScreenWidth * 0.1, 0, kZLScreenWidth * 0.9, kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
+            filterFrame = CGRectMake( - dis(40), 0, kZLScreenWidth - dis(40), kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
         }
         _filter = [[UICollectionView alloc]initWithFrame:filterFrame collectionViewLayout:self.filterFlowLayout];
         _filter.delegate = self;
@@ -202,10 +202,10 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     [kKeyWindow addSubview:self.filterCover];
     [self.filterCover addSubview:self.filter];
     if (self.pushDirection == ZLFilterViewPushDirectionFromLeft) {
-        self.filter.frame = CGRectMake(0, 0, kZLScreenWidth * 0.9, kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
+        self.filter.frame = CGRectMake(0, 0, kZLScreenWidth - dis(40) , kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
         self.sureButton.frame = CGRectMake(self.filter.frame.size.width * 0.5, CGRectGetMaxY(self.filter.frame), self.filter.width * 0.5, kFilterButtonHeight);
     } else {
-        self.filter.frame = CGRectMake(kZLScreenWidth * 0.1, 0, kZLScreenWidth * 0.9, kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
+        self.filter.frame = CGRectMake(dis(40), 0, kZLScreenWidth - dis(40), kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
         self.sureButton.frame = CGRectMake(self.filter.frame.size.width * 0.5 +kZLScreenWidth * 0.1 , CGRectGetMaxY(self.filter.frame), self.filter.width * 0.5, kFilterButtonHeight);
     }
     
