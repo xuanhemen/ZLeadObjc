@@ -62,8 +62,8 @@
 }
 
 - (void)goodsNumLabelAttributedText {
-    NSString *wholeGoodsNumStr = [NSString stringWithFormat:@"共 %@ 件商品", @(self.selectedGoodsNum)];
-    NSString *goodsNumStr = [NSString stringWithFormat:@" %@ ", @(self.selectedGoodsNum)];
+    NSString *wholeGoodsNumStr = [NSString stringWithFormat:@"共 %@ 件商品", @(_selectedGoodsNum)];
+    NSString *goodsNumStr = [NSString stringWithFormat:@" %@ ", @(_selectedGoodsNum)];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:wholeGoodsNumStr attributes: @{NSFontAttributeName: kFont14 ,NSForegroundColorAttributeName: [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]}];
     [string addAttributes:@{NSFontAttributeName: kFont14 , NSForegroundColorAttributeName: [UIColor colorWithHexString:@"#666666"]} range:NSMakeRange(0, 1)];
     [string addAttributes:@{NSFontAttributeName: kFont14 , NSForegroundColorAttributeName: [UIColor colorWithHexString:@"#FF3A3A"]} range:NSMakeRange(1, goodsNumStr.length)];
@@ -73,6 +73,7 @@
 
 - (void)setSelectedGoodsNum:(NSInteger )num {
     _selectedGoodsNum = num;
+    [self goodsNumLabelAttributedText];
 }
 
 - (void)batchSetButtonAction {

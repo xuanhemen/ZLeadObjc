@@ -27,6 +27,8 @@
 @property (nonatomic, strong) ZLFilterDataModel *filterDataModel;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) ZLShopGoodsSearchBarView *searchBarView;
+@property (nonatomic, assign) NSInteger goodsTotalNum;
+@property (nonatomic, strong) UIButton *importButton;
 @end
 
 @implementation ZLAddPlatformVC
@@ -83,13 +85,13 @@
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView = self.titleLabel;
     
-    UIButton *importButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [importButton setTitle:@"导入" forState:UIControlStateNormal];
-    importButton.titleLabel.font = kFont14;
-    importButton.frame = CGRectMake(0, 0, 40, 19);
-    [importButton setTitleColor:[UIColor zl_mainColor] forState:UIControlStateNormal];
-    [importButton addTarget:self action:@selector(importButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithCustomView:importButton];
+    self.importButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.importButton setTitle:@"导入" forState:UIControlStateNormal];
+    self.importButton.titleLabel.font = kFont14;
+    self.importButton.frame = CGRectMake(0, 0, 40, 19);
+    [self.importButton setTitleColor:self.goodsTotalNum ? [UIColor zl_mainColor] : [UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+    [self.importButton addTarget:self action:@selector(importButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithCustomView:self.importButton];
     
     UIButton *filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [filterButton setTitle:@"筛选" forState:UIControlStateNormal];
@@ -129,7 +131,26 @@
     [self.goodsListTableView reloadData];
 }
 
+#pragma mark - setter
+
+- (void)setGoodsTotalNum:(NSInteger)goodsTotalNum {
+    _goodsTotalNum = goodsTotalNum;
+    [self.importButton setTitleColor:_goodsTotalNum ? [UIColor zl_mainColor] : [UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+    [self.batchSetClassifyView setSelectedGoodsNum:_goodsTotalNum];
+}
+
 #pragma mark - private Method
+
+- (void)calculateGoodsTotalNum {
+    NSInteger count = 0;
+    for (int i = 0; i < 10; i++) {
+        ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:i];
+        if (goodsModel.isSelected) {
+            count ++;
+        }
+    }
+    self.goodsTotalNum = count;
+}
 
 /**
  是否全选
@@ -183,7 +204,10 @@
 }
 
 - (void)importButtonAction:(UIButton *)sender {
-
+    if (self.goodsTotalNum <= 0) {
+        [self showMsg:@"请选择要导入的商品"];
+        return;
+    }
 }
 
 - (void)filterButtonAction {
@@ -211,7 +235,10 @@
     cell.selectedButtonBlock = ^(ZLAddPlatformGoodsCell * _Nonnull cell, BOOL isSelected) {
         ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:indexPath.row];
         goodsModel.isSelected = !goodsModel.isSelected;
+        [weakSelf calculateGoodsTotalNum];
+        [weakSelf.goodsListTableView beginUpdates];
         [weakSelf.goodsListTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [weakSelf.goodsListTableView endUpdates];
     };
     return cell;
 }
