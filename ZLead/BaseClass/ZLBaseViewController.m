@@ -18,8 +18,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor zl_bgColor]; //背景颜色
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-
-    
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor clearColor]}forState:UIControlStateNormal];
    
     // Do any additional setup after loading the view.
 

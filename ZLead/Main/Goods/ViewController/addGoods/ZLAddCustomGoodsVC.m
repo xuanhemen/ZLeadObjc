@@ -30,6 +30,7 @@
     self.title = @"添加商品";
     [self.view addSubview:self.addView]; //添加商品视图
     [self.addImgViewModel jumpFromController:self]; //处理跳转事件
+    [self.viewModel jumpFromController:self]; //处理跳转事件
     // Do any additional setup after loading the view.
 }
 - (ZLAddGoodsView *)addView {
@@ -70,7 +71,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor grayColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor blackColor]}];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
