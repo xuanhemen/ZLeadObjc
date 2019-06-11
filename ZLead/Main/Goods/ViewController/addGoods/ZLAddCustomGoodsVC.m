@@ -7,8 +7,19 @@
 //
 
 #import "ZLAddCustomGoodsVC.h"
-#import "UIViewController+ZLFunc.h"
+#import "ZLAddGoodsView.h"
+#import "ZLAddGoodsViewModel.h"
+
+//#define width 200*kp
 @interface ZLAddCustomGoodsVC ()
+
+@property (nonatomic, strong) ZLAddGoodsView *addView; // 自定义商品视图
+
+@property (nonatomic, strong) ZLAddGoodsViewModel *viewModel; // 数据源
+
+@property (nonatomic, strong) ZLAddGoodsImgView *addImgView; // 添加图片视图
+
+@property (nonatomic, strong) ZLAddImgViewModel *addImgViewModel; // 添加图片数据源
 
 @end
 
@@ -17,8 +28,43 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"添加商品";
-    
+    [self.view addSubview:self.addView]; //添加商品视图
+    [self.addImgViewModel jumpFromController:self]; //处理跳转事件
     // Do any additional setup after loading the view.
+}
+- (ZLAddGoodsView *)addView {
+    if (!_addView) {
+        _addView = [[ZLAddGoodsView alloc] initWithFrame:self.view.frame viewModel:self.viewModel];
+        _addView.tableView.tableHeaderView = self.addImgView;
+    }
+    return _addView;
+}
+- (ZLAddGoodsViewModel *)viewModel {
+    if (!_viewModel) {
+        _viewModel = [[ZLAddGoodsViewModel alloc] init];
+    }
+    return _viewModel;
+    
+}
+- (ZLAddGoodsImgView *)addImgView {
+    if (!_addImgView) {
+        _addImgView = [[ZLAddGoodsImgView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200*kp) viewModel:self.addImgViewModel];
+    }
+    return _addImgView;
+}
+- (ZLAddImgViewModel *)addImgViewModel {
+    if (!_addImgViewModel) {
+        _addImgViewModel = [[ZLAddImgViewModel alloc] init];
+        kWeakSelf(weakSelf)
+        [_addImgViewModel.refreshImgEvent subscribeNext:^(id  _Nullable x) {
+            NSNumber *count = x;
+            if ([count integerValue]>3) {
+                weakSelf.addImgView.frame = CGRectMake(0, 0, kScreenWidth, 200*kp+(kScreenWidth-10)/3);
+                weakSelf.addView.tableView.tableHeaderView = self.addImgView;
+            }
+        }];
+    }
+    return _addImgViewModel;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -24,7 +24,7 @@
     [ZLConfig config]; //配置环境
 
     
-    [[UITabBar appearance] setTranslucent:NO];
+   // [[UITabBar appearance] setTranslucent:NO];
     
 
     // Override point for customization after application launch.

@@ -19,6 +19,7 @@ PODS:
   - MJExtension (3.0.17)
   - MJRefresh (3.2.0)
   - MOFSPickerManager (2.1.4)
+  - QBImagePickerController (3.4.0)
   - Reachability (3.2)
   - ReactiveObjC (3.1.1)
   - Realm (3.15.0):
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - MOFSPickerManager
+  - QBImagePickerController
   - Reachability
   - ReactiveObjC
   - Realm
@@ -49,6 +51,7 @@ SPEC REPOS:
     - MJExtension
     - MJRefresh
     - MOFSPickerManager
+    - QBImagePickerController
     - Reachability
     - ReactiveObjC
     - Realm
@@ -62,12 +65,13 @@ SPEC CHECKSUMS:
   MJExtension: 74ec83124a68891619fb7ba9c5c811bbf1691076
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   MOFSPickerManager: 7172f566baa25899bf24e7513dd831c23ab6f93a
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   Realm: 9b834e1be6062f544805252c812348872dc5d4ed
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: f4ebb531a472e68f680f5ac80e5d5ce20de2261c
+PODFILE CHECKSUM: c71fbbe6dedae578276cb1386ed40be8a8f5232d
 
 COCOAPODS: 1.5.3
