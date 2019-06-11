@@ -141,20 +141,20 @@
 #pragma mark - Public Method
 
 - (void)refreshUnShelveButton:(BOOL )isEnableUnShelve {
-    [self.unShelveButton setTitleColor:isEnableUnShelve ? [UIColor colorWithHexString:@"#333333"] : [UIColor colorWithHexString:@"#999999"]   forState:UIControlStateSelected];
+    [self.unShelveButton setTitleColor:isEnableUnShelve ? [UIColor colorWithHexString:@"#333333"] : [UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
 }
 
 - (void)refreshDelButton:(BOOL )isEnableDel {
-    [self.delButton setTitleColor:isEnableDel ? [UIColor colorWithHexString:@"#333333"] : [UIColor colorWithHexString:@"#999999"]   forState:UIControlStateSelected];
+    [self.delButton setTitleColor:isEnableDel ? [UIColor colorWithHexString:@"#333333"] : [UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
 }
 
 - (void)refreshTopButton:(BOOL )isEnableTop {
-    [self.topButton setTitleColor:isEnableTop ? [UIColor colorWithHexString:@"#333333"] : [UIColor colorWithHexString:@"#999999"]   forState:UIControlStateSelected];
+    [self.topButton setTitleColor:isEnableTop ? [UIColor colorWithHexString:@"#333333"] : [UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
 }
 
 - (void)refreshCanelTopButton:(BOOL )isCancelTop {
-    [self.cancelTopButton setTitleColor:isCancelTop ? [UIColor colorWithHexString:@"##FFB32A"] : [UIColor colorWithHexString:@"#999999"]   forState:UIControlStateSelected];
-    self.cancelTopButton.layer.borderColor = isCancelTop ? [UIColor colorWithHexString:@"##FFB32A"].CGColor : [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
+    [self.cancelTopButton setTitleColor:isCancelTop ? [UIColor colorWithHexString:@"#FFB32A"] : [UIColor colorWithHexString:@"#999999"]  forState:UIControlStateNormal];
+    self.cancelTopButton.layer.borderColor = isCancelTop ? [UIColor colorWithHexString:@"#FFB32A"].CGColor : [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
 }
 
 - (void)reset {
@@ -164,6 +164,38 @@
     [self.topButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
     [self.cancelTopButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
     self.cancelTopButton.layer.borderColor = [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
+}
+
+- (void)configStyleForClassifyFilterView {
+    self.cancelTopButton.hidden = YES;
+    self.topButton.hidden = YES;
+    [self.cancelTopButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self);
+        make.width.equalTo(@(0));
+        make.height.equalTo(@(0));
+        make.centerY.equalTo(self);
+    }];
+
+    [self.topButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.cancelTopButton.mas_left);
+        make.width.equalTo(@(0));
+        make.height.equalTo(@(0));
+        make.centerY.equalTo(self);
+    }];
+    
+    [self.delButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self).offset(dis(-15));
+        make.width.equalTo(@(dis(50)));
+        make.height.equalTo(@(dis(30)));
+        make.centerY.equalTo(self);
+    }];
+    
+    [self.unShelveButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.delButton.mas_left).offset(dis(-10));
+        make.width.equalTo(@(dis(50)));
+        make.height.equalTo(@(dis(30)));
+        make.centerY.equalTo(self);
+    }];
 }
 
 #pragma mark - UIButton Actions

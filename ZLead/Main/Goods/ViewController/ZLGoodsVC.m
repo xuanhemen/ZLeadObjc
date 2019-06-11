@@ -14,6 +14,7 @@
 #import "ZLAddWayVC.h"
 
 #import "ZLFilterView.h"
+#import "ZLGoodsEmptyView.h"
 
 
 #import "ZLGoodsSearchVC.h"
@@ -36,6 +37,7 @@
 @property (nonatomic, strong) ZLFilterView *filterView;
 @property (nonatomic, assign) BOOL showFilter;
 @property (nonatomic, strong) ZLFilterDataModel *filterDataModel;
+@property (nonatomic, strong) ZLGoodsEmptyView *goodsEmptyView;
 @end
 
 @implementation ZLGoodsVC
@@ -120,8 +122,10 @@
             [weakSelf.goodsList addObject:goodsModel];
         }
         [weakSelf.tableView reloadData];
+        [weakSelf.bottomManagerView refreshCanelTopButton:YES];
     };
     self.bottomManagerView.cancelTopBlock = ^{
+        int topCount = 0;
         for (int i = 0; i < 10; i++) {
             ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:i];
             goodsModel.goodsNum = i+1;
@@ -131,6 +135,7 @@
             [weakSelf.goodsList addObject:goodsModel];
         }
         [weakSelf.tableView reloadData];
+        [weakSelf.bottomManagerView refreshCanelTopButton:topCount ? YES : NO];
     };
     self.bottomManagerView.delBlock = ^{
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您确定删除商品吗？删除后不可恢复" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -198,6 +203,15 @@
     } else {
         self.bottomManagerView.allSelectedButton.selected = NO;
         self.isAllSelected = NO;
+    }
+    if (count > 0) {
+        [self.bottomManagerView refreshUnShelveButton:YES];
+        [self.bottomManagerView refreshDelButton:YES];
+        [self.bottomManagerView refreshTopButton:YES];
+    } else {
+        [self.bottomManagerView refreshUnShelveButton:NO];
+        [self.bottomManagerView refreshDelButton:NO];
+        [self.bottomManagerView refreshTopButton:NO];
     }
     if (enabelCancelTop) {
         [self.bottomManagerView refreshCanelTopButton:enabelCancelTop];
@@ -298,47 +312,6 @@
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-
-}
-
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        
-        NSLog(@"删除");
-        
-    }];
-//    [[UIButton appearanceWhenContainedInInstancesOfClasses:@[[ZLGoodsListCell class]]] setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    action1.backgroundColor = [UIColor colorWithHexString:@"#F0F0F0"];
-    
-    
-    UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"下架" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        
-        NSLog(@"更多");
-        
-    }];
-    
-    action2.backgroundColor = [UIColor colorWithHexString:@"#FFB32A"];
-    
-    UITableViewRowAction *action3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
-    }];
-    action3.backgroundColor = [UIColor colorWithHexString:@"#FF7527"];
-    
-    UITableViewRowAction *action4 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"取消\n置顶" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
-    }];
-    action4.backgroundColor = [UIColor colorWithHexString:@"#FF3731"];
-    
-    NSArray *arr = @[action4,action3, action2, action1];
-    
-    return arr;
-}
-
 #pragma mark - setter
 
 - (void)setAllowEdit:(BOOL)allowEdit {
@@ -363,6 +336,19 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
+}
+
+- (ZLGoodsEmptyView *)goodsEmptyView {
+    if (!_goodsEmptyView) {
+        _goodsEmptyView = [[ZLGoodsEmptyView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kNavBarHeight - 45 - kTabBarHeight)];
+        [self.view addSubview:_goodsEmptyView];
+        kWeakSelf(weakSelf)
+        _goodsEmptyView.operateButtonBlock = ^{
+            ZLAddWayVC *vc = [[ZLAddWayVC alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        };
+    }
+    return _goodsEmptyView;
 }
 
 @end

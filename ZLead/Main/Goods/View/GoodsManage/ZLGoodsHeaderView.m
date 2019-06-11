@@ -83,7 +83,7 @@
 #pragma mark - lazy load
 - (UIButton *)sellingBtn {
     if (!_sellingBtn) {
-        _sellingBtn = [self customButtonWithTitle:@"已上架"];
+        _sellingBtn = [self customButtonWithTitle:@"销售中"];
         _sellingBtn.selected = YES;
         _sellingBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         [self addSubview:_sellingBtn];
