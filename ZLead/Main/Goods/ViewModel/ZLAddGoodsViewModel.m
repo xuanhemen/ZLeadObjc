@@ -83,9 +83,9 @@
             [allItems addObject:filterDataModel];
         }
         self.filterDataModel.dataList = allItems;
-        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight filterViewBlock:^(NSArray * _Nonnull tagArray) {
-            
-        }];
+//        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight filterViewBlock:^(NSArray * _Nonnull tagArray) {
+//            
+//        }];
         
         self.filterView.durationTime = 0.5;
         [self.filterView show];
