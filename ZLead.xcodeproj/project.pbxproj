@@ -66,6 +66,8 @@
 		E21CB73E22AE2F1100B8C992 /* NetManager+ZLGoodsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E21CB73D22AE2F1100B8C992 /* NetManager+ZLGoodsAPI.m */; };
 		E21CB74422AF541300B8C992 /* ZLAddPlatformGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E21CB74322AF541300B8C992 /* ZLAddPlatformGoodsCell.m */; };
 		E21CB74722AF86E500B8C992 /* ZLBatchSetClassifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = E21CB74622AF86E500B8C992 /* ZLBatchSetClassifyView.m */; };
+		E21CB74D22AFB97000B8C992 /* WHActionSheetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E21CB74A22AFB97000B8C992 /* WHActionSheetCell.m */; };
+		E21CB74E22AFB97000B8C992 /* WHActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E21CB74C22AFB97000B8C992 /* WHActionSheet.m */; };
 		E2223B36229EB59F00C8547C /* ZLOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2223B35229EB59F00C8547C /* ZLOrderListCell.m */; };
 		E2223B39229FAD8D00C8547C /* ZLOrderManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2223B38229FAD8D00C8547C /* ZLOrderManageView.m */; };
 		E2223B3F229FC57C00C8547C /* ZLSegmentTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2223B3D229FC57C00C8547C /* ZLSegmentTitleView.m */; };
@@ -271,6 +273,10 @@
 		E21CB74322AF541300B8C992 /* ZLAddPlatformGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLAddPlatformGoodsCell.m; sourceTree = "<group>"; };
 		E21CB74522AF86E500B8C992 /* ZLBatchSetClassifyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLBatchSetClassifyView.h; sourceTree = "<group>"; };
 		E21CB74622AF86E500B8C992 /* ZLBatchSetClassifyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLBatchSetClassifyView.m; sourceTree = "<group>"; };
+		E21CB74922AFB97000B8C992 /* WHActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHActionSheet.h; sourceTree = "<group>"; };
+		E21CB74A22AFB97000B8C992 /* WHActionSheetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHActionSheetCell.m; sourceTree = "<group>"; };
+		E21CB74B22AFB97000B8C992 /* WHActionSheetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHActionSheetCell.h; sourceTree = "<group>"; };
+		E21CB74C22AFB97000B8C992 /* WHActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHActionSheet.m; sourceTree = "<group>"; };
 		E2223B34229EB59F00C8547C /* ZLOrderListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLOrderListCell.h; sourceTree = "<group>"; };
 		E2223B35229EB59F00C8547C /* ZLOrderListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLOrderListCell.m; sourceTree = "<group>"; };
 		E2223B37229FAD8D00C8547C /* ZLOrderManageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLOrderManageView.h; sourceTree = "<group>"; };
@@ -911,6 +917,7 @@
 		7A9D6838229682960024DF3A /* PublicClass */ = {
 			isa = PBXGroup;
 			children = (
+				E21CB74822AFB97000B8C992 /* WHActionSheet */,
 				E26DF09322A761610050615C /* ZLFilterView */,
 				E2223B3A229FC57C00C8547C /* SegmentView */,
 				E265DFE3229B951700842DD0 /* Marquee */,
@@ -1026,6 +1033,17 @@
 				E21CB73D22AE2F1100B8C992 /* NetManager+ZLGoodsAPI.m */,
 			);
 			path = Goods;
+			sourceTree = "<group>";
+		};
+		E21CB74822AFB97000B8C992 /* WHActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				E21CB74922AFB97000B8C992 /* WHActionSheet.h */,
+				E21CB74C22AFB97000B8C992 /* WHActionSheet.m */,
+				E21CB74B22AFB97000B8C992 /* WHActionSheetCell.h */,
+				E21CB74A22AFB97000B8C992 /* WHActionSheetCell.m */,
+			);
+			path = WHActionSheet;
 			sourceTree = "<group>";
 		};
 		E2223B3A229FC57C00C8547C /* SegmentView */ = {
@@ -1386,6 +1404,7 @@
 				E265E011229E4F4800842DD0 /* ZLOfflinePaymentView.m in Sources */,
 				E2802B5922991CC7004AF4B8 /* ZLShopManagerNoteCell.m in Sources */,
 				E26DF08E22A614410050615C /* ZLGoodsModel.m in Sources */,
+				E21CB74D22AFB97000B8C992 /* WHActionSheetCell.m in Sources */,
 				E287ED5A22A8E616002195B2 /* ZLClassifyListCell.m in Sources */,
 				7A89CFFC22AE2A7A00847C4D /* ZLAddImgCollectionViewCell.m in Sources */,
 				E832D71B229E715100D0ED7F /* UIImage+ZL.m in Sources */,
@@ -1466,6 +1485,7 @@
 				E265DFF6229CE80D00842DD0 /* ZLGoodsTypeSelectedView.m in Sources */,
 				7A6B75C722AF775F009CDB2D /* ZLClassifyManageVC.m in Sources */,
 				E265DFEC229BF70000842DD0 /* ZLShoppingCartView.m in Sources */,
+				E21CB74E22AFB97000B8C992 /* WHActionSheet.m in Sources */,
 				7A9D682A2296680F0024DF3A /* URLManager.m in Sources */,
 				7A9D6841229688040024DF3A /* ZLLoginVC.m in Sources */,
 				7A8B621D22A8C5B000438832 /* ZLAddGoodsViewModel.m in Sources */,
