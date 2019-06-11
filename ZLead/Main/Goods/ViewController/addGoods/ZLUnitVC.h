@@ -1,5 +1,5 @@
 //
-//  ZLBrandVC.h
+//  ZLUnitVC.h
 //  ZLead
 //
 //  Created by 董建伟 on 2019/6/11.
@@ -10,8 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZLBrandVC : ZLBaseViewController
-
+@interface ZLUnitVC : ZLBaseViewController
 
 @property (nonatomic, copy) void (^selecItem)(NSString *title); // 选中回调
 @end

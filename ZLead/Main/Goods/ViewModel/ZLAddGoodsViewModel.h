@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) RACSubject *brandEvent; // 选择品牌
 
+@property (nonatomic, strong) RACSubject *unitEvent; // 选择单位
+
 /** 负责跳转 */
 -(void)jumpFromController:(UIViewController *)vc;
 
