@@ -185,6 +185,7 @@
         _goodsNumTF.font = kFont14;
         _goodsNumTF.text = @"1";
         _goodsNumTF.textAlignment = NSTextAlignmentCenter;
+        _goodsNumTF.keyboardType = UIKeyboardTypeNumberPad;
         _goodsNumTF.textColor = [UIColor colorWithHexString:@"#333333"];
         _goodsNumTF.backgroundColor = [UIColor colorWithHexString:@"#EBEBEB"];
         [self.expandView addSubview:_goodsNumTF];
@@ -198,6 +199,7 @@
         _onlinePriceTF = [[UITextField alloc] init];
         _onlinePriceTF.font = kFont14;
         _onlinePriceTF.textAlignment = NSTextAlignmentCenter;
+        _onlinePriceTF.keyboardType = UIKeyboardTypeNumberPad;
         _onlinePriceTF.text = @"0.00";
         _onlinePriceTF.textColor = [UIColor colorWithHexString:@"#FF3A3A"];
         _onlinePriceTF.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;
@@ -212,6 +214,7 @@
         _offlinePriceTF = [[UITextField alloc] init];
         _offlinePriceTF.font = kFont14;
         _offlinePriceTF.textAlignment = NSTextAlignmentCenter;
+        _offlinePriceTF.keyboardType = UIKeyboardTypeNumberPad;
         _offlinePriceTF.text = @"0.00";
         _offlinePriceTF.textColor = [UIColor colorWithHexString:@"#FF3A3A"];
         _offlinePriceTF.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;
@@ -262,13 +265,13 @@
 
 - (void)selectedButtonAction:(UIButton *)selectedBtn {
     selectedBtn.selected = !selectedBtn.selected;
-    self.goodsModel.isSelected = selectedBtn.selected;
     if (self.selectedButtonBlock) {
         self.selectedButtonBlock(self, self.goodsModel.isSelected);
     }
 }
 
 - (void)setupData:(ZLGoodsModel *)goodsModel {
+    self.selectedButton.selected = goodsModel.isSelected;
     self.goodsModel = goodsModel;
     if (goodsModel.isSelected) {
         self.expandView.hidden = NO;
@@ -276,6 +279,9 @@
         self.goodsNameTextView.hidden = NO;
         self.bottomSeparator.frame = CGRectMake(dis(15), dis(307) - 1, dis(345), 1);
     } else {
+        [self.goodsNameLabel sizeToFit];
+        self.goodsNameLabel.y =  self.goodsImageView.top + dis(5);
+        self.goodsNameLabel.width = dis(196);
         self.expandView.hidden = YES;
         self.goodsNameLabel.hidden = NO;
         self.goodsNameTextView.hidden = YES;
