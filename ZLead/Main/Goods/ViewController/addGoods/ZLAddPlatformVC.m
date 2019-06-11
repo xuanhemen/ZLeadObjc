@@ -10,6 +10,7 @@
 #import "ZLAddPlatformGoodsCell.h"
 #import "ZLFilterView.h"
 #import "ZLBatchSetClassifyView.h"
+#import "ZLShopGoodsSearchBarView.h"
 
 #import "ZLGoodsSearchVC.h"
 
@@ -25,6 +26,7 @@
 @property (nonatomic, assign) BOOL showFilter;
 @property (nonatomic, strong) ZLFilterDataModel *filterDataModel;
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) ZLShopGoodsSearchBarView *searchBarView;
 @end
 
 @implementation ZLAddPlatformVC
@@ -47,14 +49,20 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self configNav];
     
+    [self setupViews];
+    
     [self setupData];
     
-    [self.batchSetClassifyView setSelectedGoodsNum:0];
+
 }
 
 /** 导航栏 */
@@ -91,6 +99,13 @@
     [filterButton addTarget:self action:@selector(classificationButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithCustomView:filterButton];
     self.navigationItem.rightBarButtonItems = @[rightItem2, rightItem1];
+}
+
+- (void)setupViews {
+    self.searchBarView = [[ZLShopGoodsSearchBarView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, dis(50))];
+    [self.view addSubview:self.searchBarView];
+    
+   [self.batchSetClassifyView setSelectedGoodsNum:0];
 }
 
 #pragma mark - Init
@@ -205,7 +220,7 @@
 
 - (UITableView *)goodsListTableView {
     if (!_goodsListTableView) {
-        _goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - dis(50)) style:UITableViewStylePlain];
+        _goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(50), kScreenWidth, kScreenHeight - dis(100)) style:UITableViewStylePlain];
         _goodsListTableView.delegate = self;
         _goodsListTableView.dataSource = self;
         [self.view addSubview:_goodsListTableView];
