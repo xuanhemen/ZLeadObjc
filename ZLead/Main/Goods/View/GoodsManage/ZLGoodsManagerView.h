@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)refreshTopButton:(BOOL )isEnableTop;
 - (void)refreshCanelTopButton:(BOOL )isCancelTop;
 - (void)reset;
+- (void)configStyleForClassifyFilterView;
 @end
 
 NS_ASSUME_NONNULL_END

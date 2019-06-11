@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ZLFilterSectionHeaderViewDelegate <NSObject>
 - (void)cancelSelectedClassify: (ZLFilterSectionHeaderView *)header filterDataModel: (ZLFilterDataModel *)filterDataModel;
+- (void)manageClassify: (ZLFilterSectionHeaderView *)header filterDataModel: (ZLFilterDataModel *)filterDataModel;
 @end
 
 @interface ZLFilterSectionHeaderView : UICollectionReusableView

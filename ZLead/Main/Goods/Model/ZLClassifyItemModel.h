@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, assign) NSInteger classifyId;
+@property (nonatomic, strong) NSString *sgcCode;
+@property (nonatomic, assign) NSInteger sgcParentId;
+@property (nonatomic, assign) NSInteger sgcLevel;
+@property (nonatomic, strong) NSString *sgcRemark;
 @end
 
 NS_ASSUME_NONNULL_END

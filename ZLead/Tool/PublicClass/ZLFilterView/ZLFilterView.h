@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class ZLFilterDataModel;
 
-typedef void(^FilterViewBlock) (NSArray *tagArray);
+typedef void(^FilterViewBlock) (NSString *firstClassify, NSString *secondClassify, NSString *thirdClassify);
 
 /** 出现方向*/
 typedef NS_ENUM (NSUInteger, ZLFilterViewPushDirection) {
@@ -25,6 +25,8 @@ typedef NS_ENUM (NSUInteger, ZLFilterViewPushDirection) {
 @interface ZLFilterView : UIView
 /** 动画时间 等于0 不开启动画 默认是0 */
 @property (nonatomic, assign) NSTimeInterval durationTime;
+@property (nonatomic, strong) FilterViewBlock filterViewBlock;
+@property (nonatomic, strong) void (^manageClassifyBlock) (NSInteger classifyType);
 + (instancetype)createFilterViewWidthConfiguration: (ZLFilterDataModel *)configuration
                                      pushDirection:(ZLFilterViewPushDirection )pushDirection
                                 filterViewBlock: (FilterViewBlock)filterViewBlock;

@@ -9,5 +9,10 @@
 #import "ZLClassifyItemModel.h"
 
 @implementation ZLClassifyItemModel
-
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{
+        @"title":@"sgcName",
+        @"classifyId":@"sgcId"
+    };
+}
 @end

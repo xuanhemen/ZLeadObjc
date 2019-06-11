@@ -9,9 +9,11 @@
 #import "ZLBaseCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@class ZLClassifyItemModel;
 
 @interface ZLClassifyListCell : ZLBaseCell
-
+@property (nonatomic, strong) void (^delGoodsClassifyBlock) (ZLClassifyItemModel *classifyItemModel);
+@property (nonatomic, strong) void (^editGoodsClassifyBlock) (ZLClassifyItemModel *classifyItemModel);
 @end
 
 NS_ASSUME_NONNULL_END

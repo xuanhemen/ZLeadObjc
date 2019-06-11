@@ -63,8 +63,6 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 
 @property (nonatomic, assign) BOOL isShow;
 
-@property (nonatomic, strong) FilterViewBlock filterViewBlock;
-
 @property (nonatomic, strong) ZLFilterDataModel *filterDataModel;
 
 @property (nonatomic, assign) ZLFilterViewPushDirection pushDirection;
@@ -129,9 +127,10 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
         _resetButton.frame = CGRectMake(self.filter.frame.origin.x, self.filter.frame.size.height, self.filter.frame.size.width * 0.5, kFilterButtonHeight);
         _resetButton.backgroundColor = [UIColor whiteColor];
         [_resetButton setTitle:@"取消" forState:UIControlStateNormal];
-        [_resetButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [_resetButton setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
         [_resetButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         _resetButton.tag = ZLMenuButtonTypeReset;
+        _resetButton.titleLabel.font = kFont16;
         UIView *line = [[UIView alloc]init];
         line.backgroundColor = [UIColor lightGrayColor];
         line.alpha = .1;
@@ -157,6 +156,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
         _sureButton.tag = ZLMenuButtonTypeSure;
         [_sureButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         _sureButton.alpha = 0;
+        _sureButton.titleLabel.font = kFont16;
     }
     return _sureButton;
 }
@@ -175,9 +175,9 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     if (_filter == nil) {
         CGRect filterFrame = CGRectZero;
         if (self.pushDirection == ZLFilterViewPushDirectionFromLeft) {
-            filterFrame = CGRectMake(0, 0, kZLScreenWidth * 0.9, kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
+            filterFrame = CGRectMake(0, 0, kZLScreenWidth - dis(40), kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
         } else {
-            filterFrame = CGRectMake(kZLScreenWidth * 0.1, 0, kZLScreenWidth * 0.9, kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
+            filterFrame = CGRectMake( - dis(40), 0, kZLScreenWidth - dis(40), kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
         }
         _filter = [[UICollectionView alloc]initWithFrame:filterFrame collectionViewLayout:self.filterFlowLayout];
         _filter.delegate = self;
@@ -202,10 +202,10 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     [kKeyWindow addSubview:self.filterCover];
     [self.filterCover addSubview:self.filter];
     if (self.pushDirection == ZLFilterViewPushDirectionFromLeft) {
-        self.filter.frame = CGRectMake(0, 0, kZLScreenWidth * 0.9, kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
+        self.filter.frame = CGRectMake(0, 0, kZLScreenWidth - dis(40) , kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
         self.sureButton.frame = CGRectMake(self.filter.frame.size.width * 0.5, CGRectGetMaxY(self.filter.frame), self.filter.width * 0.5, kFilterButtonHeight);
     } else {
-        self.filter.frame = CGRectMake(kZLScreenWidth * 0.1, 0, kZLScreenWidth * 0.9, kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
+        self.filter.frame = CGRectMake(dis(40), 0, kZLScreenWidth - dis(40), kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
         self.sureButton.frame = CGRectMake(self.filter.frame.size.width * 0.5 +kZLScreenWidth * 0.1 , CGRectGetMaxY(self.filter.frame), self.filter.width * 0.5, kFilterButtonHeight);
     }
     
@@ -272,6 +272,16 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 
 - (void)clickButton:(UIButton *)sender {
     [self dismiss];
+    if (sender.tag == ZLMenuButtonTypeSure) {
+        if (self.filterViewBlock) {
+            self.filterViewBlock(@"一级分类", @"二级分类", @"三级分类");
+        }
+    } else if (sender.tag == ZLMenuButtonTypeReset) {
+//        if (self.filterViewBlock) {
+//            self.filterViewBlock(@"一级分类", @"二级分类", @"三级分类");
+//        }
+    }
+    
 }
 
 #pragma mark - collectionViewDelegate
@@ -338,6 +348,9 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 - (void)selectedFilterItem:(ZLFilterItemCell *)item classifyItemModel:(ZLClassifyItemModel *)classifyItemModel {
     NSIndexPath *indexPath = [self.filter indexPathForCell:item];
     ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
+    if (filterDataModel.selectedClassifyItemModel.classifyId == classifyItemModel.classifyId) {
+        return;
+    }
     for (ZLClassifyItemModel *itemModel in filterDataModel.dataList) {
         if (itemModel.classifyId == filterDataModel.selectedClassifyItemModel.classifyId) {
             itemModel.isSelected = NO;
@@ -361,6 +374,13 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     }
      currentfilterDataModel.selectedClassifyItemModel = nil;
     [self.filter reloadData];
+}
+
+- (void)manageClassify:(ZLFilterSectionHeaderView *)header filterDataModel:(ZLFilterDataModel *)filterDataModel {
+    [self dismiss];
+    if (self.manageClassifyBlock) {
+        self.manageClassifyBlock(filterDataModel.indexPath.section);
+    }
 }
 
 #pragma mark - ZLFilterSectionFooterViewDelegate
