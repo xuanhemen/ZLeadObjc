@@ -18,7 +18,7 @@
 #import "ZLFilterDataModel.h"
 #import "ZLClassifyItemModel.h"
 
-@interface ZLAddPlatformVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface ZLAddPlatformVC ()<UITableViewDelegate, UITableViewDataSource, ZLAddPlatformGoodsCellDelegate>
 @property (nonatomic, strong) UITableView *goodsListTableView;
 @property (nonatomic, strong) ZLBatchSetClassifyView *batchSetClassifyView;
 @property (nonatomic, strong) NSMutableArray *goodsList;
@@ -230,6 +230,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLAddPlatformGoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZLAddPlatformGoodsCell"];
+    cell.delegate = self;
     [cell setupData:[self.goodsList objectAtIndex:indexPath.row]];
     kWeakSelf(weakSelf);
     cell.selectedButtonBlock = ^(ZLAddPlatformGoodsCell * _Nonnull cell, BOOL isSelected) {
@@ -268,6 +269,37 @@
         };
     }
     return _batchSetClassifyView;
+}
+
+#pragma mark - ZLAddPlatformGoodsCellDelegate
+
+- (void)addPlatformGoodsCell:(ZLAddPlatformGoodsCell *)cell goodsNameChanged:(NSString *)goodsName {
+    NSIndexPath *indexPath = [self.goodsListTableView indexPathForCell:cell];
+    ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:indexPath.row];
+    goodsModel.goodsName = goodsName;
+}
+
+- (void)addPlatformGoodsCell:(ZLAddPlatformGoodsCell *)cell goodsNumChanged:(NSInteger )goodsNum {
+    NSIndexPath *indexPath = [self.goodsListTableView indexPathForCell:cell];
+    ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:indexPath.row];
+    goodsModel.goodsNum = goodsNum;
+}
+
+- (void)addPlatformGoodsCell:(ZLAddPlatformGoodsCell *)cell goodsNumOnlinePriceChanged:(CGFloat )onlinePrice {
+//    NSIndexPath *indexPath = [self.goodsListTableView indexPathForCell:cell];
+//    ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:indexPath.row];
+//    goodsModel.goodsNum = goodsNum;
+//    [self.goodsListTableView beginUpdates];
+//    [self.goodsListTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [self.goodsListTableView endUpdates];
+}
+
+- (void)addPlatformGoodsCell:(ZLAddPlatformGoodsCell *)cell goodsNumOfflinePriceChanged:(CGFloat )offlinePrice {
+    
+}
+
+- (void)addPlatformGoodsCell:(ZLAddPlatformGoodsCell *)cell shopClassifyNameButton:(UIButton *)classifyNameButton {
+    
 }
 
 @end
