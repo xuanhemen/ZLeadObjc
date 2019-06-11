@@ -9,7 +9,7 @@
 #import "ZLAddPlatformGoodsCell.h"
 #import "ZLGoodsModel.h"
 
-@interface ZLAddPlatformGoodsCell ()
+@interface ZLAddPlatformGoodsCell ()<UITextViewDelegate, UITextFieldDelegate>
 @property (nonatomic, strong) UIButton *selectedButton;
 @property (nonatomic, strong) UIImageView *goodsImageView;
 @property (nonatomic, strong) UILabel *goodsNameLabel;
@@ -60,7 +60,8 @@
     self.offlinePriceTF.frame = CGRectMake(kScreenWidth - dis(96), self.onlinePriceTF.bottom + dis(16), dis(80), dis(30));
     self.offlinePriceSignLabel.frame = CGRectMake(self.onlinePriceTF.left - dis(62), self.onlinePriceTF.bottom + dis(17), dis(60), dis(30));
     self.shopClassifyLabel.frame = CGRectMake(dis(45), self.offlinePriceLabel.bottom + dis(26), dis(60), dis(17));
-    self.classifyNameButton.frame = CGRectMake(kScreenWidth - dis(114), self.offlinePriceTF.bottom + dis(17), dis(98), dis(25));
+//    self.classifyNameButton.frame = CGRectMake(kScreenWidth - dis(114), self.offlinePriceTF.bottom + dis(17), dis(98), dis(25));
+    self.classifyNameButton.frame = CGRectMake(kScreenWidth - dis(135), self.offlinePriceTF.bottom + dis(17), dis(120), dis(25));
 }
 
 - (UIButton *)selectedButton {
@@ -93,6 +94,7 @@
         _goodsNameTextView.layer.cornerRadius = 2;
         _goodsNameTextView.font = kFont14;
         _goodsNameTextView.text = @"美国雷亚手电钻多功能家用电 钻工业级手枪钻电动螺丝刀手 电转220V";
+        _goodsNameTextView.delegate = self;
          [self.contentView addSubview:self.goodsNameTextView];
     }
     return _goodsNameTextView;
@@ -166,6 +168,7 @@
 - (UIButton *)addButton {
     if (!_addButton) {
         _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.expandView addSubview:self.addButton];
     }
     return _addButton;
@@ -174,6 +177,7 @@
 - (UIButton *)minusButton {
     if (!_minusButton) {
         _minusButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_minusButton addTarget:self action:@selector(minusButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.expandView addSubview:self.minusButton];
     }
     return _minusButton;
@@ -185,8 +189,10 @@
         _goodsNumTF.font = kFont14;
         _goodsNumTF.text = @"1";
         _goodsNumTF.textAlignment = NSTextAlignmentCenter;
+        _goodsNumTF.keyboardType = UIKeyboardTypeNumberPad;
         _goodsNumTF.textColor = [UIColor colorWithHexString:@"#333333"];
         _goodsNumTF.backgroundColor = [UIColor colorWithHexString:@"#EBEBEB"];
+        _goodsNumTF.delegate = self;
         [self.expandView addSubview:_goodsNumTF];
     }
     return _goodsNumTF;
@@ -198,10 +204,12 @@
         _onlinePriceTF = [[UITextField alloc] init];
         _onlinePriceTF.font = kFont14;
         _onlinePriceTF.textAlignment = NSTextAlignmentCenter;
+        _onlinePriceTF.keyboardType = UIKeyboardTypeNumberPad;
         _onlinePriceTF.text = @"0.00";
         _onlinePriceTF.textColor = [UIColor colorWithHexString:@"#FF3A3A"];
         _onlinePriceTF.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;
         _onlinePriceTF.layer.borderWidth = 1;
+        _onlinePriceTF.delegate = self;
         [self.expandView addSubview:_onlinePriceTF];
     }
     return _onlinePriceTF;
@@ -212,10 +220,12 @@
         _offlinePriceTF = [[UITextField alloc] init];
         _offlinePriceTF.font = kFont14;
         _offlinePriceTF.textAlignment = NSTextAlignmentCenter;
+        _offlinePriceTF.keyboardType = UIKeyboardTypeNumberPad;
         _offlinePriceTF.text = @"0.00";
         _offlinePriceTF.textColor = [UIColor colorWithHexString:@"#FF3A3A"];
         _offlinePriceTF.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;
         _offlinePriceTF.layer.borderWidth = 1;
+        _offlinePriceTF.delegate = self;
         [self.expandView addSubview:_offlinePriceTF];
     }
     return _offlinePriceTF;
@@ -228,6 +238,7 @@
         [_classifyNameButton setTitle:@"一级分类/二级分类" forState:UIControlStateNormal];
         _classifyNameButton.titleLabel.font = kFont12;
         [_classifyNameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_classifyNameButton addTarget:self action:@selector(classifyNameButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.expandView addSubview:self.classifyNameButton];
     }
     return _classifyNameButton;
@@ -262,13 +273,39 @@
 
 - (void)selectedButtonAction:(UIButton *)selectedBtn {
     selectedBtn.selected = !selectedBtn.selected;
-    self.goodsModel.isSelected = selectedBtn.selected;
     if (self.selectedButtonBlock) {
         self.selectedButtonBlock(self, self.goodsModel.isSelected);
     }
 }
 
+- (void)addButtonAction:(UIButton *)addBtn {
+    NSInteger goodsNum = [self.goodsNumTF.text integerValue];
+    self.goodsNumTF.text = [NSString stringWithFormat:@"%@", @(goodsNum + 1)];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(addPlatformGoodsCell:goodsNumChanged:)]) {
+        [self.delegate addPlatformGoodsCell:self goodsNumChanged:[self.goodsNumTF.text integerValue]];
+    }
+}
+
+- (void)minusButtonAction:(UIButton *)addBtn {
+    NSInteger goodsNum = [self.goodsNumTF.text integerValue];
+    if (goodsNum >= 2) {
+        self.goodsNumTF.text = [NSString stringWithFormat:@"%@", @(goodsNum - 1)];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(addPlatformGoodsCell:goodsNumChanged:)]) {
+            [self.delegate addPlatformGoodsCell:self goodsNumChanged:[self.goodsNumTF.text integerValue]];
+        }
+    }
+}
+
+- (void)classifyNameButtonAction:(UIButton *)classifyNameBtn {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(addPlatformGoodsCell:shopClassifyNameButton:)]) {
+        [self.delegate addPlatformGoodsCell:self shopClassifyNameButton:self.classifyNameButton];
+    }
+}
+
+#pragma mark - Setup Data
+
 - (void)setupData:(ZLGoodsModel *)goodsModel {
+    self.selectedButton.selected = goodsModel.isSelected;
     self.goodsModel = goodsModel;
     if (goodsModel.isSelected) {
         self.expandView.hidden = NO;
@@ -276,6 +313,9 @@
         self.goodsNameTextView.hidden = NO;
         self.bottomSeparator.frame = CGRectMake(dis(15), dis(307) - 1, dis(345), 1);
     } else {
+        [self.goodsNameLabel sizeToFit];
+        self.goodsNameLabel.y =  self.goodsImageView.top + dis(5);
+        self.goodsNameLabel.width = dis(196);
         self.expandView.hidden = YES;
         self.goodsNameLabel.hidden = NO;
         self.goodsNameTextView.hidden = YES;
@@ -290,4 +330,32 @@
         return dis(116);
     }
 }
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidChange:(UITextView *)textView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(addPlatformGoodsCell:goodsNameChanged:)]) {
+        [self.delegate addPlatformGoodsCell:self goodsNameChanged:textView.text];
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField == self.goodsNumTF) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(addPlatformGoodsCell:goodsNumChanged:)]) {
+            [self.delegate addPlatformGoodsCell:self goodsNumChanged:[textField.text floatValue]];
+        }
+    } else if (textField == self.onlinePriceTF) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(addPlatformGoodsCell:goodsNumOnlinePriceChanged:)]) {
+            [self.delegate addPlatformGoodsCell:self goodsNumOnlinePriceChanged:[textField.text floatValue]];
+        }
+    } else if (textField == self.offlinePriceTF) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(addPlatformGoodsCell:goodsNumOfflinePriceChanged:)]) {
+            [self.delegate addPlatformGoodsCell:self goodsNumOfflinePriceChanged:[textField.text floatValue]];
+        }
+    }
+}
+
+
 @end

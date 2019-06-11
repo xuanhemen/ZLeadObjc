@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ZLConfig.h"
+#import "IQKeyboardManager.h"
 
 @interface AppDelegate ()
 
@@ -22,6 +23,8 @@
     
     [ZLConfig chooseRootViewController]; //配置根视图控制器
     [ZLConfig config]; //配置环境
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
 
     
    // [[UITabBar appearance] setTranslucent:NO];

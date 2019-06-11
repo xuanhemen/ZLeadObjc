@@ -34,12 +34,13 @@
     
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.cancelButton addTarget:self action:@selector(cancelButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancelButton setImage:[UIImage imageNamed:@"cancel-selected-classify-icon"] forState:UIControlStateNormal];
     [self addSubview:self.cancelButton];
 }
 
 - (void)setClassifyItemModel:(ZLClassifyItemModel *)classifyItemModel {
     self.titleButton.frame = CGRectMake(0, 0, self.width, self.height);
-    self.cancelButton.frame = CGRectMake(self.width - dis(18), self.height - dis(18), dis(18), dis(18));
+    self.cancelButton.frame = CGRectMake(self.width - dis(18), self.height - dis(14), dis(18), dis(14));
     [self.titleButton setTitle:classifyItemModel.title forState:UIControlStateNormal];
 }
 
