@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UITextField *searchTextField;
 @property (nonatomic, weak) id <ZLSearchBarViewDelegate> delegate;
 - (void)changeSearchBarViewStyle:(BOOL)enableManage;
+- (void)configRightButtonsForAddGoodsPlatform;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLShopGoodsSearchBarView : UIView
-
+@property (nonatomic, copy) void (^startSearchBlock) (void);
 @end
 
 NS_ASSUME_NONNULL_END

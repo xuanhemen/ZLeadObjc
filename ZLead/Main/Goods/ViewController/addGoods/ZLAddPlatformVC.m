@@ -7,6 +7,7 @@
 //
 
 #import "ZLAddPlatformVC.h"
+#import "ZLSearchAddPlatformGoodsVC.h"
 #import "ZLAddPlatformGoodsCell.h"
 #import "ZLFilterView.h"
 #import "ZLBatchSetClassifyView.h"
@@ -105,6 +106,11 @@
 
 - (void)setupViews {
     self.searchBarView = [[ZLShopGoodsSearchBarView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, dis(50))];
+    kWeakSelf(weakSelf)
+    self.searchBarView.startSearchBlock = ^{
+        ZLSearchAddPlatformGoodsVC *searchVC = [[ZLSearchAddPlatformGoodsVC alloc] init];
+        [weakSelf.navigationController pushViewController:searchVC animated:NO];
+    };
     [self.view addSubview:self.searchBarView];
     
    [self.batchSetClassifyView setSelectedGoodsNum:0];

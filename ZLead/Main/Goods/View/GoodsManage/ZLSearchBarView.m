@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *searchButton;
 @property (nonatomic, strong) UIButton *addButton;
+@property (nonatomic, assign) BOOL fromAddGoods;
 @end
 
 @implementation ZLSearchBarView
@@ -89,6 +90,15 @@
         self.addButton.hidden = NO;
         self.searchButton.hidden = YES;
     }
+}
+
+- (void)configRightButtonsForAddGoodsPlatform {
+    [self.manageButton setTitle:@"导入" forState:UIControlStateNormal];
+    [self.addButton setImage:nil forState:UIControlStateNormal];
+    [self.addButton setTitle:@"筛选" forState:UIControlStateNormal];
+    [self.addButton setTitleColor:[UIColor colorWithHexString:@"#F79A1E"] forState:UIControlStateNormal];
+    self.addButton.titleLabel.font = kFont15;
+    self.fromAddGoods = YES;
 }
 
 #pragma mark - UIButton Actions

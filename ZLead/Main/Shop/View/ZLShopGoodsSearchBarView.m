@@ -8,7 +8,7 @@
 
 #import "ZLShopGoodsSearchBarView.h"
 
-@interface ZLShopGoodsSearchBarView ()
+@interface ZLShopGoodsSearchBarView ()<UITextFieldDelegate>
 @property (nonatomic, strong) UITextField *searchTextField;
 @property (nonatomic, strong) UIImageView *searchIcon;
 @end
@@ -34,10 +34,36 @@
     self.searchIcon.image = [UIImage imageNamed:@"icon_search"];
     [containerView addSubview:self.searchIcon];
     
-    self.searchTextField = [[UITextField alloc] initWithFrame:kRect(31, 0, 315, 30)];
-    self.searchTextField.font = kFont14;
-    self.searchTextField.placeholder = @"搜索商品名称/编号";
-    [containerView addSubview:self.searchTextField];
+//    self.searchTextField = [[UITextField alloc] initWithFrame:kRect(31, 0, 315, 30)];
+//    self.searchTextField.delegate = self;
+//    self.searchTextField.font = kFont14;
+//    self.searchTextField.placeholder = @"搜索商品名称/编号";
+//    [containerView addSubview:self.searchTextField];
+    
+    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchButton.frame = kRect(31, 0, 315, 30);
+    [searchButton setTitle:@"搜索商品名称/编号" forState:UIControlStateNormal];
+    searchButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [searchButton setTitleColor:[UIColor colorWithHexString:@"#CCCCCC"] forState:UIControlStateNormal];
+    searchButton.titleLabel.font = kFont12;
+    [searchButton addTarget:self action:@selector(searchButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [containerView addSubview:searchButton];
+}
+
+#pragma mark - UIButton Actions
+
+- (void)searchButtonAction:(UIButton *)searchBtn {
+    if (self.startSearchBlock) {
+        self.startSearchBlock();
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (self.startSearchBlock) {
+        self.startSearchBlock();
+    }
 }
 
 @end

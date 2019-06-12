@@ -80,6 +80,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLClassifyListCell *classifyListCell = [tableView dequeueReusableCellWithIdentifier:@"ZLClassifyListCell"];
+    kWeakSelf(weakSelf)
+    classifyListCell.delGoodsClassifyBlock = ^(ZLClassifyItemModel * _Nonnull classifyItemModel) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"您确定删除商品吗？删除后不可恢复" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            DLog(@"点击取消");
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            DLog(@"点击确认");
+        }]];
+        [weakSelf presentViewController:alertController animated:YES completion:nil];
+    };
+    classifyListCell.editGoodsClassifyBlock = ^(ZLClassifyItemModel * _Nonnull classifyItemModel) {
+        
+    };
     return classifyListCell;
 }
 
