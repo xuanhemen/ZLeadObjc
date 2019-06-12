@@ -51,14 +51,14 @@
     self.expandView.frame = CGRectMake(0, self.goodsImageView.bottom + dis(8), kScreenWidth, dis(180));
     self.goodsNumTitleLabel.frame = CGRectMake(dis(45), dis(18), dis(60), dis(17));
     self.minusButton.frame = CGRectMake(dis(255), dis(11), dis(34), dis(32));
-    self.goodsNumTF.frame = CGRectMake(self.minusButton.right + dis(1), dis(11), dis(34), dis(32));
+    self.goodsNumTF.frame = CGRectMake(self.minusButton.right + dis(1), dis(13), dis(34), dis(28));
     self.addButton.frame = CGRectMake(self.goodsNumTF.right + dis(1), dis(11), dis(34), dis(32));
     self.onlinePriceLabel.frame = CGRectMake(dis(45), self.goodsNumTitleLabel.bottom + dis(32), dis(60), dis(17));
     self.onlinePriceTF.frame = CGRectMake(kScreenWidth - dis(96), self.addButton.bottom + dis(17), dis(80), dis(30));
-    self.onlinePriceSignLabel.frame = CGRectMake(self.onlinePriceTF.left - dis(62), self.addButton.bottom + dis(17), dis(60), dis(30));
+    self.onlinePriceSignLabel.frame = CGRectMake(self.onlinePriceTF.left - dis(64), self.addButton.bottom + dis(17), dis(60), dis(30));
     self.offlinePriceLabel.frame = CGRectMake(dis(45), self.onlinePriceLabel.bottom + dis(29), dis(60), dis(17));
     self.offlinePriceTF.frame = CGRectMake(kScreenWidth - dis(96), self.onlinePriceTF.bottom + dis(16), dis(80), dis(30));
-    self.offlinePriceSignLabel.frame = CGRectMake(self.onlinePriceTF.left - dis(62), self.onlinePriceTF.bottom + dis(17), dis(60), dis(30));
+    self.offlinePriceSignLabel.frame = CGRectMake(self.onlinePriceTF.left - dis(64), self.onlinePriceTF.bottom + dis(17), dis(60), dis(30));
     self.shopClassifyLabel.frame = CGRectMake(dis(45), self.offlinePriceLabel.bottom + dis(26), dis(60), dis(17));
 //    self.classifyNameButton.frame = CGRectMake(kScreenWidth - dis(114), self.offlinePriceTF.bottom + dis(17), dis(98), dis(25));
     self.classifyNameButton.frame = CGRectMake(kScreenWidth - dis(135), self.offlinePriceTF.bottom + dis(17), dis(120), dis(25));
@@ -178,7 +178,7 @@
 - (UIButton *)minusButton {
     if (!_minusButton) {
         _minusButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_minusButton setImage:[UIImage imageNamed:@"plus-sign-icon"] forState:UIControlStateNormal];
+        [_minusButton setImage:[UIImage imageNamed:@"mins-sign-icon"] forState:UIControlStateNormal];
         [_minusButton addTarget:self action:@selector(minusButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.expandView addSubview:self.minusButton];
     }

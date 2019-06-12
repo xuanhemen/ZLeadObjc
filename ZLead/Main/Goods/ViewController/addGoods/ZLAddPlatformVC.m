@@ -64,7 +64,7 @@
     
     [self setupData];
     
-
+    [self getClassifyList];
 }
 
 /** 导航栏 */
@@ -131,6 +131,27 @@
     [self.goodsListTableView reloadData];
 }
 
+- (void)getClassifyList {
+    self.filterDataModel  = [[ZLFilterDataModel alloc] init];
+    NSArray *sectionTitles = @[@"分类", @"一级分类", @"二级分类"];
+    NSMutableArray *allItems = [[NSMutableArray alloc] init];
+    for (NSInteger section = 0; section < 3; section ++) {
+        ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
+        filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
+        filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+        NSMutableArray *items = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < 10; i++) {
+            ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
+            itemModel.classifyId = i + 1;
+            itemModel.title = [NSString stringWithFormat:@"分类%@", @(i)];
+            [items addObject:itemModel];
+        }
+        filterDataModel.dataList = items;
+        [allItems addObject:filterDataModel];
+    }
+    self.filterDataModel.dataList = allItems;
+}
+
 #pragma mark - setter
 
 - (void)setGoodsTotalNum:(NSInteger)goodsTotalNum {
@@ -169,29 +190,22 @@
     [self.goodsListTableView reloadData];
 }
 
+- (void)batchSetClassify:(NSString *)firstClassify secondClassify:(NSString *)secondClassify thirdClassify:(NSString *)thirdClassify {
+    for (int i = 0; i < self.goodsList.count; i++) {
+        ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:i];
+        if (goodsModel.isSelected) {
+            goodsModel.goodsClassName1 = firstClassify;
+            goodsModel.goodsClassName2 = secondClassify;
+        }
+    }
+    [self.goodsListTableView reloadData];
+}
+
 #pragma mark - action
 
 - (void)classificationButtonAction:(UIButton *)btn {
     if (!self.showFilter) {
         [self.filterView dismiss];
-        self.filterDataModel  = [[ZLFilterDataModel alloc] init];
-        NSArray *sectionTitles = @[@"分类", @"一级分类", @"二级分类"];
-        NSMutableArray *allItems = [[NSMutableArray alloc] init];
-        for (NSInteger section = 0; section < 3; section ++) {
-            ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
-            filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
-            filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-            NSMutableArray *items = [[NSMutableArray alloc] init];
-            for (NSInteger i = 0; i < 10; i++) {
-                ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
-                itemModel.classifyId = i + 1;
-                itemModel.title = [NSString stringWithFormat:@"分类%@", @(i)];
-                [items addObject:itemModel];
-            }
-            filterDataModel.dataList = items;
-            [allItems addObject:filterDataModel];
-        }
-        self.filterDataModel.dataList = allItems;
         self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
             
         }];
@@ -264,8 +278,14 @@
     if (!_batchSetClassifyView) {
         _batchSetClassifyView = [[ZLBatchSetClassifyView alloc] initWithFrame:CGRectMake(0, kScreenHeight - dis(50) - kSafeHeight, kScreenWidth, dis(50))];
         [self.view addSubview:_batchSetClassifyView];
+        kWeakSelf(weakSelf)
         _batchSetClassifyView.batchSetClassifyBlock = ^{
-            
+            weakSelf.filterView = [ZLFilterView createFilterViewWidthConfiguration:weakSelf.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
+                DLog(@"批量设置分类");
+                [weakSelf batchSetClassify:firstClassify secondClassify:secondClassify thirdClassify:thirdClassify];
+            }];
+            weakSelf.filterView.durationTime = 0.5;
+            [weakSelf.filterView show];
         };
     }
     return _batchSetClassifyView;
@@ -299,7 +319,17 @@
 }
 
 - (void)addPlatformGoodsCell:(ZLAddPlatformGoodsCell *)cell shopClassifyNameButton:(UIButton *)classifyNameButton {
-    
+    kWeakSelf(weakSelf)
+    self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
+        [classifyNameButton setTitle:@"选择了分类" forState:UIControlStateNormal];
+        NSIndexPath *indexPath = [weakSelf.goodsListTableView indexPathForCell:cell];
+        ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:indexPath.row];
+        goodsModel.goodsClassName1 = @"";//设置分类
+        goodsModel.goodsClassName2 = @"";//设置分类
+        [cell setupData:goodsModel];
+    }];
+    self.filterView.durationTime = 0.5;
+    [self.filterView show];
 }
 
 @end

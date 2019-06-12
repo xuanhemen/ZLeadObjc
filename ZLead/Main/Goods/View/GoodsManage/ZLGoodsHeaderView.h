@@ -10,8 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZLGoodsHeaderView : UIView
+@class ZLGoodsHeaderView;
 
+@protocol ZLGoodsHeaderViewDelegate <NSObject>
+- (void)goodsHeaderView:(ZLGoodsHeaderView *)headerView didSelectedIndex:(NSInteger)index;
+@end
+
+@interface ZLGoodsHeaderView : UIView
+@property (nonatomic, weak) id <ZLGoodsHeaderViewDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END
