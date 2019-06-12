@@ -15,6 +15,7 @@
 
 #import "ZLFilterView.h"
 #import "ZLGoodsEmptyView.h"
+#import "WHActionSheet.h"
 
 
 #import "ZLGoodsSearchVC.h"
@@ -25,19 +26,23 @@
 #import "ZLFilterDataModel.h"
 #import "ZLClassifyItemModel.h"
 
-@interface ZLGoodsVC ()<UITableViewDelegate, UITableViewDataSource>
-
+@interface ZLGoodsVC ()<UITableViewDelegate, UITableViewDataSource, ZLGoodsHeaderViewDelegate, ZLFilterViewDelegate>
 @property (nonatomic, strong) ZLGoodsHeaderView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ZLGoodsManagerView *bottomManagerView;
-/** <#注释#> */
 @property (nonatomic, assign) BOOL allowEdit;
-@property (nonatomic, strong) NSMutableArray *goodsList;
 @property (nonatomic, assign) BOOL isAllSelected;
 @property (nonatomic, strong) ZLFilterView *filterView;
 @property (nonatomic, assign) BOOL showFilter;
 @property (nonatomic, strong) ZLFilterDataModel *filterDataModel;
 @property (nonatomic, strong) ZLGoodsEmptyView *goodsEmptyView;
+@property (nonatomic, assign) NSInteger currentSelectedIndex;
+@property (nonatomic, strong) NSMutableArray *sellingGoodsList;
+@property (nonatomic, strong) NSMutableArray *unSellingGoodsList;
+@property (nonatomic, strong) NSMutableArray *soldOutGoodsList;
+@property (nonatomic, assign) NSInteger sellingPageIndex;//销售中商品当前第几页
+@property (nonatomic, assign) NSInteger unsellPageIndex;
+@property (nonatomic, assign) NSInteger soldOutPageIndex;
 @end
 
 @implementation ZLGoodsVC
@@ -56,6 +61,7 @@
      [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self styleForNav];
     [self layoutChildViews];
+    [self addTableRefresh];
     
     [self setupData];
 }
@@ -102,6 +108,7 @@
 
 - (void)layoutChildViews {
     self.headerView = [[ZLGoodsHeaderView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, 45)];
+    self.headerView.delegate = self;
     [self.view addSubview:self.headerView];
     
     self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
@@ -112,27 +119,42 @@
     self.bottomManagerView.allSelectedBlock = ^(BOOL isSelected) {
         [weakSelf allSelected:isSelected];
     };
+ 
     self.bottomManagerView.topBlock = ^{
+        NSMutableArray *goodsList = nil;
+        if (self.currentSelectedIndex == 0) {
+            goodsList = self.sellingGoodsList;
+        } else if (self.currentSelectedIndex == 1) {
+            goodsList = self.unSellingGoodsList;
+        } else {
+            goodsList = self.soldOutGoodsList;
+        }
         for (int i = 0; i < 10; i++) {
-            ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:i];
+            ZLGoodsModel *goodsModel = [goodsList objectAtIndex:i];
             goodsModel.goodsNum = i+1;
             if (goodsModel.isSelected) {
                 goodsModel.top = YES;
             }
-            [weakSelf.goodsList addObject:goodsModel];
         }
         [weakSelf.tableView reloadData];
         [weakSelf.bottomManagerView refreshCanelTopButton:YES];
     };
     self.bottomManagerView.cancelTopBlock = ^{
+        NSMutableArray *goodsList = nil;
+        if (self.currentSelectedIndex == 0) {
+            goodsList = self.sellingGoodsList;
+        } else if (self.currentSelectedIndex == 1) {
+            goodsList = self.unSellingGoodsList;
+        } else {
+            goodsList = self.soldOutGoodsList;
+        }
         int topCount = 0;
         for (int i = 0; i < 10; i++) {
-            ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:i];
+            ZLGoodsModel *goodsModel = [goodsList objectAtIndex:i];
             goodsModel.goodsNum = i+1;
             if (goodsModel.isSelected) {
                 goodsModel.top = NO;
             }
-            [weakSelf.goodsList addObject:goodsModel];
         }
         [weakSelf.tableView reloadData];
         [weakSelf.bottomManagerView refreshCanelTopButton:topCount ? YES : NO];
@@ -160,13 +182,32 @@
     [self.view addSubview:self.bottomManagerView];
 }
 
+- (void)addTableRefresh {
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+}
+
 #pragma mark - Init
 
-- (NSMutableArray *)goodsList {
-    if (!_goodsList) {
-        _goodsList = [[NSMutableArray alloc] init];
+- (NSMutableArray *)sellingGoodsList {
+    if (!_sellingGoodsList) {
+        _sellingGoodsList = [[NSMutableArray alloc] init];
     }
-    return _goodsList;
+    return _sellingGoodsList;
+}
+
+- (NSMutableArray *)unSellingGoodsList {
+    if (!_unSellingGoodsList) {
+        _unSellingGoodsList = [[NSMutableArray alloc] init];
+    }
+    return _unSellingGoodsList;
+}
+
+- (NSMutableArray *)soldOutGoodsList {
+    if (!_soldOutGoodsList) {
+        _soldOutGoodsList = [[NSMutableArray alloc] init];
+    }
+    return _soldOutGoodsList;
 }
 
 #pragma mark - setupData
@@ -176,9 +217,24 @@
         ZLGoodsModel *goodsModel = [[ZLGoodsModel alloc] init];
         goodsModel.goodsNum = i+1;
         goodsModel.top = NO;
-        [self.goodsList addObject:goodsModel];
+        [self.sellingGoodsList addObject:goodsModel];
+    }
+    for (int i = 0; i < 10; i++) {
+        ZLGoodsModel *goodsModel = [[ZLGoodsModel alloc] init];
+        goodsModel.goodsNum = i+10;
+        goodsModel.goodsName = @"sfsfdsf";
+        goodsModel.top = NO;
+        [self.unSellingGoodsList addObject:goodsModel];
     }
     [self.tableView reloadData];
+}
+
+- (void)headerRefresh {
+    [self.tableView.mj_header endRefreshing];
+}
+
+- (void)footerRefresh {
+    [self.tableView.mj_footer endRefreshing];
 }
 
 #pragma mark - private Method
@@ -189,7 +245,15 @@
 - (void)judgeIsAllSelected {
     NSInteger count = 0;
     BOOL enabelCancelTop = NO;
-    for (ZLGoodsModel *goodsModel in self.goodsList) {
+    NSArray *goodsList = nil;
+    if (self.currentSelectedIndex == 0) {
+        goodsList = self.sellingGoodsList;
+    } else if (self.currentSelectedIndex == 1) {
+        goodsList = self.unSellingGoodsList;
+    } else {
+        goodsList = self.soldOutGoodsList;
+    }
+    for (ZLGoodsModel *goodsModel in goodsList) {
         if (goodsModel.isSelected) {
             count ++;
             if (goodsModel.top) {
@@ -197,7 +261,7 @@
             }
         }
     }
-    if (count == self.goodsList.count) {
+    if (count == goodsList.count) {
         self.bottomManagerView.allSelectedButton.selected = YES;
         self.isAllSelected = YES;
     } else {
@@ -219,11 +283,18 @@
 }
 
 - (void)allSelected:(BOOL )isSelected {
-    for (int i = 0; i < 10; i++) {
-        ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:i];
+    NSArray *goodsList = nil;
+    if (self.currentSelectedIndex == 0) {
+        goodsList = self.sellingGoodsList;
+    } else if (self.currentSelectedIndex == 1) {
+        goodsList = self.unSellingGoodsList;
+    } else {
+        goodsList = self.soldOutGoodsList;
+    }
+    for (int i = 0; i < goodsList.count; i++) {
+        ZLGoodsModel *goodsModel = [goodsList objectAtIndex:i];
         goodsModel.goodsNum = i+1;
         goodsModel.isSelected = isSelected;
-        [self.goodsList addObject:goodsModel];
     }
     [self.tableView reloadData];
 }
@@ -241,7 +312,21 @@
         self.filterDataModel  = [[ZLFilterDataModel alloc] init];
         NSArray *sectionTitles = @[@"分类", @"一级分类", @"二级分类"];
         NSMutableArray *allItems = [[NSMutableArray alloc] init];
-        for (NSInteger section = 0; section < 3; section ++) {
+        ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
+        filterDataModel.sectionName = [sectionTitles objectAtIndex:0];
+        filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSArray *sectionClassifys = @[@"店铺", @"平台"];
+        NSMutableArray *firstItems = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < sectionClassifys.count; i++) {
+            ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
+            itemModel.classifyId = i + 1;
+            itemModel.isSelected = (i == 0) ? YES : NO;
+            itemModel.title = [sectionClassifys objectAtIndex:i];
+            [firstItems addObject:itemModel];
+        }
+        filterDataModel.dataList = firstItems;
+        [allItems addObject:filterDataModel];
+        for (NSInteger section = 1; section < 3; section ++) {
             ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
             filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
             filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
@@ -258,6 +343,7 @@
         self.filterDataModel.dataList = allItems;
         self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromLeft  filterViewBlock:^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
         }];
+        self.filterView.delegate = self;
         kWeakSelf(weakSelf)
         self.filterView.filterViewBlock = ^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
             ZLClassifyFilterListVC *classifyFilterListVC = [[ZLClassifyFilterListVC alloc] init];
@@ -292,7 +378,13 @@
 #pragma mark - delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.goodsList.count;
+    if (self.currentSelectedIndex == 0) {
+        return self.sellingGoodsList.count;
+    } else if (self.currentSelectedIndex == 1) {
+        return self.unSellingGoodsList.count;
+    } else {
+        return self.soldOutGoodsList.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -302,14 +394,52 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLGoodsListCell *cell = [ZLGoodsListCell listCellWithTableView:tableView];
     cell.allowEdit = self.allowEdit;
-    [cell setupData:[self.goodsList objectAtIndex:indexPath.row]];
+    if (self.currentSelectedIndex == 0) {
+        [cell setupData:[self.sellingGoodsList objectAtIndex:indexPath.row]];
+    } else if (self.currentSelectedIndex == 1) {
+        [cell setupData:[self.unSellingGoodsList objectAtIndex:indexPath.row]];
+    } else {
+        [cell setupData:[self.soldOutGoodsList objectAtIndex:indexPath.row]];
+    }
     kWeakSelf(weakSelf);
     cell.selectedButtonBlock = ^(BOOL isSelected) {
-        ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:indexPath.row];
+        ZLGoodsModel *goodsModel = nil;
+        if (self.currentSelectedIndex == 0) {
+             goodsModel = [weakSelf.sellingGoodsList objectAtIndex:indexPath.row];
+        } else if (self.currentSelectedIndex == 1) {
+            goodsModel = [weakSelf.unSellingGoodsList objectAtIndex:indexPath.row];
+        } else {
+            goodsModel = [weakSelf.soldOutGoodsList objectAtIndex:indexPath.row];
+        }
         goodsModel.isSelected = isSelected;
         [weakSelf judgeIsAllSelected];
     };
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+}
+
+#pragma mark - ZLGoodsHeaderViewDelegate
+
+- (void)goodsHeaderView:(ZLGoodsHeaderView *)headerView didSelectedIndex:(NSInteger)index {
+    self.currentSelectedIndex = index;
+    [self.tableView reloadData];
+}
+
+#pragma mark - ZLFilterViewDelegate
+//选择上一级的分类刷新下一级的数据,如果点的是平台/店铺刷新整个列表
+- (void)filterView:(ZLFilterView *)filterView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+//    ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
+//    ZLClassifyItemModel *classifyItemModel = [filterDataModel.dataList objectAtIndex:indexPath.row];
+    //请求下一级的数据
+    //刷新下一级的数据
+    if (indexPath.section == 0) {
+        [filterView reloadData:self.filterDataModel];
+    } else {
+        [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
+    }
 }
 
 #pragma mark - setter

@@ -92,8 +92,10 @@
             [weakSelf.goodsList addObject:goodsModel];
         }
         [weakSelf.searchResultView.resultTableView reloadData];
+        [weakSelf.searchResultView.bottomManagerView refreshCanelTopButton:YES];
     };
     self.searchResultView.bottomManagerView.cancelTopBlock = ^{
+        int topCount = 0;
         for (int i = 0; i < 10; i++) {
             ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:i];
             goodsModel.goodsNum = i+1;
@@ -103,6 +105,7 @@
             [weakSelf.goodsList addObject:goodsModel];
         }
         [weakSelf.searchResultView.resultTableView reloadData];
+        [weakSelf.searchResultView.bottomManagerView refreshCanelTopButton:topCount ? YES : NO];
     };
 }
 
@@ -179,6 +182,15 @@
     } else {
         self.searchResultView.bottomManagerView.allSelectedButton.selected = NO;
         self.isAllSelected = NO;
+    }
+    if (count > 0) {
+        [self.searchResultView.bottomManagerView refreshUnShelveButton:YES];
+        [self.searchResultView.bottomManagerView refreshDelButton:YES];
+        [self.searchResultView.bottomManagerView refreshTopButton:YES];
+    } else {
+        [self.searchResultView.bottomManagerView refreshUnShelveButton:NO];
+        [self.searchResultView.bottomManagerView refreshDelButton:NO];
+        [self.searchResultView.bottomManagerView refreshTopButton:NO];
     }
     if (enabelCancelTop) {
         [self.searchResultView.bottomManagerView refreshCanelTopButton:enabelCancelTop];
@@ -267,6 +279,7 @@
     self.searchResultView.bottomManagerView.hidden = !self.allowEdit;
     self.isAllSelected = NO;
     [self.searchResultView.bottomManagerView reset];
+    [self.searchResultView.resultTableView reloadData];
 }
 
 - (void)addGoods {

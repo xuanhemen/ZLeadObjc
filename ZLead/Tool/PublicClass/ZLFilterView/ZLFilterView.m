@@ -267,6 +267,25 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     [self resetMenuStatus];
 }
 
+#pragma mark - 暴露给外界刷新数据的接口
+
+- (void)reloadData:(ZLFilterDataModel *)filterDataModel section:(NSInteger )section {
+    if (section < filterDataModel.dataList.count) {
+        ZLFilterDataModel *sectionDataModel = [filterDataModel.dataList objectAtIndex:section];
+        NSMutableArray *allList = [[NSMutableArray alloc] initWithArray:filterDataModel.dataList];
+        [allList replaceObjectAtIndex:section withObject:sectionDataModel];
+        self.filterDataModel.dataList = allList;
+        [self.filter performBatchUpdates:^{
+            [self.filter reloadSections:[NSIndexSet indexSetWithIndex:section]];
+        } completion:nil];
+    }
+}
+
+- (void)reloadData:(ZLFilterDataModel *)filterDataModel {
+    self.filterDataModel = filterDataModel;
+    [self.filter reloadData];
+}
+
 
 #pragma mark - UIButton Actions
 
@@ -352,14 +371,17 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
         return;
     }
     for (ZLClassifyItemModel *itemModel in filterDataModel.dataList) {
-        if (itemModel.classifyId == filterDataModel.selectedClassifyItemModel.classifyId) {
-            itemModel.isSelected = NO;
-        } else if (itemModel.classifyId == classifyItemModel.classifyId) {
+        if (itemModel.classifyId == classifyItemModel.classifyId) {
             itemModel.isSelected = YES;
+        } else {
+             itemModel.isSelected = NO;
         }
     }
     filterDataModel.selectedClassifyItemModel = classifyItemModel;
     [self.filter reloadData];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(filterView:didSelectItemAtIndexPath:)]) {
+        [self.delegate filterView:self didSelectItemAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark - ZLFilterSectionHeaderViewDelegate
