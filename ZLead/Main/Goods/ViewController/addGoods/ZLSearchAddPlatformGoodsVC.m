@@ -17,6 +17,7 @@
 
 #import "ZLGoodsModel.h"
 #import "ZLFilterDataModel.h"
+#import "ZLClassifyItemModel.h"
 
 @interface ZLSearchAddPlatformGoodsVC ()<SearchTagDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, ZLSearchBarViewDelegate, ZLAddPlatformGoodsCellDelegate>
 @property (nonatomic, strong) ZLSearchHistoryView *historyView;
@@ -88,7 +89,7 @@
     [self.searchResultView.resultTableView registerClass:[ZLAddPlatformGoodsCell class] forCellReuseIdentifier:@"ZLAddPlatformGoodsCell"];
     kWeakSelf(weakSelf)
     self.searchResultView.batchSetClassifyView.batchSetClassifyBlock = ^{
-        weakSelf.filterView = [ZLFilterView createFilterViewWidthConfiguration:weakSelf.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
+        weakSelf.filterView = [ZLFilterView createFilterViewWidthConfiguration:weakSelf.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(ZLClassifyItemModel * _Nonnull firstClassify, ZLClassifyItemModel * _Nonnull secondClassify, ZLClassifyItemModel * _Nonnull thirdClassify) {
             DLog(@"批量设置分类");
             [weakSelf batchSetClassify:firstClassify secondClassify:secondClassify thirdClassify:thirdClassify];
         }];
@@ -188,12 +189,12 @@
     [self.searchResultView.resultTableView reloadData];
 }
 
-- (void)batchSetClassify:(NSString *)firstClassify secondClassify:(NSString *)secondClassify thirdClassify:(NSString *)thirdClassify {
+- (void)batchSetClassify:(ZLClassifyItemModel *)firstClassify secondClassify:(ZLClassifyItemModel *)secondClassify thirdClassify:(ZLClassifyItemModel *)thirdClassify {
     for (int i = 0; i < self.goodsList.count; i++) {
         ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:i];
         if (goodsModel.isSelected) {
-            goodsModel.goodsClassName1 = firstClassify;
-            goodsModel.goodsClassName2 = secondClassify;
+            goodsModel.goodsClassName1 = firstClassify.title;
+            goodsModel.goodsClassName2 = secondClassify.title;
         }
     }
     [self.searchResultView.resultTableView reloadData];
@@ -284,7 +285,7 @@
 
 - (void)addPlatformGoodsCell:(ZLAddPlatformGoodsCell *)cell shopClassifyNameButton:(UIButton *)classifyNameButton {
     kWeakSelf(weakSelf)
-    self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
+    self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(ZLClassifyItemModel * _Nonnull firstClassify, ZLClassifyItemModel * _Nonnull secondClassify, ZLClassifyItemModel * _Nonnull thirdClassify) {
         [classifyNameButton setTitle:@"选择了分类" forState:UIControlStateNormal];
         NSIndexPath *indexPath = [weakSelf.searchResultView.resultTableView indexPathForCell:cell];
         ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:indexPath.row];

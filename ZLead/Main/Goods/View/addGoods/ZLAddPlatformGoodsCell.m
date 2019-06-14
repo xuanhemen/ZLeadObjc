@@ -220,6 +220,7 @@
 - (UITextField *)offlinePriceTF {
     if (!_offlinePriceTF) {
         _offlinePriceTF = [[UITextField alloc] init];
+//        [_offlinePriceTF addTarget:self action:@selector(textFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
         _offlinePriceTF.font = kFont14;
         _offlinePriceTF.textAlignment = NSTextAlignmentCenter;
         _offlinePriceTF.keyboardType = UIKeyboardTypeNumberPad;
@@ -236,11 +237,13 @@
 - (UIButton *)classifyNameButton {
     if (!_classifyNameButton) {
         _classifyNameButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _classifyNameButton.backgroundColor = [UIColor zl_mainColor];
-        [_classifyNameButton setTitle:@"一级分类/二级分类" forState:UIControlStateNormal];
-        _classifyNameButton.titleLabel.font = kFont12;
-        [_classifyNameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_classifyNameButton addTarget:self action:@selector(classifyNameButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        _classifyNameButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingHead;
+        _classifyNameButton.layer.cornerRadius = 2;
+        _classifyNameButton.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0];
+        _classifyNameButton.layer.borderWidth = 0.5;
+        _classifyNameButton.layer.borderColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0].CGColor;
+        [_classifyNameButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
         [self.expandView addSubview:self.classifyNameButton];
     }
     return _classifyNameButton;
@@ -325,6 +328,18 @@
     }
     self.goodsNameLabel.text = _goodsModel.goodsName;
     self.goodsNameTextView.text = _goodsModel.goodsName;
+    if (_goodsModel.goodsClassName1.length > 0) {
+        _classifyNameButton.backgroundColor = [UIColor zl_mainColor];
+        [_classifyNameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _classifyNameButton.layer.borderWidth = 0.5;
+        _classifyNameButton.layer.borderColor = [UIColor zl_mainColor].CGColor;
+    } else {
+        [_classifyNameButton setTitle:@"一级分类/二级分类" forState:UIControlStateNormal];
+         [_classifyNameButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        _classifyNameButton.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0];
+        _classifyNameButton.layer.borderWidth = 0.5;
+        _classifyNameButton.layer.borderColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0].CGColor;
+    }
 }
 
 + (CGFloat)heightForCell:(ZLGoodsModel *)goodsModel {

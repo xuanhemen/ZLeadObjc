@@ -32,6 +32,7 @@
 }
 @property (nonatomic, strong) ZLGoodsHeaderView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIButton *managerButton;
 @property (nonatomic, strong) ZLGoodsManagerView *bottomManagerView;
 @property (nonatomic, assign) BOOL allowEdit;
 @property (nonatomic, assign) BOOL allowUnSellingEdit;
@@ -97,13 +98,13 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:classificationButton];
     self.navigationItem.leftBarButtonItem = leftItem;
     
-    UIButton *managerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [managerButton setTitle:@"管理" forState:UIControlStateNormal];
-    managerButton.titleLabel.font = kFont14;
-    managerButton.frame = CGRectMake(0, 0, 40, 19);
-    [managerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [managerButton addTarget:self action:@selector(managerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithCustomView:managerButton];
+    self.managerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.managerButton setTitle:@"管理" forState:UIControlStateNormal];
+    self.managerButton.titleLabel.font = kFont14;
+    self.managerButton.frame = CGRectMake(0, 0, 40, 19);
+    [self.managerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.managerButton addTarget:self action:@selector(managerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithCustomView:self.managerButton];
     
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addButton setImage:[UIImage imageNamed:@"goods-add-icon"] forState:UIControlStateNormal];
@@ -418,7 +419,6 @@
     }];
 }
 
-
 #pragma mark - private Method
 
 /**
@@ -491,11 +491,12 @@
 - (void)classificationButtonAction:(UIButton *)btn {
     if (!self.showFilter) {
         [self.filterView dismiss];
-        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromLeft  filterViewBlock:^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
+        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromLeft  filterViewBlock:^(ZLClassifyItemModel * _Nonnull firstClassify, ZLClassifyItemModel * _Nonnull secondClassify, ZLClassifyItemModel * _Nonnull thirdClassify) {
+
         }];
         self.filterView.delegate = self;
         kWeakSelf(weakSelf)
-        self.filterView.filterViewBlock = ^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
+        self.filterView.filterViewBlock = ^(ZLClassifyItemModel * _Nonnull firstClassify, ZLClassifyItemModel * _Nonnull secondClassify, ZLClassifyItemModel * _Nonnull thirdClassify) {
             ZLClassifyFilterListVC *classifyFilterListVC = [[ZLClassifyFilterListVC alloc] init];
             [weakSelf.navigationController pushViewController:classifyFilterListVC animated:YES];
         };
@@ -603,13 +604,13 @@
 
 - (void)goodsHeaderView:(ZLGoodsHeaderView *)headerView didSelectedIndex:(NSInteger)index {
     self.currentSelectedIndex = index;
+    self.allowEdit = self.allowEdit;
     self.bottomManagerView.hidden = !self.allowEdit;
     if (self.currentSelectedIndex != index) {
         [self.bottomManagerView reset];
     } else {
-        
+        [self.managerButton setTitle:!self.allowEdit ? @"管理": @"完成" forState:UIControlStateNormal];
     }
-
     [self.tableView reloadData];
 }
 
@@ -696,17 +697,17 @@
 
 - (void)setAllowEdit:(BOOL)allowEdit {
     _allowEdit = allowEdit;
-    if (_allowEdit) {
-        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - dis(50) - kNavBarHeight - 45);
-    } else {
-        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
-    }
     if (self.currentSelectedIndex == 0) {
         self.allowSellingEdit = allowEdit;
     } else if (self.currentSelectedIndex == 1) {
         self.allowUnSellingEdit = allowEdit;
     } else {
         self.allowSoldOutEdit = allowEdit;
+    }
+    if (_allowEdit) {
+        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - dis(50) - kNavBarHeight - 45);
+    } else {
+        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
     }
     [self.tableView reloadData];
 }

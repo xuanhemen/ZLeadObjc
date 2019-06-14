@@ -294,12 +294,12 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     [self dismiss];
     if (sender.tag == ZLMenuButtonTypeSure) {
         if (self.filterViewBlock) {
-            self.filterViewBlock(@"一级分类", @"二级分类", @"三级分类");
+            ZLFilterDataModel *fDataModel = [self.filterDataModel.dataList objectAtIndex:1];
+            ZLFilterDataModel *sDataModel = [self.filterDataModel.dataList objectAtIndex:2];
+            ZLFilterDataModel *tDataModel = [self.filterDataModel.dataList objectAtIndex:3];
+            self.filterViewBlock(fDataModel.selectedClassifyItemModel, sDataModel.selectedClassifyItemModel, tDataModel.selectedClassifyItemModel);
         }
     } else if (sender.tag == ZLMenuButtonTypeReset) {
-//        if (self.filterViewBlock) {
-//            self.filterViewBlock(@"一级分类", @"二级分类", @"三级分类");
-//        }
     }
     
 }

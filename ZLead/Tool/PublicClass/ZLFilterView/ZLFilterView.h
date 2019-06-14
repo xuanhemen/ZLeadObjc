@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class ZLFilterDataModel, ZLFilterView;
+@class ZLFilterDataModel, ZLFilterView, ZLClassifyItemModel;
 
-typedef void(^FilterViewBlock) (NSString *firstClassify, NSString *secondClassify, NSString *thirdClassify);
+typedef void(^FilterViewBlock) (ZLClassifyItemModel *firstClassify, ZLClassifyItemModel *secondClassify, ZLClassifyItemModel *thirdClassify);
 
 /** 出现方向*/
 typedef NS_ENUM (NSUInteger, ZLFilterViewPushDirection) {
