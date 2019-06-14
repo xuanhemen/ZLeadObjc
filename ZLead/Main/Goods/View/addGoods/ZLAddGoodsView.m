@@ -7,7 +7,7 @@
 //
 
 #import "ZLAddGoodsView.h"
-
+#import "ZLSpeTableView.h"
 @interface ZLAddGoodsView ()
 
 @property (nonatomic, strong) UIView *bottomView; // 底部视图
@@ -29,15 +29,27 @@
         self.tableView.dataSource = viewModel;
         [self addSubview:self.bottomView];
         [self.bottomView addSubview:self.sureBtn];
+        [viewModel.addlistView subscribeNext:^(id  _Nullable x) {
+            viewModel.isAdd = @"多规格";
+            NSDictionary *formParams = x;
+            NSInteger count = formParams.count;
+            ZLSpeTableView *footView = [[ZLSpeTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, dis(50*(count+2))) param:formParams viewModel:viewModel];
+            self.tableView.tableFooterView = footView;
+        }];
     }
     return self;
 }
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.frame.size.height-kTabBarHeight) style:UITableViewStyleGrouped];
+        _tableView.backgroundColor = [UIColor zl_bgColor];
         _tableView.sectionFooterHeight = 0;
         _tableView.rowHeight = dis(50);;
         _tableView.sectionHeaderHeight = dis(70);
+        UIView *footView = [[UIView alloc] init];
+        footView.backgroundColor = [UIColor zl_bgColor];
+        footView.frame = CGRectMake(0, 0, kScreenWidth, dis(100));
+        _tableView.tableFooterView = footView;
         [self addSubview:_tableView];
     }
     return _tableView;

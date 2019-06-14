@@ -8,7 +8,7 @@
 
 #import "ZLDataVC.h"
 #import "ZLLoginVC.h"
-@interface ZLDataVC ()
+@interface ZLDataVC ()<QBImagePickerControllerDelegate>
 
 @end
 
@@ -27,8 +27,18 @@
     // Do any additional setup after loading the view.
 }
 - (void)btnClick {
-    ZLLoginVC *vc = [[ZLLoginVC alloc] init];
-    [self presentViewController:vc animated:YES completion:nil];
+    QBImagePickerController *imagePickerController =[QBImagePickerController new];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsMultipleSelection = YES;
+    //imagePickerController.prompt = @"请选择图像!";//在界面上方显示文字“请选择图像!”
+    imagePickerController.showsNumberOfSelectedAssets = YES;//在界面下方显示已经选择图像的数量
+    imagePickerController.numberOfColumnsInPortrait = 4;//竖屏模式下一行显示4张图像
+    imagePickerController.numberOfColumnsInLandscape = 7;//横屏模式下一行显示7张图像
+    imagePickerController.maximumNumberOfSelection = 9;
+    
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+//    ZLLoginVC *vc = [[ZLLoginVC alloc] init];
+//    [self presentViewController:vc animated:YES completion:nil];
 }
 /*
 #pragma mark - Navigation

@@ -11,6 +11,7 @@
 @class ZLSearchBarView;
 
 @protocol ZLSearchBarViewDelegate <NSObject>
+@optional
 - (void)backPreviousPage;
 - (void)addGoods;
 - (void)manageGoods:(UIButton *)manageBtn;

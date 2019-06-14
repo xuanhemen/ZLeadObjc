@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLBrandVC : ZLBaseViewController
 
+
+@property (nonatomic, copy) void (^selecItem)(NSString *title); // 选中回调
 @end
 
 NS_ASSUME_NONNULL_END
