@@ -7,6 +7,7 @@
 //
 
 #import "ZLAddClassifyNameVC.h"
+#import "ZLClassifyItemModel.h"
 
 #define kMaxLength 30
 
@@ -40,12 +41,16 @@
     self.navigationItem.leftBarButtonItem = leftItem;
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dis(200), 30)];
-    titleLabel.text = @"添加分类名称";
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = [UIColor colorWithHexString:@"#202020"];
     titleLabel.lineBreakMode = NSLineBreakByTruncatingHead;
     titleLabel.font = [UIFont systemFontOfSize:17];
     self.navigationItem.titleView = titleLabel;
+    if (self.classifyItemModel) {
+        titleLabel.text = @"编辑分类名称";
+    } else {
+        titleLabel.text = @"添加分类名称";
+    }
     
     UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [saveButton setTitleColor:[UIColor zl_mainColor] forState:UIControlStateNormal];
@@ -78,6 +83,10 @@
     self.numLabel.textAlignment = NSTextAlignmentRight;
     self.numLabel.text = @"0/30";
     [self.view addSubview:self.numLabel];
+    
+    if (self.classifyItemModel) {
+        self.classifyNameTF.text = self.classifyItemModel.title;
+    }
 }
 
 #pragma mark - UITextField Method
@@ -118,12 +127,28 @@
     if (self.classifyNameTF.text.length <= 0) {
         [self showMsg:@"请输入您的分类名称"];
     }
+    if (self.classifyItemModel) {
+        [[NetManager sharedInstance] editShopGoodsClass:self.classifyItemModel.classifyId classifyName:self.classifyNameTF.text sucess:^{
+            [self showMsg:@"编辑成功"];
+            if (self.addClassifySuccessBlock) {
+                self.addClassifySuccessBlock();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        } fail:^(NSError * _Nonnull error) {
+            
+        }];
+    } else {
+        [[NetManager sharedInstance] addShopGoodsClass:@"1" classifyName:self.classifyNameTF.text parentId:self.parentId sucess:^{
+            [self showMsg:@"添加成功"];
+            if (self.addClassifySuccessBlock) {
+                self.addClassifySuccessBlock();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        } fail:^(NSError * _Nonnull error) {
+            [self showMsg:@"添加失败"];
+        }];
+    }
     
-    [[NetManager sharedInstance] addShopGoodsClass:@"1" classifyName:self.classifyNameTF.text parentId:@"0" sucess:^{
-        
-    } fail:^(NSError * _Nonnull error) {
-        
-    }];
 }
 
 #pragma mark - Private Method

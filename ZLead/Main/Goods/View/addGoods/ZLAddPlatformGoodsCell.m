@@ -323,6 +323,8 @@
         self.goodsNameTextView.hidden = YES;
         self.bottomSeparator.frame = CGRectMake(dis(15), dis(307) - 1, dis(345), 0);
     }
+    self.goodsNameLabel.text = _goodsModel.goodsName;
+    self.goodsNameTextView.text = _goodsModel.goodsName;
 }
 
 + (CGFloat)heightForCell:(ZLGoodsModel *)goodsModel {
@@ -343,7 +345,7 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField == self.goodsNumTF) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(addPlatformGoodsCell:goodsNumChanged:)]) {
             [self.delegate addPlatformGoodsCell:self goodsNumChanged:[textField.text floatValue]];

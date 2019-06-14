@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *goodsName; //商品名
 @property (nonatomic, strong) NSString *goodsClassName1;//1级分类名
 @property (nonatomic, strong) NSString *goodsClassName2;//2级名
+@property (nonatomic, strong) NSString *goodsClassName3;//3级名
 @property (nonatomic, strong) NSString *skuId;//sku编号
 @property (nonatomic, strong) NSString *spuId;//sgu编号
 @property (nonatomic, strong) NSString *skuCode;//SKU编码
@@ -23,9 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *shopId; //店铺编号
 @property (nonatomic, strong) NSString *gooodsClassId2;//2级分类id
 @property (nonatomic, strong) NSString *gooodsClassId1;//1级分类id
+@property (nonatomic, strong) NSString *gooodsClassId3;//3级分类id
 @property (nonatomic, strong) NSString *sgSpecs;//规格信息
 @property (nonatomic, strong) NSString *priceId;//价格编号
 @property (nonatomic, strong) NSArray *imagesUrls;//商品所有图片文件夹链接
+@property (nonatomic, strong) NSArray *imagesDescs;//描述
 @property (nonatomic, strong) NSString *fromSource;//发布渠道
 @property (nonatomic, assign) NSInteger status;////状态  状态 -1：全部 1：销售中 2：下架 3：违规下架
 @property (nonatomic, strong) NSString *createTime; //商品创建时间
@@ -48,6 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger monthSaleNum;//月销统计
 @property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, assign) int top;//置顶排序   默认1   置顶为2
+@property (nonatomic, strong) NSString *pgbId;//商品品牌id
+@property (nonatomic, strong) NSString *pgmId;//生产企业编码
+@property (nonatomic, strong) NSString *pgCodebar;//条形码
 @end
 
 NS_ASSUME_NONNULL_END

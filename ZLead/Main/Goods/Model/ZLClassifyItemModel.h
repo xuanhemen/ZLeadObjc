@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLClassifyItemModel : NSObject
-@property (nonatomic, assign) NSInteger classifyId;//编号
+@property (nonatomic, strong) NSString *classifyId;//编号
 @property (nonatomic, strong) NSString *classifyCode;//编码
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, assign) NSInteger shopId;//店铺ID
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *remark;//"备注",
 @property (nonatomic, assign) NSInteger level; //等级： 1 ， 2
 @property (nonatomic, assign) BOOL isSelected;
+@property (nonatomic, assign) BOOL isPlatform;
 
 @end
 

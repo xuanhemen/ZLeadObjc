@@ -30,6 +30,7 @@
 @property (nonatomic, strong) ZLShopGoodsSearchBarView *searchBarView;
 @property (nonatomic, assign) NSInteger goodsTotalNum;
 @property (nonatomic, strong) UIButton *importButton;
+@property (nonatomic, assign) NSInteger pageIndex;
 @end
 
 @implementation ZLAddPlatformVC
@@ -63,6 +64,7 @@
     
     [self setupViews];
     
+    self.pageIndex = 1;
     [self setupData];
     
     [self getClassifyList];
@@ -79,7 +81,7 @@
     self.navigationItem.leftBarButtonItem = leftItem;
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dis(200), 30)];
-    self.titleLabel.text = @"一级分类/一级分类/一级分类/一级分类/二级分类/三级分类";
+    self.titleLabel.text = @"从平台添加商品";
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#202020"];
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingHead;
     self.titleLabel.font = [UIFont systemFontOfSize:17];
@@ -128,13 +130,12 @@
 #pragma mark - setupData
 
 - (void)setupData {
-    for (int i = 0; i < 10; i++) {
-        ZLGoodsModel *goodsModel = [[ZLGoodsModel alloc] init];
-        goodsModel.goodsNum = i+1;
-        goodsModel.top = NO;
-        [self.goodsList addObject:goodsModel];
-    }
-    [self.goodsListTableView reloadData];
+    [[NetManager sharedInstance] getPlatformGoodsList:self.pageIndex shopId:@"1" sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+        [self.goodsList addObjectsFromArray:dataList];
+        [self.goodsListTableView reloadData];
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)getClassifyList {
@@ -148,7 +149,7 @@
         NSMutableArray *items = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < 10; i++) {
             ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
-            itemModel.classifyId = i + 1;
+            itemModel.classifyId = [NSString stringWithFormat:@"%@", @(i + 1)];
             itemModel.title = [NSString stringWithFormat:@"分类%@", @(i)];
             [items addObject:itemModel];
         }
@@ -170,7 +171,7 @@
 
 - (void)calculateGoodsTotalNum {
     NSInteger count = 0;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < self.goodsList.count; i++) {
         ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:i];
         if (goodsModel.isSelected) {
             count ++;
@@ -187,7 +188,7 @@
 }
 
 - (void)allSelected:(BOOL )isSelected {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < self.goodsList.count; i++) {
         ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:i];
         goodsModel.goodsNum = i+1;
         goodsModel.isSelected = isSelected;
@@ -228,6 +229,39 @@
         [self showMsg:@"请选择要导入的商品"];
         return;
     }
+    NSMutableArray *dicts = [[NSMutableArray alloc] initWithCapacity:0];
+    for (int i = 0; i < self.goodsList.count; i++) {
+        ZLGoodsModel *goods = [self.goodsList objectAtIndex:i];
+        if (goods.isSelected) {
+            if (goods.onlinePrice.length <= 0) {
+                return;
+            }
+            if (goods.offlinePrice.length <= 0) {
+                return;
+            }
+            if (goods.gooodsClassId1.length <= 0) {
+                return;
+            }
+//            if (goods.gooodsClassId2.length <= 0) {
+//                return;
+//            }
+            NSMutableDictionary *goodsDicts = [NSMutableDictionary dictionary];
+            goodsDicts[@"shopId"] = [ZLUserInfo sharedInstance].currentShopId;
+            goodsDicts[@"spuCode"] = goods.spuCode;
+            goodsDicts[@"sgInventory"] = [NSString stringWithFormat:@"%@", @(goods.goodsNum)];
+            goodsDicts[@"sgpPublicEprice"] = goods.onlinePrice;
+            goodsDicts[@"sgpPublicPrice"] = goods.offlinePrice;
+            goodsDicts[@"shopClass1"] = @"1";
+            goodsDicts[@"shopClass2"] = @"3";
+            goodsDicts[@"pgId"] = goods.spuId;
+            [dicts addObject:goodsDicts];
+        }
+    }
+    [[NetManager sharedInstance] importGoods:dicts sucess:^{
+        DLog(@"导入商品成功");
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)filterButtonAction {
@@ -312,16 +346,18 @@
 }
 
 - (void)addPlatformGoodsCell:(ZLAddPlatformGoodsCell *)cell goodsNumOnlinePriceChanged:(CGFloat )onlinePrice {
-//    NSIndexPath *indexPath = [self.goodsListTableView indexPathForCell:cell];
-//    ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:indexPath.row];
-//    goodsModel.goodsNum = goodsNum;
+    NSIndexPath *indexPath = [self.goodsListTableView indexPathForCell:cell];
+    ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:indexPath.row];
+    goodsModel.onlinePrice = [NSString stringWithFormat:@"%.2f", onlinePrice];
 //    [self.goodsListTableView beginUpdates];
 //    [self.goodsListTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 //    [self.goodsListTableView endUpdates];
 }
 
 - (void)addPlatformGoodsCell:(ZLAddPlatformGoodsCell *)cell goodsNumOfflinePriceChanged:(CGFloat )offlinePrice {
-    
+    NSIndexPath *indexPath = [self.goodsListTableView indexPathForCell:cell];
+    ZLGoodsModel *goodsModel = [self.goodsList objectAtIndex:indexPath.row];
+    goodsModel.offlinePrice = [NSString stringWithFormat:@"%.2f", offlinePrice];
 }
 
 - (void)addPlatformGoodsCell:(ZLAddPlatformGoodsCell *)cell shopClassifyNameButton:(UIButton *)classifyNameButton {
@@ -332,6 +368,8 @@
         ZLGoodsModel *goodsModel = [weakSelf.goodsList objectAtIndex:indexPath.row];
         goodsModel.goodsClassName1 = @"";//设置分类
         goodsModel.goodsClassName2 = @"";//设置分类
+        goodsModel.gooodsClassId1 = @"";//设置分类
+        goodsModel.gooodsClassId2 = @"";//设置分类
         [cell setupData:goodsModel];
     }];
     self.filterView.durationTime = 0.5;

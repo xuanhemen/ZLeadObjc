@@ -28,9 +28,10 @@ typedef NS_ENUM (NSUInteger, ZLFilterViewPushDirection) {
 @interface ZLFilterView : UIView
 /** 动画时间 等于0 不开启动画 默认是0 */
 @property (nonatomic, assign) NSTimeInterval durationTime;
+@property (nonatomic, assign) BOOL isPlatform;//是平台分类
 @property (nonatomic, weak) id <ZLFilterViewDelegate> delegate;
 @property (nonatomic, strong) FilterViewBlock filterViewBlock;
-@property (nonatomic, strong) void (^manageClassifyBlock) (NSInteger classifyType);
+@property (nonatomic, strong) void (^manageClassifyBlock) (NSInteger classifyType, NSString *parentId);
 + (instancetype)createFilterViewWidthConfiguration: (ZLFilterDataModel *)configuration
                                      pushDirection:(ZLFilterViewPushDirection )pushDirection
                                 filterViewBlock: (FilterViewBlock)filterViewBlock;

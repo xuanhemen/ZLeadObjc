@@ -92,11 +92,11 @@
     }];
 }
 
-- (void)removeShopGoodsClass:(NSInteger )goodsClassifyId
+- (void)removeShopGoodsClass:(NSString *)goodsClassifyId
                       sucess:(successfulBlock)sucess
                         fail:(failWithErrorBlock)fail {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"sgcId"] = [NSString stringWithFormat:@"%@",@(goodsClassifyId)];
+    dict[@"sgcId"] = goodsClassifyId;
     [[NetManager sharedInstance] postRequestWithPath:ZLURL_RemoveShopGoodsClass parameters:dict sueccessful:^(id  _Nonnull responseObject) {
         sucess();
     } fail:^(NSError * _Nonnull error) {
@@ -126,8 +126,8 @@
     [[NetManager sharedInstance] postRequestWithPath:ZLURL_GetPlatFormClass parameters:dict sueccessful:^(id  _Nonnull responseObject) {
         NSMutableArray *classifyList = [[NSMutableArray alloc] init];
         for (NSDictionary *classifyItemDic in responseObject[@"platFormClass"]) {
-            ZLClassifyItemModel *item = [[ZLClassifyItemModel alloc] init];
-            item.classifyId = [classifyItemDic[@"pgcId"] integerValue];
+            ZLClassifyItemModel *item = [ZLClassifyItemModel mj_objectWithKeyValues:classifyItemDic];
+            item.classifyId = classifyItemDic[@"pgcId"];
             item.title = classifyItemDic[@"pgcName"];
             item.level = [classifyItemDic[@"pgcLevel"] integerValue];
             item.remark = classifyItemDic[@"pgcRemark"];
@@ -140,13 +140,38 @@
 }
 
 - (void)getPlatformGoodsList:(NSInteger )pageNum
+                      shopId:(NSString *)shopId
                       sucess:(successBlock)sucess
                         fail:(failWithErrorBlock)fail {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"currentPage"] = [NSString stringWithFormat:@"%@", @(pageNum)];
     dict[@"sizePage"] = [NSString stringWithFormat:@"%d", kSizePage];
+    dict[@"shopId"] = [NSString stringWithFormat:@"%@", shopId];
     [[NetManager sharedInstance] postRequestWithPath:ZLURL_GetPlatformGoodsList parameters:dict sueccessful:^(id  _Nonnull responseObject) {
-        
+        NSMutableArray *goodsList = [[NSMutableArray alloc] init];
+        for (NSDictionary *goodsDic in responseObject[@"goods"][@"records"]) {
+            ZLGoodsModel *item = [[ZLGoodsModel alloc] init];
+            item.spuId = goodsDic[@"pgId"];//编号
+            item.spuCode = goodsDic[@"spuCode"];
+            if (![goodsDic[@"pgName"] isEqual:[NSNull null]]) {
+                 item.goodsName = goodsDic[@"pgName"];
+            }
+            if (![goodsDic[@"pgcId1"] isEqual:[NSNull null]]) {
+                item.gooodsClassId1 = goodsDic[@"pgcId1"];
+            }
+            if (![goodsDic[@"pgcId2"] isEqual:[NSNull null]]) {
+                item.gooodsClassId1 = goodsDic[@"pgcId2"];
+            }
+            if (![goodsDic[@"pgcId3"] isEqual:[NSNull null]]) {
+                item.gooodsClassId1 = goodsDic[@"pgcId3"];
+            }
+            item.pgmId = goodsDic[@"pgmId"];
+            item.remark = goodsDic[@"pgRemark"];
+            item.pgbId = goodsDic[@"pgbId"];
+//              "pgImageUrl":"xxx", //图片路径+名称  "pgImageDesc":"xxx"  //描述
+            [goodsList addObject:item];
+        }
+        sucess(goodsList, [responseObject[@"goods"][@"total"] integerValue]);
     } fail:^(NSError * _Nonnull error) {
         
     }];
@@ -162,13 +187,13 @@
     [[NetManager sharedInstance] postRequestWithPath:ZLURL_GetShopClassLeve1 parameters:dict sueccessful:^(id  _Nonnull responseObject) {
         NSMutableArray *classifyList = [[NSMutableArray alloc] init];
         for (NSDictionary *classifyItemDic in responseObject[@"shopClass"]) {
-            ZLClassifyItemModel *item = [[ZLClassifyItemModel alloc] init];
-            item.classifyId = [classifyItemDic[@"sgcId"] integerValue];
-            item.classifyCode = classifyItemDic[@"sgcCode"];
-            item.shopId = [classifyItemDic[@"shopId"] integerValue];
-            item.parentId = [classifyItemDic[@"sgcParentId"] integerValue];
-            item.remark = classifyItemDic[@"sgcRemark"];
-            item.level = [classifyItemDic[@"sgcLevel"] integerValue];
+            ZLClassifyItemModel *item = [ZLClassifyItemModel mj_objectWithKeyValues:classifyItemDic];
+//            item.classifyId = classifyItemDic[@"sgcId"];
+//            item.classifyCode = classifyItemDic[@"sgcCode"];
+//            item.shopId = [classifyItemDic[@"shopId"] integerValue];
+//            item.parentId = [classifyItemDic[@"sgcParentId"] integerValue];
+//            item.remark = classifyItemDic[@"sgcRemark"];
+//            item.level = [classifyItemDic[@"sgcLevel"] integerValue];
             [classifyList addObject:item];
         }
         sucess(classifyList, classifyList.count);
@@ -193,5 +218,16 @@
     }];
 }
 
+- (void)importGoods:(NSString *)goods
+             sucess:(successfulBlock)sucess
+               fail:(failWithErrorBlock)fail {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"goods"] = goods;
+    [[NetManager sharedInstance] postRequestWithPath:ZLURL_ImportGoods parameters:dict sueccessful:^(id  _Nonnull responseObject) {
+        sucess();
+    } fail:^(NSError * _Nonnull error) {
+        fail(error);
+    }];
+}
 
 @end

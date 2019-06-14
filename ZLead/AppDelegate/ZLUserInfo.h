@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ZLUserInfo : NSObject
 
 @property (nonatomic, copy) NSString *userID; // 用户id
+@property (nonatomic, copy) NSString *currentShopId; // 当前选择的店铺
 
 + (instancetype)sharedInstance;
 @end

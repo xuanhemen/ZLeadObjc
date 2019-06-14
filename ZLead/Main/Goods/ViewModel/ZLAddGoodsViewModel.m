@@ -89,7 +89,7 @@
             NSMutableArray *items = [[NSMutableArray alloc] init];
             for (NSInteger i = 0; i < 10; i++) {
                 ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
-                itemModel.classifyId = i + 1;
+                itemModel.classifyId = [NSString stringWithFormat:@"%@", @(i + 1)];
                 itemModel.title = [NSString stringWithFormat:@"分类%@", @(i)];
                 [items addObject:itemModel];
             }

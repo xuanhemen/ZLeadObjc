@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param sucess 成功
  @param fail 失败
  */
-- (void)removeShopGoodsClass:(NSInteger )goodsClassifyId
+- (void)removeShopGoodsClass:(NSString *)goodsClassifyId
                     sucess:(successfulBlock)sucess
                       fail:(failWithErrorBlock)fail;
 
@@ -107,10 +107,12 @@ NS_ASSUME_NONNULL_BEGIN
  查询平台商品列表
  
  @param pageNum 当前页数
+ @param shopId 店铺id
  @param sucess 成功
  @param fail 失败
  */
 - (void)getPlatformGoodsList:(NSInteger )pageNum
+                      shopId:(NSString *)shopId
                       sucess:(successBlock)sucess
                         fail:(failWithErrorBlock)fail;
 
@@ -141,6 +143,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addShopGoodsClass:(NSString *)shopId
              classifyName:(NSString *)classifyName
                  parentId:(NSString *)parentId
+                   sucess:(successfulBlock)sucess
+                     fail:(failWithErrorBlock)fail;
+
+
+/**
+ 从平台导入商品
+
+ @param goods 商品集合
+ @param sucess 成功
+ @param fail 失败
+ */
+- (void)importGoods:(NSArray *)goods
                    sucess:(successfulBlock)sucess
                      fail:(failWithErrorBlock)fail;
 

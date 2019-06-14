@@ -27,10 +27,16 @@
 #import "ZLClassifyItemModel.h"
 
 @interface ZLGoodsVC ()<UITableViewDelegate, UITableViewDataSource, ZLGoodsHeaderViewDelegate, ZLFilterViewDelegate>
+{
+    BOOL _allowEdit;
+}
 @property (nonatomic, strong) ZLGoodsHeaderView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ZLGoodsManagerView *bottomManagerView;
 @property (nonatomic, assign) BOOL allowEdit;
+@property (nonatomic, assign) BOOL allowUnSellingEdit;
+@property (nonatomic, assign) BOOL allowSellingEdit;
+@property (nonatomic, assign) BOOL allowSoldOutEdit;
 @property (nonatomic, assign) BOOL isAllSelected;
 @property (nonatomic, strong) ZLFilterView *filterView;
 @property (nonatomic, assign) BOOL showFilter;
@@ -238,8 +244,12 @@
     } fail:^(NSError * _Nonnull error) {
         
     }];
-    [self getShopClassWithParentId:0];
-    [self getPlatFormClassWithParentId:0];
+    [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+        
+    }];
+//    [self getPlatFormClassWithParentId:0 sucess:^(NSArray *dataList) {
+//
+//    }];
 }
 
 - (void)getGoodsList:(NSInteger )pageNum WithRefreshPart:(NSString *)refreshPart {
@@ -352,31 +362,57 @@
     }];
 }
 
-- (void)getPlatFormClassWithParentId:(NSInteger )parentId {
-    [[NetManager sharedInstance] getPlatFormClass:[NSString stringWithFormat:@"%@", @(parentId)] sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
-        if (parentId == 0) {
+- (void)getPlatFormClassWithParentId:(NSString *)parentId sucess:(void (^) (NSArray *dataList))sucess {
+    [[NetManager sharedInstance] getPlatFormClass:parentId sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+        if ([parentId isEqualToString:@"0"]) {
             NSMutableArray *sectionDataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
-            ZLFilterDataModel *firstFilterDataModel = [sectionDataList objectAtIndex:1];
-            firstFilterDataModel.dataList = dataList;
-            [sectionDataList replaceObjectAtIndex:1 withObject:firstFilterDataModel];
+            for (int i = 0; i < self.filterDataModel.dataList.count; i++) {
+                ZLFilterDataModel *firstFilterDataModel = [sectionDataList objectAtIndex:i];
+                if (i == 0) {
+                    
+                } else if (i == 1) {
+                    firstFilterDataModel.isUnflod = YES;
+                    firstFilterDataModel.selectedClassifyItemModel = nil;
+                    firstFilterDataModel.dataList = dataList;
+                } else {
+                    firstFilterDataModel.isUnflod = NO;
+                    firstFilterDataModel.selectedClassifyItemModel = nil;
+                    firstFilterDataModel.dataList = [NSArray array];
+                }
+                [sectionDataList replaceObjectAtIndex:i withObject:firstFilterDataModel];
+            }
             self.filterDataModel.dataList = sectionDataList;
             [self.filterView reloadData:self.filterDataModel];
         }
+        sucess(dataList);
     } fail:^(NSError * _Nonnull error) {
         
     }];
 }
 
-- (void)getShopClassWithParentId:(NSInteger )parentId {
-    [[NetManager sharedInstance] getShopClassWithParentId:[NSString stringWithFormat:@"%@", @(parentId)] shopId:@"1" sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
-        if (parentId == 0) {
+- (void)getShopClassWithParentId:(NSString *)parentId sucess:(void (^) (NSArray *dataList))sucess {
+    [[NetManager sharedInstance] getShopClassWithParentId:parentId shopId:@"1" sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+        if ([parentId isEqualToString:@"0"]) {
             NSMutableArray *sectionDataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
-            ZLFilterDataModel *firstFilterDataModel = [sectionDataList objectAtIndex:1];
-            firstFilterDataModel.dataList = dataList;
-            [sectionDataList replaceObjectAtIndex:1 withObject:firstFilterDataModel];
+            for (int i = 0; i < self.filterDataModel.dataList.count; i++) {
+                ZLFilterDataModel *firstFilterDataModel = [sectionDataList objectAtIndex:i];
+                if (i == 0) {
+                    
+                } else if (i == 1) {
+                    firstFilterDataModel.isUnflod = YES;
+                    firstFilterDataModel.selectedClassifyItemModel = nil;
+                    firstFilterDataModel.dataList = dataList;
+                } else {
+                    firstFilterDataModel.isUnflod = NO;
+                    firstFilterDataModel.selectedClassifyItemModel = nil;
+                    firstFilterDataModel.dataList = [NSArray array];
+                }
+                 [sectionDataList replaceObjectAtIndex:i withObject:firstFilterDataModel];
+            }
             self.filterDataModel.dataList = sectionDataList;
             [self.filterView reloadData:self.filterDataModel];
         }
+        sucess(dataList);
     } fail:^(NSError * _Nonnull error) {
         
     }];
@@ -463,12 +499,17 @@
             ZLClassifyFilterListVC *classifyFilterListVC = [[ZLClassifyFilterListVC alloc] init];
             [weakSelf.navigationController pushViewController:classifyFilterListVC animated:YES];
         };
-        self.filterView.manageClassifyBlock = ^(NSInteger classifyType) {
+        self.filterView.manageClassifyBlock = ^(NSInteger classifyType, NSString *parentId) {
             ZLClassifyManageVC *classifyManageVC = [[ZLClassifyManageVC alloc] init];
+            classifyManageVC.level = classifyType;
+            classifyManageVC.parentId = parentId;
             [weakSelf.navigationController pushViewController:classifyManageVC animated:YES];
         };
         self.filterView.durationTime = 0.5;
         [self.filterView show];
+        [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+            
+        }];
     } else {
         [self.filterView dismiss];
     }
@@ -476,8 +517,23 @@
 }
 
 - (void)managerButtonAction:(UIButton *)sender {
+//    BOOL allowEdit = YES;
+//    if (self.currentSelectedIndex == 0) {
+//        allowEdit = self.allowSellingEdit;
+//    } else if (self.currentSelectedIndex == 1) {
+//        allowEdit = self.allowUnSellingEdit;
+//    } else {
+//        allowEdit = self.allowSoldOutEdit;
+//    }
     [sender setTitle:self.allowEdit ? @"管理": @"完成" forState:UIControlStateNormal];
     self.allowEdit = !self.allowEdit;
+//    if (self.currentSelectedIndex == 0) {
+//        self.allowSellingEdit = !self.allowEdit;
+//    } else if (self.currentSelectedIndex == 1) {
+//        self.allowUnSellingEdit = !self.allowEdit;
+//    } else {
+//        self.allowSoldOutEdit = !self.allowEdit;
+//    }
     self.bottomManagerView.hidden = !self.allowEdit;
     self.isAllSelected = NO;
     [self.bottomManagerView reset];
@@ -507,6 +563,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLGoodsListCell *cell = [ZLGoodsListCell listCellWithTableView:tableView];
+//    BOOL allowEdit = YES;
+//    if (self.currentSelectedIndex == 0) {
+//        allowEdit = self.allowSellingEdit;
+//    } else if (self.currentSelectedIndex == 1) {
+//        allowEdit = self.allowUnSellingEdit;
+//    } else {
+//        allowEdit = self.allowSoldOutEdit;
+//    }
     cell.allowEdit = self.allowEdit;
     if (self.currentSelectedIndex == 0) {
         [cell setupData:[self.sellingGoodsList objectAtIndex:indexPath.row]];
@@ -539,6 +603,7 @@
 
 - (void)goodsHeaderView:(ZLGoodsHeaderView *)headerView didSelectedIndex:(NSInteger)index {
     self.currentSelectedIndex = index;
+    self.bottomManagerView.hidden = !self.allowEdit;
     if (self.currentSelectedIndex != index) {
         [self.bottomManagerView reset];
     } else {
@@ -551,32 +616,83 @@
 #pragma mark - ZLFilterViewDelegate
 //选择上一级的分类刷新下一级的数据,如果点的是平台/店铺刷新整个列表
 - (void)filterView:(ZLFilterView *)filterView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
-//    ZLClassifyItemModel *classifyItemModel = [filterDataModel.dataList objectAtIndex:indexPath.row];
+    ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
+    ZLClassifyItemModel *classifyItemModel = [filterDataModel.dataList objectAtIndex:indexPath.row];
     //请求下一级的数据
     //刷新下一级的数据
     if (indexPath.section == 0) {//平台分类和店铺分类切换
         if (indexPath.row == 0) {
-            [self getShopClassWithParentId:0];
-            
+            [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+                
+            }];
         } else {
-            [self getPlatFormClassWithParentId:0];
+            [self getPlatFormClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+                
+            }];
         }
-        [filterView reloadData:self.filterDataModel];
     } else {
-        NSInteger nextSection = indexPath.section + 1;
-        if (nextSection < self.filterDataModel.dataList.count) {
-            ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
-            nextFilterDataModel.isUnflod = YES;
-            NSMutableArray *dataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
-            [dataList replaceObjectAtIndex:indexPath.section + 1 withObject:nextFilterDataModel];
-            self.filterDataModel.dataList = dataList;
-            [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
+        if (!filterView.isPlatform) {
+            [self getShopClassWithParentId:classifyItemModel.classifyId sucess:^(NSArray *dataList) {
+                NSInteger nextSection = indexPath.section + 1;
+                if (nextSection < self.filterDataModel.dataList.count) {
+                    ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
+                    nextFilterDataModel.isUnflod = YES;
+                    nextFilterDataModel.dataList = dataList;
+                    NSMutableArray *dataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
+                    [dataList replaceObjectAtIndex:indexPath.section + 1 withObject:nextFilterDataModel];
+                    self.filterDataModel.dataList = dataList;
+                    [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
+                }
+            }];
+        } else {
+            [self getPlatFormClassWithParentId:classifyItemModel.classifyId sucess:^(NSArray *dataList) {
+                NSInteger nextSection = indexPath.section + 1;
+                if (nextSection < self.filterDataModel.dataList.count) {
+                    ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
+                    nextFilterDataModel.isUnflod = YES;
+                    nextFilterDataModel.dataList = dataList;
+                    NSMutableArray *dataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
+                    [dataList replaceObjectAtIndex:indexPath.section + 1 withObject:nextFilterDataModel];
+                    self.filterDataModel.dataList = dataList;
+                    [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
+                }
+            }];
         }
+        
     }
 }
 
 #pragma mark - setter
+
+//- (void)setAllowSellingEdit:(BOOL)allowSellingEdit {
+//    _allowSellingEdit = allowSellingEdit;
+//    if (_allowSellingEdit) {
+//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - dis(50) - kNavBarHeight - 45);
+//    } else {
+//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
+//    }
+//    [self.tableView reloadData];
+//}
+//
+//- (void)setAllowUnSellingEdit:(BOOL)allowUnSellingEdit {
+//    _allowUnSellingEdit = allowUnSellingEdit;
+//    if (_allowUnSellingEdit) {
+//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - dis(50) - kNavBarHeight - 45);
+//    } else {
+//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
+//    }
+//    [self.tableView reloadData];
+//}
+//
+//- (void)setAllowSoldOutEdit:(BOOL)allowSoldOutEdit {
+//    _allowSoldOutEdit = allowSoldOutEdit;
+//    if (_allowSoldOutEdit) {
+//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - dis(50) - kNavBarHeight - 45);
+//    } else {
+//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
+//    }
+//    [self.tableView reloadData];
+//}
 
 - (void)setAllowEdit:(BOOL)allowEdit {
     _allowEdit = allowEdit;
@@ -585,7 +701,24 @@
     } else {
         self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
     }
+    if (self.currentSelectedIndex == 0) {
+        self.allowSellingEdit = allowEdit;
+    } else if (self.currentSelectedIndex == 1) {
+        self.allowUnSellingEdit = allowEdit;
+    } else {
+        self.allowSoldOutEdit = allowEdit;
+    }
     [self.tableView reloadData];
+}
+
+- (BOOL)allowEdit {
+    if (self.currentSelectedIndex == 0) {
+        return _allowSellingEdit;
+    } else if (self.currentSelectedIndex == 1) {
+        return _allowUnSellingEdit;
+    } else {
+        return _allowSoldOutEdit;
+    }
 }
 
 #pragma mark - lazy load
@@ -618,7 +751,7 @@
 - (ZLFilterDataModel *)filterDataModel {
     if (!_filterDataModel) {
         _filterDataModel = [[ZLFilterDataModel alloc] init];
-        NSArray *sectionTitles = @[@"分类", @"一级分类", @"二级分类"];
+        NSArray *sectionTitles = @[@"分类", @"一级分类", @"二级分类", @"三级分类"];
         NSMutableArray *allItems = [[NSMutableArray alloc] init];
         ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
         filterDataModel.sectionName = [sectionTitles objectAtIndex:0];
@@ -627,28 +760,20 @@
         NSMutableArray *firstItems = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < sectionClassifys.count; i++) {
             ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
-            itemModel.classifyId = i + 1;
+            itemModel.classifyId = [NSString stringWithFormat:@"%@", @(i + 1)];
             itemModel.isSelected = (i == 0) ? YES : NO;
             itemModel.title = [sectionClassifys objectAtIndex:i];
             [firstItems addObject:itemModel];
         }
         filterDataModel.dataList = firstItems;
         [allItems addObject:filterDataModel];
-        for (NSInteger section = 1; section < 3; section ++) {
+        for (NSInteger section = 1; section < 4; section ++) {
             ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
             filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
             filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-            NSMutableArray *items = [[NSMutableArray alloc] init];
             if (section == 1) {
                 filterDataModel.isUnflod = YES;
             }
-            for (NSInteger i = 0; i < 10; i++) {
-                ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
-                itemModel.classifyId = i + 1;
-                itemModel.title = [NSString stringWithFormat:@"分类%@", @(i)];
-                [items addObject:itemModel];
-            }
-            filterDataModel.dataList = items;
             [allItems addObject:filterDataModel];
         }
         self.filterDataModel.dataList = allItems;

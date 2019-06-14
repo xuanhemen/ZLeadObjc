@@ -57,6 +57,9 @@
 
 - (void)setupData:(ZLClassifyItemModel *)dataModel {
     self.classifyItemModel = dataModel;
+    if (![dataModel.title isEqual:[NSNull null]]) {
+        self.classifyNameLabel.text = dataModel.title;
+    }
 }
 
 - (void)delButtonAction {

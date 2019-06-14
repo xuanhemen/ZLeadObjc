@@ -19,6 +19,24 @@
 
 @implementation ZLClassifyManageVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+}
+
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    if (!parent) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        self.navigationController.navigationBar.barTintColor = [UIColor zl_mainColor];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -47,7 +65,13 @@
     self.navigationItem.leftBarButtonItem = leftItem;
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dis(200), 30)];
-    self.titleLabel.text = @"一级分类";
+    if (self.level == 1) {
+        self.titleLabel.text = @"一级分类";
+    } else if (self.level == 2) {
+        self.titleLabel.text = @"二级分类";
+    } else if (self.level == 3) {
+        self.titleLabel.text = @"三级分类";
+    }
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#202020"];
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingHead;
@@ -76,7 +100,8 @@
 #pragma mark - SetupData
 
 - (void)setupData {
-    [[NetManager sharedInstance] getShopClassWithParentId:@"0" shopId:@"1" sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+    [[NetManager sharedInstance] getShopClassWithParentId:self.parentId shopId:@"1" sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+        [self.classifyList removeAllObjects];
         [self.classifyList addObjectsFromArray:dataList];
         [self.classifyListTableView reloadData];
     } fail:^(NSError * _Nonnull error) {
@@ -92,6 +117,11 @@
 
 - (void)addButtonAction {
     ZLAddClassifyNameVC *addClassifyNameVC = [[ZLAddClassifyNameVC alloc] init];
+    addClassifyNameVC.parentId = self.parentId;
+    kWeakSelf(weakSelf)
+    addClassifyNameVC.addClassifySuccessBlock = ^{
+        [weakSelf setupData];
+    };
     [self.navigationController pushViewController:addClassifyNameVC animated:YES];
 }
 
@@ -124,6 +154,10 @@
     };
     classifyListCell.editGoodsClassifyBlock = ^(ZLClassifyItemModel * _Nonnull classifyItemModel, ZLClassifyListCell * _Nonnull cell) {
         ZLAddClassifyNameVC *addClassifyNameVC = [[ZLAddClassifyNameVC alloc] init];
+        addClassifyNameVC.classifyItemModel = classifyItemModel;
+        addClassifyNameVC.addClassifySuccessBlock = ^{
+            [weakSelf setupData];
+        };
         [weakSelf.navigationController pushViewController:addClassifyNameVC animated:YES];
     };
     return classifyListCell;

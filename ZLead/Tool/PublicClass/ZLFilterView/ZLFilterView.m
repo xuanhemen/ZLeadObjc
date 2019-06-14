@@ -82,6 +82,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 }
 
 - (void)setupFilterView {
+    self.isPlatform = NO;
     self.durationTime = 0.3;
     [kKeyWindow addSubview:self];
     [self addSubview:self.filterCover];
@@ -306,7 +307,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 #pragma mark - collectionViewDelegate
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section  {
-    if (section == 1 || section == 2) {
+    if (section == 1 || section == 2 || section == 3) {
         return CGSizeMake(kZLScreenWidth * 0.8, dis(38));
     }
     return CGSizeZero;
@@ -326,6 +327,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader] && self.filter == collectionView) {
         ZLFilterSectionHeaderView *header  = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"ZLFilterSectionHeaderViewID" forIndexPath:indexPath];
         ZLFilterDataModel *currentfilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
+        currentfilterDataModel.allowEdit = !self.isPlatform;
         header.filterDataModel = currentfilterDataModel;
         header.delegate = self;
         return header;
@@ -369,6 +371,13 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 
 - (void)selectedFilterItem:(ZLFilterItemCell *)item classifyItemModel:(ZLClassifyItemModel *)classifyItemModel {
     NSIndexPath *indexPath = [self.filter indexPathForCell:item];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            self.isPlatform = NO;
+        } else {
+            self.isPlatform = YES;
+        }
+    }
     ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
     if (filterDataModel.selectedClassifyItemModel.classifyId == classifyItemModel.classifyId) {
         return;
@@ -404,7 +413,12 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 - (void)manageClassify:(ZLFilterSectionHeaderView *)header filterDataModel:(ZLFilterDataModel *)filterDataModel {
     [self dismiss];
     if (self.manageClassifyBlock) {
-        self.manageClassifyBlock(filterDataModel.indexPath.section);
+        NSString *parentId = @"0";
+        if (filterDataModel.indexPath.section > 1) {
+            ZLFilterDataModel *currentfilterDataModel = [self.filterDataModel.dataList objectAtIndex:filterDataModel.indexPath.section - 1];
+            parentId = currentfilterDataModel.selectedClassifyItemModel.classifyId;
+        }
+        self.manageClassifyBlock(filterDataModel.indexPath.section, parentId);
     }
 }
 

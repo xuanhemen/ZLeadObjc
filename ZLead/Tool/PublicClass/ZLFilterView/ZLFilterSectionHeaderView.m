@@ -29,7 +29,11 @@
     } else {
         self.filterItemView.hidden = YES;
         if (_filterDataModel.indexPath.section != 0) {
-            self.manageButton.hidden = NO;
+            if (_filterDataModel.allowEdit) {
+                self.manageButton.hidden = NO;
+            } else {
+                self.manageButton.hidden = YES;
+            }
         } else {
             self.manageButton.hidden = YES;
         }
