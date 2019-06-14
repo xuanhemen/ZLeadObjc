@@ -70,6 +70,9 @@
         }
     }
     [self moveIndViewWithButton:sender];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(goodsHeaderView:didSelectedIndex:)]) {
+        [self.delegate goodsHeaderView:self didSelectedIndex:sender.tag-100];
+    }
 }
 
 - (void)moveIndViewWithButton:(UIButton *)btn {
@@ -86,6 +89,7 @@
         _sellingBtn = [self customButtonWithTitle:@"销售中"];
         _sellingBtn.selected = YES;
         _sellingBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        _sellingBtn.tag = 100;
         [self addSubview:_sellingBtn];
     }
     return _sellingBtn;
@@ -95,6 +99,7 @@
     if (!_unsellBtn) {
         _unsellBtn = [self customButtonWithTitle:@"未上架"];
         _unsellBtn.selected = NO;
+         _unsellBtn.tag = 101;
         [self addSubview:_unsellBtn];
     }
     return _unsellBtn;
@@ -104,6 +109,7 @@
     if (!_selledBtn) {
         _selledBtn = [self customButtonWithTitle:@"已售完"];
         _selledBtn.selected = NO;
+        _selledBtn.tag = 102;
         [self addSubview:_selledBtn];
     }
     return _selledBtn;

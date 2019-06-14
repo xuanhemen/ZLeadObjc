@@ -19,6 +19,7 @@
 #import "ZLUserInfo.h"  //单例，存储用户信息
 
 #import "MJExtension.h"
+#import "MJRefresh.h"
 
 
 //API
