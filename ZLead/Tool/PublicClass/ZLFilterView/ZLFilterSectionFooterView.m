@@ -43,7 +43,7 @@
 #pragma mark - UIButton Actions
 
 - (void)unflodButtonAction:(UIButton *)unflodButton {
-    unflodButton.selected = !unflodButton.selected;
+    unflodButton.selected = !_filterDataModel.isUnflod;
     _filterDataModel.isUnflod = !_filterDataModel.isUnflod;
     [self.unflodButton setImage:_filterDataModel.isUnflod ? [UIImage imageNamed:@"goods-classifiy-close"] : [UIImage imageNamed:@"goods-classifiy-open"] forState:UIControlStateNormal];
     [self.unflodButton setTitle:_filterDataModel.isUnflod ? @" 收起" : @" 展开" forState:UIControlStateNormal];

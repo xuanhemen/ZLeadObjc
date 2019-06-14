@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isUnflod;
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) NSString *sectionName;
+@property (nonatomic, assign) int selectedShopClassify;//大分类 是否选择的是店铺分类
 @end
 
 NS_ASSUME_NONNULL_END

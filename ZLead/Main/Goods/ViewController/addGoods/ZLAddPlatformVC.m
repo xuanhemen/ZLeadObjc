@@ -268,7 +268,7 @@
 
 - (UITableView *)goodsListTableView {
     if (!_goodsListTableView) {
-        _goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(50), kScreenWidth, kScreenHeight -kNavBarHeight - dis(100)) style:UITableViewStylePlain];
+        _goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(50), kScreenWidth, kScreenHeight - kNavBarHeight - dis(100)) style:UITableViewStylePlain];
         _goodsListTableView.delegate = self;
         _goodsListTableView.dataSource = self;
         [self.view addSubview:_goodsListTableView];

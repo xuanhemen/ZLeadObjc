@@ -232,7 +232,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     self.filterCover.backgroundColor = [UIColor clearColor];
     [UIView animateWithDuration:self.durationTime animations:^{
         if (self.pushDirection == ZLFilterViewPushDirectionFromLeft) {
-            self.filterCover.frame = CGRectMake(- kZLScreenWidth, 0, kZLScreenWidth, kZLScreenHeight);
+            self.filterCover.frame = CGRectMake(-kZLScreenWidth, 0, kZLScreenWidth, kZLScreenHeight);
         } else {
             self.filterCover.frame = CGRectMake(kZLScreenWidth, 0, kZLScreenWidth, kZLScreenHeight);
         }
@@ -350,7 +350,10 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:section];
-    return filterDataModel.isUnflod ? filterDataModel.dataList.count : ((filterDataModel.dataList.count < 9) ? filterDataModel.dataList.count : 9);
+    if (section == 0) {
+        return filterDataModel.dataList.count;
+    }
+    return filterDataModel.isUnflod ? filterDataModel.dataList.count : 0;
 }
 
 #pragma mark - collectionView item

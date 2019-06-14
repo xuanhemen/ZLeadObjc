@@ -118,6 +118,12 @@
     if (self.classifyNameTF.text.length <= 0) {
         [self showMsg:@"请输入您的分类名称"];
     }
+    
+    [[NetManager sharedInstance] addShopGoodsClass:@"1" classifyName:self.classifyNameTF.text parentId:@"0" sucess:^{
+        
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 #pragma mark - Private Method

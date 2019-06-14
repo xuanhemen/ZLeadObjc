@@ -15,6 +15,7 @@
 - (void)addGoods;
 - (void)manageGoods:(UIButton *)manageBtn;
 - (void)searchGoods;
+- (void)searchBarView:(ZLSearchBarView *)searchBarView searchBarButtonClicked:(UIButton *)button;
 @end
 
 NS_ASSUME_NONNULL_BEGIN
