@@ -98,6 +98,7 @@
     
     [self.seleVC presentViewController:alertController animated:YES completion:nil];
 }
+/** 跳转到相册 */
 - (void)goPhotoLibrary {
     
     QBImagePickerController *imagePickerController =[QBImagePickerController new];
@@ -107,7 +108,8 @@
     imagePickerController.showsNumberOfSelectedAssets = YES;//在界面下方显示已经选择图像的数量
     imagePickerController.numberOfColumnsInPortrait = 4;//竖屏模式下一行显示4张图像
     imagePickerController.numberOfColumnsInLandscape = 7;//横屏模式下一行显示7张图像
-    imagePickerController.maximumNumberOfSelection = 5;
+    imagePickerController.maximumNumberOfSelection = 9;
+    
     [self.seleVC presentViewController:imagePickerController animated:YES completion:nil];
 }
 #pragma mark-选取图片

@@ -1,14 +1,14 @@
 //
-//  ZLAddGoodsCell.m
+//  ZLAddSpeCell.m
 //  ZLead
 //
-//  Created by 董建伟 on 2019/6/10.
+//  Created by 董建伟 on 2019/6/11.
 //  Copyright © 2019 Beijing tai chi HuaQing information systems co., LTD. All rights reserved.
 //
 
-#import "ZLAddGoodsCell.h"
+#import "ZLAddSpeCell.h"
 
-@implementation ZLAddGoodsCell
+@implementation ZLAddSpeCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -23,23 +23,21 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        //self.accessoryView = [[UIImageView alloc] initWithImage:image(@"icon_jump")];
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         [self addSubview:self.titleLb];
         [self addSubview:self.markLb];
-        
+        [self addSubview:self.textField];
     }
     return self;
 }
 - (UILabel *)titleLb {
     if (!_titleLb) {
         _titleLb = [[UILabel alloc] init];
+        _titleLb.textColor = normalColor;
         _titleLb.font = kFont14;
-        _titleLb.textColor = hex(@"#333333");
         [self addSubview:_titleLb];
         [_titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self);
             make.left.equalTo(self).offset(dis(15));
+            make.centerY.equalTo(self);
         }];
     }
     return _titleLb;
@@ -49,37 +47,30 @@
         _markLb = [[UILabel alloc] init];
         _markLb.text = @"*";
         _markLb.textColor = [UIColor redColor];
-        _markLb.font = kFont16;
+        _markLb.font = kFont14;
         [self addSubview:_markLb];
         [_markLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self);
             make.left.equalTo(self.titleLb.mas_right).offset(dis(5));
+            make.centerY.equalTo(self);
         }];
     }
     return _markLb;
 }
-- (UILabel *)contentLb {
-    if (!_contentLb) {
-        _contentLb = [[UILabel alloc] init];
-        _contentLb.font = kFont14;
-        _contentLb.textColor = lightColor;
-        [self addSubview:_contentLb];
-        [_contentLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self);
-            make.right.equalTo(self).offset(-dis(40));
-        }];
-    }
-    return _contentLb;
-}
+
 - (UITextField *)textField {
     if (!_textField) {
         _textField = [[UITextField alloc] init];
-        _textField.font = kFont14;
-        _textField.placeholder = @"请输入";
+        _textField.tintColor = [UIColor lightGrayColor];
+        _textField.placeholder = @"￥";
+        _textField.keyboardType = UIKeyboardTypeDecimalPad;
+        _textField.adjustsFontSizeToFitWidth = YES;
+        _textField.font = [UIFont boldSystemFontOfSize:14];
         [self addSubview:_textField];
         [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self).offset(-dis(15));
             make.centerY.equalTo(self);
-            make.right.equalTo(self).offset(-dis(25));
+           
+            
         }];
     }
     return _textField;

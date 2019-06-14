@@ -13,12 +13,20 @@
 #import "ZLClassifyItemModel.h"
 #import "ZLBrandVC.h"
 #import "ZLUnitVC.h"
-@interface ZLAddGoodsViewModel ()
+#import "WHActionSheet.h"
+#import "ZLAddSpecificateVC.h"
+#import "ZLMoreSpeVC.h"
+#import "ZLAddImgTextVC.h"
+@interface ZLAddGoodsViewModel ()<WHActionSheetDelegate>
 
 @property (nonatomic, strong) ZLFilterView *filterView;
 @property (nonatomic, assign) BOOL showFilter;
 @property (nonatomic, strong) ZLFilterDataModel *filterDataModel;
 @property (nonatomic, strong) UIViewController *seleVC; // 中间变量
+
+@property (nonatomic, strong) NSMutableDictionary *paraDic; // 无规格参数
+@property (nonatomic, strong) NSMutableArray *detailArr; // 详细信息数据源
+
 
 @end
 @implementation ZLAddGoodsViewModel
@@ -28,6 +36,9 @@
     if (self) {
         self.brandEvent = [RACSubject subject];
         self.unitEvent = [RACSubject subject];
+        self.addlistView = [RACSubject subject];
+        self.changeSpeEvent = [RACSubject subject];
+        self.isAdd = @"未设置";
     }
     return self;
 }
@@ -52,8 +63,18 @@
         }
     }
     if (indexPath.section==1) {
-        cell.contentLb.text = @"未设置";
-        cell.markLb.hidden = YES;
+        
+        if (indexPath.row==0) {
+            cell.contentLb.text = @"未设置";
+            cell.markLb.hidden = YES;
+        }else{
+           RAC(cell.contentLb,text) = [RACObserve(self, isAdd) map:^id _Nullable(id  _Nullable value) {
+                cell.contentLb.text = value;
+                return [value description];
+            }];
+            cell.markLb.hidden = NO;
+        }
+        
     }
     return cell;
 }
@@ -62,21 +83,53 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZLAddGoodsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == 0) {
-        if (indexPath.row==0) {
+        if (indexPath.row==0) { //分类
             [self classificationButtonAction:cell.contentLb];
-        }else if (indexPath.row==1){
+        }else if (indexPath.row==1){ //品牌
             [self.brandEvent sendNext:cell.contentLb];
             
         }else if (indexPath.row==2){
             [self.unitEvent sendNext:cell.contentLb];
         }
     }else if (indexPath.section==1) {
-        if (indexPath.row==0) {
-            [self classificationButtonAction:cell.contentLb];
+        if (indexPath.row==0) { //跳转到图文简介
+            ZLAddImgTextVC *vc = [[ZLAddImgTextVC alloc] init];
+            [self.seleVC.navigationController pushViewController:vc animated:YES];
+            
         }else if (indexPath.row==1){
-            [self.brandEvent sendNext:cell.contentLb];
+            if ([self.isAdd isEqualToString:@"多规格"]) {
+                ZLMoreSpeVC *vc = [[ZLMoreSpeVC alloc] init];
+                [self.seleVC.navigationController pushViewController:vc animated:YES];
+                return;
+            }
+            if ([self.isAdd isEqualToString:@"无规格"]) {
+                ZLAddSpecificateVC *vc = [[ZLAddSpecificateVC alloc] init];
+                vc.passParams = ^(NSMutableDictionary * _Nonnull param) {
+                    DLog(@"参数%@",param);
+                    self.paraDic = param;
+                    [self.addlistView sendNext:param];
+                };
+                [self.seleVC.navigationController pushViewController:vc animated:YES];
+                return;
+            }
+            WHActionSheet *sheetView = [[WHActionSheet alloc] initWithTitle:@"" sheetTitles:@[@"无规格",@"多规格"] cancleBtnTitle:@"取消" sheetStyle:WHActionSheetDefault delegate:self];
+            [sheetView show];
             
         }
+    }
+}
+- (void)actionSheet:(WHActionSheet *)actionSheet clickButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex==0) {
+        ZLAddSpecificateVC *vc = [[ZLAddSpecificateVC alloc] init];
+        vc.passParams = ^(NSMutableDictionary * _Nonnull param) {
+            DLog(@"参数%@",param);
+            self.paraDic = param;
+            [self.addlistView sendNext:param];
+        };
+        [self.seleVC.navigationController pushViewController:vc animated:YES];
+    }else if (buttonIndex==1) {
+        ZLMoreSpeVC *vc = [[ZLMoreSpeVC alloc] init];
+        [self.seleVC.navigationController pushViewController:vc animated:YES];
     }
 }
 #pragma mark - 跳转
@@ -95,6 +148,16 @@
         ZLUnitVC *vc = [[ZLUnitVC alloc] init];
         vc.selecItem = ^(NSString * _Nonnull title) {
             lable.text = title;
+        };
+        [self.seleVC.navigationController pushViewController:vc animated:YES];
+    }];
+    [self.changeSpeEvent subscribeNext:^(id  _Nullable x) {
+        ZLAddSpecificateVC *vc = [[ZLAddSpecificateVC alloc] init];
+        vc.infoDic = self.paraDic;
+        DLog(@"参数的%@",vc.infoDic);
+        vc.passParams = ^(NSMutableDictionary * _Nonnull param) {
+            DLog(@"参数%@",param);
+            [self.addlistView sendNext:param];
         };
         [self.seleVC.navigationController pushViewController:vc animated:YES];
     }];
@@ -159,9 +222,9 @@
     if (!_dataArr) {
         _dataArr = [NSMutableArray array];
         NSArray *baseInfoArr = @[@"分类",@"品牌",@"单位",@"自定义编码",@"型号"];
-        NSArray *detailArr = @[@"添加规格",@"图文简介"];
+        _detailArr = [NSMutableArray arrayWithObjects:@"图文简介",@"添加规格", nil];
         [_dataArr addObject:baseInfoArr];
-        [_dataArr addObject:detailArr];
+        [_dataArr addObject:_detailArr];
     }
     return _dataArr;
 }

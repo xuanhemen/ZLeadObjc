@@ -109,7 +109,7 @@
     _sheetTable.scrollEnabled = NO;
     _sheetTable.tableHeaderView = _headerView;
     _sheetTable.tableFooterView = footerView;
-    _sheetTable.layer.cornerRadius = 5*[AdapterRect adapterMultipleByWidth];
+    _sheetTable.layer.cornerRadius = 5*kp;
     [self addSubview:_sheetTable];
 }
 

@@ -19,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) RACSubject *unitEvent; // 选择单位
 
+@property (nonatomic, strong) RACSubject *addlistView; // 添加规格后，生成底部表视图
+
+@property (nonatomic, strong) RACSubject *changeSpeEvent; // 调整规格
+
+@property (nonatomic, copy) NSString *isAdd; // 标识是否添加了规格
+
 /** 负责跳转 */
 -(void)jumpFromController:(UIViewController *)vc;
 
