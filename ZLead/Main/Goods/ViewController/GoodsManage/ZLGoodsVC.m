@@ -254,12 +254,6 @@
     } fail:^(NSError * _Nonnull error) {
         
     }];
-    
-//    [[NetManager sharedInstance] getAllPlatFormClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
-//
-//    } fail:^(NSError * _Nonnull error) {
-//
-//    }];
 }
 
 - (void)getGoodsList:(NSInteger )pageNum WithRefreshPart:(NSString *)refreshPart {
@@ -520,9 +514,6 @@
         };
         self.filterView.durationTime = 0.5;
         [self.filterView show];
-//        [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
-//
-//        }];
         [self getAllShopClassWithSucess:^(NSArray *dataList) {
             
         }];
@@ -533,23 +524,8 @@
 }
 
 - (void)managerButtonAction:(UIButton *)sender {
-//    BOOL allowEdit = YES;
-//    if (self.currentSelectedIndex == 0) {
-//        allowEdit = self.allowSellingEdit;
-//    } else if (self.currentSelectedIndex == 1) {
-//        allowEdit = self.allowUnSellingEdit;
-//    } else {
-//        allowEdit = self.allowSoldOutEdit;
-//    }
     [sender setTitle:self.allowEdit ? @"管理": @"完成" forState:UIControlStateNormal];
     self.allowEdit = !self.allowEdit;
-//    if (self.currentSelectedIndex == 0) {
-//        self.allowSellingEdit = !self.allowEdit;
-//    } else if (self.currentSelectedIndex == 1) {
-//        self.allowUnSellingEdit = !self.allowEdit;
-//    } else {
-//        self.allowSoldOutEdit = !self.allowEdit;
-//    }
     self.bottomManagerView.hidden = !self.allowEdit;
     self.isAllSelected = NO;
     [self.bottomManagerView reset];
@@ -579,14 +555,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLGoodsListCell *cell = [ZLGoodsListCell listCellWithTableView:tableView];
-//    BOOL allowEdit = YES;
-//    if (self.currentSelectedIndex == 0) {
-//        allowEdit = self.allowSellingEdit;
-//    } else if (self.currentSelectedIndex == 1) {
-//        allowEdit = self.allowUnSellingEdit;
-//    } else {
-//        allowEdit = self.allowSoldOutEdit;
-//    }
     cell.allowEdit = self.allowEdit;
     if (self.currentSelectedIndex == 0) {
         [cell setupData:[self.sellingGoodsList objectAtIndex:indexPath.row]];
@@ -653,33 +621,6 @@
             }];
         }
     } else {
-//        if (!filterView.isPlatform) {
-//            [self getShopClassWithParentId:classifyItemModel.classifyId sucess:^(NSArray *dataList) {
-//                NSInteger nextSection = indexPath.section + 1;
-//                if (nextSection < self.filterDataModel.dataList.count) {
-//                    ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
-//                    nextFilterDataModel.isUnflod = YES;
-//                    nextFilterDataModel.dataList = dataList;
-//                    NSMutableArray *dataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
-//                    [dataList replaceObjectAtIndex:indexPath.section + 1 withObject:nextFilterDataModel];
-//                    self.filterDataModel.dataList = dataList;
-//                    [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
-//                }
-//            }];
-//        } else {
-//            [self getPlatFormClassWithParentId:classifyItemModel.classifyId sucess:^(NSArray *dataList) {
-//                NSInteger nextSection = indexPath.section + 1;
-//                if (nextSection < self.filterDataModel.dataList.count) {
-//                    ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
-//                    nextFilterDataModel.isUnflod = YES;
-//                    nextFilterDataModel.dataList = dataList;
-//                    NSMutableArray *dataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
-//                    [dataList replaceObjectAtIndex:indexPath.section + 1 withObject:nextFilterDataModel];
-//                    self.filterDataModel.dataList = dataList;
-//                    [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
-//                }
-//            }];
-//        }
         NSInteger nextSection = indexPath.section + 1;
         if (nextSection < self.filterDataModel.dataList.count) {
             ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
@@ -695,36 +636,6 @@
 }
 
 #pragma mark - setter
-
-//- (void)setAllowSellingEdit:(BOOL)allowSellingEdit {
-//    _allowSellingEdit = allowSellingEdit;
-//    if (_allowSellingEdit) {
-//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - dis(50) - kNavBarHeight - 45);
-//    } else {
-//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
-//    }
-//    [self.tableView reloadData];
-//}
-//
-//- (void)setAllowUnSellingEdit:(BOOL)allowUnSellingEdit {
-//    _allowUnSellingEdit = allowUnSellingEdit;
-//    if (_allowUnSellingEdit) {
-//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - dis(50) - kNavBarHeight - 45);
-//    } else {
-//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
-//    }
-//    [self.tableView reloadData];
-//}
-//
-//- (void)setAllowSoldOutEdit:(BOOL)allowSoldOutEdit {
-//    _allowSoldOutEdit = allowSoldOutEdit;
-//    if (_allowSoldOutEdit) {
-//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - dis(50) - kNavBarHeight - 45);
-//    } else {
-//        self.tableView.frame = CGRectMake(0, kNavBarHeight + 45, kScreenWidth, kScreenHeight - kTabBarHeight - kNavBarHeight - 45);
-//    }
-//    [self.tableView reloadData];
-//}
 
 - (void)setAllowEdit:(BOOL)allowEdit {
     _allowEdit = allowEdit;
