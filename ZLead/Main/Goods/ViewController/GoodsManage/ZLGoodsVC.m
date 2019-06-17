@@ -141,11 +141,11 @@
             ZLGoodsModel *goodsModel = [goodsList objectAtIndex:i];
             goodsModel.goodsNum = i+1;
             if (goodsModel.isSelected) {
-                goodsModel.top = YES;
+                goodsModel.top = 2;
             }
         }
         [weakSelf.tableView reloadData];
-        [weakSelf.bottomManagerView refreshCanelTopButton:YES];
+//        [weakSelf.bottomManagerView refreshCanelTopButton:YES];
         [weakSelf batchEditGoodsStatusWihtType:@"top" success:^{
 
         }];
@@ -164,7 +164,7 @@
             ZLGoodsModel *goodsModel = [goodsList objectAtIndex:i];
             goodsModel.goodsNum = i+1;
             if (goodsModel.isSelected) {
-                goodsModel.top = NO;
+                goodsModel.top = 1;
             }
         }
         [weakSelf.tableView reloadData];
@@ -257,14 +257,14 @@
 }
 
 - (void)getGoodsList:(NSInteger )pageNum WithRefreshPart:(NSString *)refreshPart {
-    //    1:销售中,2：下架,3：违规
+    //    1:销售中,2：下架,3：违规4.已售完
     NSInteger status = 2;
     if (self.currentSelectedIndex == 0) {
         status = 1;
     } else if (self.currentSelectedIndex == 1) {
         status = 2;
     } else {
-
+        status = 4;
     }
     [[NetManager sharedInstance] getGoodsListByStatus:status shopId:@"1" pageNum:pageNum sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
         if ([refreshPart isEqualToString:kRefreshHeader]) {
@@ -295,8 +295,8 @@
             self.goodsEmptyView.hidden = YES;
         }
     } fail:^(NSError * _Nonnull error) {
-        if (pageNum > 0) {
-            if (self.currentSelectedIndex == 0) {
+        if (pageNum > 1) {
+            if (self.currentSelectedIndex  == 0) {
                 self.sellingPageIndex --;
             } else if (self.currentSelectedIndex == 1) {
                 self.unsellPageIndex --;
@@ -304,6 +304,7 @@
                 self.soldOutPageIndex --;
             }
         }
+        
         if ([refreshPart isEqualToString:kRefreshHeader]) {
             [self.tableView.mj_header endRefreshing];
         } else if ([refreshPart isEqualToString:kRefreshFooter]){
@@ -315,13 +316,13 @@
 - (void)headerRefresh {
     NSInteger pageIndex = 1;
     if (self.currentSelectedIndex == 0) {
-        self.sellingPageIndex ++;
+        self.sellingPageIndex = 1;
         pageIndex = self.sellingPageIndex;
     } else if (self.currentSelectedIndex == 1) {
-        self.unsellPageIndex ++;
+        self.unsellPageIndex = 1;
         pageIndex = self.unsellPageIndex;
     } else {
-        self.soldOutPageIndex ++;
+        self.soldOutPageIndex = 1;
         pageIndex = self.soldOutPageIndex;
     }
     [self getGoodsList:pageIndex WithRefreshPart:kRefreshHeader];
@@ -359,6 +360,8 @@
     }
     sgGoodsIds = [sgGoodsIds substringToIndex:sgGoodsIds.length - 1];
     [[NetManager sharedInstance] batchEditGoodsStatus:sgGoodsIds sgType:type sucess:^{
+        self.bottomManagerView.allSelectedButton.selected = NO;
+        self.isAllSelected = NO;
         [self getGoodsList:1 WithRefreshPart:nil];
         success();
     } fail:^(NSError * _Nonnull error) {
@@ -444,7 +447,7 @@
     for (ZLGoodsModel *goodsModel in goodsList) {
         if (goodsModel.isSelected) {
             count ++;
-            if (goodsModel.top) {
+            if (goodsModel.top == 2) {
                 enabelCancelTop = YES;
             }
         }
@@ -465,9 +468,7 @@
         [self.bottomManagerView refreshDelButton:NO];
         [self.bottomManagerView refreshTopButton:NO];
     }
-    if (enabelCancelTop) {
-        [self.bottomManagerView refreshCanelTopButton:enabelCancelTop];
-    }
+    [self.bottomManagerView refreshCanelTopButton:enabelCancelTop];
 }
 
 - (void)allSelected:(BOOL )isSelected {
