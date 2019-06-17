@@ -87,7 +87,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     [kKeyWindow addSubview:self];
     [self addSubview:self.filterCover];
     [self.filterCover addSubview:self.filter];
-    [self.filterCover addSubview:self.bottomView];
+//    [self.filterCover addSubview:self.bottomView];
     [self.filterCover addSubview:self.sureButton];
     [self.filterCover addSubview:self.resetButton];
 }
@@ -97,7 +97,6 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 - (UIView *)bottomView {
     if (_bottomView == nil) {
         _bottomView = [[UIView alloc] init];
-        _bottomView.backgroundColor = [UIColor whiteColor];
         _bottomView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.05].CGColor;
         _bottomView.layer.shadowOffset = CGSizeMake(0,-4);
         _bottomView.layer.shadowOpacity = 1;
@@ -296,7 +295,10 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
         if (self.filterViewBlock) {
             ZLFilterDataModel *fDataModel = [self.filterDataModel.dataList objectAtIndex:1];
             ZLFilterDataModel *sDataModel = [self.filterDataModel.dataList objectAtIndex:2];
-            ZLFilterDataModel *tDataModel = [self.filterDataModel.dataList objectAtIndex:3];
+            ZLFilterDataModel *tDataModel = nil;
+            if (self.filterDataModel.dataList.count > 3) {
+                tDataModel = [self.filterDataModel.dataList objectAtIndex:3];
+            }
             self.filterViewBlock(fDataModel.selectedClassifyItemModel, sDataModel.selectedClassifyItemModel, tDataModel.selectedClassifyItemModel);
         }
     } else if (sender.tag == ZLMenuButtonTypeReset) {

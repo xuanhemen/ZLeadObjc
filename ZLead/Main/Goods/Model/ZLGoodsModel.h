@@ -22,9 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *spuCode;//SPU编号
 @property (nonatomic, strong) NSString *customCode;//商品自定义编号
 @property (nonatomic, strong) NSString *shopId; //店铺编号
-@property (nonatomic, strong) NSString *gooodsClassId2;//2级分类id
-@property (nonatomic, strong) NSString *gooodsClassId1;//1级分类id
-@property (nonatomic, strong) NSString *gooodsClassId3;//3级分类id
+@property (nonatomic, strong) NSString *goodsClassId2;//2级分类id
+@property (nonatomic, strong) NSString *goodsClassId1;//1级分类id
+@property (nonatomic, strong) NSString *goodsClassId3;//3级分类id
 @property (nonatomic, strong) NSString *sgSpecs;//规格信息
 @property (nonatomic, strong) NSString *priceId;//价格编号
 @property (nonatomic, strong) NSArray *imagesUrls;//商品所有图片文件夹链接

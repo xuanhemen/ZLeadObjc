@@ -238,6 +238,7 @@
     if (!_classifyNameButton) {
         _classifyNameButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_classifyNameButton addTarget:self action:@selector(classifyNameButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        _classifyNameButton.titleLabel.font = kFont12;
         _classifyNameButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingHead;
         _classifyNameButton.layer.cornerRadius = 2;
         _classifyNameButton.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0];

@@ -157,13 +157,13 @@
                  item.goodsName = goodsDic[@"pgName"];
             }
             if (![goodsDic[@"pgcId1"] isEqual:[NSNull null]]) {
-                item.gooodsClassId1 = goodsDic[@"pgcId1"];
+                item.goodsClassId1 = goodsDic[@"pgcId1"];
             }
             if (![goodsDic[@"pgcId2"] isEqual:[NSNull null]]) {
-                item.gooodsClassId1 = goodsDic[@"pgcId2"];
+                item.goodsClassId2 = goodsDic[@"pgcId2"];
             }
             if (![goodsDic[@"pgcId3"] isEqual:[NSNull null]]) {
-                item.gooodsClassId1 = goodsDic[@"pgcId3"];
+                item.goodsClassId3 = goodsDic[@"pgcId3"];
             }
             item.pgmId = goodsDic[@"pgmId"];
             item.remark = goodsDic[@"pgRemark"];

@@ -245,9 +245,9 @@
             goodsModel.goodsClassName1 = firstClassify.title;
             goodsModel.goodsClassName2 = secondClassify.title;
             goodsModel.goodsClassName3 = thirdClassify.title;
-            goodsModel.gooodsClassId1 = firstClassify.classifyId;
-            goodsModel.gooodsClassId2 = secondClassify.classifyId;
-            goodsModel.gooodsClassId3 = thirdClassify.classifyId;
+            goodsModel.goodsClassId1 = firstClassify.classifyId;
+            goodsModel.goodsClassId2 = secondClassify.classifyId;
+            goodsModel.goodsClassId3 = thirdClassify.classifyId;
         }
     }
     [self.goodsListTableView reloadData];
@@ -274,6 +274,7 @@
 }
 
 - (void)importButtonAction:(UIButton *)sender {
+    [self.view endEditing:YES];
     if (self.goodsTotalNum <= 0) {
         [self showMsg:@"请选择要导入的商品"];
         return;
@@ -287,7 +288,7 @@
                 return;
             }
             float offlinePrice = [goods.offlinePrice floatValue];
-            float onlinePrice = [goods.offlinePrice floatValue];
+            float onlinePrice = [goods.onlinePrice floatValue];
             if (goods.onlinePrice.length <= 0 || onlinePrice <= 0) {
                 [self showMsg:@"请输入网店售价"];
                 return;
@@ -297,11 +298,11 @@
                 [self showMsg:@"请输入门店售价"];
                 return;
             }
-            if (goods.gooodsClassId1.length <= 0) {
+            if (goods.goodsClassId1.length <= 0) {
                 [self showMsg:@"请设置一级分类"];
                 return;
             }
-            if (goods.gooodsClassId2.length <= 0) {
+            if (goods.goodsClassId2.length <= 0) {
                 [self showMsg:@"请设置二级分类"];
                 return;
             }
@@ -311,8 +312,8 @@
             goodsDicts[@"sgInventory"] = [NSString stringWithFormat:@"%@", @(goods.goodsNum)];
             goodsDicts[@"sgpPublicEprice"] = goods.onlinePrice;
             goodsDicts[@"sgpPublicPrice"] = goods.offlinePrice;
-            goodsDicts[@"shopClass1"] = @"1";
-            goodsDicts[@"shopClass2"] = @"3";
+            goodsDicts[@"shopClass1"] = goods.goodsClassId1;
+            goodsDicts[@"shopClass2"] = goods.goodsClassId2;
             goodsDicts[@"pgId"] = goods.spuId;
             [dicts addObject:goodsDicts];
         }
@@ -456,9 +457,9 @@
         goodsModel.goodsClassName1 = firstClassify.title;
         goodsModel.goodsClassName2 = secondClassify.title;
         goodsModel.goodsClassName3 = thirdClassify.title;
-        goodsModel.gooodsClassId1 = firstClassify.classifyId;
-        goodsModel.gooodsClassId2 = secondClassify.classifyId;
-        goodsModel.gooodsClassId3 = thirdClassify.classifyId;
+        goodsModel.goodsClassId1 = firstClassify.classifyId;
+        goodsModel.goodsClassId2 = secondClassify.classifyId;
+        goodsModel.goodsClassId3 = thirdClassify.classifyId;
         [classifyNameButton setTitle:[NSString stringWithFormat:@"%@/%@/%@", firstClassify.title, secondClassify.title, thirdClassify.title] forState:UIControlStateNormal];
         [cell setupData:goodsModel];
     }];
