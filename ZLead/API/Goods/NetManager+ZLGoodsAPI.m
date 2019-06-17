@@ -235,12 +235,50 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [[NetManager sharedInstance] postRequestWithPath:ZLURL_GetAllPlatFormClass parameters:dict sueccessful:^(id  _Nonnull responseObject) {
         NSMutableArray *classifyList = [[NSMutableArray alloc] init];
-        for (NSDictionary *classifyItemDic in responseObject[@"platFormClass"]) {
+        for (NSDictionary *classifyItemDic in responseObject[@"platFormClass"]) {//一级分类
             ZLClassifyItemModel *item = [ZLClassifyItemModel mj_objectWithKeyValues:classifyItemDic];
+            if ([classifyItemDic[@"sonClassList"] isKindOfClass:[NSArray class]]) {
+                 NSMutableArray *childrenList = [[NSMutableArray alloc] init];
+                for (NSDictionary *cItemDic in classifyItemDic[@"sonClassList"]) {//二级分类
+                    ZLClassifyItemModel *cItem = [ZLClassifyItemModel mj_objectWithKeyValues:cItemDic];
+                    cItem.classifyId = cItemDic[@"pgcId"];
+                    cItem.title = cItemDic[@"pgcName"];
+                    cItem.level = [cItemDic[@"pgcLevel"] integerValue];
+                    cItem.remark = cItemDic[@"pgcRemark"];
+                    NSMutableArray *tList = [[NSMutableArray alloc] init];
+                    for (NSDictionary *tItemDic in cItemDic[@"sonClassList"]) {//三级分类
+                        ZLClassifyItemModel *tItem = [ZLClassifyItemModel mj_objectWithKeyValues:tItemDic];
+                        tItem.classifyId = tItemDic[@"pgcId"];
+                        tItem.title = tItemDic[@"pgcName"];
+                        tItem.level = [tItemDic[@"pgcLevel"] integerValue];
+                        tItem.remark = tItemDic[@"pgcRemark"];
+                        [tList addObject:tItem];
+                    }
+                    cItem.childrenList = tList;
+                    [childrenList addObject:cItem];
+                }
+                item.childrenList = childrenList;
+            }
+            
             item.classifyId = classifyItemDic[@"pgcId"];
             item.title = classifyItemDic[@"pgcName"];
             item.level = [classifyItemDic[@"pgcLevel"] integerValue];
             item.remark = classifyItemDic[@"pgcRemark"];
+            [classifyList addObject:item];
+        }
+        sucess(classifyList, classifyList.count);
+    } fail:^(NSError * _Nonnull error) {
+        fail(error);
+    }];
+}
+
+- (void)getAllShopClassWithsSucess:(successBlock)sucess
+                                  fail:(failWithErrorBlock)fail {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [[NetManager sharedInstance] postRequestWithPath:ZLURL_GetShopClassTree parameters:dict sueccessful:^(id  _Nonnull responseObject) {
+        NSMutableArray *classifyList = [[NSMutableArray alloc] init];
+        for (NSDictionary *classifyItemDic in responseObject[@"shopClass"]) {
+            ZLClassifyItemModel *item = [ZLClassifyItemModel mj_objectWithKeyValues:classifyItemDic];
             [classifyList addObject:item];
         }
         sucess(classifyList, classifyList.count);

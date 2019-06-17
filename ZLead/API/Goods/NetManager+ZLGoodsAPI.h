@@ -167,6 +167,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getAllPlatFormClassWithsSucess:(successBlock)sucess
                fail:(failWithErrorBlock)fail;
 
+
+/**
+ 获取所有店铺分类
+ 
+ @param sucess 成功
+ @param fail 失败
+ */
+- (void)getAllShopClassWithsSucess:(successBlock)sucess
+                              fail:(failWithErrorBlock)fail;
+
 @end
 
 NS_ASSUME_NONNULL_END

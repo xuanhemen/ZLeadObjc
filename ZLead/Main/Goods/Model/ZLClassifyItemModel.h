@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger level; //等级： 1 ， 2
 @property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, assign) BOOL isPlatform;
-
+@property (nonatomic, strong) NSArray <ZLClassifyItemModel *> *childrenList;//子分类
 @end
 
 NS_ASSUME_NONNULL_END

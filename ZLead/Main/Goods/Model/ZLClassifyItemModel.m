@@ -17,6 +17,12 @@
         @"parentId":@"sgcParentId",
         @"remark":@"sgcRemark",
         @"level":@"sgcLevel",
+        @"childrenList":@"children"
     };
 }
+
++ (NSDictionary *)objectClassInArray{
+    return @{@"childrenList":[ZLClassifyItemModel class]};
+}
+
 @end

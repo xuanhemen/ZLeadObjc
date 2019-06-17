@@ -245,16 +245,19 @@
     } fail:^(NSError * _Nonnull error) {
         
     }];
-    [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
-        
-    }];
+//    [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+//
+//    }];
     
-    [[NetManager sharedInstance] getAllPlatFormClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+    [[NetManager sharedInstance] getAllShopClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
         
     } fail:^(NSError * _Nonnull error) {
         
     }];
-//    [self getPlatFormClassWithParentId:0 sucess:^(NSArray *dataList) {
+    
+//    [[NetManager sharedInstance] getAllPlatFormClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+//
+//    } fail:^(NSError * _Nonnull error) {
 //
 //    }];
 }
@@ -372,24 +375,7 @@
 - (void)getPlatFormClassWithParentId:(NSString *)parentId sucess:(void (^) (NSArray *dataList))sucess {
     [[NetManager sharedInstance] getPlatFormClass:parentId sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
         if ([parentId isEqualToString:@"0"]) {
-            NSMutableArray *sectionDataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
-            for (int i = 0; i < self.filterDataModel.dataList.count; i++) {
-                ZLFilterDataModel *firstFilterDataModel = [sectionDataList objectAtIndex:i];
-                if (i == 0) {
-                    
-                } else if (i == 1) {
-                    firstFilterDataModel.isUnflod = YES;
-                    firstFilterDataModel.selectedClassifyItemModel = nil;
-                    firstFilterDataModel.dataList = dataList;
-                } else {
-                    firstFilterDataModel.isUnflod = NO;
-                    firstFilterDataModel.selectedClassifyItemModel = nil;
-                    firstFilterDataModel.dataList = [NSArray array];
-                }
-                [sectionDataList replaceObjectAtIndex:i withObject:firstFilterDataModel];
-            }
-            self.filterDataModel.dataList = sectionDataList;
-            [self.filterView reloadData:self.filterDataModel];
+            [self updateFilterMenuData:dataList];
         }
         sucess(dataList);
     } fail:^(NSError * _Nonnull error) {
@@ -400,29 +386,49 @@
 - (void)getShopClassWithParentId:(NSString *)parentId sucess:(void (^) (NSArray *dataList))sucess {
     [[NetManager sharedInstance] getShopClassWithParentId:parentId shopId:@"1" sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
         if ([parentId isEqualToString:@"0"]) {
-            NSMutableArray *sectionDataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
-            for (int i = 0; i < self.filterDataModel.dataList.count; i++) {
-                ZLFilterDataModel *firstFilterDataModel = [sectionDataList objectAtIndex:i];
-                if (i == 0) {
-                    
-                } else if (i == 1) {
-                    firstFilterDataModel.isUnflod = YES;
-                    firstFilterDataModel.selectedClassifyItemModel = nil;
-                    firstFilterDataModel.dataList = dataList;
-                } else {
-                    firstFilterDataModel.isUnflod = NO;
-                    firstFilterDataModel.selectedClassifyItemModel = nil;
-                    firstFilterDataModel.dataList = [NSArray array];
-                }
-                 [sectionDataList replaceObjectAtIndex:i withObject:firstFilterDataModel];
-            }
-            self.filterDataModel.dataList = sectionDataList;
-            [self.filterView reloadData:self.filterDataModel];
+            [self updateFilterMenuData:dataList];
         }
         sucess(dataList);
     } fail:^(NSError * _Nonnull error) {
         
     }];
+}
+
+- (void)getAllPlatFormClassWithSucess:(void (^) (NSArray *dataList))sucess {
+    [[NetManager sharedInstance] getAllPlatFormClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+       [self updateFilterMenuData:dataList];
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
+- (void)getAllShopClassWithSucess:(void (^) (NSArray *dataList))sucess {
+    [[NetManager sharedInstance] getAllShopClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+        [self updateFilterMenuData:dataList];
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
+- (void)updateFilterMenuData:(NSArray *)dataList {
+    NSMutableArray *sectionDataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
+    for (int i = 0; i < self.filterDataModel.dataList.count; i++) {
+        ZLFilterDataModel *firstFilterDataModel = [sectionDataList objectAtIndex:i];
+        if (i == 0) {
+            
+        } else if (i == 1) {
+            firstFilterDataModel.isUnflod = YES;
+            firstFilterDataModel.selectedClassifyItemModel = nil;
+            firstFilterDataModel.dataList = dataList;
+        } else {
+            firstFilterDataModel.isUnflod = NO;
+            firstFilterDataModel.selectedClassifyItemModel = nil;
+            firstFilterDataModel.dataList = [NSArray array];
+        }
+        [sectionDataList replaceObjectAtIndex:i withObject:firstFilterDataModel];
+    }
+    self.filterDataModel.dataList = sectionDataList;
+    [self.filterView reloadData:self.filterDataModel];
 }
 
 #pragma mark - private Method
@@ -514,7 +520,10 @@
         };
         self.filterView.durationTime = 0.5;
         [self.filterView show];
-        [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+//        [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+//
+//        }];
+        [self getAllShopClassWithSucess:^(NSArray *dataList) {
             
         }];
     } else {
@@ -629,43 +638,59 @@
     //刷新下一级的数据
     if (indexPath.section == 0) {//平台分类和店铺分类切换
         if (indexPath.row == 0) {
-            [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+//            [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+//
+//            }];
+            [self getAllShopClassWithSucess:^(NSArray *dataList) {
                 
             }];
         } else {
-            [self getPlatFormClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+//            [self getPlatFormClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+//
+//            }];
+            [self getAllPlatFormClassWithSucess:^(NSArray *dataList) {
                 
             }];
         }
     } else {
-        if (!filterView.isPlatform) {
-            [self getShopClassWithParentId:classifyItemModel.classifyId sucess:^(NSArray *dataList) {
-                NSInteger nextSection = indexPath.section + 1;
-                if (nextSection < self.filterDataModel.dataList.count) {
-                    ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
-                    nextFilterDataModel.isUnflod = YES;
-                    nextFilterDataModel.dataList = dataList;
-                    NSMutableArray *dataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
-                    [dataList replaceObjectAtIndex:indexPath.section + 1 withObject:nextFilterDataModel];
-                    self.filterDataModel.dataList = dataList;
-                    [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
-                }
-            }];
-        } else {
-            [self getPlatFormClassWithParentId:classifyItemModel.classifyId sucess:^(NSArray *dataList) {
-                NSInteger nextSection = indexPath.section + 1;
-                if (nextSection < self.filterDataModel.dataList.count) {
-                    ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
-                    nextFilterDataModel.isUnflod = YES;
-                    nextFilterDataModel.dataList = dataList;
-                    NSMutableArray *dataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
-                    [dataList replaceObjectAtIndex:indexPath.section + 1 withObject:nextFilterDataModel];
-                    self.filterDataModel.dataList = dataList;
-                    [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
-                }
-            }];
+//        if (!filterView.isPlatform) {
+//            [self getShopClassWithParentId:classifyItemModel.classifyId sucess:^(NSArray *dataList) {
+//                NSInteger nextSection = indexPath.section + 1;
+//                if (nextSection < self.filterDataModel.dataList.count) {
+//                    ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
+//                    nextFilterDataModel.isUnflod = YES;
+//                    nextFilterDataModel.dataList = dataList;
+//                    NSMutableArray *dataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
+//                    [dataList replaceObjectAtIndex:indexPath.section + 1 withObject:nextFilterDataModel];
+//                    self.filterDataModel.dataList = dataList;
+//                    [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
+//                }
+//            }];
+//        } else {
+//            [self getPlatFormClassWithParentId:classifyItemModel.classifyId sucess:^(NSArray *dataList) {
+//                NSInteger nextSection = indexPath.section + 1;
+//                if (nextSection < self.filterDataModel.dataList.count) {
+//                    ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
+//                    nextFilterDataModel.isUnflod = YES;
+//                    nextFilterDataModel.dataList = dataList;
+//                    NSMutableArray *dataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
+//                    [dataList replaceObjectAtIndex:indexPath.section + 1 withObject:nextFilterDataModel];
+//                    self.filterDataModel.dataList = dataList;
+//                    [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
+//                }
+//            }];
+//        }
+        NSInteger nextSection = indexPath.section + 1;
+        if (nextSection < self.filterDataModel.dataList.count) {
+            ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
+            nextFilterDataModel.isUnflod = YES;
+            nextFilterDataModel.selectedClassifyItemModel = nil;
+            nextFilterDataModel.dataList = classifyItemModel.childrenList;
+            NSMutableArray *dataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
+            [dataList replaceObjectAtIndex:indexPath.section + 1 withObject:nextFilterDataModel];
+            self.filterDataModel.dataList = dataList;
+            [filterView reloadData:self.filterDataModel section:indexPath.section + 1];
         }
-        
     }
 }
 
