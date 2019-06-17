@@ -118,6 +118,12 @@
    [self.batchSetClassifyView setSelectedGoodsNum:0];
 }
 
+
+- (void)addTableRefresh {
+    self.goodsListTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    self.goodsListTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+}
+
 #pragma mark - Init
 
 - (NSMutableArray *)goodsList {
@@ -130,7 +136,14 @@
 #pragma mark - setupData
 
 - (void)setupData {
-    [[NetManager sharedInstance] getPlatformGoodsList:self.pageIndex shopId:@"1" sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+    [self getPlatformGoodsList:self.pageIndex refreshPart:nil];
+}
+
+- (void)getPlatformGoodsList:(NSInteger)pageNum refreshPart:(NSString *)refreshPart {
+    [[NetManager sharedInstance] getPlatformGoodsList:pageNum shopId:@"1" sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+        if (self.pageIndex == 1) {
+            [self.goodsList removeAllObjects];
+        }
         [self.goodsList addObjectsFromArray:dataList];
         [self.goodsListTableView reloadData];
     } fail:^(NSError * _Nonnull error) {
@@ -198,6 +211,16 @@
     } fail:^(NSError * _Nonnull error) {
         
     }];
+}
+
+- (void)headerRefresh {
+    self.pageIndex = 1;
+    [self getPlatformGoodsList:self.pageIndex refreshPart:kRefreshHeader];
+}
+
+- (void)footerRefresh {
+    self.pageIndex ++;
+    [self getPlatformGoodsList:self.pageIndex refreshPart:kRefreshFooter];
 }
 
 #pragma mark - setter
@@ -320,6 +343,8 @@
     }
     [[NetManager sharedInstance] importGoods:dicts sucess:^{
         DLog(@"导入商品成功");
+        self.pageIndex = 1;
+        [self setupData];
     } fail:^(NSError * _Nonnull error) {
         
     }];

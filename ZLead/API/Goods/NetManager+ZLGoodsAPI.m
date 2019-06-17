@@ -230,4 +230,23 @@
     }];
 }
 
+- (void)getAllPlatFormClassWithsSucess:(successBlock)sucess
+                                  fail:(failWithErrorBlock)fail {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [[NetManager sharedInstance] postRequestWithPath:ZLURL_GetAllPlatFormClass parameters:dict sueccessful:^(id  _Nonnull responseObject) {
+        NSMutableArray *classifyList = [[NSMutableArray alloc] init];
+        for (NSDictionary *classifyItemDic in responseObject[@"platFormClass"]) {
+            ZLClassifyItemModel *item = [ZLClassifyItemModel mj_objectWithKeyValues:classifyItemDic];
+            item.classifyId = classifyItemDic[@"pgcId"];
+            item.title = classifyItemDic[@"pgcName"];
+            item.level = [classifyItemDic[@"pgcLevel"] integerValue];
+            item.remark = classifyItemDic[@"pgcRemark"];
+            [classifyList addObject:item];
+        }
+        sucess(classifyList, classifyList.count);
+    } fail:^(NSError * _Nonnull error) {
+        fail(error);
+    }];
+}
+
 @end

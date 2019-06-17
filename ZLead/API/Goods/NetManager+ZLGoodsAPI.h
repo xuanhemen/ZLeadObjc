@@ -158,6 +158,15 @@ NS_ASSUME_NONNULL_BEGIN
                    sucess:(successfulBlock)sucess
                      fail:(failWithErrorBlock)fail;
 
+/**
+ 获取平台所有分类
+ 
+ @param sucess 成功
+ @param fail 失败
+ */
+- (void)getAllPlatFormClassWithsSucess:(successBlock)sucess
+               fail:(failWithErrorBlock)fail;
+
 @end
 
 NS_ASSUME_NONNULL_END

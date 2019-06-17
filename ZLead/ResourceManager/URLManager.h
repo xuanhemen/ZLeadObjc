@@ -24,3 +24,5 @@ static NSString * const ZLURL_GetPlatformGoodsList = @"/ZlwPlatformGoods/getPlat
 static NSString * const ZLURL_GetShopClassLeve1 = @"/ZlwGoods/getShopClassLeve1";//查询店铺分类
 static NSString * const ZLURL_AddShopGoodsClass = @"/ZlwGoods/addShopGoodsClass";//添加店铺商品分类
 static NSString * const ZLURL_ImportGoods = @"/ZlwGoods/importGoods";//从平台导入商品
+static NSString * const ZLURL_GetAllPlatFormClass = @"/ZlwPlatformGoods/getAllPlatFormClass";//获取平台所有分类
+

@@ -87,7 +87,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     [kKeyWindow addSubview:self];
     [self addSubview:self.filterCover];
     [self.filterCover addSubview:self.filter];
-//    [self.filterCover addSubview:self.bottomView];
+    [self.filterCover addSubview:self.bottomView];
     [self.filterCover addSubview:self.sureButton];
     [self.filterCover addSubview:self.resetButton];
 }
@@ -97,6 +97,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 - (UIView *)bottomView {
     if (_bottomView == nil) {
         _bottomView = [[UIView alloc] init];
+        _bottomView.backgroundColor = [UIColor whiteColor];
         _bottomView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.05].CGColor;
         _bottomView.layer.shadowOffset = CGSizeMake(0,-4);
         _bottomView.layer.shadowOpacity = 1;
@@ -208,6 +209,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
         self.filter.frame = CGRectMake(dis(40), 0, kZLScreenWidth - dis(40), kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
         self.sureButton.frame = CGRectMake(self.filter.frame.size.width * 0.5 +kZLScreenWidth * 0.1 , CGRectGetMaxY(self.filter.frame), self.filter.width * 0.5, kFilterButtonHeight);
     }
+    _bottomView.frame = CGRectMake(self.filter.frame.origin.x, self.filter.frame.size.height + self.filter.frame.origin.y + kFilterButtonHeight,self.filter.frame.size.width , kZLSafeAreaBottomHeight);
     
     [self.filterCover addSubview:self.sureButton];
     [self.filterCover addSubview:self.resetButton];

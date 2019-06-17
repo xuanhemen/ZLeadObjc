@@ -248,6 +248,12 @@
     [self getShopClassWithParentId:@"0" sucess:^(NSArray *dataList) {
         
     }];
+    
+    [[NetManager sharedInstance] getAllPlatFormClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
+        
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
 //    [self getPlatFormClassWithParentId:0 sucess:^(NSArray *dataList) {
 //
 //    }];
