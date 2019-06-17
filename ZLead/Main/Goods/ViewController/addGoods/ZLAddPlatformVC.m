@@ -394,7 +394,7 @@
                 DLog(@"批量设置分类");
                 [weakSelf batchSetClassify:firstClassify secondClassify:secondClassify thirdClassify:thirdClassify];
             }];
-            [weakSelf getPlatFormClassWithParentId:@"0" sucess:^(NSArray *dataList) {
+            [weakSelf getAllPlatFormClassWithSucess:^(NSArray *dataList) {
                 
             }];
             weakSelf.filterView.delegate = weakSelf;
