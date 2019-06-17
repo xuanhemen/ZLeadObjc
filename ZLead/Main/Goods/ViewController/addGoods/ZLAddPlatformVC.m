@@ -264,8 +264,9 @@
 - (void)classificationButtonAction:(UIButton *)btn {
     if (!self.showFilter) {
         [self.filterView dismiss];
+        kWeakSelf(weakSelf)
         self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(ZLClassifyItemModel * _Nonnull firstClassify, ZLClassifyItemModel * _Nonnull secondClassify, ZLClassifyItemModel * _Nonnull thirdClassify) {
-            
+            [weakSelf batchSetClassify:firstClassify secondClassify:secondClassify thirdClassify:thirdClassify];
         }];
         self.filterView.delegate = self;
         self.filterView.isPlatform = YES;
@@ -327,6 +328,7 @@
     }
     [[NetManager sharedInstance] importGoods:dicts sucess:^{
         DLog(@"导入商品成功");
+        [self.importButton setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
         self.pageIndex = 1;
         [self setupData];
     } fail:^(NSError * _Nonnull error) {
@@ -394,15 +396,15 @@
                 DLog(@"批量设置分类");
                 [weakSelf batchSetClassify:firstClassify secondClassify:secondClassify thirdClassify:thirdClassify];
             }];
-            [weakSelf getAllPlatFormClassWithSucess:^(NSArray *dataList) {
-                
-            }];
             weakSelf.filterView.delegate = weakSelf;
             weakSelf.filterView.isPlatform = YES;
             weakSelf.filterView.durationTime = 0.5;
             [weakSelf.filterView show];
         };
     }
+    [self getAllPlatFormClassWithSucess:^(NSArray *dataList) {
+        
+    }];
     return _batchSetClassifyView;
 }
 

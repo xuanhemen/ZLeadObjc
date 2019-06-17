@@ -334,6 +334,7 @@
         [_classifyNameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _classifyNameButton.layer.borderWidth = 0.5;
         _classifyNameButton.layer.borderColor = [UIColor zl_mainColor].CGColor;
+        [_classifyNameButton setTitle:[NSString stringWithFormat:@"%@/%@/%@", goodsModel.goodsClassName1, goodsModel.goodsClassName2, goodsModel.goodsClassName3] forState:UIControlStateNormal];
     } else {
         [_classifyNameButton setTitle:@"一级分类/二级分类" forState:UIControlStateNormal];
          [_classifyNameButton setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];

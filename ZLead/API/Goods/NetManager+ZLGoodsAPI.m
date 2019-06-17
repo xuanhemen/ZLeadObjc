@@ -21,7 +21,7 @@
                         fail:(failWithErrorBlock)fail {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"sgStatus"] = @(status);//[NSString stringWithFormat:@"%@", ];
-    dict[@"shopId"] = shopId;
+    dict[@"shopId"] = shopId ? shopId : @"1";
     dict[@"currentPage"] = [NSString stringWithFormat:@"%@", @(pageNum)];
     dict[@"sizePage"] = [NSString stringWithFormat:@"%d", kSizePage];
     [[NetManager sharedInstance] postRequestWithPath:ZLURL_GetGoodsListByStatus parameters:dict sueccessful:^(id  _Nonnull responseObject) {
@@ -46,7 +46,7 @@
                         fail:(failWithErrorBlock)fail {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"sgSpuStatus"] = [NSString stringWithFormat:@"%@", @(status)];
-    dict[@"shopId"] = shopId;
+    dict[@"shopId"] = shopId ? shopId : @"1";
     dict[@"currentPage"] = [NSString stringWithFormat:@"%@", @(pageNum)];
     dict[@"sizePage"] = [NSString stringWithFormat:@"%d", kSizePage];
     [[NetManager sharedInstance] postRequestWithPath:ZLURL_GetGoodsSpuListByStatus parameters:dict sueccessful:^(id  _Nonnull responseObject) {
@@ -222,7 +222,9 @@
              sucess:(successfulBlock)sucess
                fail:(failWithErrorBlock)fail {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"goods"] = goods;
+    if (goods) {
+        dict[@"goods"] = goods;
+    }
     [[NetManager sharedInstance] postRequestWithPath:ZLURL_ImportGoods parameters:dict sueccessful:^(id  _Nonnull responseObject) {
         sucess();
     } fail:^(NSError * _Nonnull error) {
