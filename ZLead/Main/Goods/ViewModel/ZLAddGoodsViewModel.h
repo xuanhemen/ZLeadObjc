@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *isAdd; // 标识是否添加了规格
 
+@property (nonatomic, copy) NSString *isAddImgText; // 标识是否添加了图文描述
+
+@property (nonatomic, strong) NSMutableArray *categoryArr; // 分类数据源
+
 /** 负责跳转 */
 -(void)jumpFromController:(UIViewController *)vc;
 

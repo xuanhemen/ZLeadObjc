@@ -15,10 +15,14 @@
 
 @property (nonatomic, strong) UIView *headView; //
 
-@property (nonatomic, strong) ZLImgTextView *inputView; // <#annotation#>
+@property (nonatomic, strong) NSMutableArray *imgArr; // 图片数组
+
+@property (nonatomic, strong) NSMutableDictionary *textDic; // 文字描述参数
+
+@property (nonatomic, strong) UIButton *addBtn; // 继续添加
 @end
 
-static NSInteger contentY = 0;
+static NSInteger contentY = 0; //inputView的y的位置
 static NSInteger tag = 0;
 @implementation ZLAddImgTextVC
 
@@ -40,29 +44,38 @@ static NSInteger tag = 0;
 }
 - (void)addImgTextView {
     
-    _inputView = [[ZLImgTextView alloc] init];
-    _inputView.tag = tag;
-    tag++;
+    self.addBtn.enabled = NO; //继续添加按钮设为不可点击
+    
+    ZLImgTextView *inputView = [[ZLImgTextView alloc] init];
+    inputView.tag = tag;
+    tag ++;
     kWeakSelf(weakSelf)
-    [[_inputView.imgBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-        [weakSelf popSheetView];
+    [[inputView.imgBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        [weakSelf popSheetView:inputView];
         
     }];
+    [[inputView.desView.textView.rac_textSignal map:^id _Nullable(NSString * _Nullable value) {
+        return value;
+    }] subscribeNext:^(id  _Nullable x) {
+        NSInteger tag = inputView.tag;
+        NSString *key = [NSString stringWithFormat:@"text_0%ld",tag];
+        [weakSelf.textDic setObject:x forKey:key]; //收集参数
+    }];
     self.headView.frame = CGRectMake(0, 0, kScreenWidth, dis(230)+contentY);
-    _inputView.frame = CGRectMake(0, 0+contentY, kScreenWidth, dis(230));
+    inputView.frame = CGRectMake(0, contentY, kScreenWidth, dis(230));
     contentY += dis(230);
-    [self.headView addSubview:_inputView];
+    [self.headView addSubview:inputView];
     _tableView.tableHeaderView = self.headView ;
 }
-- (void)popSheetView {
+- (void)popSheetView:(ZLImgTextView *)view {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"请选择添加方式" preferredStyle: UIAlertControllerStyleActionSheet];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { //相机拍照
-         [self goPhotoLibrary:@"camera"];  //跳到相册
+         [self goPhotoLibrary:@"camera" imgTextView:view];  //跳到相册
     }];
     UIAlertAction *archiveAction = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self goPhotoLibrary:@"library"];  //跳到相册
+        [self goPhotoLibrary:@"library" imgTextView:view];  //跳到相册
     }];
     
     [alertController addAction:cancelAction];
@@ -72,17 +85,53 @@ static NSInteger tag = 0;
     [self presentViewController:alertController animated:YES completion:nil];
 }
 /** 跳转到相册 */
-- (void)goPhotoLibrary:(NSString *)type {
+- (void)goPhotoLibrary:(NSString *)type imgTextView:(ZLImgTextView *)view {
     kWeakSelf(weakSelf)
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    
+    TZImagePickerController *vc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
     // 你可以通过block或者代理，来得到用户选择的照片.
-    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-        [weakSelf.inputView.imgBtn setImage:[photos objectAtIndex:0] forState:UIControlStateNormal];
+    [vc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        UIImage *image = [photos objectAtIndex:0];
+        NSInteger tag = view.tag;
+        [view.imgBtn setImage:image forState:UIControlStateNormal];
+        if (view.isEmpty) {
+            weakSelf.addBtn.enabled = YES;
+            [weakSelf.imgArr addObject:image];
+        }else{
+            [weakSelf.imgArr replaceObjectAtIndex:tag withObject:image];
+        }
+        view.isEmpty = NO;  //控制继续添加按钮是否可点击
+        
     }];
-    [self presentViewController:imagePickerVc animated:YES completion:nil];
+    
+    [self presentViewController:vc animated:YES completion:nil];
    
 }
-
+- (void)addFootView {
+    
+    UIView * footView = [[UIView alloc] init];
+    footView.backgroundColor = [UIColor whiteColor];
+    footView.frame = CGRectMake(0, 0, kScreenWidth, dis(60));
+    
+    _addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_addBtn setTitle:@"继续添加 +" forState:UIControlStateNormal];
+    [_addBtn setTitleColor:normalColor forState:UIControlStateNormal];
+    [_addBtn setTitleColor:lightColor forState:UIControlStateDisabled];
+    _addBtn.enabled = NO;
+    _addBtn.titleLabel.font = kFont16;
+    kWeakSelf(weakSelf)
+    [[_addBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        [weakSelf addImgTextView];
+    }];
+    [footView addSubview:_addBtn];
+    [_addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(footView);
+        make.left.equalTo(footView).offset(dis(20));
+    }];
+    
+    _tableView.tableFooterView = footView;
+    
+}
 - (UIView *)headView {
     if (!_headView) {
         _headView = [[UIView alloc] init];
@@ -97,29 +146,6 @@ static NSInteger tag = 0;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
-    
-}
-- (void)addFootView {
-    
-    UIView * footView = [[UIView alloc] init];
-    footView.backgroundColor = [UIColor whiteColor];
-    footView.frame = CGRectMake(0, 0, kScreenWidth, dis(60));
-    
-    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn setTitle:@"继续添加 +" forState:UIControlStateNormal];
-    [addBtn setTitleColor:normalColor forState:UIControlStateNormal];
-    addBtn.titleLabel.font = kFont16;
-    kWeakSelf(weakSelf)
-    [[addBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-        [weakSelf addImgTextView];
-    }];
-    [footView addSubview:addBtn];
-    [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(footView);
-        make.left.equalTo(footView).offset(dis(20));
-    }];
-    
-    _tableView.tableFooterView = footView;
     
 }
 - (void)addBottomView {
@@ -144,6 +170,11 @@ static NSInteger tag = 0;
         make.centerX.equalTo(bottomView);
         make.size.mas_equalTo(kSize(kScreenWidth-60, 44));
     }];
+    kWeakSelf(weakSelf)
+    [[saveBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        weakSelf.passImgtext(weakSelf.imgArr, weakSelf.textDic);
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    }];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 0;
@@ -151,6 +182,18 @@ static NSInteger tag = 0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     return cell;
+}
+- (NSMutableArray *)imgArr {
+    if (!_imgArr) {
+        _imgArr = [NSMutableArray array];
+    }
+    return _imgArr;
+}
+- (NSMutableDictionary *)textDic {
+    if (!_textDic) {
+        _textDic = [NSMutableDictionary dictionary];
+    }
+    return _textDic;
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -160,6 +203,9 @@ static NSInteger tag = 0;
     if (!parent) {
         contentY = 0;
     }
+}
+- (void)dealloc {
+    NSLog(@"走了吗安云");
 }
 /*
 #pragma mark - Navigation

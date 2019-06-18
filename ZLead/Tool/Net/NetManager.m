@@ -71,7 +71,10 @@ static NetManager *_instance = nil;
     [manager POST:urlStr parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         NSDictionary *dictionary = responseObject;
-        DLog(@"请求结果%@",dictionary);
+        NSError *parseError = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&parseError];
+        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        DLog(@"请求结果%@",jsonStr);
         NSInteger stateCode = [[dictionary objectForKey:@"status"] integerValue];
         NSDictionary *dataDic = [dictionary objectForKey:@"data"];
         NSString *msg = [dictionary objectForKey:@"message"];

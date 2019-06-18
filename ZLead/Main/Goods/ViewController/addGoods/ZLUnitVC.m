@@ -8,9 +8,12 @@
 
 #import "ZLUnitVC.h"
 #import "GeneralTableView.h"
+#import "ZLUnitModel.h"
 @interface ZLUnitVC ()
 
 @property (nonatomic, strong) NSMutableArray *dataArr; // 数据源
+
+@property (nonatomic, strong) GeneralTableView *tableView; //
 @end
 
 @implementation ZLUnitVC
@@ -18,36 +21,56 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"选择单位";
-    kWeakSelf(weakSelf)
-    GeneralTableView *tableView = [[GeneralTableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain array:self.dataArr cellHeight:50*kp cell:^UITableViewCell * _Nonnull(UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
-        static NSString *indentifier = @"brand";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indentifier];
-        }
-        cell.textLabel.text = weakSelf.dataArr[indexPath.row];
-        return cell;
-    } selectedCell:^(NSIndexPath * _Nonnull indexPath) {
-        NSString *title = [weakSelf.dataArr objectAtIndex:indexPath.row];
-        weakSelf.selecItem(title);
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-    }];
-    [self.view addSubview:tableView];
+
+    [self.view addSubview:self.tableView];
+    [self initData]; //请求数据
     // Do any additional setup after loading the view.
+}
+- (GeneralTableView *)tableView {
+     kWeakSelf(weakSelf)
+    if (!_tableView) {
+        _tableView = [[GeneralTableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain array:self.dataArr cellHeight:50*kp cell:^UITableViewCell * _Nonnull(UITableView * _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
+            static NSString *indentifier = @"brand";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indentifier];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indentifier];
+            }
+            ZLUnitModel *model = weakSelf.dataArr[indexPath.row];
+            cell.textLabel.text = model.sguName;
+            return cell;
+        } selectedCell:^(NSIndexPath * _Nonnull indexPath) {
+            ZLUnitModel *model = [weakSelf.dataArr objectAtIndex:indexPath.row];
+            weakSelf.selecItem(model.sguName,model.sguId);
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }];
+
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
+}
+- (void)initData {
+    [self showHUD];
+    NSDictionary *dic = [NSDictionary dictionary];
+    [NetManager postWithURLString:@"ZlwGoods/getShopGoodsUnit" parameters:dic success:^(NSDictionary * _Nonnull response) {
+        [self dismissHUD];
+        NSArray *dataArr = [response objectForKey:@"unit"];
+        for (NSDictionary *dic in dataArr) {
+            ZLUnitModel *model = [ZLUnitModel mj_objectWithKeyValues:dic];
+            [self.dataArr addObject:model];
+        }
+        [self.tableView reloadData];
+    } failure:^(NSDictionary * _Nonnull errorMsg) {
+        
+    }];
 }
 - (NSMutableArray *)dataArr {
     if (!_dataArr) {
         _dataArr = [NSMutableArray array];
-        [_dataArr addObject:@"个"];
-        [_dataArr addObject:@"箱"];
-        [_dataArr addObject:@"盆"];
-        [_dataArr addObject:@"双"];
     }
     return _dataArr;
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor blackColor]}];
 }
 /*

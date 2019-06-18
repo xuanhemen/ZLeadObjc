@@ -72,6 +72,9 @@
     if (!_sureBtn) {
         _sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_sureBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [[_sureBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+            [self showMsg:@"上传"];
+        }];
         _sureBtn.backgroundColor = [UIColor zl_mainColor];
         _sureBtn.layer.masksToBounds = YES;
         _sureBtn.layer.cornerRadius = 4;

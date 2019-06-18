@@ -21,10 +21,11 @@
     self = [super initWithFrame:frame style:style];
     if (self) {
 
-         //配置代理
+        //配置代理
         self.delegate = self.tableDelegate;
         self.dataSource = self.tableDelegate;
         [self.tableDelegate configDelegateWithArray:array cell:myCell selecedCell:selecBlock];
+        self.tableDelegate.ind = @"测试";
         self.rowHeight = height;
         if (style == UITableViewStylePlain) {
             self.sectionHeaderHeight = 0;

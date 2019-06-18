@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ZLAddImgTextVC : ZLBaseViewController
 
 
-@property (nonatomic, copy) void (^setImg)(UIImage *img); // <#annotation#> 
+@property (nonatomic, copy) void (^passImgtext)(NSArray *imgArr,NSDictionary *textDic); // 参数回调
 @end
 
 NS_ASSUME_NONNULL_END

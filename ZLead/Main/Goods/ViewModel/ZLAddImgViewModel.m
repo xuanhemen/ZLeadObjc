@@ -109,7 +109,7 @@
     imagePickerController.numberOfColumnsInPortrait = 4;//竖屏模式下一行显示4张图像
     imagePickerController.numberOfColumnsInLandscape = 7;//横屏模式下一行显示7张图像
     imagePickerController.maximumNumberOfSelection = 9;
-    
+   
     [self.seleVC presentViewController:imagePickerController animated:YES completion:nil];
 }
 #pragma mark-选取图片

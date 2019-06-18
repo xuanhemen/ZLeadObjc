@@ -10,6 +10,13 @@
 
 @implementation GeneralTableViewDelegate
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
 -(void)configDelegateWithArray:(NSArray *)array cell:(UITableViewCell *(^)(UITableView *,NSIndexPath *))cell selecedCell:(void (^)(NSIndexPath *)) selectedBlock{
     self.dataArr = array;
     self.createCell = cell;

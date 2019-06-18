@@ -12,8 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLImgTextView : UIView
 
+@property (nonatomic,assign) BOOL isEmpty; //是否是空的视图
+@property (nonatomic, strong) UIButton *imgBtn; //
 
-@property (nonatomic, strong) UIButton *imgBtn; //  
+@property (nonatomic, strong) ZLDescribeView *desView; // 商品描述
 
 @end
 

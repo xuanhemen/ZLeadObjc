@@ -75,11 +75,14 @@
     if (!_textField) {
         _textField = [[UITextField alloc] init];
         _textField.font = kFont14;
-        _textField.placeholder = @"请输入";
+        _textField.textColor = normalColor;
+        _textField.placeholder = @"未设置";
+        _textField.enabled = NO;
+        _textField.textAlignment = NSTextAlignmentRight;
         [self addSubview:_textField];
         [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self);
-            make.right.equalTo(self).offset(-dis(25));
+            make.right.equalTo(self).offset(-dis(30));
         }];
     }
     return _textField;
