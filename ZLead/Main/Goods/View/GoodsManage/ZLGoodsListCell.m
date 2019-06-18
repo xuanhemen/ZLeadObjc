@@ -63,12 +63,13 @@
         make.width.height.mas_equalTo(dis(120));
     }];
     
+    self.topImageView.hidden = YES;
     [self.topImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.topicImgView.mas_left);
         make.top.equalTo(self.topicImgView.mas_top);
-        make.width.height.mas_equalTo(dis(20));
+        make.width.height.mas_equalTo(@(dis(25)));
     }];
-    self.topicLbl.text = @"绿林钢卷尺 3米5米7.5米10米加厚盒尺木工高精度测量工具米…";
+    self.topicLbl.text = @"";
     [self.topicLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.topicImgView.mas_right).offset(dis(10));
         make.right.equalTo(self.contentView).offset(-dis(15));
@@ -83,21 +84,25 @@
     [self.salesLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.stockLbl);
         make.left.equalTo(self.stockLbl.mas_right).offset(dis(10));
+        make.width.lessThanOrEqualTo(@(dis(100)));
     }];
     
     [self.offlinePriceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.topicLbl);
         make.bottom.equalTo(self.stockLbl.mas_top).offset(-dis(10));
+        make.width.lessThanOrEqualTo(@(dis(100)));
     }];
     
     [self.onlinePriceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.topicLbl);
         make.bottom.equalTo(self.offlinePriceLbl.mas_top).offset(-dis(10));
+        make.width.lessThanOrEqualTo(@(dis(200)));
     }];
     
     [self.costLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.offlinePriceLbl.mas_right).offset(dis(10));
         make.centerY.equalTo(self.offlinePriceLbl);
+        make.width.lessThanOrEqualTo(@(dis(100)));
     }];
     
     [self.editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -130,8 +135,14 @@
 
 - (void)setupData:(ZLGoodsModel *)goodsModel {
     _goodsModel = goodsModel;
+    self.topicLbl.text = _goodsModel.goodsName;
+    self.onlinePriceLbl.attributedText = [self attributedStringWithStr:[NSString stringWithFormat:@"网店价 ¥%@",  _goodsModel.offlinePrice]];
+    self.offlinePriceLbl.text = [NSString stringWithFormat:@"门店价: ¥%@", _goodsModel.offlinePrice];
+    self.costLbl.text = [NSString stringWithFormat:@"成本：%@起", goodsModel.costPrice];
+    self.stockLbl.text = [NSString stringWithFormat:@"库存：%@", @(goodsModel.inventoryValue)];
+    self.salesLbl.text = [NSString stringWithFormat:@"月销：%@", @(goodsModel.monthSaleNum)];
     self.selectBtn.selected = _goodsModel.isSelected;
-    self.topImageView.hidden = !_goodsModel.top;
+    self.topImageView.hidden = (_goodsModel.top == 1) ? YES : NO;
 }
 
 #pragma mark - lazy load
@@ -158,8 +169,7 @@
 - (UIImageView *)topImageView {
     if (!_topImageView) {
         _topImageView = [[UIImageView alloc] init];
-        _topImageView.backgroundColor = [UIColor zl_mainColor];
-        _topImageView.hidden = YES;
+        _topImageView.image = [UIImage imageNamed:@"goods-top-icon"];
         [self.contentView addSubview:_topImageView];
     }
     return _topImageView;

@@ -199,36 +199,7 @@
     }];
 }
 - (void)classificationButtonAction:(UITextField *)textField {
-    if (!self.showFilter) {
-        [self.filterView dismiss];
-        self.filterDataModel  = [[ZLFilterDataModel alloc] init];
-        NSArray *sectionTitles = @[@"分类", @"一级分类", @"二级分类"];
-        NSMutableArray *allItems = [[NSMutableArray alloc] init];
-        for (NSInteger section = 0; section < 3; section ++) {
-            ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
-            filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
-            filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-            NSMutableArray *items = [[NSMutableArray alloc] init];
-            for (NSInteger i = 0; i < 10; i++) {
-                ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
-                itemModel.classifyId = i + 1;
-                itemModel.title = [NSString stringWithFormat:@"分类%@", @(i)];
-                [items addObject:itemModel];
-            }
-            filterDataModel.dataList = items;
-            [allItems addObject:filterDataModel];
-        }
-        self.filterDataModel.dataList = allItems;
-        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight filterViewBlock:^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
-            textField.text = thirdClassify;
-            [self.totalParams setObject:thirdClassify forKey:@"category"];
-        }];
-        
-        self.filterView.durationTime = 0.5;
-        [self.filterView show];
-    } else {
-        [self.filterView dismiss];
-    }
+    
     
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

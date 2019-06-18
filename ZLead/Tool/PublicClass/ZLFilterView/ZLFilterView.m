@@ -82,6 +82,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 }
 
 - (void)setupFilterView {
+    self.isPlatform = NO;
     self.durationTime = 0.3;
     [kKeyWindow addSubview:self];
     [self addSubview:self.filterCover];
@@ -208,6 +209,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
         self.filter.frame = CGRectMake(dis(40), 0, kZLScreenWidth - dis(40), kZLScreenHeight - kFilterButtonHeight - kZLSafeAreaBottomHeight);
         self.sureButton.frame = CGRectMake(self.filter.frame.size.width * 0.5 +kZLScreenWidth * 0.1 , CGRectGetMaxY(self.filter.frame), self.filter.width * 0.5, kFilterButtonHeight);
     }
+    _bottomView.frame = CGRectMake(self.filter.frame.origin.x, self.filter.frame.size.height + self.filter.frame.origin.y + kFilterButtonHeight,self.filter.frame.size.width , kZLSafeAreaBottomHeight);
     
     [self.filterCover addSubview:self.sureButton];
     [self.filterCover addSubview:self.resetButton];
@@ -232,7 +234,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     self.filterCover.backgroundColor = [UIColor clearColor];
     [UIView animateWithDuration:self.durationTime animations:^{
         if (self.pushDirection == ZLFilterViewPushDirectionFromLeft) {
-            self.filterCover.frame = CGRectMake(- kZLScreenWidth, 0, kZLScreenWidth, kZLScreenHeight);
+            self.filterCover.frame = CGRectMake(-kZLScreenWidth, 0, kZLScreenWidth, kZLScreenHeight);
         } else {
             self.filterCover.frame = CGRectMake(kZLScreenWidth, 0, kZLScreenWidth, kZLScreenHeight);
         }
@@ -267,6 +269,25 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     [self resetMenuStatus];
 }
 
+#pragma mark - 暴露给外界刷新数据的接口
+
+- (void)reloadData:(ZLFilterDataModel *)filterDataModel section:(NSInteger )section {
+    if (section < filterDataModel.dataList.count) {
+        ZLFilterDataModel *sectionDataModel = [filterDataModel.dataList objectAtIndex:section];
+        NSMutableArray *allList = [[NSMutableArray alloc] initWithArray:filterDataModel.dataList];
+        [allList replaceObjectAtIndex:section withObject:sectionDataModel];
+        self.filterDataModel.dataList = allList;
+        [self.filter performBatchUpdates:^{
+            [self.filter reloadSections:[NSIndexSet indexSetWithIndex:section]];
+        } completion:nil];
+    }
+}
+
+- (void)reloadData:(ZLFilterDataModel *)filterDataModel {
+    self.filterDataModel = filterDataModel;
+    [self.filter reloadData];
+}
+
 
 #pragma mark - UIButton Actions
 
@@ -274,12 +295,15 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     [self dismiss];
     if (sender.tag == ZLMenuButtonTypeSure) {
         if (self.filterViewBlock) {
-            self.filterViewBlock(@"一级分类", @"二级分类", @"三级分类");
+            ZLFilterDataModel *fDataModel = [self.filterDataModel.dataList objectAtIndex:1];
+            ZLFilterDataModel *sDataModel = [self.filterDataModel.dataList objectAtIndex:2];
+            ZLFilterDataModel *tDataModel = nil;
+            if (self.filterDataModel.dataList.count > 3) {
+                tDataModel = [self.filterDataModel.dataList objectAtIndex:3];
+            }
+            self.filterViewBlock(fDataModel.selectedClassifyItemModel, sDataModel.selectedClassifyItemModel, tDataModel.selectedClassifyItemModel);
         }
     } else if (sender.tag == ZLMenuButtonTypeReset) {
-//        if (self.filterViewBlock) {
-//            self.filterViewBlock(@"一级分类", @"二级分类", @"三级分类");
-//        }
     }
     
 }
@@ -287,7 +311,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 #pragma mark - collectionViewDelegate
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section  {
-    if (section == 1 || section == 2) {
+    if (section == 1 || section == 2 || section == 3) {
         return CGSizeMake(kZLScreenWidth * 0.8, dis(38));
     }
     return CGSizeZero;
@@ -307,6 +331,7 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader] && self.filter == collectionView) {
         ZLFilterSectionHeaderView *header  = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"ZLFilterSectionHeaderViewID" forIndexPath:indexPath];
         ZLFilterDataModel *currentfilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
+        currentfilterDataModel.allowEdit = !self.isPlatform;
         header.filterDataModel = currentfilterDataModel;
         header.delegate = self;
         return header;
@@ -331,7 +356,10 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:section];
-    return filterDataModel.isUnflod ? filterDataModel.dataList.count : ((filterDataModel.dataList.count < 9) ? filterDataModel.dataList.count : 9);
+    if (section == 0) {
+        return filterDataModel.dataList.count;
+    }
+    return filterDataModel.isUnflod ? filterDataModel.dataList.count : 0;
 }
 
 #pragma mark - collectionView item
@@ -347,19 +375,29 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 
 - (void)selectedFilterItem:(ZLFilterItemCell *)item classifyItemModel:(ZLClassifyItemModel *)classifyItemModel {
     NSIndexPath *indexPath = [self.filter indexPathForCell:item];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            self.isPlatform = NO;
+        } else {
+            self.isPlatform = YES;
+        }
+    }
     ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
     if (filterDataModel.selectedClassifyItemModel.classifyId == classifyItemModel.classifyId) {
         return;
     }
     for (ZLClassifyItemModel *itemModel in filterDataModel.dataList) {
-        if (itemModel.classifyId == filterDataModel.selectedClassifyItemModel.classifyId) {
-            itemModel.isSelected = NO;
-        } else if (itemModel.classifyId == classifyItemModel.classifyId) {
+        if (itemModel.classifyId == classifyItemModel.classifyId) {
             itemModel.isSelected = YES;
+        } else {
+             itemModel.isSelected = NO;
         }
     }
     filterDataModel.selectedClassifyItemModel = classifyItemModel;
     [self.filter reloadData];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(filterView:didSelectItemAtIndexPath:)]) {
+        [self.delegate filterView:self didSelectItemAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark - ZLFilterSectionHeaderViewDelegate
@@ -372,6 +410,16 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
             itemModel.isSelected = NO;
         }
     }
+    for (NSInteger section = indexPath.section; section < self.filterDataModel.dataList.count; section++) {
+        ZLFilterDataModel *cfilterDataModel = [self.filterDataModel.dataList objectAtIndex:section];
+        cfilterDataModel.selectedClassifyItemModel = nil;
+        for (ZLClassifyItemModel *itemModel in cfilterDataModel.dataList) {
+            itemModel.isSelected = NO;
+        }
+        if (section > indexPath.section) {
+            cfilterDataModel.dataList = nil;
+        }
+    }
      currentfilterDataModel.selectedClassifyItemModel = nil;
     [self.filter reloadData];
 }
@@ -379,7 +427,12 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
 - (void)manageClassify:(ZLFilterSectionHeaderView *)header filterDataModel:(ZLFilterDataModel *)filterDataModel {
     [self dismiss];
     if (self.manageClassifyBlock) {
-        self.manageClassifyBlock(filterDataModel.indexPath.section);
+        NSString *parentId = @"0";
+        if (filterDataModel.indexPath.section > 1) {
+            ZLFilterDataModel *currentfilterDataModel = [self.filterDataModel.dataList objectAtIndex:filterDataModel.indexPath.section - 1];
+            parentId = currentfilterDataModel.selectedClassifyItemModel.classifyId;
+        }
+        self.manageClassifyBlock(filterDataModel.indexPath.section, parentId);
     }
 }
 

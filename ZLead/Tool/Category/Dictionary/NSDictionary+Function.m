@@ -14,10 +14,10 @@
 + (NSMutableDictionary *)splicingParameters:(NSDictionary *)params {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"platform"] = @"ios";
-    param[@"appversion"] = @"1.0.0";
-    param[@"apiversion"] = @"1.0.0";
-    param[@"imei"] = @"1423415435";
-    param[@"signature"] = @"";
+    param[@"appversion"] = @"1.0.3";
+    param[@"apiversion"] = @"1.0.2";
+    param[@"imei"] = @"12345678";
+    param[@"signature"] = @"xxxxxxxxxxxx";
     NSString *tokenStr =  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     if (IsStrEmpty(tokenStr)) {
         param[@"token"] = @"";
@@ -28,6 +28,7 @@
     if ([params isKindOfClass:[NSDictionary class]]) {
         param[@"data"] = params;
     }
+    DLog(@"请求参数%@",param);
     return param;
 }
 @end

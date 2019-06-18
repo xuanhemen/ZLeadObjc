@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLClassifyManageVC : ZLBaseViewController
-
+@property (nonatomic, assign) NSString *parentId;//父id
+@property (nonatomic, assign) NSInteger level; //等级： 1 ， 2
+//@property (nonatomic, assign) BOOL isFromPlatform;//yes 平台分类 no 来自店铺
 @end
 
 NS_ASSUME_NONNULL_END

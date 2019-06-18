@@ -25,6 +25,7 @@
 //API
 #import "NetManager+ZLLoginAPI.h"
 #import "NetManager+ZLShopAPI.h"
+#import "NetManager+ZLGoodsAPI.h"
 
 #import "Masonry.h"   // 布局
 #import "ReactiveObjC.h"  // rac
@@ -60,5 +61,8 @@
 #define kUserInfo [ZLUserInfo sharedInstance]
 /** 用户id */
 #define kUserID [ZLUserInfo sharedInstance].userID
+
+#define kRefreshHeader @"freshHeader"
+#define kRefreshFooter @"freshFooter"
 
 #endif /* ZLeadPch_pch */

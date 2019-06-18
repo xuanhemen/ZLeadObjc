@@ -35,7 +35,7 @@
 
 - (void)setupViews {
     self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    self.bgImageView.backgroundColor = [UIColor colorWithHexString:@"#FFA700"];
+    self.bgImageView.image = [UIImage imageNamed:@"shop-panel-bg"];
     self.bgImageView.layer.cornerRadius = dis(4);
     [self addSubview:self.bgImageView];
     
@@ -84,14 +84,14 @@
     __weak __typeof(self) weakSelf = self;
     __weak __typeof(self.bgImageView) weakBgImageView = self.bgImageView;
     [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf).offset(dis(15));
-        make.right.equalTo(weakSelf).offset(dis(-15));
-        make.height.mas_equalTo(dis(160));
+        make.left.equalTo(weakSelf).offset(dis(8));
+        make.right.equalTo(weakSelf).offset(dis(-8));
+        make.height.mas_equalTo(dis(174));
         make.top.equalTo(weakSelf).offset(dis(15));
     }];
     
     [self.todayturnoverTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakBgImageView).offset(dis(20));
+        make.left.equalTo(weakBgImageView).offset(dis(27));
         make.width.mas_equalTo(dis(100));
         make.height.mas_equalTo(dis(20));
         make.top.equalTo(weakBgImageView).offset(dis(12));

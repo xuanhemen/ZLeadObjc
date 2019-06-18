@@ -208,15 +208,14 @@
             NSMutableArray *items = [[NSMutableArray alloc] init];
             for (NSInteger i = 0; i < 10; i++) {
                 ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
-                itemModel.classifyId = i + 1;
-                itemModel.title = [NSString stringWithFormat:@"分类%@", @(i)];
+                itemModel.classifyId = [NSString stringWithFormat:@"%@", @(i + 1)];;
                 [items addObject:itemModel];
             }
             filterDataModel.dataList = items;
             [allItems addObject:filterDataModel];
         }
         self.filterDataModel.dataList = allItems;
-        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(NSString * _Nonnull firstClassify, NSString * _Nonnull secondClassify, NSString * _Nonnull thirdClassify) {
+        self.filterView = [ZLFilterView createFilterViewWidthConfiguration:self.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(ZLClassifyItemModel * _Nonnull firstClassify, ZLClassifyItemModel * _Nonnull secondClassify, ZLClassifyItemModel * _Nonnull thirdClassify) {
 
         }];
         self.filterView.durationTime = 0.5;

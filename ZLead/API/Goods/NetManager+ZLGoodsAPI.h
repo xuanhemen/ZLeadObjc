@@ -20,11 +20,26 @@ NS_ASSUME_NONNULL_BEGIN
  @param sucess 成功
  @param fail 失败
  */
-- (void)getGoodsListByStatus:(NSString *)status
+- (void)getGoodsListByStatus:(NSInteger )status
                       shopId:(NSString *)shopId
-                     pageNum:(NSString *)pageNum
-                       sucess:(successBlock)sucess
-                         fail:(failWithErrorBlock)fail;
+                     pageNum:(NSInteger )pageNum
+                      sucess:(successBlock)sucess
+                        fail:(failWithErrorBlock)fail;
+
+/**
+ 根据状态获取商品SPU+sku列表
+ 
+ @param status 商品状态 1:销售中,2：下架,3：违规
+ @param shopId 店铺ID
+ @param pageNum 当前页数
+ @param sucess 成功
+ @param fail 失败
+ */
+- (void)getGoodsSpuListByStatus:(NSInteger )status
+                         shopId:(NSString *)shopId
+                        pageNum:(NSInteger )pageNum
+                         sucess:(successBlock)sucess
+                           fail:(failWithErrorBlock)fail;
 
 
 /**
@@ -37,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)batchEditGoodsStatus:(NSString *)sgGoodsIds
                       sgType:(NSString *)sgType
-                      sucess:(resultBlock)sucess
+                      sucess:(successfulBlock)sucess
                         fail:(failWithErrorBlock)fail;
 
 /**
@@ -50,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)editShopGoodsClass:(NSString *)goodsClassifyId
                       classifyName:(NSString *)classifyName
-                      sucess:(resultBlock)sucess
+                      sucess:(successfulBlock)sucess
                         fail:(failWithErrorBlock)fail;
 
 /**
@@ -61,21 +76,21 @@ NS_ASSUME_NONNULL_BEGIN
  @param fail 失败
  */
 - (void)removeShopGoodsClass:(NSString *)goodsClassifyId
-                    sucess:(resultBlock)sucess
+                    sucess:(successfulBlock)sucess
                       fail:(failWithErrorBlock)fail;
 
-/**
- 添加商品分类
- 
- @param sgcParentId 上级分类ID/非必填
- @param classifyName 分类名称
- @param sucess 成功
- @param fail 失败
- */
-- (void)addGoodsClass:(NSString *)sgcParentId
-                classifyName:(NSString *)classifyName
-                      sucess:(resultBlock)sucess
-                        fail:(failWithErrorBlock)fail;
+///**
+// 添加商品分类
+//
+// @param sgcParentId 上级分类ID/非必填
+// @param classifyName 分类名称
+// @param sucess 成功
+// @param fail 失败
+// */
+//- (void)addGoodsClass:(NSString *)sgcParentId
+//                classifyName:(NSString *)classifyName
+//                      sucess:(successfulBlock)sucess
+//                        fail:(failWithErrorBlock)fail;
 
 /**
  获取平台分类
@@ -92,10 +107,12 @@ NS_ASSUME_NONNULL_BEGIN
  查询平台商品列表
  
  @param pageNum 当前页数
+ @param shopId 店铺id
  @param sucess 成功
  @param fail 失败
  */
 - (void)getPlatformGoodsList:(NSInteger )pageNum
+                      shopId:(NSString *)shopId
                       sucess:(successBlock)sucess
                         fail:(failWithErrorBlock)fail;
 
@@ -108,9 +125,9 @@ NS_ASSUME_NONNULL_BEGIN
  @param sucess 成功
  @param fail 失败
  */
-- (void)getShopClassLeve1:(NSString *)sgcParentId
+- (void)getShopClassWithParentId:(NSString *)sgcParentId
                    shopId:(NSString *)shopId
-                   sucess:(resultBlock)sucess
+                   sucess:(successBlock)sucess
                      fail:(failWithErrorBlock)fail;
 
 /**
@@ -126,8 +143,39 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addShopGoodsClass:(NSString *)shopId
              classifyName:(NSString *)classifyName
                  parentId:(NSString *)parentId
-                   sucess:(resultBlock)sucess
+                   sucess:(successfulBlock)sucess
                      fail:(failWithErrorBlock)fail;
+
+
+/**
+ 从平台导入商品
+
+ @param goods 商品集合
+ @param sucess 成功
+ @param fail 失败
+ */
+- (void)importGoods:(NSArray *)goods
+                   sucess:(successfulBlock)sucess
+                     fail:(failWithErrorBlock)fail;
+
+/**
+ 获取平台所有分类
+ 
+ @param sucess 成功
+ @param fail 失败
+ */
+- (void)getAllPlatFormClassWithsSucess:(successBlock)sucess
+               fail:(failWithErrorBlock)fail;
+
+
+/**
+ 获取所有店铺分类
+ 
+ @param sucess 成功
+ @param fail 失败
+ */
+- (void)getAllShopClassWithsSucess:(successBlock)sucess
+                              fail:(failWithErrorBlock)fail;
 
 @end
 

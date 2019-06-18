@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class ZLClassifyItemModel;
 
 @interface ZLClassifyListCell : ZLBaseCell
-@property (nonatomic, strong) void (^delGoodsClassifyBlock) (ZLClassifyItemModel *classifyItemModel);
-@property (nonatomic, strong) void (^editGoodsClassifyBlock) (ZLClassifyItemModel *classifyItemModel);
+@property (nonatomic, strong) void (^delGoodsClassifyBlock) (ZLClassifyItemModel *classifyItemModel, ZLClassifyListCell *cell);
+@property (nonatomic, strong) void (^editGoodsClassifyBlock) (ZLClassifyItemModel *classifyItemModel, ZLClassifyListCell *cell);
 @end
 
 NS_ASSUME_NONNULL_END

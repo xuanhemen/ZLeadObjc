@@ -12,7 +12,17 @@
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
         @"title":@"sgcName",
-        @"classifyId":@"sgcId"
+        @"classifyId":@"sgcId",
+        @"classifyCode":@"sgcCode",
+        @"parentId":@"sgcParentId",
+        @"remark":@"sgcRemark",
+        @"level":@"sgcLevel",
+        @"childrenList":@"children"
     };
 }
+
++ (NSDictionary *)objectClassInArray{
+    return @{@"childrenList":[ZLClassifyItemModel class]};
+}
+
 @end

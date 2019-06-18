@@ -7,11 +7,13 @@
 //
 
 #import "ZLClassifyListCell.h"
+#import "ZLClassifyItemModel.h"
 
 @interface ZLClassifyListCell ()
 @property (nonatomic, strong) UILabel *classifyNameLabel;
 @property (nonatomic, strong) UIButton *editButton;
 @property (nonatomic, strong) UIButton *delButton;
+@property (nonatomic, strong) ZLClassifyItemModel *classifyItemModel;
 @end
 
 @implementation ZLClassifyListCell
@@ -53,15 +55,22 @@
     [self addSubview:self.editButton];
 }
 
+- (void)setupData:(ZLClassifyItemModel *)dataModel {
+    self.classifyItemModel = dataModel;
+    if (![dataModel.title isEqual:[NSNull null]]) {
+        self.classifyNameLabel.text = dataModel.title;
+    }
+}
+
 - (void)delButtonAction {
     if (self.delGoodsClassifyBlock) {
-        self.delGoodsClassifyBlock(nil);
+        self.delGoodsClassifyBlock(self.classifyItemModel, self);
     }
 }
 
 - (void)editButtonAction {
     if (self.editGoodsClassifyBlock) {
-        self.editGoodsClassifyBlock(nil);
+        self.editGoodsClassifyBlock(self.classifyItemModel, self);
     }
 }
 

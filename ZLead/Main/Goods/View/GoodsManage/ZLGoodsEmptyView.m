@@ -25,6 +25,7 @@
 
 - (void)setupViews {
     self.emptyImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.width - dis(125))/2, dis(125), dis(125), dis(125))];
+    self.emptyImageView.image = [UIImage imageNamed:@"no-goods-icon"];
     [self addSubview:self.emptyImageView];
     
     self.emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.emptyImageView.bottom + dis(8), self.width, dis(20))];

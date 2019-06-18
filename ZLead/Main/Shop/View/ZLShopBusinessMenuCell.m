@@ -47,7 +47,7 @@
     }];
     
     NSArray *titles = @[@"订单管理", @"一键开单", @"线下收款", @"敬请期待"];
-//    NSArray *icons = @[@"订单管理", @"一键开单", @"线下收款", @"敬请期待"];
+    NSArray *icons = @[@"shop-order-manage", @"shop-make-order", @"shop-offline-pay", @"shop-coming-soon"];
     CGFloat singleMenuViewWidth = (kScreenWidth-dis(30))/4;
     UIView *tempSingleMenuView = nil;
     UIView *tempTitleLabel = nil;
@@ -75,7 +75,7 @@
         tempSingleMenuView = singleMenuView;
         
         UIImageView *icon = [[UIImageView alloc] init];
-        icon.backgroundColor = [UIColor colorWithHexString:@"#F7F3EA"];
+        icon.image = [UIImage imageNamed:icons[i]];
         [singleMenuView addSubview:icon];
         
         UILabel *titleLabel = [[UILabel alloc] init];

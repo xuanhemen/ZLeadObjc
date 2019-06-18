@@ -40,12 +40,13 @@
     [self addSubview:self.shopNameLabel];
     
     self.shopChangeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.shopChangeButton.backgroundColor = [UIColor colorWithHexString:@"#FFF9EF"];
+    [self.shopChangeButton setImage:[UIImage imageNamed:@"shop-home-switch-icon"] forState:UIControlStateNormal];
     [self.shopChangeButton addTarget:self action:@selector(changeShopButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.shopChangeButton];
     
     
     self.notificationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.notificationButton setImage:[UIImage imageNamed:@"shop-home-news-icon"] forState:UIControlStateNormal];
     [self addSubview:self.notificationButton];
     
     [self settingSubViewsLayout];
