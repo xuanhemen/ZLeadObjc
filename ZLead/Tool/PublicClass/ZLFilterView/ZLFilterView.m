@@ -413,11 +413,11 @@ typedef NS_ENUM (NSUInteger,ZLMenuButtonType) {
     for (NSInteger section = indexPath.section; section < self.filterDataModel.dataList.count; section++) {
         ZLFilterDataModel *cfilterDataModel = [self.filterDataModel.dataList objectAtIndex:section];
         cfilterDataModel.selectedClassifyItemModel = nil;
-        if (section > indexPath.section) {
-            cfilterDataModel.dataList = nil;
-        }
         for (ZLClassifyItemModel *itemModel in cfilterDataModel.dataList) {
             itemModel.isSelected = NO;
+        }
+        if (section > indexPath.section) {
+            cfilterDataModel.dataList = nil;
         }
     }
      currentfilterDataModel.selectedClassifyItemModel = nil;
