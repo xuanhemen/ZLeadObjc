@@ -395,7 +395,7 @@
     [[NetManager sharedInstance] getAllPlatFormClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
        [self updateFilterMenuData:dataList];
     } fail:^(NSError * _Nonnull error) {
-        
+        [self updateFilterMenuData:nil];
     }];
 }
 
@@ -403,7 +403,7 @@
     [[NetManager sharedInstance] getAllShopClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
         [self updateFilterMenuData:dataList];
     } fail:^(NSError * _Nonnull error) {
-        
+        [self updateFilterMenuData:nil];
     }];
 }
 
@@ -602,6 +602,7 @@
 //选择上一级的分类刷新下一级的数据,如果点的是平台/店铺刷新整个列表
 - (void)filterView:(ZLFilterView *)filterView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
+    filterDataModel.isUnflod = NO;
     ZLClassifyItemModel *classifyItemModel = [filterDataModel.dataList objectAtIndex:indexPath.row];
     //请求下一级的数据
     //刷新下一级的数据
@@ -711,7 +712,7 @@
         }
         filterDataModel.dataList = firstItems;
         [allItems addObject:filterDataModel];
-        for (NSInteger section = 1; section < 4; section ++) {
+        for (NSInteger section = 1; section < sectionTitles.count; section ++) {
             ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
             filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
             filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];

@@ -392,6 +392,7 @@
         [self.view addSubview:_batchSetClassifyView];
         kWeakSelf(weakSelf)
         _batchSetClassifyView.batchSetClassifyBlock = ^{
+            [weakSelf.filterView dismiss];
             weakSelf.filterView = [ZLFilterView createFilterViewWidthConfiguration:weakSelf.filterDataModel pushDirection:ZLFilterViewPushDirectionFromRight  filterViewBlock:^(ZLClassifyItemModel * _Nonnull firstClassify, ZLClassifyItemModel * _Nonnull secondClassify, ZLClassifyItemModel * _Nonnull thirdClassify) {
                 DLog(@"批量设置分类");
                 [weakSelf batchSetClassify:firstClassify secondClassify:secondClassify thirdClassify:thirdClassify];
@@ -417,7 +418,7 @@
         filterDataModel.sectionName = [sectionTitles objectAtIndex:0];
         filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [allItems addObject:filterDataModel];
-        for (NSInteger section = 1; section < 4; section ++) {
+        for (NSInteger section = 1; section < sectionTitles.count; section ++) {
             ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
             filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
             filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
@@ -484,6 +485,7 @@
 //选择上一级的分类刷新下一级的数据,如果点的是平台/店铺刷新整个列表
 - (void)filterView:(ZLFilterView *)filterView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ZLFilterDataModel *filterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section];
+    filterDataModel.isUnflod = NO;
     ZLClassifyItemModel *classifyItemModel = [filterDataModel.dataList objectAtIndex:indexPath.row];
     //请求下一级的数据
     //刷新下一级的数据
