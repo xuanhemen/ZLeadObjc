@@ -31,8 +31,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
-//    [self setupViews];
-//    [self setupData];
+    [self setupViews];
+    [self setupData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,14 +72,14 @@
     headerView.backgroundColor = [UIColor whiteColor];
     __weak typeof (self) weakSelf = self;
     if (!self.shopNameView) {
-        self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, dis(92))];
+        self.shopNameView = [[ZLShopTopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, dis(95))];
         self.shopNameView.changeShopBlock = ^{
             ZLShopListVC *shopListVC = [[ZLShopListVC alloc] init];
             [weakSelf.navigationController pushViewController:shopListVC animated:YES];
         };
     }
     [headerView addSubview:self.shopNameView];
-    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, dis(92), kScreenWidth, dis(223))];
+    ZLShopTurnoverView *headView = [[ZLShopTurnoverView alloc] initWithFrame:CGRectMake(0, dis(95), kScreenWidth, dis(225))];
     [headerView addSubview:headView];
     return headerView;
 }
