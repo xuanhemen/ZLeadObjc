@@ -372,7 +372,7 @@
 - (void)getPlatFormClassWithParentId:(NSString *)parentId sucess:(void (^) (NSArray *dataList))sucess {
     [[NetManager sharedInstance] getPlatFormClass:parentId sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
         if ([parentId isEqualToString:@"0"]) {
-            [self updateFilterMenuData:dataList];
+            [self updateFilterMenuData:dataList isPlatform:YES];
         }
         sucess(dataList);
     } fail:^(NSError * _Nonnull error) {
@@ -383,7 +383,7 @@
 - (void)getShopClassWithParentId:(NSString *)parentId sucess:(void (^) (NSArray *dataList))sucess {
     [[NetManager sharedInstance] getShopClassWithParentId:parentId shopId:@"1" sucess:^(NSArray * _Nonnull dataList, NSInteger total) {
         if ([parentId isEqualToString:@"0"]) {
-            [self updateFilterMenuData:dataList];
+            [self updateFilterMenuData:dataList isPlatform:NO];
         }
         sucess(dataList);
     } fail:^(NSError * _Nonnull error) {
@@ -393,23 +393,25 @@
 
 - (void)getAllPlatFormClassWithSucess:(void (^) (NSArray *dataList))sucess {
     [[NetManager sharedInstance] getAllPlatFormClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
-       [self updateFilterMenuData:dataList];
+       [self updateFilterMenuData:dataList isPlatform:YES];
     } fail:^(NSError * _Nonnull error) {
-        [self updateFilterMenuData:nil];
+        [self updateFilterMenuData:nil isPlatform:YES];
     }];
 }
 
 - (void)getAllShopClassWithSucess:(void (^) (NSArray *dataList))sucess {
     [[NetManager sharedInstance] getAllShopClassWithsSucess:^(NSArray * _Nonnull dataList, NSInteger total) {
-        [self updateFilterMenuData:dataList];
+        [self updateFilterMenuData:dataList isPlatform:NO];
     } fail:^(NSError * _Nonnull error) {
-        [self updateFilterMenuData:nil];
+        [self updateFilterMenuData:nil isPlatform:NO];
     }];
 }
 
-- (void)updateFilterMenuData:(NSArray *)dataList {
-    NSMutableArray *sectionDataList = [[NSMutableArray alloc] initWithArray:self.filterDataModel.dataList];
-    for (int i = 0; i < self.filterDataModel.dataList.count; i++) {
+- (void)updateFilterMenuData:(NSArray *)dataList isPlatform:(BOOL)isPlatform {
+    ZLFilterDataModel *filterDataModel = [self filterData:isPlatform];
+    NSMutableArray *sectionDataList = [[NSMutableArray alloc] initWithArray:filterDataModel.dataList];
+    int sectionCount = isPlatform ? 4 : 3;
+    for (int i = 0; i < sectionCount; i++) {
         ZLFilterDataModel *firstFilterDataModel = [sectionDataList objectAtIndex:i];
         if (i == 0) {
             
@@ -624,7 +626,7 @@
         }
     } else {
         NSInteger nextSection = indexPath.section + 1;
-        if (nextSection < self.filterDataModel.dataList.count) {
+        if ((filterView.isPlatform && nextSection < self.filterDataModel.dataList.count) || (!filterView.isPlatform && nextSection < (self.filterDataModel.dataList.count - 1))) {
             ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
             nextFilterDataModel.isUnflod = YES;
             nextFilterDataModel.selectedClassifyItemModel = nil;
@@ -696,33 +698,42 @@
 - (ZLFilterDataModel *)filterDataModel {
     if (!_filterDataModel) {
         _filterDataModel = [[ZLFilterDataModel alloc] init];
-        NSArray *sectionTitles = @[@"分类", @"一级分类", @"二级分类", @"三级分类"];
-        NSMutableArray *allItems = [[NSMutableArray alloc] init];
-        ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
-        filterDataModel.sectionName = [sectionTitles objectAtIndex:0];
-        filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        NSArray *sectionClassifys = @[@"店铺", @"平台"];
-        NSMutableArray *firstItems = [[NSMutableArray alloc] init];
-        for (NSInteger i = 0; i < sectionClassifys.count; i++) {
-            ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
-            itemModel.classifyId = [NSString stringWithFormat:@"%@", @(i + 1)];
-            itemModel.isSelected = (i == 0) ? YES : NO;
-            itemModel.title = [sectionClassifys objectAtIndex:i];
-            [firstItems addObject:itemModel];
-        }
-        filterDataModel.dataList = firstItems;
-        [allItems addObject:filterDataModel];
-        for (NSInteger section = 1; section < sectionTitles.count; section ++) {
-            ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
-            filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
-            filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-            if (section == 1) {
-                filterDataModel.isUnflod = YES;
-            }
-            [allItems addObject:filterDataModel];
-        }
-        self.filterDataModel.dataList = allItems;
     }
+    return _filterDataModel;
+}
+
+- (ZLFilterDataModel *)filterData:(BOOL)isPlatform {
+    NSArray *sectionTitles = @[@"分类", @"一级分类", @"二级分类"];
+    if (isPlatform) {
+        sectionTitles = @[@"分类", @"一级分类", @"二级分类", @"三级分类"];
+    }
+    
+    NSMutableArray *allItems = [[NSMutableArray alloc] init];
+    ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
+    filterDataModel.sectionName = [sectionTitles objectAtIndex:0];
+    filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSArray *sectionClassifys = @[@"店铺", @"平台"];
+    NSMutableArray *firstItems = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < sectionClassifys.count; i++) {
+        ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
+        itemModel.classifyId = [NSString stringWithFormat:@"%@", @(i + 1)];
+        itemModel.isSelected = (i == 0) ? YES : NO;
+        itemModel.title = [sectionClassifys objectAtIndex:i];
+        [firstItems addObject:itemModel];
+    }
+    filterDataModel.dataList = firstItems;
+    [allItems addObject:filterDataModel];
+    for (NSInteger section = 1; section < sectionTitles.count; section ++) {
+        ZLFilterDataModel *filterDataModel  = [[ZLFilterDataModel alloc] init];
+        filterDataModel.sectionName = [sectionTitles objectAtIndex:section];
+        filterDataModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+        if (section == 1) {
+            filterDataModel.isUnflod = YES;
+        }
+        [allItems addObject:filterDataModel];
+    }
+    
+    self.filterDataModel.dataList = allItems;
     return _filterDataModel;
 }
 
