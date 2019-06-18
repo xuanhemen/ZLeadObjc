@@ -138,7 +138,7 @@
     self.topicLbl.text = _goodsModel.goodsName;
     self.onlinePriceLbl.attributedText = [self attributedStringWithStr:[NSString stringWithFormat:@"网店价 ¥%@",  _goodsModel.offlinePrice]];
     self.offlinePriceLbl.text = [NSString stringWithFormat:@"门店价: ¥%@", _goodsModel.offlinePrice];
-    self.stockLbl.text = [NSString stringWithFormat:@"成本：%@起", goodsModel.costPrice];
+    self.costLbl.text = [NSString stringWithFormat:@"成本：%@起", goodsModel.costPrice];
     self.stockLbl.text = [NSString stringWithFormat:@"库存：%@", @(goodsModel.inventoryValue)];
     self.salesLbl.text = [NSString stringWithFormat:@"月销：%@", @(goodsModel.monthSaleNum)];
     self.selectBtn.selected = _goodsModel.isSelected;
