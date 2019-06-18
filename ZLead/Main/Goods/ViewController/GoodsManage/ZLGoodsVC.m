@@ -626,7 +626,7 @@
         }
     } else {
         NSInteger nextSection = indexPath.section + 1;
-        if ((filterView.isPlatform && nextSection < self.filterDataModel.dataList.count) || (!filterView.isPlatform && nextSection < (self.filterDataModel.dataList.count - 1))) {
+        if (nextSection < self.filterDataModel.dataList.count) {
             ZLFilterDataModel *nextFilterDataModel = [self.filterDataModel.dataList objectAtIndex:indexPath.section + 1];
             nextFilterDataModel.isUnflod = YES;
             nextFilterDataModel.selectedClassifyItemModel = nil;
@@ -717,7 +717,7 @@
     for (NSInteger i = 0; i < sectionClassifys.count; i++) {
         ZLClassifyItemModel *itemModel = [[ZLClassifyItemModel alloc] init];
         itemModel.classifyId = [NSString stringWithFormat:@"%@", @(i + 1)];
-        itemModel.isSelected = (i == 0) ? YES : NO;
+        itemModel.isSelected = (i == 0) ? !isPlatform : isPlatform;
         itemModel.title = [sectionClassifys objectAtIndex:i];
         [firstItems addObject:itemModel];
     }
