@@ -14,7 +14,7 @@ pod 'Realm'
 pod 'Realm/Headers'
 pod 'ReactiveObjC'
 pod 'MOFSPickerManager'
-
+pod 'SCIndexView'
 pod 'TZImagePickerController'
 pod 'IQKeyboardManager'
 pod 'QBImagePickerController'

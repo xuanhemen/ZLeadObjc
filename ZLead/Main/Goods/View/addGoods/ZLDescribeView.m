@@ -9,7 +9,7 @@
 #import "ZLDescribeView.h"
 @interface ZLDescribeView ()
 
-@property (nonatomic, strong) UITextView *textView; // 商品名称输入框
+
 @property (nonatomic, strong) UILabel *placeLb; // 占位符
 
 @property (nonatomic, strong) UILabel *countLb; // 计数lable

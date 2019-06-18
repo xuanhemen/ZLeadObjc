@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLDescribeView : UIView
 
+@property (nonatomic, strong) UITextView *textView; // 商品名称输入框
 @end
 
 NS_ASSUME_NONNULL_END

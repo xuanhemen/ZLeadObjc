@@ -11,6 +11,7 @@
 @interface ZLImgTextView ()
 
 
+
 @property (nonatomic, strong) CALayer *bottomLayer; //
 @end
 
@@ -26,6 +27,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.isEmpty = YES;
         self.backgroundColor = [UIColor whiteColor];
         _bottomLayer = [CALayer layer];
         _bottomLayer.backgroundColor = lightColor.CGColor;
@@ -39,9 +41,9 @@
             make.left.equalTo(self).offset(dis(20));
             make.size.mas_equalTo(kSize(100, 100));
         }];
-        ZLDescribeView *textView = [[ZLDescribeView alloc] init];
-        [self addSubview:textView];
-        [textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        _desView = [[ZLDescribeView alloc] init];
+        [self addSubview:_desView];
+        [_desView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.imgBtn.mas_bottom).offset(dis(20));
             make.centerX.equalTo(self);
             make.size.mas_equalTo(CGSizeMake(kScreenWidth, dis(80)));

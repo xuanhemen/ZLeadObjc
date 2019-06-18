@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLUnitVC : ZLBaseViewController
 
-@property (nonatomic, copy) void (^selecItem)(NSString *title); // 选中回调
+@property (nonatomic, copy) void (^selecItem)(NSString *title,NSString *sgID); // 选中回调
 @end
 
 NS_ASSUME_NONNULL_END

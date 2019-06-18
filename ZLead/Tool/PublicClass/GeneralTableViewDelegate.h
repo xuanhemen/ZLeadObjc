@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 创建sectionView */
 @property(nonatomic,copy)UIView * (^secView)(NSInteger section);
 
+@property (nonatomic, copy) NSString *ind; // <#annotation#> 
 /**
  配置代理
 

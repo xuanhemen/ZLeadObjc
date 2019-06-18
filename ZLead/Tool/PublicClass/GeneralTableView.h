@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(instancetype)initWithFrame:(CGRect)frame
                        style:(UITableViewStyle)style
-                       array:(NSArray *)array
+                       array:(NSMutableArray *)array
                   cellHeight:(CGFloat)height
                         cell:(UITableViewCell * (^)(UITableView *tableView,NSIndexPath *indexPaht))myCell
                 selectedCell:(void (^)(NSIndexPath *indexPath))selecBlock;
