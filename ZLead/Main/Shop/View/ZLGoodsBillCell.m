@@ -26,14 +26,14 @@
 
 - (void)setupViews {
     [super setupViews];
-    self.shoppingCartView.frame = kRect(0, 0, 375, 156);
-    [self.shoppingCartView setSubviewsFrame:NO];
-    self.bottomSeparator.frame = CGRectMake(0, dis(156) - 0.5, kScreenWidth, 0.5);
+    self.shoppingCartView.frame = kRect(0, 0, 375, 132);
+    [self.shoppingCartView setSubviewsFrame:YES];
+//    self.bottomSeparator.frame = CGRectMake(0, dis(156) - 0.5, kScreenWidth, 0.5);
     [self bringSubviewToFront:self.bottomSeparator];
 }
 
 + (CGFloat)heightForCell {
-    return dis(156);
+    return dis(132);
 }
 
 @end

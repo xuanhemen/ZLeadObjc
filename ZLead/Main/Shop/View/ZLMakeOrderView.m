@@ -30,11 +30,11 @@
 }
 
 - (void)setupViews {
-    self.searchView = [[ZLShopGoodsSearchBarView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, dis(42))];
+    self.searchView = [[ZLShopGoodsSearchBarView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, kScreenWidth, dis(50))];
     self.searchView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.searchView];
     
-    self.goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(84), kScreenWidth, kScreenHeight - (dis(135) + kSafeHeight)) style:UITableViewStylePlain];
+    self.goodsListTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight + dis(50), kScreenWidth, kScreenHeight - (dis(50) + kSafeHeight)) style:UITableViewStylePlain];
     self.goodsListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.goodsListTableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     self.goodsListTableView.backgroundView = nil;
@@ -43,16 +43,16 @@
     
     [self createBottomView];
     
-    self.typeSelectedView = [[ZLGoodsTypeSelectedView alloc] initWithFrame:CGRectMake(0, self.searchView.bottom, kScreenWidth, dis(42))];
-    self.typeSelectedView.backgroundColor = [UIColor whiteColor];
-    self.typeSelectedView.resetButtonBlock = ^{
-        
-    };
-    
-    self.typeSelectedView.sureButtonBlock = ^(NSString * _Nonnull fType, NSString * _Nonnull sType, NSString * _Nonnull tType) {
-        
-    };
-    [self addSubview:self.typeSelectedView];
+//    self.typeSelectedView = [[ZLGoodsTypeSelectedView alloc] initWithFrame:CGRectMake(0, self.searchView.bottom, kScreenWidth, dis(42))];
+//    self.typeSelectedView.backgroundColor = [UIColor whiteColor];
+//    self.typeSelectedView.resetButtonBlock = ^{
+//
+//    };
+//
+//    self.typeSelectedView.sureButtonBlock = ^(NSString * _Nonnull fType, NSString * _Nonnull sType, NSString * _Nonnull tType) {
+//
+//    };
+//    [self addSubview:self.typeSelectedView];
 }
 
 - (void)createBottomView {

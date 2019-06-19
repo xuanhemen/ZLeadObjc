@@ -19,6 +19,24 @@
 
 @implementation ZLMakeOrderVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+}
+
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    if (!parent) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        self.navigationController.navigationBar.barTintColor = [UIColor zl_mainColor];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    }
+}
+
 - (void)loadView {
     self.makeOrderView = [[ZLMakeOrderView alloc] init];
     self.view = _makeOrderView;
@@ -28,8 +46,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    [self setupViews];
-    self.title = @"一键开单";
     [self config];
+    [self configNav];
     [self setupData];
 
 }
@@ -78,6 +96,54 @@
     };
 }
 
+- (void)configNav {
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    backButton.frame = CGRectMake(0, 0, 19, 19);
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dis(200), 30)];
+    titleLabel.text = @"一键开单";
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [UIColor colorWithHexString:@"#202020"];
+    titleLabel.lineBreakMode = NSLineBreakByTruncatingHead;
+    titleLabel.font = [UIFont systemFontOfSize:17];
+    self.navigationItem.titleView = titleLabel;
+    
+    UIButton *filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [filterButton setTitleColor:[UIColor zl_mainColor] forState:UIControlStateNormal];
+    [filterButton setTitle:@"筛选" forState:UIControlStateNormal];
+    filterButton.titleLabel.font = kFont15;
+    filterButton.frame = CGRectMake(0, 0, 19, 19);
+    [filterButton setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];
+    [filterButton addTarget:self action:@selector(filterButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithCustomView:filterButton];
+    self.navigationItem.rightBarButtonItem = rightItem1;
+    
+    UIButton *scanButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [scanButton setImage:[UIImage imageNamed:@"shop-scan-icon"] forState:UIControlStateNormal];
+    scanButton.frame = CGRectMake(0, 0, 19, 19);
+    [scanButton addTarget:self action:@selector(scanButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithCustomView:scanButton];
+    self.navigationItem.rightBarButtonItems = @[rightItem2, rightItem1];
+}
+
+#pragma mark - UIButton Action
+
+- (void)backAction {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)filterButtonAction {
+    
+}
+
+- (void)scanButtonAction {
+    
+}
+
 #pragma mark - private Method
 
 /**
@@ -116,7 +182,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZLBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZLShoppingCartCell"];
-    [((ZLShoppingCartCell *)cell).shoppingCartView setSubviewsFrame:YES];
+    [((ZLShoppingCartCell *)cell).shoppingCartView setSubviewsFrame:NO];
     [(ZLShoppingCartCell *)cell setupData:[self.goodsList objectAtIndex:indexPath.row]];
     ((ZLShoppingCartCell *)cell).delegate = self;
     return cell;

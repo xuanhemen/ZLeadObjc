@@ -26,21 +26,21 @@
 }
 
 - (void)setupViews {
-    self.shoppingCartView = [[ZLShoppingCartView alloc] initWithFrame:kRect(15, 5, 345, 164)];
+    self.shoppingCartView = [[ZLShoppingCartView alloc] initWithFrame:kRect(0, 0, 375, 132)];
 //    [self.shoppingCartView setSubviewsFrame:YES];
     kWeakSelf(weakSelf);
     self.shoppingCartView.minusButtonBlock = ^{
-        if (weakSelf.delegate) {
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(numButtonClick:isAdd:)]) {
             [weakSelf.delegate numButtonClick:weakSelf isAdd:NO];
         }
     };
     self.shoppingCartView.addButtonBlock = ^{
-        if (weakSelf.delegate) {
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(numButtonClick:isAdd:)]) {
             [weakSelf.delegate numButtonClick:weakSelf isAdd:YES];
         }
     };
     self.shoppingCartView.selectedButtonBlock = ^(BOOL isSelected) {
-        if (weakSelf.delegate) {
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(selectedButtonClick:isSelected:)]) {
             [weakSelf.delegate selectedButtonClick:weakSelf isSelected:isSelected];
         }
     };
@@ -53,7 +53,7 @@
 }
 
 + (CGFloat)heightForCell {
-    return dis(174);
+    return dis(132);
 }
 
 @end
